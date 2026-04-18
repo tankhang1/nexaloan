@@ -351,8 +351,9 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
           </View>
 
           <ScrollView
+            style={styles.paymentList}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ gap: 12 }}
+            contentContainerStyle={styles.paymentListContent}
           >
             {mortgage?.payments && mortgage.payments.length > 0 ? (
               [...mortgage.payments].reverse().map((payment) => (
@@ -453,7 +454,6 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
           </View>
         </View>
       )}
-      <View style={{ flex: 1 }} />
       <Animated.View
         entering={FadeIn}
         exiting={FadeOut}
@@ -543,11 +543,6 @@ const styles = StyleSheet.create({
   gap14: {
     gap: 14,
   },
-  promotion: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   head: {
     height: 40,
     backgroundColor: COLORS.foundation.blue.b300,
@@ -569,6 +564,13 @@ const styles = StyleSheet.create({
   paymentContainer: {
     flex: 1,
     gap: 20,
+  },
+  paymentList: {
+    flex: 1,
+  },
+  paymentListContent: {
+    gap: 12,
+    paddingBottom: 12,
   },
   paymentSummary: {
     flexDirection: "row",
@@ -646,5 +648,11 @@ const styles = StyleSheet.create({
   },
   floatingDown: {
     transform: [{ rotate: "-90deg" }],
+  },
+  promotion: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 8,
   },
 });

@@ -1,4 +1,4 @@
-import {Platform, PermissionsAndroid, Alert} from 'react-native';
+import {Platform, Alert} from 'react-native';
 import dayjs from 'dayjs';
 import ReactNativeFilesystem, {
   ReactNativeFilesystemCommonMimeTypes,
@@ -19,39 +19,7 @@ const downloadFileWithPermission = async ({
   fileType,
   filename = '',
 }: DownloadParams): Promise<void> => {
-  const isAndroid = Platform.OS === 'android';
-
-  if (isAndroid) {
-    const deviceVersion = parseInt(Platform.Version.toString(), 10);
-    let granted = PermissionsAndroid.RESULTS.DENIED;
-
-    if (deviceVersion >= 13) {
-      granted = PermissionsAndroid.RESULTS.GRANTED;
-    } else {
-      granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-        {
-          title: 'Storage Permission',
-          message: 'App needs access to your storage to download files.',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-    }
-
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      downloadFile(url, fileType, filename);
-    } else {
-      Alert.alert(
-        'Permission Denied',
-        'Storage permission is required to download files.',
-      );
-    }
-  } else {
-    // Handle iOS or other platforms
-    downloadFile(url, fileType, filename);
-  }
+  downloadFile(url, fileType, filename);
 };
 
 const downloadFile = (
