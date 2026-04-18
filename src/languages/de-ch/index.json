@@ -22,6 +22,9 @@
     "monthlyRepayment": "Monatliche Tilgung",
     "confirm": "Bestätigen",
     "cancel": "Abbrechen",
+    "descFixedPayment": "Monatliche Rate ist fix. Einfacher für die Budgetplanung.",
+    "descFixedPrincipal": "Tilgung ist gleichbleibend. Gesamtrate sinkt, Zinskosten niedriger.",
+    "descFlatRate": "Zins immer auf den Ursprungsbetrag. Oft bei Konsumkrediten.",
     "mortgage": {
       "title": "Hypothek",
       "desc": "Berechnen Sie Ihre monatlichen Hypothekarzahlungen\nund die Gesamtkosten der Finanzierung."
@@ -43,9 +46,11 @@
     "title": "Hypothek",
     "loanAmount": "Finanzierungsbetrag",
     "duration": "Laufzeit (Monate)",
-    "interestRate": "Zinssatz p.a. (%)",
-    "fixedPayment": "Konstante Annuität",
-    "fixedPrincipal": "Konstante Amortisation\n(sinkende Zinslast)",
+    "interestRate": "Sollzinssatz (%/Jahr)",
+    "interestRateMonthly": "Sollzinssatz (%/Monat)",
+    "fixedPayment": "Annuitätendarlehen",
+    "fixedPrincipal": "Tilgungsdarlehen\n(Fallende Zinsen)",
+    "flatRate": "Flatrate-Zins",
     "calculate": "Berechnen"
   },
   "mortgageResult": {
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "Alle",
       "newest": "Neueste",
-      "oldest": "Älteste"
+      "oldest": "Älteste",
+      "deleteConfirmTitle": "Löschen bestätigen",
+      "deleteConfirmDesc": "Sind Sie sicher, dass Sie diesen Kredit aus dem Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "clearAllConfirmTitle": "Verlauf löschen",
+      "clearAllConfirmDesc": "Alle gespeicherten Kredite werden dauerhaft gelöscht. Möchten Sie wirklich fortfahren?"
     },
     "loanTitles": {
       "mortgage": "Hypothek"

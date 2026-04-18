@@ -22,6 +22,9 @@
     "monthlyRepayment": "月々の返済額",
     "confirm": "確認",
     "cancel": "キャンセル",
+    "descFixedPayment": "月々の支払額が固定。予算管理が簡単。",
+    "descFixedPrincipal": "元金が均等。支払額は減少、利息総額は低い。",
+    "descFlatRate": "利息は常に元本に対して計算。小売ローンで一般的。",
     "mortgage": {
       "title": "住宅ローン",
       "desc": "月々の返済額や総返済額を\n簡単にシミュレーションできます。"
@@ -43,9 +46,11 @@
     "title": "住宅ローン",
     "loanAmount": "借入金額",
     "duration": "返済期間（月）",
-    "interestRate": "金利（年利・％）",
+    "interestRate": "金利 (%/年)",
+    "interestRateMonthly": "金利 (%/月)",
     "fixedPayment": "元利均等返済",
     "fixedPrincipal": "元金均等返済\n（利息は減少）",
+    "flatRate": "1% フラット",
     "calculate": "計算する"
   },
   "mortgageResult": {
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "すべて",
       "newest": "新しい順",
-      "oldest": "古い順"
+      "oldest": "古い順",
+      "deleteConfirmTitle": "削除の確認",
+      "deleteConfirmDesc": "このローンを履歴から削除してもよろしいですか？この操作は取り消せません。",
+      "clearAllConfirmTitle": "履歴をすべてクリア",
+      "clearAllConfirmDesc": "保存されたすべてのローンが完全に削除されます。続行してもよろしいですか？"
     },
     "loanTitles": {
       "mortgage": "住宅ローン"

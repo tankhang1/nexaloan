@@ -22,6 +22,9 @@
     "monthlyRepayment": "Rambursare lunară",
     "confirm": "Confirmați",
     "cancel": "Anulați",
+    "descFixedPayment": "Rata lunară este fixă. Mai ușor pentru planificarea bugetului.",
+    "descFixedPrincipal": "Rambursare egală a principalului. Rata lunară scade în timp.",
+    "descFlatRate": "Dobânda se calculează la suma inițială. Comun la credite de consum.",
     "mortgage": {
       "title": "Credit Imobiliar",
       "desc": "Calculează ușor ratele lunare\nși costul total al creditului."
@@ -43,9 +46,11 @@
     "title": "Credit Imobiliar",
     "loanAmount": "Suma Împrumutată",
     "duration": "Durată (luni)",
-    "interestRate": "Rată Dobândă (%)",
+    "interestRate": "Rată Dobândă (%/an)",
+    "interestRateMonthly": "Rată Dobândă (%/lună)",
     "fixedPayment": "Rată Fixă",
     "fixedPrincipal": "Principal Fix\nDobândă Descrescătoare",
+    "flatRate": "Rată Fixă (Flat)",
     "calculate": "Calculează"
   },
   "mortgageResult": {
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "Toate",
       "newest": "Cele mai recente",
-      "oldest": "Cele mai vechi"
+      "oldest": "Cele mai vechi",
+      "deleteConfirmTitle": "Confirmare Ștergere",
+      "deleteConfirmDesc": "Sigur doriți să ștergeți acest împrumut din istoric? Această acțiune nu poate fi anulată.",
+      "clearAllConfirmTitle": "Șterge tot istoricul",
+      "clearAllConfirmDesc": "Toate împrumuturile salvate vor fi șterse definitiv. Sigur doriți să continuați?"
     },
     "loanTitles": {
       "mortgage": "Credit Imobiliar"

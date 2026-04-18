@@ -22,6 +22,9 @@
     "monthlyRepayment": "每月还款",
     "confirm": "确认",
     "cancel": "取消",
+    "descFixedPayment": "每月还款固定。易于个人理财。",
+    "descFixedPrincipal": "本金均等。还款额随时间减少，总利息较低。",
+    "descFlatRate": "利息基于原始本金。常用于零售贷款。",
     "mortgage": {
       "title": "按揭貸款",
       "desc": "輕鬆計算每月供款及\n貸款總成本。"
@@ -43,10 +46,12 @@
     "title": "按揭貸款",
     "loanAmount": "貸款金額",
     "duration": "還款期（月）",
-    "interestRate": "年利率 (%)",
-    "fixedPayment": "等額本息",
-    "fixedPrincipal": "等額本金\n（利息遞減）",
-    "calculate": "計算"
+    "interestRate": "年利率 (%/年)",
+    "interestRateMonthly": "利率 (%/月)",
+    "fixedPayment": "等额本息",
+    "fixedPrincipal": "等额本金\n（利息递减）",
+    "flatRate": "平息",
+    "calculate": "计算"
   },
   "mortgageResult": {
     "amortization": "攤還表",
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "全部",
       "newest": "最新",
-      "oldest": "最舊"
+      "oldest": "最舊",
+      "deleteConfirmTitle": "确认删除",
+      "deleteConfirmDesc": "您确定要从历史记录中删除此贷款吗？此操作无法撤销。",
+      "clearAllConfirmTitle": "清除所有历史记录",
+      "clearAllConfirmDesc": "所有保存的贷款将被永久删除。您确定要继续吗？"
     },
     "loanTitles": {
       "mortgage": "按揭貸款"

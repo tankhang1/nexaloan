@@ -52,7 +52,11 @@ const LanguageScreen = () => {
       </View>
       <View style={styles.scrollContainer}>
         <View style={styles.container}>
-          <ScrollView>
+          <ScrollView 
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 16 }}
+            style={{ flex: 1 }}
+          >
             {LANGUAGES.map((item, index) => (
               <Card
                 onPress={() => setCurLanguage(item.code)}
@@ -106,7 +110,8 @@ const styles = StyleSheet.create({
     borderColor: COLORS.foundation.neutral.n900,
     backgroundColor: COLORS.foundation.neutral.n0,
     borderRadius: 16,
-    height: HEIGHT * 0.7,
+    flex: 1,
+    width: WIDTH - 32,
     overflow: 'hidden',
   },
   buttonContainer: {

@@ -8,10 +8,12 @@ import AppText from '../../components/AppText';
 import {WIDTH} from '../../constants/dimension';
 import Card from './components/Card';
 import AppIndicator from '../../components/AppIndicator';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux/store';
 import dayjs from 'dayjs';
-import {ELoan, TLoan} from '../../redux/slices/history';
+import {ELoan, TLoan, deleteLoan, resetLoans} from '../../redux/slices/history';
+import Toast from 'react-native-toast-message';
+import {Alert} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {formatNumber} from '../../hooks/format_number';
 import {formatMonth} from '../../hooks/format_month';
@@ -25,6 +27,7 @@ import {
 
 const HistoryScreen = () => {
   const {t} = useTranslation();
+  const dispatch = useDispatch();
   const [type, setType] = useState(0);
   const [timeType, setTimeType] = useState(0);
 
@@ -70,6 +73,40 @@ const HistoryScreen = () => {
       label: mortgage.label,
     });
   };
+
+  const onDeleteHistoryItem = (id: string) => {
+    Alert.alert(
+      t('history.tabs.deleteConfirmTitle'),
+      t('history.tabs.deleteConfirmDesc'),
+      [
+        { text: t('main.cancel'), style: 'cancel' },
+        { 
+          text: t('main.confirm'), 
+          onPress: () => {
+            dispatch(deleteLoan(id));
+            Toast.show({ type: 'success', text1: t('main.paymentSuccess') });
+          } 
+        }
+      ]
+    );
+  };
+
+  const onClearAllHistory = () => {
+    Alert.alert(
+      t('history.tabs.clearAllConfirmTitle'),
+      t('history.tabs.clearAllConfirmDesc'),
+      [
+        { text: t('main.cancel'), style: 'cancel' },
+        { 
+          text: t('main.confirm'), 
+          onPress: () => {
+            dispatch(resetLoans());
+            Toast.show({ type: 'success', text1: t('main.paymentSuccess') });
+          } 
+        }
+      ]
+    );
+  };
   return (
     <AppView appStyle={styles.overall}>
       <View style={styles.header}>
@@ -86,9 +123,9 @@ const HistoryScreen = () => {
           fontWeight={600}
           color={COLORS.foundation.neutral.n700}
         />
-        <AppIconButton onPress={onNavSettingScreen}>
+        <AppIconButton onPress={onClearAllHistory}>
           <Feather
-            name="settings"
+            name="trash-2"
             size={24}
             color={COLORS.foundation.neutral.n900}
           />
@@ -172,6 +209,7 @@ const HistoryScreen = () => {
           <Card
             id={mortgage.id}
             onPress={() => onNavMortgageDetailScreen(mortgage)}
+            onDelete={onDeleteHistoryItem}
             index={index}
             key={Math.random()}
             icon={

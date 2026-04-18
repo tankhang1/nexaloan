@@ -50,4 +50,52 @@ export const CURRENCIES = [
     locale: 'de-CH',
     icon: <ICONS.currency.chf color={COLORS.foundation.neutral.n0} />,
   },
+  {
+    label: 'TRY',
+    symbol: '₺',
+    locale: 'tr-TR',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'RON',
+    symbol: 'lei',
+    locale: 'ro-RO',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'BRL',
+    symbol: 'R$',
+    locale: 'pt-BR',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'INR',
+    symbol: '₹',
+    locale: 'en-IN',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'CNY',
+    symbol: '¥',
+    locale: 'zh-CN',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'AUD',
+    symbol: 'A$',
+    locale: 'en-AU',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'SGD',
+    symbol: 'S$',
+    locale: 'en-SG',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
+    label: 'THB',
+    symbol: '฿',
+    locale: 'th-TH',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
 ];

@@ -31,7 +31,7 @@ function buildRows(
   ];
 }
 
-export async function exportLoanCsvToDownloadsRNFA(
+export async function exportLoanXlsxToDownloadsRNFA(
   data: any[],
   baseName = 'Loan_Report',
   currency: {
@@ -52,13 +52,12 @@ export async function exportLoanCsvToDownloadsRNFA(
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Schedule');
 
-    const csv = XLSX.write(wb, {type: 'string', bookType: 'csv'});
-    const body = '\uFEFF' + csv;
-    const filename = `${baseName}-${dayjs().format('YYYYMMDD_HHmmss')}.csv`;
+    const wbout = XLSX.write(wb, {type: 'base64', bookType: 'xlsx'});
+    const filename = `${baseName}-${dayjs().format('YYYYMMDD_HHmmss')}.xlsx`;
     const savedPath = await ReactNativeFilesystem.writeFileToDownloads(
       filename,
-      body,
-      ReactNativeFilesystemCommonMimeTypes.Csv,
+      wbout,
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     );
 
     Alert.alert(
@@ -68,7 +67,7 @@ export async function exportLoanCsvToDownloadsRNFA(
 
     return savedPath;
   } catch (err: any) {
-    console.log('EXPORT CSV ERROR →', err);
-    Alert.alert('Error', String(err?.message ?? 'Failed to export CSV'));
+    console.log('EXPORT XLSX ERROR →', err);
+    Alert.alert('Error', String(err?.message ?? 'Failed to export XLSX'));
   }
 }

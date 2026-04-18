@@ -1,5 +1,5 @@
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import React, {useState, useTransition} from 'react';
+import React, {useState, useTransition, useMemo} from 'react';
 import AppView from '../../components/AppView';
 import AppText from '../../components/AppText';
 import {COLORS} from '../../constants/colors';
@@ -29,6 +29,19 @@ const MortgageLoanScreen = ({route}: Props) => {
   const [month, setMonth] = useState(1);
   const [type, setType] = useState(0);
   const [rate, setRate] = useState<string | number>(1);
+
+  const sliderLimits = useMemo(() => {
+    const code = currency.code;
+    if (code === 'VND' || code === 'IDR') {
+      return { min: 10000000, max: 100000000000, step: 1000000 };
+    }
+    if (code === 'INR' || code === 'JPY' || code === 'KRW' || code === 'THB') {
+      return { min: 100000, max: 1000000000, step: 10000 };
+    }
+    // High value currencies (USD, EUR, GBP, CHF, AUD, SGD)
+    return { min: 1000, max: 20000000, step: 1000 };
+  }, [currency.code]);
+
   const onNavSetting = () => {
     navigationRef.navigate('SettingScreen');
   };
@@ -98,8 +111,8 @@ const MortgageLoanScreen = ({route}: Props) => {
             />
             <AppSlider
               prefix={true}
-              minValue={4000}
-              maxValue={2000000000}
+              minValue={sliderLimits.min}
+              maxValue={sliderLimits.max}
               curValue={+loanAmount}
               setCurValue={setLoanAmount}
             />
@@ -144,7 +157,7 @@ const MortgageLoanScreen = ({route}: Props) => {
                 <AppText
                   fontSize={14}
                   fontWeight={500}
-                  value={t('mortgage.interestRate')}
+                  value={type === 2 ? t('mortgage.interestRateMonthly') : t('mortgage.interestRate')}
                   color={COLORS.foundation.neutral.n200}
                 />
                 {/* <ICONS.info /> */}
@@ -165,8 +178,8 @@ const MortgageLoanScreen = ({route}: Props) => {
               />
             </View>
             <AppSlider
-              minValue={1}
-              maxValue={20}
+              minValue={type === 2 ? 0.1 : 1}
+              maxValue={type === 2 ? 5 : 25}
               curValue={+rate}
               isFloat={true}
               setCurValue={setRate}
@@ -181,20 +194,39 @@ const MortgageLoanScreen = ({route}: Props) => {
                 id: 0,
                 children: t('mortgage.fixedPayment'),
                 isLeftBorder: true,
-                tabWidth: (WIDTH - 36) * 0.45,
+                tabWidth: (WIDTH - 36) * 0.33,
               },
-
               {
                 id: 1,
                 children: t('mortgage.fixedPrincipal'),
+                tabWidth: (WIDTH - 36) * 0.34,
+              },
+              {
+                id: 2,
+                children: t('mortgage.flatRate'),
                 isRightBorder: true,
-                tabWidth: (WIDTH - 36) * 0.55,
+                tabWidth: (WIDTH - 36) * 0.33,
               },
             ]}
             activeKey={type}
             onPress={setType}
             isEqual={false}
           />
+          <View style={{minHeight: 40, paddingHorizontal: 4}}>
+            <AppText
+              value={
+                type === 0
+                  ? t('mortgage.descFixedPayment')
+                  : type === 1
+                  ? t('mortgage.descFixedPrincipal')
+                  : t('mortgage.descFlatRate')
+              }
+              fontSize={12}
+              fontWeight={400}
+              color={COLORS.foundation.neutral.n500}
+              textStyle={{fontStyle: 'italic', lineHeight: 18}}
+            />
+          </View>
           <AppIconButton
             style={{width: WIDTH - 36}}
             onPress={onNavMortgageLoanResult}>

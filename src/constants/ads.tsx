@@ -1,17 +1,17 @@
-import {Platform} from 'react-native';
-import {TestIds} from 'react-native-google-mobile-ads';
+import { Platform } from "react-native";
+import { TestIds } from "react-native-google-mobile-ads";
 
 const bannerAdUnitId = __DEV__
   ? TestIds.ADAPTIVE_BANNER
-  : Platform.OS === 'ios'
-  ? 'ca-app-pub-3940256099942544/2435281174'
-  : 'ca-app-pub-3012411444875177/1035366792';
+  : Platform.OS === "ios"
+    ? ""
+    : "ca-app-pub-3012411444875177/1035366792";
 
 const interstitialAdUnitId = __DEV__
   ? TestIds.INTERSTITIAL
-  : Platform.OS === 'ios'
-  ? 'ca-app-pub-3940256099942544/4411468910'
-  : 'ca-app-pub-3012411444875177/3574959717';
+  : Platform.OS === "ios"
+    ? ""
+    : "ca-app-pub-3012411444875177/3574959717";
 
 export const ADS = {
   banner: bannerAdUnitId,

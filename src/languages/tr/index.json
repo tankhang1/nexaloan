@@ -22,6 +22,9 @@
     "monthlyRepayment": "Aylık Ödeme",
     "confirm": "Onayla",
     "cancel": "İptal",
+    "descFixedPayment": "Aylık ödeme sabit. Bütçe planlaması için kolay.",
+    "descFixedPrincipal": "Anapara eşit bölünür. Ödeme azalır, faiz maliyeti düşük.",
+    "descFlatRate": "Faiz ana para üzerinden. Tüketici kredilerinde yaygın.",
     "mortgage": {
       "title": "Konut Kredisi",
       "desc": "Aylık taksitlerinizi ve toplam kredi maliyetinizi\nkolayca hesaplayın."
@@ -43,9 +46,11 @@
     "title": "Konut Kredisi",
     "loanAmount": "Kredi Tutarı",
     "duration": "Vade (ay)",
-    "interestRate": "Faiz Oranı (%)",
-    "fixedPayment": "Sabit Taksitli Geri Ödeme",
+    "interestRate": "Faiz Oranı (%/yıl)",
+    "interestRateMonthly": "Faiz Oranı (%/ay)",
+    "fixedPayment": "Eşit Ödemeli (Anüite)",
     "fixedPrincipal": "Azalan Faizli Geri Ödeme\n(Eşit Anapara Sistemi)",
+    "flatRate": "Sabit Faiz",
     "calculate": "Hesapla"
   },
   "mortgageResult": {
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "Tümü",
       "newest": "En Yeni",
-      "oldest": "En Eski"
+      "oldest": "En Eski",
+      "deleteConfirmTitle": "Silme Onayı",
+      "deleteConfirmDesc": "Bu krediyi geçmişten silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
+      "clearAllConfirmTitle": "Tüm Geçmişi Temizle",
+      "clearAllConfirmDesc": "Kayıtlı tüm krediler kalıcı olarak silinecektir. Devam etmek istediğinize emin misiniz?"
     },
     "loanTitles": {
       "mortgage": "Konut Kredisi"

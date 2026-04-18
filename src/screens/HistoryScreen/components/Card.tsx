@@ -1,9 +1,12 @@
 import {View, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
+import { Feather } from '@expo/vector-icons';
+import AppIconButton from '../../../components/AppIconButton';
 import AppText from '../../../components/AppText';
 import {COLORS} from '../../../constants/colors';
 import {WIDTH} from '../../../constants/dimension';
 import Animated, {FadeIn} from 'react-native-reanimated';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 type TCard = {
   icon: React.ReactNode;
@@ -13,48 +16,66 @@ type TCard = {
   time: string;
   index: number;
   onPress: (value: string) => void;
+  onDelete?: (id: string) => void;
   id: string;
 };
 const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
-const Card = ({icon, time, title, value, year, id, index, onPress}: TCard) => {
+
+const Card = ({icon, time, title, value, year, id, index, onPress, onDelete}: TCard) => {
+  const renderRightActions = () => {
+    return (
+      <View style={styles.deleteAction}>
+        <Feather name="trash-2" size={24} color={COLORS.foundation.neutral.n0} />
+      </View>
+    );
+  };
+
   return (
-    <AnimatedTouchable
-      entering={FadeIn.delay(index * 100)}
-      onPress={() => onPress(id)}>
-      <View style={styles.overall}>
-        <View style={styles.leftSection}>
-          <View style={styles.icon}>{icon}</View>
-          <View style={styles.contentContainer}>
+    <Swipeable
+      renderRightActions={onDelete ? renderRightActions : undefined}
+      onSwipeableOpen={() => onDelete?.(id)}
+      friction={2}
+      rightThreshold={40}
+    >
+      <AnimatedTouchable
+        entering={FadeIn.delay(index * 100)}
+        onPress={() => onPress(id)}
+      >
+        <View style={styles.overall}>
+          <View style={styles.leftSection}>
+            <View style={styles.icon}>{icon}</View>
+            <View style={styles.contentContainer}>
+              <AppText
+                value={title}
+                fontSize={12}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n700}
+              />
+              <AppText
+                value={value}
+                fontSize={16}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+            </View>
+          </View>
+          <View style={styles.rightSection}>
             <AppText
-              value={title}
-              fontSize={12}
-              fontWeight={500}
+              value={year}
+              fontSize={14}
+              fontWeight={700}
               color={COLORS.foundation.neutral.n700}
             />
             <AppText
-              value={value}
-              fontSize={16}
-              fontWeight={700}
+              value={time}
+              fontSize={11}
+              fontWeight={400}
               color={COLORS.foundation.neutral.n700}
             />
           </View>
         </View>
-        <View style={styles.rightSection}>
-          <AppText
-            value={year}
-            fontSize={14}
-            fontWeight={700}
-            color={COLORS.foundation.neutral.n700}
-          />
-          <AppText
-            value={time}
-            fontSize={11}
-            fontWeight={400}
-            color={COLORS.foundation.neutral.n700}
-          />
-        </View>
-      </View>
-    </AnimatedTouchable>
+      </AnimatedTouchable>
+    </Swipeable>
   );
 };
 
@@ -63,7 +84,7 @@ export default Card;
 const styles = StyleSheet.create({
   overall: {
     width: WIDTH - 34,
-    backgroundColor: 'rgba(255,255,255,0.96)',
+    backgroundColor: 'rgba(255,255,255,1)',
     minHeight: 76,
     borderWidth: 1,
     borderColor: COLORS.foundation.neutral.n100,
@@ -92,4 +113,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: COLORS.foundation.blue.b300,
   },
+  deleteAction: {
+    backgroundColor: '#FF4D4D',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: '100%',
+    borderRadius: 20,
+    marginLeft: -20, // To overlap with card radius
+  }
 });

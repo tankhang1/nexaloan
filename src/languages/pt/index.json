@@ -22,6 +22,9 @@
     "monthlyRepayment": "Reembolso Mensal",
     "confirm": "Confirmar",
     "cancel": "Cancelar",
+    "descFixedPayment": "Parcela fixa mensal. Mais fácil para planejamento.",
+    "descFixedPrincipal": "Amortização fixa. Parcela diminui, juros menores.",
+    "descFlatRate": "Juros sobre o valor inicial. Comum em varejo.",
     "mortgage": {
       "title": "Financiamento Imobiliário",
       "desc": "Simule o valor das parcelas mensais\ne o custo total do seu financiamento."
@@ -43,9 +46,11 @@
     "title": "Financiamento Imobiliário",
     "loanAmount": "Valor Financiado",
     "duration": "Prazo (meses)",
-    "interestRate": "Taxa de Juros (%)",
+    "interestRate": "Taxa de Juros (%/ano)",
+    "interestRateMonthly": "Taxa de Juros (%/mês)",
     "fixedPayment": "Sistema Price",
     "fixedPrincipal": "Sistema SAC\n(Amortização Constante)",
+    "flatRate": "Taxa Plana",
     "calculate": "Calcular"
   },
   "mortgageResult": {
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "Todos",
       "newest": "Mais Recentes",
-      "oldest": "Mais Antigos"
+      "oldest": "Mais Antigos",
+      "deleteConfirmTitle": "Confirmar Exclusão",
+      "deleteConfirmDesc": "Tem certeza de que deseja excluir este empréstimo do histórico? Esta ação não pode ser desfeita.",
+      "clearAllConfirmTitle": "Limpar Todo o Histórico",
+      "clearAllConfirmDesc": "Todos os empréstimos salvos serão excluídos permanentemente. Tem certeza de que deseja continuar?"
     },
     "loanTitles": {
       "mortgage": "Financiamento Imobiliário"

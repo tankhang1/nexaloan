@@ -23,8 +23,8 @@ import { ADS } from "../../constants/ads";
 import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
-import { exportLoanCsvToDownloadsRNFA } from "../../hooks/export_excel";
-import { calculateFixedMonthlyPayment } from "../../hooks/fixed_monthly_payment";
+import { exportLoanXlsxToDownloadsRNFA } from "../../hooks/export_excel";
+import { calculateFixedMonthlyPayment, calculateFlatRatePayment } from "../../hooks/fixed_monthly_payment";
 import { calculateFixedPrincipal } from "../../hooks/fixed_principal";
 import { formatMonth } from "../../hooks/format_month";
 import { formatNumber } from "../../hooks/format_number";
@@ -68,6 +68,8 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     () =>
       mortgage?.type === 1
         ? calculateFixedPrincipal(mortgage)
+        : mortgage?.type === 2
+        ? calculateFlatRatePayment(mortgage)
         : calculateFixedMonthlyPayment(mortgage!),
     [mortgage],
   );
@@ -75,7 +77,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     navigationRef.goBack();
   };
   const onDownload = useCallback(() => {
-    exportLoanCsvToDownloadsRNFA(
+    exportLoanXlsxToDownloadsRNFA(
       result?.monthlyBreakdown || [],
       `Report-${dayjs(new Date()).format("DD-MM-YYYY")}`,
       {

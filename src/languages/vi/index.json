@@ -44,9 +44,14 @@
     "title": "Vay Mua Nhà",
     "loanAmount": "Số Tiền Vay",
     "duration": "Thời Hạn (tháng)",
-    "interestRate": "Lãi Suất (%)",
+    "interestRate": "Lãi Suất (%/năm)",
+    "interestRateMonthly": "Lãi Suất (%/tháng)",
     "fixedPayment": "Trả Góp Đều",
     "fixedPrincipal": "Trả Gốc Đều\nLãi Giảm Dần",
+    "flatRate": "Lãi Suất Phẳng",
+    "descFixedPayment": "Số tiền trả hàng tháng cố định. Dễ dàng lập kế hoạch chi tiêu.",
+    "descFixedPrincipal": "Tiền gốc chia đều. Tổng tiền trả giảm dần, tổng lãi thấp hơn.",
+    "descFlatRate": "Lãi tính trên gốc ban đầu. Thường dùng cho vay tiêu dùng trả góp.",
     "calculate": "Tính Toán"
   },
   "mortgageResult": {
@@ -167,7 +172,11 @@
     "tabs": {
       "all": "Tất Cả",
       "newest": "Mới Nhất",
-      "oldest": "Cũ Nhất"
+      "oldest": "Cũ nhất",
+      "deleteConfirmTitle": "Xác nhận xoá",
+      "deleteConfirmDesc": "Bạn có chắc chắn muốn xoá khoản vay này khỏi lịch sử không? Hành động này không thể hoàn tác.",
+      "clearAllConfirmTitle": "Xoá toàn bộ lịch sử",
+      "clearAllConfirmDesc": "Tất cả các khoản vay đã lưu sẽ bị xoá vĩnh viễn. Bạn có chắc chắn muốn tiếp tục không?"
     },
     "loanTitles": {
       "mortgage": "Vay Mua Nhà"

@@ -44,9 +44,14 @@
     "title": "Mortgage Loan",
     "loanAmount": "Loan Amount",
     "duration": "Duration (months)",
-    "interestRate": "Interest Rate (%)",
+    "interestRate": "Interest Rate (%/year)",
+    "interestRateMonthly": "Interest Rate (%/month)",
     "fixedPayment": "Fixed Payment",
     "fixedPrincipal": "Fixed Principal\nReducing Interest",
+    "flatRate": "Flat Interest Rate",
+    "descFixedPayment": "Monthly payment is fixed. Easier for personal budgeting.",
+    "descFixedPrincipal": "Principal is divided equally. Total payment decreases over time.",
+    "descFlatRate": "Interest always calculated on original principal. Common for retail loans.",
     "calculate": "Calculate"
   },
   "mortgageResult": {
@@ -167,7 +172,11 @@
     "tabs": {
       "all": "All",
       "newest": "Newest",
-      "oldest": "Oldest"
+      "oldest": "Oldest",
+      "deleteConfirmTitle": "Delete Confirmation",
+      "deleteConfirmDesc": "Are you sure you want to delete this loan from history? This action cannot be undone.",
+      "clearAllConfirmTitle": "Clear All History",
+      "clearAllConfirmDesc": "All saved loans will be permanently deleted. Are you sure you want to proceed?"
     },
     "loanTitles": {
       "mortgage": "Mortgage Loan"

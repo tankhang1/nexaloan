@@ -22,6 +22,9 @@
     "monthlyRepayment": "Monatliche Tilgung",
     "confirm": "Bestätigen",
     "cancel": "Abbrechen",
+    "descFixedPayment": "Monatliche Rate là cố định. Einfacher für die Budgetplanung.",
+    "descFixedPrincipal": "Tilgung ist gleich. Gesamtrate sinkt, Zinskosten thấp hơn.",
+    "descFlatRate": "Zins immer auf den Ursprungsbetrag. Oft bei Konsumkrediten.",
     "mortgage": {
       "title": "Immobilienkredit",
       "desc": "Berechnen Sie mühelos Ihre monatlichen Raten\nund die Gesamtkosten des Darlehens."
@@ -43,9 +46,11 @@
     "title": "Immobilienkredit",
     "loanAmount": "Darlehensbetrag",
     "duration": "Laufzeit (Monate)",
-    "interestRate": "Sollzinssatz (%)",
+    "interestRate": "Sollzinssatz (%/Jahr)",
+    "interestRateMonthly": "Sollzinssatz (%/Monat)",
     "fixedPayment": "Annuitätendarlehen",
     "fixedPrincipal": "Tilgungsdarlehen\n(Fallende Zinsen)",
+    "flatRate": "Flatrate-Zins",
     "calculate": "Berechnen"
   },
   "mortgageResult": {
@@ -107,7 +112,11 @@
     "tabs": {
       "all": "Alle",
       "newest": "Neueste",
-      "oldest": "Älteste"
+      "oldest": "Älteste",
+      "deleteConfirmTitle": "Löschen bestätigen",
+      "deleteConfirmDesc": "Sind Sie sicher, dass Sie diesen Kredit aus dem Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+      "clearAllConfirmTitle": "Verlauf löschen",
+      "clearAllConfirmDesc": "Alle gespeicherten Kredite werden dauerhaft gelöscht. Möchten Sie wirklich fortfahren?"
     },
     "loanTitles": {
       "mortgage": "Immobilienkredit"

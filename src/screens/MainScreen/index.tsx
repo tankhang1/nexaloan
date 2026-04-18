@@ -18,6 +18,7 @@ import {
   Ionicons,
   FontAwesome6,
 } from '@expo/vector-icons';
+import AppBanner from '../../components/AppBanner';
 
 const MainScreen = () => {
   const {t} = useTranslation();
@@ -212,6 +213,10 @@ const MainScreen = () => {
             <AppText value={t('main.noLoans')} color={COLORS.foundation.neutral.n500} fontWeight={400} fontSize={14} />
           </View>
         )}
+        
+        <View style={{alignItems: 'center', marginVertical: 10}}>
+           <AppBanner />
+        </View>
 
         {/* Categories Section */}
         <View style={styles.sectionHeader}>
