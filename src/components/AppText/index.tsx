@@ -4,9 +4,11 @@ import {FONT_FAMILY} from '../../constants/font_family';
 
 type TAppText = {
   value: string;
-  color: string;
-  fontWeight: number;
+  color?: string;
+  fontWeight?: number;
   fontSize: number;
+  lineHeight?: number;
+  appStyle?: StyleProp<TextStyle>;
   textStyle?: StyleProp<TextStyle>;
   numberOfLines?: number;
   allowFontScaling?: boolean;
@@ -16,7 +18,9 @@ const AppText = ({
   color,
   numberOfLines,
   fontSize,
-  fontWeight,
+  fontWeight = 400,
+  lineHeight,
+  appStyle,
   textStyle,
   allowFontScaling = false,
 }: TAppText) => {
@@ -29,8 +33,10 @@ const AppText = ({
           color,
           fontFamily: FONT_FAMILY[fontWeight],
           fontSize,
+          lineHeight,
         },
         textStyle,
+        appStyle,
       ]}>
       {value}
     </Text>
