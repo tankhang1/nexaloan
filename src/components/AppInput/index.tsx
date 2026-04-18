@@ -16,6 +16,8 @@ type TAppInput = {
   onChangeText: (value: string) => void;
   keyboardType?: KeyboardTypeOptions;
   textStyle?: StyleProp<TextStyle>;
+  placeholder?: string;
+  placeholderTextColor?: string;
 };
 const AppInput = ({
   color,
@@ -25,12 +27,16 @@ const AppInput = ({
   textStyle,
   keyboardType,
   onChangeText,
+  placeholder,
+  placeholderTextColor,
 }: TAppInput) => {
   return (
     <TextInput
       onChangeText={onChangeText}
       keyboardType={keyboardType}
       value={value}
+      placeholder={placeholder}
+      placeholderTextColor={placeholderTextColor}
       style={[
         styles.inputStyle,
         {color, fontFamily: FONT_FAMILY[fontWeight], fontSize},

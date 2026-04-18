@@ -6,7 +6,22 @@
   },
   "main": {
     "greeting": "您好，",
-    "title": "為您的貸款\n尋找合適方案",
+    "title": "寻找\n您的贷款解决方案",
+    "heroTitle": "每天更清晰地规划您的贷款",
+    "badge": "探索",
+    "activeLoans": "我的贷款",
+    "report": "概览报告",
+    "totalDebt": "总债务",
+    "totalPaid": "已付总额",
+    "updatePayment": "更新",
+    "noLoans": "尚无保存的贷款",
+    "paidThisMonth": "本月已付",
+    "paymentSuccess": "付款已更新",
+    "paymentHistory": "付款历史",
+    "noPayments": "尚无历史",
+    "monthlyRepayment": "每月还款",
+    "confirm": "确认",
+    "cancel": "取消",
     "mortgage": {
       "title": "按揭貸款",
       "desc": "輕鬆計算每月供款及\n貸款總成本。"

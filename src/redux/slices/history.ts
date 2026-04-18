@@ -5,6 +5,12 @@ export enum ELoan {
   PERSONAL_LOAN,
   BUSINESS_LOAN,
 }
+export type TPayment = {
+  id: string;
+  date: string;
+  amount: number;
+};
+
 export type TLoan = {
   id: string; // Add an ID to track each item uniquely
   loan_amount: number;
@@ -18,6 +24,8 @@ export type TLoan = {
   };
   type: ELoan;
   date: Date;
+  paid_amount?: number;
+  payments?: TPayment[];
 };
 
 const initialState: TLoan[] = [];

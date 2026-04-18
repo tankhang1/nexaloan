@@ -6,7 +6,22 @@
   },
   "main": {
     "greeting": "Olá,",
-    "title": "Encontre soluções\npara seus financiamentos",
+    "title": "Encontre Soluções\nPara os Seus Empréstimos",
+    "heroTitle": "Planeje seus empréstimos com mais clareza a cada dia",
+    "badge": "Explorar",
+    "activeLoans": "Meus Empréstimos",
+    "report": "Relatório Geral",
+    "totalDebt": "Dívida Total",
+    "totalPaid": "Total Pago",
+    "updatePayment": "Atualizar",
+    "noLoans": "Nenhum empréstimo salvo",
+    "paidThisMonth": "Pago este mês",
+    "paymentSuccess": "Pagamento atualizado com sucesso",
+    "paymentHistory": "Histórico de Pagos",
+    "noPayments": "Sem histórico",
+    "monthlyRepayment": "Reembolso Mensal",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
     "mortgage": {
       "title": "Financiamento Imobiliário",
       "desc": "Simule o valor das parcelas mensais\ne o custo total do seu financiamento."

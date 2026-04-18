@@ -10,6 +10,19 @@
     "heroTitle": "Lập kế hoạch khoản vay rõ ràng hơn mỗi ngày",
     "heroDesc": "Ước tính khoản trả, xem kịch bản vay và quản lý các phép tính trong cùng một nơi.",
     "badge": "Khám phá",
+    "activeLoans": "Khoản Vay Của Tôi",
+    "report": "Báo Cáo Tổng Quan",
+    "totalDebt": "Tổng Nợ",
+    "totalPaid": "Đã Thanh Toán",
+    "updatePayment": "Cập Nhật",
+    "noLoans": "Chưa có khoản vay nào",
+    "paidThisMonth": "Đã đóng tháng này",
+    "paymentSuccess": "Cập nhật số tiền đã đóng thành công",
+    "paymentHistory": "Lịch Sử Trả Nợ",
+    "noPayments": "Chưa có lịch sử thanh toán",
+    "monthlyRepayment": "Khoản trả định kỳ",
+    "confirm": "Xác nhận",
+    "cancel": "Hủy",
     "mortgage": {
       "title": "Vay Mua Nhà",
       "desc": "Tính khoản trả hàng tháng và tổng chi phí vay mua nhà một cách rõ ràng."
@@ -90,7 +103,64 @@
     "currency": "Tiền Tệ",
     "aboutUs": "Về Chúng Tôi",
     "terms": "Điều Khoản & Điều Kiện",
-    "privacy": "Chính Sách Bảo Mật"
+    "privacy": "Chính Sách Bảo Mật",
+    "aboutContent": {
+      "description": "Nexa Tech là một đội ngũ phát triển nhỏ và linh hoạt, chuyên xây dựng các giải pháp kỹ thuật số thiết thực và miễn phí. Chúng tôi tập trung vào việc tạo ra các ứng dụng web, di động và công cụ mã nguồn mở để giải quyết các thách thức hàng ngày.",
+      "mission": "Sứ mệnh của chúng tôi là giải quyết các nhu cầu thiết yếu hàng ngày bằng cách tạo ra các sản phẩm kỹ thuật số chất lượng cao, miễn phí và hữu ích cho mọi người.",
+      "features": {
+        "title": "Giá Trị Cốt Lõi",
+        "f1": "Xây dựng sản phẩm thực tế, dùng được ngay",
+        "f2": "Ưu tiên người dùng (User-centric)",
+        "f3": "Mã nguồn mở và chia sẻ cộng đồng",
+        "f4": "Hoàn toàn miễn phí cho người dùng"
+      },
+      "contact": "Email: cs.nexatech@gmail.com",
+      "team": {
+        "title": "Đội Ngũ Của Chúng Tôi",
+        "ethan": "Ethan - Tech Lead",
+        "tina": "Tina - Team Lead"
+      }
+    },
+    "termsContent": {
+      "title": "ĐIỀU KHOẢN SỬ DỤNG",
+      "intro": "Chào mừng bạn đến với Nexa Loan. Bằng việc sử dụng ứng dụng của chúng tôi, bạn đồng ý với các điều khoản sau:",
+      "section1": {
+        "title": "1. Chấp nhận Điều khoản",
+        "content": "Bằng cách truy cập hoặc sử dụng Nexa Loan, bạn đồng ý bị ràng buộc bởi các Điều khoản này và tất cả các luật và quy định hiện hành."
+      },
+      "section2": {
+        "title": "2. Sử dụng Dịch vụ",
+        "content": "Bạn cam kết sử dụng ứng dụng cho các mục đích hợp pháp và không vi phạm quyền của bất kỳ bên thứ ba nào."
+      },
+      "section3": {
+        "title": "3. Sở hữu Trí tuệ",
+        "content": "Tất cả nội dung, logo, và thiết kế của Nexa Loan đều thuộc bản quyền của chúng tôi. Bạn không được sao chép khi chưa có sự đồng ý."
+      },
+      "section4": {
+        "title": "4. Giới hạn Trách nhiệm",
+        "content": "Chúng tôi không chịu trách nhiệm cho bất kỳ tổn thất tài chính nào phát sinh từ việc sử dụng các kết quả tính toán trên ứng dụng. Các con số chỉ mang tính chất tham khảo."
+      }
+    },
+    "privacyContent": {
+      "title": "CHÍNH SÁCH BẢO MẬT",
+      "intro": "Nexa Loan cam kết bảo vệ quyền riêng tư của bạn. Chính sách này giải thích cách chúng tôi xử lý thông tin của bạn.",
+      "section1": {
+        "title": "1. Thu thập Thông tin",
+        "content": "Chúng tôi thu thập thông tin bạn cung cấp trực tiếp khi sử dụng các tính năng của ứng dụng như số tiền vay, thời hạn vay."
+      },
+      "section2": {
+        "title": "2. Sử dụng Thông tin",
+        "content": "Thông tin được sử dụng để thực hiện các phép tính và cải thiện trải nghiệm người dùng."
+      },
+      "section3": {
+        "title": "3. Bảo mật Dữ liệu",
+        "content": "Chúng tôi áp dụng các biện pháp bảo mật nghiêm ngặt để đảm bảo an toàn cho dữ liệu cá nhân của bạn."
+      },
+      "section4": {
+        "title": "4. Quyền của Bạn",
+        "content": "Bạn có quyền yêu cầu xem, chỉnh sửa hoặc xóa thông tin cá nhân của mình bất kỳ lúc nào."
+      }
+    }
   },
   "history": {
     "title": "Lịch Sử",

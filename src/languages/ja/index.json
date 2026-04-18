@@ -7,6 +7,21 @@
   "main": {
     "greeting": "こんにちは、",
     "title": "ローンに関する\n最適な解決策を見つけましょう",
+    "heroTitle": "ローンプランを毎日より明確に",
+    "badge": "見つける",
+    "activeLoans": "マイローン",
+    "report": "概要レポート",
+    "totalDebt": "総負債",
+    "totalPaid": "支払い済み",
+    "updatePayment": "更新",
+    "noLoans": "保存されたローンはありません",
+    "paidThisMonth": "今月の支払い",
+    "paymentSuccess": "支払いが更新されました",
+    "paymentHistory": "支払い履歴",
+    "noPayments": "履歴なし",
+    "monthlyRepayment": "月々の返済額",
+    "confirm": "確認",
+    "cancel": "キャンセル",
     "mortgage": {
       "title": "住宅ローン",
       "desc": "月々の返済額や総返済額を\n簡単にシミュレーションできます。"

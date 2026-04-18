@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import AppView from '../../components/AppView';
 import AppIconButton from '../../components/AppIconButton';
 import {ICONS} from '../../constants/icon';
@@ -6,7 +6,6 @@ import AppText from '../../components/AppText';
 import {useTranslation} from 'react-i18next';
 import {COLORS} from '../../constants/colors';
 import {navigationRef} from '../../navigation';
-import WebView from 'react-native-webview';
 
 const PrivacyPolicyScreen = () => {
   const {t} = useTranslation();
@@ -26,12 +25,39 @@ const PrivacyPolicyScreen = () => {
           color={COLORS.foundation.neutral.n700}
         />
       </View>
-      <WebView
-        source={{
-          uri: 'https://www.notion.so/Loaner-Privacy-Policy-2303265de24380a29379fcd520cceff4',
-        }}
-        style={{flex: 1}}
-      />
+      <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
+        <AppText
+          value={t('settings.privacyContent.title')}
+          fontSize={22}
+          fontWeight={700}
+          color={COLORS.foundation.neutral.n700}
+          appStyle={styles.mainTitle}
+        />
+        <AppText
+          value={t('settings.privacyContent.intro')}
+          fontSize={16}
+          color={COLORS.foundation.neutral.n500}
+          appStyle={styles.intro}
+        />
+
+        {[1, 2, 3, 4].map((i) => (
+          <View key={i} style={styles.section}>
+            <AppText
+              value={t(`settings.privacyContent.section${i}.title`)}
+              fontSize={18}
+              fontWeight={600}
+              color={COLORS.foundation.neutral.n700}
+              appStyle={styles.sectionTitle}
+            />
+            <AppText
+              value={t(`settings.privacyContent.section${i}.content`)}
+              fontSize={15}
+              color={COLORS.foundation.neutral.n500}
+              lineHeight={22}
+            />
+          </View>
+        ))}
+      </ScrollView>
     </AppView>
   );
 };
@@ -39,15 +65,31 @@ export default PrivacyPolicyScreen;
 const styles = StyleSheet.create({
   overall: {
     flex: 1,
-    gap: 24,
     width: '100%',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 4,
+    paddingVertical: 12,
     paddingHorizontal: 16,
     gap: 20,
+  },
+  body: {
+    padding: 20,
+    paddingBottom: 40,
+  },
+  mainTitle: {
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  intro: {
+    marginBottom: 24,
+    fontStyle: 'italic',
+  },
+  section: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    marginBottom: 8,
   },
 });

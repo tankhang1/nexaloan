@@ -12,6 +12,8 @@ export type TMortgageLoan = {
     locale: string;
   };
   date: Date;
+  paid_amount?: number;
+  payments?: any[];
 };
 
 //@ts-ignore no check

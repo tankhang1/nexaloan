@@ -5,8 +5,23 @@
     "by": "dezvoltat de Neoprototype"
   },
   "main": {
-    "greeting": "Bună ziua,",
-    "title": "Găsește soluții\npentru creditele tale",
+    "greeting": "Bună,",
+    "title": "Găsiți Soluții\nPentru Împrumuturile Voastre",
+    "heroTitle": "Planificați-vă împrumuturile mai clar în fiecare zi",
+    "badge": "Explorați",
+    "activeLoans": "Împrumuturile mele",
+    "report": "Raport general",
+    "totalDebt": "Datoria totală",
+    "totalPaid": "Total plătit",
+    "updatePayment": "Actualizați",
+    "noLoans": "Niciun împrumut salvat",
+    "paidThisMonth": "Plătit luna aceasta",
+    "paymentSuccess": "Plată actualizată cu succes",
+    "paymentHistory": "Istoricul plăților",
+    "noPayments": "Niciun istoric",
+    "monthlyRepayment": "Rambursare lunară",
+    "confirm": "Confirmați",
+    "cancel": "Anulați",
     "mortgage": {
       "title": "Credit Imobiliar",
       "desc": "Calculează ușor ratele lunare\nși costul total al creditului."

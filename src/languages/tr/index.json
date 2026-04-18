@@ -7,6 +7,21 @@
   "main": {
     "greeting": "Merhaba,",
     "title": "Kredileriniz İçin\nÇözümler Bulun",
+    "heroTitle": "Kredilerinizi her gün daha net planlayın",
+    "badge": "Keşfet",
+    "activeLoans": "Kredilerim",
+    "report": "Genel Rapor",
+    "totalDebt": "Toplam Borç",
+    "totalPaid": "Toplam Ödenen",
+    "updatePayment": "Güncelle",
+    "noLoans": "Henüz kayıtlı kredi yok",
+    "paidThisMonth": "Bu ay ödenen",
+    "paymentSuccess": "Ödeme güncellendi",
+    "paymentHistory": "Ödeme Geçmişi",
+    "noPayments": "Geçmiş bulunamadı",
+    "monthlyRepayment": "Aylık Ödeme",
+    "confirm": "Onayla",
+    "cancel": "İptal",
     "mortgage": {
       "title": "Konut Kredisi",
       "desc": "Aylık taksitlerinizi ve toplam kredi maliyetinizi\nkolayca hesaplayın."

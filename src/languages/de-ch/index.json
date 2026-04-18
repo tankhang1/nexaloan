@@ -7,6 +7,21 @@
   "main": {
     "greeting": "Guten Tag,",
     "title": "Lösungen für\nIhre Finanzierungen finden",
+    "heroTitle": "Planen Sie Ihre Kredite jeden Tag klarer",
+    "badge": "Entdecken",
+    "activeLoans": "Meine Kredite",
+    "report": "Übersicht",
+    "totalDebt": "Gesamtverschuldung",
+    "totalPaid": "Bezahlt",
+    "updatePayment": "Aktualisieren",
+    "noLoans": "Keine Kredite gespeichert",
+    "paidThisMonth": "Diesen Monat bezahlt",
+    "paymentSuccess": "Zahlung aktualisiert",
+    "paymentHistory": "Zahlungsverlauf",
+    "noPayments": "Kein Verlauf",
+    "monthlyRepayment": "Monatliche Tilgung",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
     "mortgage": {
       "title": "Hypothek",
       "desc": "Berechnen Sie Ihre monatlichen Hypothekarzahlungen\nund die Gesamtkosten der Finanzierung."
