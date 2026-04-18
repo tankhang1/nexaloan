@@ -2,7 +2,6 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
 import {COLORS} from '../../constants/colors';
 import AppText from '../../components/AppText';
-import {Shadow} from 'react-native-shadow-2';
 import {WIDTH} from '../../constants/dimension';
 import Animated, {
   useAnimatedStyle,
@@ -67,56 +66,50 @@ const AppIndicator = ({
     }
   }, [activeKey, tabWidth, transX, isEqual, tabs]);
   return (
-    <Shadow
-      distance={1} // equivalent to elevation
-      startColor="rgba(0, 0, 0, 1)" // your rgba color
-      offset={[4, 4]} // X, Y offset
-    >
-      <View
+    <View
+      style={[
+        styles.overall,
+        {
+          width: isEqual
+            ? (tabWidth || 0) * tabs.length
+            : tabs.reduce((pre, cur) => pre + (cur?.tabWidth || 0), 0),
+        },
+      ]}>
+      <Animated.View
         style={[
-          styles.overall,
-          {
-            width: isEqual
-              ? (tabWidth || 0) * tabs.length
-              : tabs.reduce((pre, cur) => pre + (cur?.tabWidth || 0), 0),
-          },
-        ]}>
-        <Animated.View
-          style={[
-            styles.item,
-            {width: isEqual ? tabWidth : tabs?.[activeKey]?.tabWidth},
-            styles.active,
-            animatedStyle,
-            activeKey === 0 ? styles.borderLeft : null,
-            activeKey === tabs.length ? styles.borderRight : null,
-          ]}
-        />
-        {tabs.map((item, index) => (
-          <TouchableOpacity
-            onPress={() => {
-              if (item.isDisable) {
-                onNotiFeatureReleaseSoon();
-              } else {
-                onPress?.(index);
-              }
-            }}
-            key={index}
-            style={[styles.item, {width: isEqual ? tabWidth : item.tabWidth}]}>
-            {typeof item.children === 'string' ? (
-              <AppText
-                value={item.children}
-                color={COLORS.foundation.neutral.n900}
-                fontSize={11}
-                fontWeight={600}
-                textStyle={styles.center}
-              />
-            ) : (
-              item.children
-            )}
-          </TouchableOpacity>
-        ))}
-      </View>
-    </Shadow>
+          styles.item,
+          {width: isEqual ? tabWidth : tabs?.[activeKey]?.tabWidth},
+          styles.active,
+          animatedStyle,
+          activeKey === 0 ? styles.borderLeft : null,
+          activeKey === tabs.length ? styles.borderRight : null,
+        ]}
+      />
+      {tabs.map((item, index) => (
+        <TouchableOpacity
+          onPress={() => {
+            if (item.isDisable) {
+              onNotiFeatureReleaseSoon();
+            } else {
+              onPress?.(index);
+            }
+          }}
+          key={index}
+          style={[styles.item, {width: isEqual ? tabWidth : item.tabWidth}]}>
+          {typeof item.children === 'string' ? (
+            <AppText
+              value={item.children}
+              color={COLORS.foundation.neutral.n900}
+              fontSize={11}
+              fontWeight={600}
+              textStyle={styles.center}
+            />
+          ) : (
+            item.children
+          )}
+        </TouchableOpacity>
+      ))}
+    </View>
   );
 };
 
@@ -126,19 +119,19 @@ const styles = StyleSheet.create({
   overall: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 40,
+    height: 48,
     width: WIDTH - 34,
-    backgroundColor: COLORS.foundation.neutral.n0,
+    backgroundColor: 'rgba(255,255,255,0.88)',
     borderWidth: 1,
-    borderRadius: 12,
-    borderColor: COLORS.foundation.neutral.n700,
+    borderRadius: 18,
+    borderColor: COLORS.foundation.neutral.n100,
     overflow: 'hidden',
     position: 'relative',
   },
   item: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 40,
+    height: 48,
   },
   borderLeft: {
     borderLeftWidth: 0,
@@ -148,8 +141,8 @@ const styles = StyleSheet.create({
   },
   active: {
     backgroundColor: COLORS.foundation.blue.b75,
-    borderWidth: 1,
-    borderRadius: 12,
+    borderWidth: 0,
+    borderRadius: 16,
     position: 'absolute',
   },
   center: {

@@ -37,7 +37,6 @@ const AppSlider = ({
         ? Math.max(curValue * 10, minValue * 10)
         : Math.max(curValue, minValue),
     );
-    console.log('curValue', curValue, maxValue);
     min.value = withTiming(isFloat ? minValue * 10 : minValue);
     max.value = withTiming(isFloat ? maxValue * 10 : maxValue);
   }, [curValue, progress, isFloat, minValue, maxValue, min, max]);
@@ -53,7 +52,7 @@ const AppSlider = ({
           minimumTrackTintColor: COLORS.foundation.blue.b300,
           maximumTrackTintColor: COLORS.foundation.neutral.n200,
           bubbleBackgroundColor: 'transparent',
-          bubbleTextColor: COLORS.foundation.neutral.n700,
+          bubbleTextColor: COLORS.foundation.blue.b500,
         }}
         renderThumb={() => (
           <View style={styles.mark}>
@@ -110,11 +109,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   mark: {
-    width: 40,
-    height: 20,
+    width: 44,
+    height: 24,
     borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n900,
-    borderRadius: 20,
+    borderColor: COLORS.foundation.neutral.n100,
+    borderRadius: 24,
     backgroundColor: COLORS.foundation.blue.b300,
     justifyContent: 'center',
     alignItems: 'center',

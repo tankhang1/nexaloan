@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   checkStyle: {
-    backgroundColor: COLORS.foundation.blue.b100,
+    backgroundColor: COLORS.foundation.blue.b50,
   },
 });

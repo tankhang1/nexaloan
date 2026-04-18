@@ -7,21 +7,24 @@
   "main": {
     "greeting": "Hello there,",
     "title": "Find Solutions\nFor Your Loans",
+    "heroTitle": "Plan your loans with more clarity every day",
+    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
+    "badge": "Explore",
     "mortgage": {
       "title": "Mortgage Loan",
-      "desc": "Calculate your monthly mortgage\n payments and total loan cost effortlessly."
+      "desc": "Calculate monthly mortgage payments and total borrowing cost with a clearer overview."
     },
     "car": {
       "title": "Car Loan",
-      "desc": "Plan your auto loan payments and\ninterest costs with ease."
+      "desc": "Plan auto loan payments and interest costs with an easier monthly view."
     },
     "personal": {
       "title": "Personal Loan",
-      "desc": "Estimate your monthly installments\nand repayment schedule."
+      "desc": "Estimate monthly installments and repayment schedules for personal needs."
     },
     "business": {
       "title": "Business Loan",
-      "desc": "Analyze loan options to optimize\nyour business financing."
+      "desc": "Analyze loan options to improve cash flow and business financing decisions."
     }
   },
   "mortgage": {
@@ -38,6 +41,8 @@
     "share": "Share",
     "save": "Save",
     "home": "Home",
+    "summaryBadge": "Loan Summary",
+    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook.",
     "notificationTitle": "Notification",
     "notificationMessage": "Save mortgage loan success",
     "downloadFileMessage": "Download Excel File Success",

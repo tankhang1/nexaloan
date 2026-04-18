@@ -160,7 +160,7 @@ const MortgageLoanScreen = ({route}: Props) => {
                     setRate(numericValue);
                   }
                 }}
-                textStyle={styles.inputBox}
+                textStyle={styles.rateInputBox}
                 color={COLORS.foundation.neutral.n700}
               />
             </View>
@@ -257,6 +257,10 @@ const styles = StyleSheet.create({
   body_container: {justifyContent: 'space-between', flex: 1},
   inputBox: {
     width: 70,
+    textAlign: 'center',
+  },
+  rateInputBox: {
+    width: 92,
     textAlign: 'center',
   },
 });

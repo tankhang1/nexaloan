@@ -3,11 +3,16 @@ import React from 'react';
 import AppView from '../../components/AppView';
 import AppText from '../../components/AppText';
 import {COLORS} from '../../constants/colors';
-import {ICONS} from '../../constants/icon';
 import AppIconButton from '../../components/AppIconButton';
 import Card from './components/Card';
 import {navigationRef} from '../../navigation';
 import {useTranslation} from 'react-i18next';
+import {
+  Feather,
+  MaterialCommunityIcons,
+  Ionicons,
+  FontAwesome6,
+} from '@expo/vector-icons';
 
 const MainScreen = () => {
   const {t} = useTranslation();
@@ -46,51 +51,107 @@ const MainScreen = () => {
           />
           <AppText
             value={t('main.title')}
-            fontSize={32}
+            fontSize={34}
             fontWeight={700}
-            color={COLORS.foundation.neutral.n900}
+            color={COLORS.foundation.neutral.n700}
           />
         </View>
         <View style={styles.headerRightSection}>
           <AppIconButton onPress={onNavSettingScreen}>
-            <ICONS.button.setting />
+            <Feather
+              name="settings"
+              size={24}
+              color={COLORS.foundation.neutral.n900}
+            />
           </AppIconButton>
           <AppIconButton onPress={onNavHistoryScreen}>
-            <ICONS.button.history />
+            <MaterialCommunityIcons
+              name="history"
+              size={24}
+              color={COLORS.foundation.neutral.n900}
+            />
           </AppIconButton>
         </View>
       </View>
-      <View>
-        <ScrollView contentContainerStyle={styles.cardContainer}>
+      <View style={styles.heroCard}>
+        <AppText
+          value={t('main.heroTitle')}
+          fontSize={17}
+          fontWeight={700}
+          color={COLORS.foundation.neutral.n700}
+        />
+        <AppText
+          value={t('main.heroDesc')}
+          fontSize={14}
+          fontWeight={400}
+          color={COLORS.foundation.neutral.n500}
+        />
+      </View>
+      <View style={styles.listSection}>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.cardContainer}
+          showsVerticalScrollIndicator={false}>
           <Card
-            image={require('../../assets/mortgage-loan.png')}
             title={t('main.mortgage.title')}
             desc={t('main.mortgage.desc')}
-            icon={<ICONS.button.home />}
+            badgeLabel={t('main.badge')}
+            accentColor="#0F8A6A"
+            iconBackgroundColor="#0F8A6A"
+            icon={
+              <Ionicons
+                name="home"
+                size={24}
+                color={COLORS.foundation.neutral.n0}
+              />
+            }
             onPress={() => onNavMortgageLoanScreen('mortgage')}
           />
           <Card
-            image={require('../../assets/car-loan.png')}
             title={t('main.car.title')}
             desc={t('main.car.desc')}
-            icon={<ICONS.button.car />}
+            badgeLabel={t('main.badge')}
+            accentColor="#5D7CF4"
+            iconBackgroundColor="#5D7CF4"
+            icon={
+              <Ionicons
+                name="car-sport"
+                size={24}
+                color={COLORS.foundation.neutral.n0}
+              />
+            }
             onPress={() => onNavMortgageLoanScreen('car')}
           />
           <Card
-            image={require('../../assets/personal-loan.png')}
             title={t('main.personal.title')}
             desc={t('main.personal.desc')}
-            icon={<ICONS.button.user />}
+            badgeLabel={t('main.badge')}
+            accentColor="#E07A5F"
+            iconBackgroundColor="#E07A5F"
+            icon={
+              <Ionicons
+                name="person"
+                size={24}
+                color={COLORS.foundation.neutral.n0}
+              />
+            }
             onPress={() => onNavMortgageLoanScreen('personal')}
           />
           <Card
-            image={require('../../assets/business-loan.png')}
             title={t('main.business.title')}
             desc={t('main.business.desc')}
-            icon={<ICONS.button.money />}
+            badgeLabel={t('main.badge')}
+            accentColor="#B45CE0"
+            iconBackgroundColor="#B45CE0"
+            icon={
+              <FontAwesome6
+                name="briefcase"
+                size={20}
+                color={COLORS.foundation.neutral.n0}
+              />
+            }
             onPress={() => onNavMortgageLoanScreen('business')}
           />
-          <View style={styles.spacing} />
         </ScrollView>
       </View>
     </AppView>
@@ -101,9 +162,8 @@ export default MainScreen;
 const styles = StyleSheet.create({
   overall: {
     flex: 1,
-    backgroundColor: COLORS.foundation.neutral.n25,
     paddingHorizontal: 16,
-    gap: 16,
+    gap: 18,
     width: '100%',
   },
   header: {
@@ -112,7 +172,7 @@ const styles = StyleSheet.create({
   },
   headerLeftSection: {
     gap: 4,
-    maxWidth: '80%',
+    maxWidth: '68%',
   },
   headerRightSection: {
     gap: 14,
@@ -123,7 +183,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   cardContainer: {
-    gap: 14,
+    gap: 16,
+    paddingBottom: 140,
   },
-  spacing: {height: 100},
+  heroCard: {
+    backgroundColor: 'rgba(255,255,255,0.82)',
+    borderColor: COLORS.foundation.neutral.n100,
+    borderWidth: 1,
+    borderRadius: 24,
+    padding: 18,
+    gap: 8,
+  },
+  listSection: {
+    flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
 });

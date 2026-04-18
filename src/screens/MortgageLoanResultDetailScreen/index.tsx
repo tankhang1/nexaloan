@@ -5,7 +5,6 @@ import AppText from '../../components/AppText';
 import AppIconButton from '../../components/AppIconButton';
 import {ICONS} from '../../constants/icon';
 import {COLORS} from '../../constants/colors';
-import {Shadow} from 'react-native-shadow-2';
 import {WIDTH} from '../../constants/dimension';
 import Table from './components/Table';
 import {navigationRef} from '../../navigation';
@@ -128,26 +127,15 @@ const MortgageLoanResultDetailScreen = ({route}: Props) => {
         isEqual={false}
       />
       {tab === 0 && (
-        <Shadow
-          distance={1} // equivalent to elevation
-          startColor="rgba(0, 0, 0, 1)" // your rgba color
-          offset={[4, 4]} // X, Y offset
-        >
-          <View style={styles.statistic}>
-            <Shadow
-              distance={1} // equivalent to elevation
-              startColor="rgba(0, 0, 0, 1)" // your rgba color
-              offset={[4, 4]} // X, Y offset
-            >
-              <View style={styles.title}>
-                <AppText
-                  value={route.params?.label}
-                  fontSize={24}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              </View>
-            </Shadow>
+        <View style={styles.statistic}>
+          <View style={styles.title}>
+            <AppText
+              value={route.params?.label}
+              fontSize={24}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+            />
+          </View>
             <View style={[styles.rows, styles.justifyBetween]}>
               <AppText
                 value={t('mortgageDetail.loanAmount')}
@@ -197,70 +185,12 @@ const MortgageLoanResultDetailScreen = ({route}: Props) => {
             </View>
             <View style={styles.gap14}>
               <View style={[styles.rows, styles.gap8]}>
-                <Shadow
-                  distance={1} // equivalent to elevation
-                  startColor="rgba(0, 0, 0, 1)" // your rgba color
-                  offset={[4, 4]} // X, Y offset
-                >
-                  <Pressable style={styles.halfWidthButton}>
-                    <AppText
-                      fontSize={12}
-                      fontWeight={500}
-                      value={t('mortgageDetail.monthlyPayment') + ' (Avg)'}
-                      textStyle={styles.center}
-                      color={COLORS.foundation.neutral.n500}
-                    />
-                    <AppText
-                      allowFontScaling={true}
-                      fontSize={15}
-                      fontWeight={700}
-                      value={formatNumber(
-                        result?.averageMonthlyPayment || 0,
-                        mortgage?.currency?.locale || currency.locale,
-                        true,
-                        mortgage?.currency?.code || currency.code,
-                      )}
-                      color={COLORS.foundation.blue.b500}
-                    />
-                  </Pressable>
-                </Shadow>
-                <Shadow
-                  distance={1} // equivalent to elevation
-                  startColor="rgba(0, 0, 0, 1)" // your rgba color
-                  offset={[4, 4]} // X, Y offset
-                >
-                  <Pressable style={styles.halfWidthButton}>
-                    <AppText
-                      fontSize={12}
-                      fontWeight={500}
-                      value={t('mortgageDetail.totalInterestPaid')}
-                      color={COLORS.foundation.neutral.n500}
-                    />
-                    <AppText
-                      allowFontScaling={true}
-                      fontSize={15}
-                      fontWeight={700}
-                      value={formatNumber(
-                        result?.totalInterest || 0,
-                        mortgage?.currency?.locale || currency.locale,
-                        true,
-                        mortgage?.currency?.code || currency.code,
-                      )}
-                      color={COLORS.foundation.blue.b500}
-                    />
-                  </Pressable>
-                </Shadow>
-              </View>
-              <Shadow
-                distance={1} // equivalent to elevation
-                startColor="rgba(0, 0, 0, 1)" // your rgba color
-                offset={[4, 4]} // X, Y offset
-              >
-                <Pressable style={styles.fullWidthButton}>
+                <Pressable style={styles.halfWidthButton}>
                   <AppText
                     fontSize={12}
                     fontWeight={500}
-                    value={t('mortgageDetail.totalPayments')}
+                    value={t('mortgageDetail.monthlyPayment') + ' (Avg)'}
+                    textStyle={styles.center}
                     color={COLORS.foundation.neutral.n500}
                   />
                   <AppText
@@ -268,7 +198,7 @@ const MortgageLoanResultDetailScreen = ({route}: Props) => {
                     fontSize={15}
                     fontWeight={700}
                     value={formatNumber(
-                      result?.totalPayment || 0,
+                      result?.averageMonthlyPayment || 0,
                       mortgage?.currency?.locale || currency.locale,
                       true,
                       mortgage?.currency?.code || currency.code,
@@ -276,17 +206,52 @@ const MortgageLoanResultDetailScreen = ({route}: Props) => {
                     color={COLORS.foundation.blue.b500}
                   />
                 </Pressable>
-              </Shadow>
+                <Pressable style={styles.halfWidthButton}>
+                  <AppText
+                    fontSize={12}
+                    fontWeight={500}
+                    value={t('mortgageDetail.totalInterestPaid')}
+                    color={COLORS.foundation.neutral.n500}
+                  />
+                  <AppText
+                    allowFontScaling={true}
+                    fontSize={15}
+                    fontWeight={700}
+                    value={formatNumber(
+                      result?.totalInterest || 0,
+                      mortgage?.currency?.locale || currency.locale,
+                      true,
+                      mortgage?.currency?.code || currency.code,
+                    )}
+                    color={COLORS.foundation.blue.b500}
+                  />
+                </Pressable>
+              </View>
+              <Pressable style={styles.fullWidthButton}>
+                <AppText
+                  fontSize={12}
+                  fontWeight={500}
+                  value={t('mortgageDetail.totalPayments')}
+                  color={COLORS.foundation.neutral.n500}
+                />
+                <AppText
+                  allowFontScaling={true}
+                  fontSize={15}
+                  fontWeight={700}
+                  value={formatNumber(
+                    result?.totalPayment || 0,
+                    mortgage?.currency?.locale || currency.locale,
+                    true,
+                    mortgage?.currency?.code || currency.code,
+                  )}
+                  color={COLORS.foundation.blue.b500}
+                />
+              </Pressable>
             </View>
-          </View>
-        </Shadow>
+        </View>
       )}
       {tab === 1 && (
-        <Shadow
-          distance={1} // equivalent to elevation
-          startColor="rgba(0, 0, 0, 1)" // your rgba color
-          offset={[4, 4]} // X, Y offset
-          style={styles.borderRadius}>
+        <View style={styles.borderRadius}>
           <Table
             result={result}
             mortgage={mortgage}
@@ -294,7 +259,7 @@ const MortgageLoanResultDetailScreen = ({route}: Props) => {
               scrollRef.current?.scrollToEnd();
             }}
           />
-        </Shadow>
+        </View>
       )}
       <View style={{flex: 1}} />
       <Animated.View

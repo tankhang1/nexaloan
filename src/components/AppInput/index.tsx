@@ -45,9 +45,10 @@ export default AppInput;
 const styles = StyleSheet.create({
   inputStyle: {
     borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n200,
-    borderRadius: 4,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 18,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
   },
 });

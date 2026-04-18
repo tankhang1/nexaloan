@@ -5,7 +5,6 @@ import AppIconButton from '../../components/AppIconButton';
 import {ICONS} from '../../constants/icon';
 import AppText from '../../components/AppText';
 import {COLORS} from '../../constants/colors';
-import {Shadow} from 'react-native-shadow-2';
 import {navigationRef} from '../../navigation';
 import Card from './components/Card';
 import {HEIGHT, WIDTH} from '../../constants/dimension';
@@ -52,26 +51,20 @@ const LanguageScreen = () => {
         />
       </View>
       <View style={styles.scrollContainer}>
-        <Shadow
-          distance={1} // equivalent to elevation
-          startColor="rgba(0, 0, 0, 1)" // your rgba color
-          offset={[4, 4]} // X, Y offset
-        >
-          <View style={styles.container}>
-            <ScrollView>
-              {LANGUAGES.map((item, index) => (
-                <Card
-                  onPress={() => setCurLanguage(item.code)}
-                  label={item.label}
-                  icon={item.icon}
-                  isCheck={curLanguage === item.code}
-                  isBorder
-                  key={index}
-                />
-              ))}
-            </ScrollView>
-          </View>
-        </Shadow>
+        <View style={styles.container}>
+          <ScrollView>
+            {LANGUAGES.map((item, index) => (
+              <Card
+                onPress={() => setCurLanguage(item.code)}
+                label={item.label}
+                icon={item.icon}
+                isCheck={curLanguage === item.code}
+                isBorder
+                key={index}
+              />
+            ))}
+          </ScrollView>
+        </View>
 
         <AppIconButton style={styles.button} onPress={onSave}>
           <AppText

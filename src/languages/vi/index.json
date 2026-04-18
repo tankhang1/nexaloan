@@ -7,21 +7,24 @@
   "main": {
     "greeting": "Xin chào,",
     "title": "Tìm Giải Pháp\nCho Các Khoản Vay",
+    "heroTitle": "Lập kế hoạch khoản vay rõ ràng hơn mỗi ngày",
+    "heroDesc": "Ước tính khoản trả, xem kịch bản vay và quản lý các phép tính trong cùng một nơi.",
+    "badge": "Khám phá",
     "mortgage": {
       "title": "Vay Mua Nhà",
-      "desc": "Tính toán khoản thanh toán hàng tháng\nvà tổng chi phí vay một cách dễ dàng."
+      "desc": "Tính khoản trả hàng tháng và tổng chi phí vay mua nhà một cách rõ ràng."
     },
     "car": {
       "title": "Vay Mua Xe",
-      "desc": "Lập kế hoạch thanh toán vay mua xe\nvà chi phí lãi suất một cách hiệu quả."
+      "desc": "Lập kế hoạch vay mua xe với số tiền trả và chi phí lãi suất dễ theo dõi."
     },
     "personal": {
       "title": "Vay Tiêu Dùng",
-      "desc": "Ước tính khoản trả góp hàng tháng\nvà lịch trình thanh toán nợ."
+      "desc": "Ước tính khoản trả góp hàng tháng và lịch trình hoàn trả cho nhu cầu cá nhân."
     },
     "business": {
       "title": "Vay Kinh Doanh",
-      "desc": "Phân tích các phương án vay\nđể tối ưu tài chính doanh nghiệp."
+      "desc": "Phân tích nhiều phương án vay để tối ưu dòng tiền cho hoạt động kinh doanh."
     }
   },
   "mortgage": {
@@ -38,6 +41,8 @@
     "share": "Chia sẻ",
     "save": "Lưu lại",
     "home": "Trang Chủ",
+    "summaryBadge": "Tóm tắt khoản vay",
+    "summaryDesc": "Xem nhanh kế hoạch vay, thời hạn và bức tranh hoàn trả của bạn.",
     "notificationTitle": "Thông báo",
     "notificationMessage": "Lưu thông tin vay mua nhà thành công",
     "downloadFileMessage": "Tải xuống tệp Excel thành công",

@@ -4,7 +4,6 @@ import {COLORS} from '../../constants/colors';
 import AppView from '../../components/AppView';
 import AppIconButton from '../../components/AppIconButton';
 import {navigationRef} from '../../navigation';
-import {ICONS} from '../../constants/icon';
 import AppText from '../../components/AppText';
 import {WIDTH} from '../../constants/dimension';
 import Card from './components/Card';
@@ -18,6 +17,11 @@ import {formatNumber} from '../../hooks/format_number';
 import {formatMonth} from '../../hooks/format_month';
 import AppBanner from '../../components/AppBanner';
 import {BannerAdSize} from 'react-native-google-mobile-ads';
+import {
+  Feather,
+  Ionicons,
+  FontAwesome6,
+} from '@expo/vector-icons';
 
 const HistoryScreen = () => {
   const {t} = useTranslation();
@@ -33,7 +37,6 @@ const HistoryScreen = () => {
       const mortgages = [...history].filter(
         item => item.type === ELoan.MORTGAGE_LOAN,
       );
-      console.log('mortgages', mortgages);
       return timeType === 1 ? mortgages : mortgages.reverse();
     }
     if (type === 2) {
@@ -71,7 +74,11 @@ const HistoryScreen = () => {
     <AppView appStyle={styles.overall}>
       <View style={styles.header}>
         <AppIconButton onPress={onGoBack}>
-          <ICONS.button.chervon_left />
+          <Feather
+            name="chevron-left"
+            size={24}
+            color={COLORS.foundation.neutral.n900}
+          />
         </AppIconButton>
         <AppText
           value={t('history.title')}
@@ -80,7 +87,11 @@ const HistoryScreen = () => {
           color={COLORS.foundation.neutral.n700}
         />
         <AppIconButton onPress={onNavSettingScreen}>
-          <ICONS.button.setting />
+          <Feather
+            name="settings"
+            size={24}
+            color={COLORS.foundation.neutral.n900}
+          />
         </AppIconButton>
       </View>
       <View style={styles.rows}>
@@ -93,19 +104,43 @@ const HistoryScreen = () => {
             },
             {
               id: 1,
-              children: <ICONS.indicator.home />,
+              children: (
+                <Ionicons
+                  name="home"
+                  size={18}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              ),
             },
             {
               id: 2,
-              children: <ICONS.indicator.user />,
+              children: (
+                <Ionicons
+                  name="person"
+                  size={18}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              ),
             },
             {
               id: 3,
-              children: <ICONS.indicator.bag />,
+              children: (
+                <FontAwesome6
+                  name="briefcase"
+                  size={15}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              ),
             },
             {
               id: 4,
-              children: <ICONS.indicator.car />,
+              children: (
+                <Ionicons
+                  name="car-sport"
+                  size={18}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              ),
               isRightBorder: true,
             },
           ]}
@@ -141,13 +176,29 @@ const HistoryScreen = () => {
             key={Math.random()}
             icon={
               mortgage.type === ELoan.MORTGAGE_LOAN ? (
-                <ICONS.button.home />
+                <Ionicons
+                  name="home"
+                  size={22}
+                  color={COLORS.foundation.neutral.n0}
+                />
               ) : mortgage.type === ELoan.PERSONAL_LOAN ? (
-                <ICONS.button.user />
+                <Ionicons
+                  name="person"
+                  size={22}
+                  color={COLORS.foundation.neutral.n0}
+                />
               ) : mortgage.type === ELoan.BUSINESS_LOAN ? (
-                <ICONS.button.money />
+                <FontAwesome6
+                  name="briefcase"
+                  size={18}
+                  color={COLORS.foundation.neutral.n0}
+                />
               ) : (
-                <ICONS.button.car />
+                <Ionicons
+                  name="car-sport"
+                  size={22}
+                  color={COLORS.foundation.neutral.n0}
+                />
               )
             }
             title={

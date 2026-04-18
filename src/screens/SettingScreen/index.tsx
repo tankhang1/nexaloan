@@ -5,7 +5,6 @@ import AppIconButton from '../../components/AppIconButton';
 import {ICONS} from '../../constants/icon';
 import AppText from '../../components/AppText';
 import {COLORS} from '../../constants/colors';
-import {Shadow} from 'react-native-shadow-2';
 import Card from './components/Card';
 import {navigationRef} from '../../navigation';
 import {useSelector} from 'react-redux';
@@ -58,42 +57,36 @@ const SettingScreen = () => {
           color={COLORS.foundation.neutral.n700}
         />
       </View>
-      <Shadow
-        distance={1} // equivalent to elevation
-        startColor="rgba(0, 0, 0, 1)" // your rgba color
-        offset={[4, 4]} // X, Y offset
-      >
-        <View style={styles.container}>
-          <Card
-            label={t('settings.selectLanguage')}
-            rightSection={{
-              label: curLanguage?.label || '',
-              icon: curLanguage?.icon,
-            }}
-            onPress={onNavLanguageScreen}
-            isBorder
-          />
-          <Card
-            label={t('settings.currency')}
-            rightSection={{
-              label: curCurrency?.label || '',
-              icon: curCurrency?.icon,
-            }}
-            isBorder
-            onPress={onNavCurrencyScreen}
-          />
-          <Card
-            label={t('settings.aboutUs')}
-            isBorder
-            onPress={onNavAboutUsScreen}
-          />
-          <Card label={t('settings.terms')} isBorder onPress={onNavTOUScreen} />
-          <Card
-            label={t('settings.privacy')}
-            onPress={onNavPrivacyPolicyScreen}
-          />
-        </View>
-      </Shadow>
+      <View style={styles.container}>
+        <Card
+          label={t('settings.selectLanguage')}
+          rightSection={{
+            label: curLanguage?.label || '',
+            icon: curLanguage?.icon,
+          }}
+          onPress={onNavLanguageScreen}
+          isBorder
+        />
+        <Card
+          label={t('settings.currency')}
+          rightSection={{
+            label: curCurrency?.label || '',
+            icon: curCurrency?.icon,
+          }}
+          isBorder
+          onPress={onNavCurrencyScreen}
+        />
+        <Card
+          label={t('settings.aboutUs')}
+          isBorder
+          onPress={onNavAboutUsScreen}
+        />
+        <Card label={t('settings.terms')} isBorder onPress={onNavTOUScreen} />
+        <Card
+          label={t('settings.privacy')}
+          onPress={onNavPrivacyPolicyScreen}
+        />
+      </View>
       <View style={styles.banner}>
         <AppBanner size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
       </View>
@@ -118,9 +111,9 @@ const styles = StyleSheet.create({
   },
   container: {
     borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n900,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderRadius: 16,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 24,
     overflow: 'hidden',
   },
   banner: {alignItems: 'center', position: 'absolute', bottom: 40},
