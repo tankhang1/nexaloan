@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Tính Toán Thông Minh, Vay Vốn Hiệu Quả",
+    "by": "bởi Neoprototype"
+  },
+  "main": {
+    "greeting": "Xin chào,",
+    "title": "Tìm Giải Pháp\nCho Các Khoản Vay",
+    "mortgage": {
+      "title": "Vay Mua Nhà",
+      "desc": "Tính toán khoản thanh toán hàng tháng\nvà tổng chi phí vay một cách dễ dàng."
+    },
+    "car": {
+      "title": "Vay Mua Xe",
+      "desc": "Lập kế hoạch thanh toán vay mua xe\nvà chi phí lãi suất một cách hiệu quả."
+    },
+    "personal": {
+      "title": "Vay Tiêu Dùng",
+      "desc": "Ước tính khoản trả góp hàng tháng\nvà lịch trình thanh toán nợ."
+    },
+    "business": {
+      "title": "Vay Kinh Doanh",
+      "desc": "Phân tích các phương án vay\nđể tối ưu tài chính doanh nghiệp."
+    }
+  },
+  "mortgage": {
+    "title": "Vay Mua Nhà",
+    "loanAmount": "Số Tiền Vay",
+    "duration": "Thời Hạn (tháng)",
+    "interestRate": "Lãi Suất (%)",
+    "fixedPayment": "Trả Góp Đều",
+    "fixedPrincipal": "Trả Gốc Đều\nLãi Giảm Dần",
+    "calculate": "Tính Toán"
+  },
+  "mortgageResult": {
+    "amortization": "Chi tiết",
+    "share": "Chia sẻ",
+    "save": "Lưu lại",
+    "home": "Trang Chủ",
+    "notificationTitle": "Thông báo",
+    "notificationMessage": "Lưu thông tin vay mua nhà thành công",
+    "downloadFileMessage": "Tải xuống tệp Excel thành công",
+    "resultTitle": "Kết Quả Vay Mua Nhà",
+    "result": {
+      "title": "Vay Mua Nhà",
+      "loanAmount": "Số Tiền Vay",
+      "duration": "Thời Hạn",
+      "month": "Tháng",
+      "year": "Năm",
+      "interestRate": "Lãi Suất (%)",
+      "result": "Kết Quả",
+      "monthlyPayment": "Khoản Trả Hàng Tháng",
+      "totalPayments": "Tổng Số Tiền Thanh Toán",
+      "totalInterestPaid": "Tổng Tiền Lãi Phải Trả"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Vay Mua Nhà",
+    "result": "Kết Quả",
+    "loanAmount": "Số Tiền Vay",
+    "duration": "Thời Hạn",
+    "month": "Tháng",
+    "year": "Năm",
+    "months": "Tháng",
+    "years": "Năm",
+    "interestRate": "Lãi Suất (%)",
+    "monthlyPayment": "Khoản Trả Hàng Tháng",
+    "totalPayments": "Tổng Số Tiền Thanh Toán",
+    "totalInterestPaid": "Tổng Tiền Lãi Phải Trả",
+    "amortization": "Chi tiết",
+    "summary": "Tóm Tắt",
+    "analysisByMonth": "Phân Tích Theo Tháng",
+    "table": {
+      "month": "Tháng",
+      "principal": "Gốc",
+      "interest": "Lãi",
+      "monthlyPayment": "Trả Hàng Tháng",
+      "endingBalance": "Dư Nợ Cuối Kỳ"
+    }
+  },
+  "settings": {
+    "title": "Cài Đặt",
+    "selectLanguage": "Chọn Ngôn Ngữ",
+    "currency": "Tiền Tệ",
+    "aboutUs": "Về Chúng Tôi",
+    "terms": "Điều Khoản & Điều Kiện",
+    "privacy": "Chính Sách Bảo Mật"
+  },
+  "history": {
+    "title": "Lịch Sử",
+    "tabs": {
+      "all": "Tất Cả",
+      "newest": "Mới Nhất",
+      "oldest": "Cũ Nhất"
+    },
+    "loanTitles": {
+      "mortgage": "Vay Mua Nhà"
+    }
+  },
+  "currency": {
+    "title": "Tiền Tệ",
+    "save": "Lưu",
+    "notification": {
+      "title": "Thông báo",
+      "success": "Cập nhật đơn vị tiền tệ thành công"
+    }
+  },
+  "language": {
+    "title": "Ngôn Ngữ",
+    "notification": {
+      "title": "Thông báo",
+      "success": "Lưu ngôn ngữ thành công"
+    },
+    "save": "Lưu"
+  },
+  "noti": {
+    "title": "Chức Năng Sắp Ra Mắt",
+    "desc": "Chúng tôi đang hoàn thiện chức năng này. Hãy quay lại sau để trải nghiệm!"
+  },
+  "loading": "Dữ liệu đang được xử lý"
+}

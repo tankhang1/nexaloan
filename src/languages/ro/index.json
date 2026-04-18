@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Calculează inteligent, împrumută responsabil",
+    "by": "dezvoltat de Neoprototype"
+  },
+  "main": {
+    "greeting": "Bună ziua,",
+    "title": "Găsește soluții\npentru creditele tale",
+    "mortgage": {
+      "title": "Credit Imobiliar",
+      "desc": "Calculează ușor ratele lunare\nși costul total al creditului."
+    },
+    "car": {
+      "title": "Credit Auto",
+      "desc": "Planifică-ți ratele lunare și\ncosturile cu dobânda."
+    },
+    "personal": {
+      "title": "Credit de Nevoi Personale",
+      "desc": "Estimează ratele lunare\nși graficul de rambursare."
+    },
+    "business": {
+      "title": "Credit pentru Afaceri",
+      "desc": "Analizează opțiunile de creditare\npentru a optimiza finanțarea companiei."
+    }
+  },
+  "mortgage": {
+    "title": "Credit Imobiliar",
+    "loanAmount": "Suma Împrumutată",
+    "duration": "Durată (luni)",
+    "interestRate": "Rată Dobândă (%)",
+    "fixedPayment": "Rată Fixă",
+    "fixedPrincipal": "Principal Fix\nDobândă Descrescătoare",
+    "calculate": "Calculează"
+  },
+  "mortgageResult": {
+    "amortization": "Grafic de Rambursare",
+    "share": "Distribuie",
+    "save": "Salvează",
+    "home": "Acasă",
+    "notificationTitle": "Notificare",
+    "notificationMessage": "Creditul imobiliar a fost salvat cu succes",
+    "downloadFileMessage": "Descărcarea fișierului Excel a reușit",
+    "resultTitle": "Rezultatul Creditului Imobiliar",
+    "result": {
+      "title": "Credit Imobiliar",
+      "loanAmount": "Suma Împrumutată",
+      "duration": "Durată",
+      "month": "Lună",
+      "year": "An",
+      "interestRate": "Dobândă (%)",
+      "result": "Rezultat",
+      "monthlyPayment": "Rată Lunară",
+      "totalPayments": "Total de Plată",
+      "totalInterestPaid": "Dobândă Totală Plătită"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Detalii Credit Imobiliar",
+    "result": "Rezultat",
+    "loanAmount": "Suma Împrumutată",
+    "duration": "Durată",
+    "month": "Lună",
+    "year": "An",
+    "months": "Luni",
+    "years": "Ani",
+    "interestRate": "Dobândă (%)",
+    "monthlyPayment": "Rată Lunară",
+    "totalPayments": "Total de Plată",
+    "totalInterestPaid": "Dobândă Totală Plătită",
+    "amortization": "Grafic de Rambursare",
+    "summary": "Rezumat",
+    "analysisByMonth": "Analiză pe Lună",
+    "table": {
+      "month": "Lună",
+      "principal": "Principal",
+      "interest": "Dobândă",
+      "monthlyPayment": "Rată Lună",
+      "endingBalance": "Sold Rămas"
+    }
+  },
+  "settings": {
+    "title": "Setări",
+    "selectLanguage": "Selectează Limba",
+    "currency": "Monedă",
+    "aboutUs": "Despre Noi",
+    "terms": "Termeni și Condiții",
+    "privacy": "Politica de Confidențialitate"
+  },
+  "history": {
+    "title": "Istoric",
+    "tabs": {
+      "all": "Toate",
+      "newest": "Cele mai recente",
+      "oldest": "Cele mai vechi"
+    },
+    "loanTitles": {
+      "mortgage": "Credit Imobiliar"
+    }
+  },
+  "currency": {
+    "title": "Monedă",
+    "save": "Salvează",
+    "notification": {
+      "title": "Notificare",
+      "success": "Moneda a fost actualizată cu succes"
+    }
+  },
+  "language": {
+    "title": "Limba",
+    "notification": {
+      "title": "Notificare",
+      "success": "Limba a fost salvată cu succes"
+    },
+    "save": "Salvează"
+  },
+  "noti": {
+    "title": "Funcție în curând",
+    "desc": "Lucrăm în prezent la această funcție. Te rugăm să revii mai târziu pentru a o încerca!"
+  },
+  "loading": "Datele sunt în curs de procesare"
+}

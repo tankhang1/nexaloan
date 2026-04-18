@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "賢く計算し、賢く借りる",
+    "by": "Neoprototype 提供"
+  },
+  "main": {
+    "greeting": "こんにちは、",
+    "title": "ローンに関する\n最適な解決策を見つけましょう",
+    "mortgage": {
+      "title": "住宅ローン",
+      "desc": "月々の返済額や総返済額を\n簡単にシミュレーションできます。"
+    },
+    "car": {
+      "title": "自動車ローン",
+      "desc": "金利と返済プランを考慮しながら\n車の購入計画を立てましょう。"
+    },
+    "personal": {
+      "title": "パーソナルローン",
+      "desc": "毎月の返済額や\n返済スケジュールを見積もります。"
+    },
+    "business": {
+      "title": "ビジネスローン",
+      "desc": "事業資金に最適なローンの選択肢を\n分析・比較できます。"
+    }
+  },
+  "mortgage": {
+    "title": "住宅ローン",
+    "loanAmount": "借入金額",
+    "duration": "返済期間（月）",
+    "interestRate": "金利（年利・％）",
+    "fixedPayment": "元利均等返済",
+    "fixedPrincipal": "元金均等返済\n（利息は減少）",
+    "calculate": "計算する"
+  },
+  "mortgageResult": {
+    "amortization": "返済計画表",
+    "share": "共有",
+    "save": "保存する",
+    "home": "ホーム",
+    "notificationTitle": "お知らせ",
+    "notificationMessage": "住宅ローン情報を保存しました",
+    "downloadFileMessage": "Excelファイルのダウンロードが成功しました",
+    "resultTitle": "住宅ローン結果",
+    "result": {
+      "title": "住宅ローン",
+      "loanAmount": "借入金額",
+      "duration": "返済期間",
+      "month": "月",
+      "year": "年",
+      "interestRate": "金利（％）",
+      "result": "結果",
+      "monthlyPayment": "月々の返済額",
+      "totalPayments": "総返済額",
+      "totalInterestPaid": "支払総利息"
+    }
+  },
+  "mortgageDetail": {
+    "title": "住宅ローン詳細",
+    "result": "結果",
+    "loanAmount": "借入金額",
+    "duration": "返済期間",
+    "months": "月",
+    "years": "年",
+    "month": "月",
+    "year": "年",
+    "interestRate": "金利（％）",
+    "monthlyPayment": "月々の返済額",
+    "totalPayments": "総返済額",
+    "totalInterestPaid": "支払総利息",
+    "amortization": "返済計画表",
+    "summary": "概要",
+    "analysisByMonth": "月別分析",
+    "table": {
+      "month": "月",
+      "principal": "元金",
+      "interest": "利息",
+      "monthlyPayment": "月々返済額",
+      "endingBalance": "残高"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "selectLanguage": "言語を選択",
+    "currency": "通貨",
+    "aboutUs": "会社情報",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
+  },
+  "history": {
+    "title": "履歴",
+    "tabs": {
+      "all": "すべて",
+      "newest": "新しい順",
+      "oldest": "古い順"
+    },
+    "loanTitles": {
+      "mortgage": "住宅ローン"
+    }
+  },
+  "currency": {
+    "title": "通貨",
+    "save": "保存",
+    "notification": {
+      "title": "お知らせ",
+      "success": "通貨が更新されました"
+    }
+  },
+  "language": {
+    "title": "言語",
+    "notification": {
+      "title": "お知らせ",
+      "success": "言語設定を保存しました"
+    },
+    "save": "保存"
+  },
+  "noti": {
+    "title": "近日公開予定の機能",
+    "desc": "現在、この機能を開発中です。ぜひ後ほどもう一度ご確認ください！"
+  },
+  "loading": "データを処理中です"
+}

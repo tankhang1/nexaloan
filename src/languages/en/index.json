@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Calculate Wisely, Borrow Smartly",
+    "by": "by Neoprototype"
+  },
+  "main": {
+    "greeting": "Hello there,",
+    "title": "Find Solutions\nFor Your Loans",
+    "mortgage": {
+      "title": "Mortgage Loan",
+      "desc": "Calculate your monthly mortgage\n payments and total loan cost effortlessly."
+    },
+    "car": {
+      "title": "Car Loan",
+      "desc": "Plan your auto loan payments and\ninterest costs with ease."
+    },
+    "personal": {
+      "title": "Personal Loan",
+      "desc": "Estimate your monthly installments\nand repayment schedule."
+    },
+    "business": {
+      "title": "Business Loan",
+      "desc": "Analyze loan options to optimize\nyour business financing."
+    }
+  },
+  "mortgage": {
+    "title": "Mortgage Loan",
+    "loanAmount": "Loan Amount",
+    "duration": "Duration (months)",
+    "interestRate": "Interest Rate (%)",
+    "fixedPayment": "Fixed Payment",
+    "fixedPrincipal": "Fixed Principal\nReducing Interest",
+    "calculate": "Calculate"
+  },
+  "mortgageResult": {
+    "amortization": "Amortization",
+    "share": "Share",
+    "save": "Save",
+    "home": "Home",
+    "notificationTitle": "Notification",
+    "notificationMessage": "Save mortgage loan success",
+    "downloadFileMessage": "Download Excel File Success",
+    "resultTitle": "Mortgage Loan Result",
+    "result": {
+      "title": "Mortgage Loan",
+      "loanAmount": "Loan Amount",
+      "duration": "Duration",
+      "month": "Months",
+      "year": "Year",
+      "interestRate": "Int Rate (%)",
+      "result": "Result",
+      "monthlyPayment": "Monthly Payment",
+      "totalPayments": "Total Payments",
+      "totalInterestPaid": "Total Interest Paid"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Mortgage Loan",
+    "result": "Result",
+    "loanAmount": "Loan Amount",
+    "duration": "Duration",
+    "months": "Months",
+    "years": "Years",
+    "month": "Month",
+    "year": "Year",
+    "interestRate": "Int Rate (%)",
+    "monthlyPayment": "Monthly Payment",
+    "totalPayments": "Total Payments",
+    "totalInterestPaid": "Total Interest Paid",
+    "amortization": "Amortization",
+    "summary": "Summary",
+    "analysisByMonth": "Analysis by Month",
+    "table": {
+      "month": "Month",
+      "principal": "Principal",
+      "interest": "Interest",
+      "monthlyPayment": "Monthly Payment",
+      "endingBalance": "Ending Balance"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "selectLanguage": "Select Language",
+    "currency": "Currency",
+    "aboutUs": "About us",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "history": {
+    "title": "History",
+    "tabs": {
+      "all": "All",
+      "newest": "Newest",
+      "oldest": "Oldest"
+    },
+    "loanTitles": {
+      "mortgage": "Mortgage Loan"
+    }
+  },
+  "currency": {
+    "title": "Currency",
+    "save": "Save",
+    "notification": {
+      "title": "Notification",
+      "success": "Update currency success"
+    }
+  },
+  "language": {
+    "title": "Language",
+    "notification": {
+      "title": "Notification",
+      "success": "Save Language Success"
+    },
+    "save": "Save"
+  },
+  "noti": {
+    "title": "Feature Coming Soon",
+    "desc": "We're currently working on this feature. Please check back later to try it out!"
+  },
+  "loading": "Data is being processed"
+}

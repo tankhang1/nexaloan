@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Klug Rechnen, Clever Finanzieren",
+    "by": "von Neoprototype"
+  },
+  "main": {
+    "greeting": "Hallo,",
+    "title": "Finden Sie Lösungen\nfür Ihre Kredite",
+    "mortgage": {
+      "title": "Immobilienkredit",
+      "desc": "Berechnen Sie mühelos Ihre monatlichen Raten\nund die Gesamtkosten des Darlehens."
+    },
+    "car": {
+      "title": "Autokredit",
+      "desc": "Planen Sie bequem Ihre Autofinanzierung\nund Zinskosten."
+    },
+    "personal": {
+      "title": "Privatkredit",
+      "desc": "Schätzen Sie Ihre monatlichen Raten\nund den Rückzahlungsplan ab."
+    },
+    "business": {
+      "title": "Firmenkredit",
+      "desc": "Analysieren Sie Kreditoptionen,\num Ihre Unternehmensfinanzierung zu optimieren."
+    }
+  },
+  "mortgage": {
+    "title": "Immobilienkredit",
+    "loanAmount": "Darlehensbetrag",
+    "duration": "Laufzeit (Monate)",
+    "interestRate": "Sollzinssatz (%)",
+    "fixedPayment": "Annuitätendarlehen",
+    "fixedPrincipal": "Tilgungsdarlehen\n(Fallende Zinsen)",
+    "calculate": "Berechnen"
+  },
+  "mortgageResult": {
+    "amortization": "Tilgungsplan",
+    "share": "Teilen",
+    "save": "Speichern",
+    "home": "Startseite",
+    "notificationTitle": "Benachrichtigung",
+    "notificationMessage": "Immobilienkredit erfolgreich gespeichert",
+    "downloadFileMessage": "Excel-Datei erfolgreich heruntergeladen",
+    "resultTitle": "Ergebnis – Immobilienkredit",
+    "result": {
+      "title": "Immobilienkredit",
+      "loanAmount": "Darlehensbetrag",
+      "duration": "Laufzeit",
+      "month": "Monat",
+      "year": "Jahr",
+      "interestRate": "Zinssatz (%)",
+      "result": "Ergebnis",
+      "monthlyPayment": "Monatliche Rate",
+      "totalPayments": "Gesamtrückzahlung",
+      "totalInterestPaid": "Gesamtzinszahlung"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Details – Immobilienkredit",
+    "result": "Ergebnis",
+    "loanAmount": "Darlehensbetrag",
+    "duration": "Laufzeit",
+    "months": "Monate",
+    "years": "Jahre",
+    "month": "Monat",
+    "year": "Jahr",
+    "interestRate": "Zinssatz (%)",
+    "monthlyPayment": "Monatliche Rate",
+    "totalPayments": "Gesamtrückzahlung",
+    "totalInterestPaid": "Gesamtzinszahlung",
+    "amortization": "Tilgungsplan",
+    "summary": "Zusammenfassung",
+    "analysisByMonth": "Analyse nach Monat",
+    "table": {
+      "month": "Monat",
+      "principal": "Tilgung",
+      "interest": "Zinsen",
+      "monthlyPayment": "Monatliche Rate",
+      "endingBalance": "Restschuld"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "selectLanguage": "Sprache auswählen",
+    "currency": "Währung",
+    "aboutUs": "Über uns",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "privacy": "Datenschutzrichtlinie"
+  },
+  "history": {
+    "title": "Verlauf",
+    "tabs": {
+      "all": "Alle",
+      "newest": "Neueste",
+      "oldest": "Älteste"
+    },
+    "loanTitles": {
+      "mortgage": "Immobilienkredit"
+    }
+  },
+  "currency": {
+    "title": "Währung",
+    "save": "Speichern",
+    "notification": {
+      "title": "Benachrichtigung",
+      "success": "Währung erfolgreich aktualisiert"
+    }
+  },
+  "language": {
+    "title": "Sprache",
+    "notification": {
+      "title": "Benachrichtigung",
+      "success": "Sprache erfolgreich gespeichert"
+    },
+    "save": "Speichern"
+  },
+  "noti": {
+    "title": "Funktion kommt bald",
+    "desc": "Wir arbeiten derzeit an dieser Funktion. Schau später noch einmal vorbei, um sie auszuprobieren!"
+  },
+  "loading": "Daten werden verarbeitet"
+}

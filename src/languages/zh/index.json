@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "精明計算，理性借貸",
+    "by": "由 Neoprototype 提供"
+  },
+  "main": {
+    "greeting": "您好，",
+    "title": "為您的貸款\n尋找合適方案",
+    "mortgage": {
+      "title": "按揭貸款",
+      "desc": "輕鬆計算每月供款及\n貸款總成本。"
+    },
+    "car": {
+      "title": "汽車貸款",
+      "desc": "簡單計劃汽車分期付款及\n利息支出。"
+    },
+    "personal": {
+      "title": "私人貸款",
+      "desc": "估算每月還款金額及\n還款期數。"
+    },
+    "business": {
+      "title": "商業貸款",
+      "desc": "分析不同融資方案，\n優化企業資金安排。"
+    }
+  },
+  "mortgage": {
+    "title": "按揭貸款",
+    "loanAmount": "貸款金額",
+    "duration": "還款期（月）",
+    "interestRate": "年利率 (%)",
+    "fixedPayment": "等額本息",
+    "fixedPrincipal": "等額本金\n（利息遞減）",
+    "calculate": "計算"
+  },
+  "mortgageResult": {
+    "amortization": "攤還表",
+    "share": "分享",
+    "save": "儲存",
+    "home": "主頁",
+    "notificationTitle": "提示",
+    "notificationMessage": "按揭貸款儲存成功",
+    "downloadFileMessage": "Excel 文件下载成功",
+    "resultTitle": "按揭計算結果",
+    "result": {
+      "title": "按揭貸款",
+      "loanAmount": "貸款金額",
+      "duration": "還款期",
+      "month": "月份",
+      "year": "年",
+      "interestRate": "利率 (%)",
+      "result": "結果",
+      "monthlyPayment": "每月供款",
+      "totalPayments": "總還款金額",
+      "totalInterestPaid": "已付利息總額"
+    }
+  },
+  "mortgageDetail": {
+    "title": "按揭詳情",
+    "result": "結果",
+    "loanAmount": "貸款金額",
+    "duration": "還款期",
+    "month": "月份",
+    "year": "年",
+    "months": "月份",
+    "years": "年",
+    "interestRate": "利率 (%)",
+    "monthlyPayment": "每月供款",
+    "totalPayments": "總還款金額",
+    "totalInterestPaid": "已付利息總額",
+    "amortization": "攤還表",
+    "summary": "總結",
+    "analysisByMonth": "按月分析",
+    "table": {
+      "month": "月份",
+      "principal": "本金",
+      "interest": "利息",
+      "monthlyPayment": "月供金額",
+      "endingBalance": "尚欠本金"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "selectLanguage": "選擇語言",
+    "currency": "貨幣",
+    "aboutUs": "關於我們",
+    "terms": "使用條款",
+    "privacy": "私隱政策"
+  },
+  "history": {
+    "title": "歷史紀錄",
+    "tabs": {
+      "all": "全部",
+      "newest": "最新",
+      "oldest": "最舊"
+    },
+    "loanTitles": {
+      "mortgage": "按揭貸款"
+    }
+  },
+  "currency": {
+    "title": "貨幣",
+    "save": "儲存",
+    "notification": {
+      "title": "提示",
+      "success": "貨幣設定已成功更新"
+    }
+  },
+  "language": {
+    "title": "語言",
+    "notification": {
+      "title": "提示",
+      "success": "語言已成功儲存"
+    },
+    "save": "儲存"
+  },
+  "noti": {
+    "title": "功能即將推出",
+    "desc": "我們正在開發這項功能，請稍後再回來體驗！"
+  },
+  "loading": "數據處理中"
+}

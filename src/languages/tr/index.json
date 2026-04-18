@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Akıllıca Hesaplayın, Bilinçli Kredi Kullanın",
+    "by": "Neoprototype tarafından"
+  },
+  "main": {
+    "greeting": "Merhaba,",
+    "title": "Kredileriniz İçin\nÇözümler Bulun",
+    "mortgage": {
+      "title": "Konut Kredisi",
+      "desc": "Aylık taksitlerinizi ve toplam kredi maliyetinizi\nkolayca hesaplayın."
+    },
+    "car": {
+      "title": "Araç Kredisi",
+      "desc": "Oto kredi taksitlerinizi ve\nfaiz maliyetinizi planlayın."
+    },
+    "personal": {
+      "title": "İhtiyaç Kredisi",
+      "desc": "Aylık ödeme tutarınızı ve geri ödeme planınızı\nhesaplayın."
+    },
+    "business": {
+      "title": "Ticari Kredi",
+      "desc": "İşletmeniz için uygun kredi seçeneklerini\nanaliz ederek finansmanı optimize edin."
+    }
+  },
+  "mortgage": {
+    "title": "Konut Kredisi",
+    "loanAmount": "Kredi Tutarı",
+    "duration": "Vade (ay)",
+    "interestRate": "Faiz Oranı (%)",
+    "fixedPayment": "Sabit Taksitli Geri Ödeme",
+    "fixedPrincipal": "Azalan Faizli Geri Ödeme\n(Eşit Anapara Sistemi)",
+    "calculate": "Hesapla"
+  },
+  "mortgageResult": {
+    "amortization": "Geri Ödeme Planı",
+    "share": "Paylaş",
+    "save": "Kaydet",
+    "home": "Ana Sayfa",
+    "notificationTitle": "Bildirim",
+    "notificationMessage": "Konut kredisi başarıyla kaydedildi",
+    "downloadFileMessage": "Excel dosyası başarıyla indirildi",
+    "resultTitle": "Konut Kredisi Sonucu",
+    "result": {
+      "title": "Konut Kredisi",
+      "loanAmount": "Kredi Tutarı",
+      "duration": "Vade",
+      "month": "Ay",
+      "year": "Yıl",
+      "interestRate": "Faiz Oranı (%)",
+      "result": "Sonuç",
+      "monthlyPayment": "Aylık Taksit",
+      "totalPayments": "Toplam Ödeme",
+      "totalInterestPaid": "Toplam Ödenen Faiz"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Konut Kredisi Detayları",
+    "result": "Sonuç",
+    "loanAmount": "Kredi Tutarı",
+    "duration": "Vade",
+    "month": "Ay",
+    "year": "Yıl",
+    "months": "Aylar",
+    "years": "Yıllar",
+    "interestRate": "Faiz Oranı (%)",
+    "monthlyPayment": "Aylık Taksit",
+    "totalPayments": "Toplam Ödeme",
+    "totalInterestPaid": "Toplam Ödenen Faiz",
+    "amortization": "Geri Ödeme Planı",
+    "summary": "Özet",
+    "analysisByMonth": "Aylık Analiz",
+    "table": {
+      "month": "Ay",
+      "principal": "Anapara",
+      "interest": "Faiz",
+      "monthlyPayment": "Aylık Taksit",
+      "endingBalance": "Kalan Bakiye"
+    }
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "selectLanguage": "Dil Seçimi",
+    "currency": "Para Birimi",
+    "aboutUs": "Hakkımızda",
+    "terms": "Kullanım Koşulları",
+    "privacy": "Gizlilik Politikası"
+  },
+  "history": {
+    "title": "Geçmiş",
+    "tabs": {
+      "all": "Tümü",
+      "newest": "En Yeni",
+      "oldest": "En Eski"
+    },
+    "loanTitles": {
+      "mortgage": "Konut Kredisi"
+    }
+  },
+  "currency": {
+    "title": "Para Birimi",
+    "save": "Kaydet",
+    "notification": {
+      "title": "Bildirim",
+      "success": "Para birimi başarıyla güncellendi"
+    }
+  },
+  "language": {
+    "title": "Dil",
+    "notification": {
+      "title": "Bildirim",
+      "success": "Dil tercihi başarıyla kaydedildi"
+    },
+    "save": "Kaydet"
+  },
+  "noti": {
+    "title": "Özellik Çok Yakında",
+    "desc": "Bu özellikle ilgili çalışmalarımız devam ediyor. Denemek için lütfen daha sonra tekrar kontrol edin!"
+  },
+  "loading": "Veriler işleniyor"
+}

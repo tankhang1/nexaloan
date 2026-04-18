@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Calcule com inteligência, financie com responsabilidade",
+    "by": "por Neoprototype"
+  },
+  "main": {
+    "greeting": "Olá,",
+    "title": "Encontre soluções\npara seus financiamentos",
+    "mortgage": {
+      "title": "Financiamento Imobiliário",
+      "desc": "Simule o valor das parcelas mensais\ne o custo total do seu financiamento."
+    },
+    "car": {
+      "title": "Financiamento de Veículo",
+      "desc": "Planeje suas parcelas e\ncustos de juros com facilidade."
+    },
+    "personal": {
+      "title": "Empréstimo Pessoal",
+      "desc": "Estime o valor das parcelas\nmensais e o cronograma de pagamento."
+    },
+    "business": {
+      "title": "Crédito Empresarial",
+      "desc": "Analise opções de crédito\npara otimizar o capital da sua empresa."
+    }
+  },
+  "mortgage": {
+    "title": "Financiamento Imobiliário",
+    "loanAmount": "Valor Financiado",
+    "duration": "Prazo (meses)",
+    "interestRate": "Taxa de Juros (%)",
+    "fixedPayment": "Sistema Price",
+    "fixedPrincipal": "Sistema SAC\n(Amortização Constante)",
+    "calculate": "Calcular"
+  },
+  "mortgageResult": {
+    "amortization": "Tabela de Amortização",
+    "share": "Compartilhar",
+    "save": "Salvar",
+    "home": "Início",
+    "notificationTitle": "Notificação",
+    "notificationMessage": "Financiamento salvo com sucesso",
+    "downloadFileMessage": "Download do arquivo Excel concluído com sucesso",
+    "resultTitle": "Resultado do Financiamento",
+    "result": {
+      "title": "Financiamento Imobiliário",
+      "loanAmount": "Valor Financiado",
+      "duration": "Prazo",
+      "month": "Mês",
+      "year": "Ano",
+      "interestRate": "Juros (%)",
+      "result": "Resultado",
+      "monthlyPayment": "Parcela Mensal",
+      "totalPayments": "Total Pago",
+      "totalInterestPaid": "Total de Juros Pagos"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Detalhes do Financiamento",
+    "result": "Resultado",
+    "loanAmount": "Valor Financiado",
+    "duration": "Prazo",
+    "months": "Meses",
+    "years": "Anos",
+    "month": "Mês",
+    "year": "Ano",
+    "interestRate": "Juros (%)",
+    "monthlyPayment": "Parcela Mensal",
+    "totalPayments": "Total Pago",
+    "totalInterestPaid": "Total de Juros Pagos",
+    "amortization": "Tabela de Amortização",
+    "summary": "Resumo",
+    "analysisByMonth": "Análise Mensal",
+    "table": {
+      "month": "Mês",
+      "principal": "Amortização",
+      "interest": "Juros",
+      "monthlyPayment": "Parcela",
+      "endingBalance": "Saldo Devedor"
+    }
+  },
+  "settings": {
+    "title": "Configurações",
+    "selectLanguage": "Selecionar Idioma",
+    "currency": "Moeda",
+    "aboutUs": "Sobre Nós",
+    "terms": "Termos e Condições",
+    "privacy": "Política de Privacidade"
+  },
+  "history": {
+    "title": "Histórico",
+    "tabs": {
+      "all": "Todos",
+      "newest": "Mais Recentes",
+      "oldest": "Mais Antigos"
+    },
+    "loanTitles": {
+      "mortgage": "Financiamento Imobiliário"
+    }
+  },
+  "currency": {
+    "title": "Moeda",
+    "save": "Salvar",
+    "notification": {
+      "title": "Notificação",
+      "success": "Moeda atualizada com sucesso"
+    }
+  },
+  "language": {
+    "title": "Idioma",
+    "notification": {
+      "title": "Notificação",
+      "success": "Idioma salvo com sucesso"
+    },
+    "save": "Salvar"
+  },
+  "noti": {
+    "title": "Recurso em Breve",
+    "desc": "Estamos trabalhando neste recurso. Volte mais tarde para experimentá-lo!"
+  },
+  "loading": "Os dados estão sendo processados"
+}

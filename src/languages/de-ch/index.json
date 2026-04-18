@@ -1,0 +1,122 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Intelligent rechnen, bewusst finanzieren",
+    "by": "von Neoprototype"
+  },
+  "main": {
+    "greeting": "Guten Tag,",
+    "title": "Lösungen für\nIhre Finanzierungen finden",
+    "mortgage": {
+      "title": "Hypothek",
+      "desc": "Berechnen Sie Ihre monatlichen Hypothekarzahlungen\nund die Gesamtkosten der Finanzierung."
+    },
+    "car": {
+      "title": "Autofinanzierung",
+      "desc": "Planen Sie Ihre monatlichen Raten\nund Zinskosten für das Fahrzeugleasing oder Kredit."
+    },
+    "personal": {
+      "title": "Privatdarlehen",
+      "desc": "Berechnen Sie die monatliche Belastung\nsowie den Rückzahlungszeitraum."
+    },
+    "business": {
+      "title": "Unternehmenskredit",
+      "desc": "Analysieren Sie Kreditoptionen zur\nOptimierung Ihrer Unternehmensfinanzierung."
+    }
+  },
+  "mortgage": {
+    "title": "Hypothek",
+    "loanAmount": "Finanzierungsbetrag",
+    "duration": "Laufzeit (Monate)",
+    "interestRate": "Zinssatz p.a. (%)",
+    "fixedPayment": "Konstante Annuität",
+    "fixedPrincipal": "Konstante Amortisation\n(sinkende Zinslast)",
+    "calculate": "Berechnen"
+  },
+  "mortgageResult": {
+    "amortization": "Amortisationsplan",
+    "share": "Teilen",
+    "save": "Speichern",
+    "home": "Startseite",
+    "notificationTitle": "Benachrichtigung",
+    "notificationMessage": "Hypothek erfolgreich gespeichert",
+    "downloadFileMessage": "Excel-Datei erfolgreich heruntergeladen",
+    "resultTitle": "Ergebnis – Hypothek",
+    "result": {
+      "title": "Hypothek",
+      "loanAmount": "Finanzierungsbetrag",
+      "duration": "Laufzeit",
+      "month": "Monat",
+      "year": "Jahr",
+      "interestRate": "Zinssatz (%)",
+      "result": "Ergebnis",
+      "monthlyPayment": "Monatliche Belastung",
+      "totalPayments": "Gesamtkosten",
+      "totalInterestPaid": "Total bezahlte Zinsen"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Hypothekarübersicht",
+    "result": "Ergebnis",
+    "loanAmount": "Finanzierungsbetrag",
+    "duration": "Laufzeit",
+    "months": "Monate",
+    "years": "Jahre",
+    "month": "Monat",
+    "year": "Jahr",
+    "interestRate": "Zinssatz (%)",
+    "monthlyPayment": "Monatliche Belastung",
+    "totalPayments": "Gesamtkosten",
+    "totalInterestPaid": "Total bezahlte Zinsen",
+    "amortization": "Amortisationsplan",
+    "summary": "Zusammenfassung",
+    "analysisByMonth": "Analyse nach Monat",
+    "table": {
+      "month": "Monat",
+      "principal": "Amortisation",
+      "interest": "Zins",
+      "monthlyPayment": "Zahlung",
+      "endingBalance": "Restschuld"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "selectLanguage": "Sprache wählen",
+    "currency": "Währung",
+    "aboutUs": "Über uns",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "privacy": "Datenschutzerklärung"
+  },
+  "history": {
+    "title": "Verlauf",
+    "tabs": {
+      "all": "Alle",
+      "newest": "Neueste",
+      "oldest": "Älteste"
+    },
+    "loanTitles": {
+      "mortgage": "Hypothek"
+    }
+  },
+  "currency": {
+    "title": "Währung",
+    "save": "Speichern",
+    "notification": {
+      "title": "Benachrichtigung",
+      "success": "Währung erfolgreich aktualisiert"
+    }
+  },
+  "language": {
+    "title": "Sprache",
+    "notification": {
+      "title": "Benachrichtigung",
+      "success": "Sprache erfolgreich gespeichert"
+    },
+    "save": "Speichern"
+  },
+  "noti": {
+    "title": "Funktion kommt bald",
+    "desc": "Wir arbeiten derzeit an dieser Funktion. Bitte schau später wieder vorbei, um sie auszuprobieren!"
+  },
+  "loading": "Daten werden verarbeitet"
+}
