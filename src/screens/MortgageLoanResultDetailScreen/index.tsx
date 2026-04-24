@@ -3,14 +3,12 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import React, {
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { useInterstitialAd } from "react-native-google-mobile-ads";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { useDispatch, useSelector } from "react-redux";
 import AppBanner from "../../components/AppBanner";
@@ -19,7 +17,6 @@ import AppIndicator from "../../components/AppIndicator";
 import AppInput from "../../components/AppInput";
 import AppText from "../../components/AppText";
 import AppView from "../../components/AppView";
-import { ADS } from "../../constants/ads";
 import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
@@ -41,10 +38,6 @@ type Props = NativeStackScreenProps<
 const MortgageLoanResultDetailScreen = ({ route }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { isLoaded, load, show, isClosed } = useInterstitialAd(
-    ADS.interstitial,
-  );
-  const [shouldDownloadAfterAd, setShouldDownloadAfterAd] = useState(false);
 
   const scrollRef = useRef<Animated.ScrollView>(null);
   const [tab, setTab] = useState(0);
@@ -112,15 +105,6 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
       }
     }
   };
-  useEffect(() => {
-    load();
-  }, [load]);
-  useEffect(() => {
-    if (isClosed && shouldDownloadAfterAd) {
-      setShouldDownloadAfterAd(false);
-      onDownload();
-    }
-  }, [isClosed, onDownload, shouldDownloadAfterAd]);
   return (
     <AppView appStyle={styles.overall}>
       <View style={styles.header}>
@@ -136,17 +120,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
             numberOfLines={1}
           />
         </View>
-        <AppIconButton
-          onPress={() => {
-            if (isLoaded) {
-              setShouldDownloadAfterAd(true);
-              show();
-            } else {
-              onDownload();
-              load();
-            }
-          }}
-        >
+        <AppIconButton onPress={onDownload}>
           <ICONS.download />
         </AppIconButton>
       </View>

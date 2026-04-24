@@ -1,10 +1,9 @@
 import XLSX from 'xlsx';
 import {Alert} from 'react-native';
 import dayjs from 'dayjs';
+import * as FileSystem from 'expo-file-system/legacy';
+import Share from 'react-native-share';
 import i18n from '../languages';
-import ReactNativeFilesystem, {
-  ReactNativeFilesystemCommonMimeTypes,
-} from 'react-native-simple-fs';
 import {formatNumber} from './format_number';
 
 function buildRows(
@@ -39,6 +38,8 @@ export async function exportLoanXlsxToDownloadsRNFA(
     code: string;
   },
 ) {
+  let tempFileUri: string | null = null;
+
   try {
     const headers: Record<string, string> = {
       month: i18n.t('mortgageDetail.table.month'),
@@ -54,20 +55,38 @@ export async function exportLoanXlsxToDownloadsRNFA(
 
     const wbout = XLSX.write(wb, {type: 'base64', bookType: 'xlsx'});
     const filename = `${baseName}-${dayjs().format('YYYYMMDD_HHmmss')}.xlsx`;
-    const savedPath = await ReactNativeFilesystem.writeFileToDownloads(
+    tempFileUri = `${FileSystem.cacheDirectory}${filename}`;
+
+    if (!tempFileUri) {
+      throw new Error('Temporary storage is unavailable');
+    }
+
+    await FileSystem.writeAsStringAsync(tempFileUri, wbout, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+
+    await Share.open({
+      url: tempFileUri,
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       filename,
-      wbout,
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    );
+      title: i18n.t('mortgageResult.resultTitle'),
+      failOnCancel: false,
+    });
 
     Alert.alert(
       i18n.t('mortgageResult.notificationTitle'),
       i18n.t('mortgageResult.downloadFileMessage'),
     );
 
-    return savedPath;
+    return tempFileUri;
   } catch (err: any) {
     console.log('EXPORT XLSX ERROR →', err);
     Alert.alert('Error', String(err?.message ?? 'Failed to export XLSX'));
+  } finally {
+    if (tempFileUri) {
+      await FileSystem.deleteAsync(tempFileUri, {idempotent: true}).catch(
+        () => {},
+      );
+    }
   }
 }
