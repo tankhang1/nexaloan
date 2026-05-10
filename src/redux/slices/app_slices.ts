@@ -15,7 +15,7 @@ const initialState: TApp = {
     symbol: '$',
     locale: 'en-US',
   },
-  language: 'en-US',
+  language: '',
 };
 
 export const appSlice = createSlice({

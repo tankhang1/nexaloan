@@ -1,5 +1,6 @@
 import i18next from 'i18next';
 import {initReactI18next} from 'react-i18next';
+import {getLocales} from 'react-native-localize';
 import EN_LANGUGAE from './en/index.json';
 import VI_LANGUGAE from './vi/index.json';
 import DE_LANGUGAE from './de/index.json';
@@ -35,20 +36,76 @@ export const i18nLanguages = {
   'pt-BR': 'Portuguese (Brazil)',
   'de-AT': 'German (Austria)',
 };
-export const i18nDefaultLang: any = 'en-US';
+export const i18nDefaultLang: I18nLanguage = 'en-US';
+const supportedLanguages = Object.keys(i18nLanguages) as I18nLanguage[];
+const languageFallbacks: Record<string, I18nLanguage> = {
+  en: 'en-US',
+  vi: 'vi-VN',
+  de: 'de-DE',
+  tr: 'tr-TR',
+  zh: 'zh-HK',
+  ja: 'ja-JP',
+  ko: 'ko-KR',
+  th: 'th-TH',
+  lo: 'lo-LA',
+  km: 'km-KH',
+  ro: 'ro-RO',
+  pt: 'pt-BR',
+};
+
+const isSupportedLanguage = (language?: string): language is I18nLanguage =>
+  !!language && supportedLanguages.includes(language as I18nLanguage);
+
+const normalizeLocale = (locale?: string): string | undefined => {
+  if (!locale) {
+    return undefined;
+  }
+
+  const parts = locale.replace(/_/g, '-').split('-').filter(Boolean);
+  const language = parts[0]?.toLowerCase();
+  const region = parts.length > 1 ? parts[parts.length - 1].toUpperCase() : '';
+
+  if (!language) {
+    return undefined;
+  }
+
+  return region ? `${language}-${region}` : language;
+};
+
+const getDeviceLocale = (): string | undefined => {
+  const locale = getLocales()[0];
+
+  return locale?.languageTag || Intl.DateTimeFormat().resolvedOptions().locale;
+};
+
+const resolveSupportedLanguage = (locale?: string): I18nLanguage => {
+  const normalizedLocale = normalizeLocale(locale);
+
+  if (isSupportedLanguage(normalizedLocale)) {
+    return normalizedLocale;
+  }
+
+  const baseLanguage = normalizedLocale?.split('-')[0];
+
+  if (baseLanguage && languageFallbacks[baseLanguage]) {
+    return languageFallbacks[baseLanguage];
+  }
+
+  return i18nDefaultLang;
+};
+
 const getInitialLanguage = (): I18nLanguage => {
   const savedLanguage = store.getState().app.language as I18nLanguage;
-  console.log(
-    savedLanguage,
-    savedLanguage && Object.keys(i18nLanguages)?.includes(savedLanguage),
-  );
-  if (savedLanguage && Object.keys(i18nLanguages)?.includes(savedLanguage)) {
+
+  if (isSupportedLanguage(savedLanguage)) {
     return savedLanguage;
   }
 
-  store.dispatch(updateLanguage(i18nDefaultLang));
+  const detectedLanguage = resolveSupportedLanguage(getDeviceLocale());
 
-  return i18nDefaultLang;
+  store.dispatch(updateLanguage(detectedLanguage));
+
+  return detectedLanguage;
 };
 
 //export const i18nDefaultLang: I18nLanguage = 'ko';
@@ -109,6 +166,7 @@ export const initI18n = () => {
   i18next.use(initReactI18next).init({
     resources: i18nResources,
     lng,
+    fallbackLng: i18nDefaultLang,
     ns: i18nNamespaces,
     defaultNS: i18nDefaultNs,
     interpolation: {
