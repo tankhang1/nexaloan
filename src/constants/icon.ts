@@ -17,6 +17,11 @@ import Brazil from '../assets/icons/flags/brazil.svg';
 import German from '../assets/icons/flags/german.svg';
 import HongKong from '../assets/icons/flags/hong-kong.svg';
 import Japan from '../assets/icons/flags/japan.svg';
+import Cambodia from '../assets/icons/flags/cambodia.svg';
+import Korea from '../assets/icons/flags/korea.svg';
+import Laos from '../assets/icons/flags/laos.svg';
+import Pakistan from '../assets/icons/flags/pakistan.svg';
+import Thailand from '../assets/icons/flags/thailand.svg';
 import Turkey from '../assets/icons/flags/turkey.svg';
 import Vietnam from '../assets/icons/flags/vietnam.svg';
 import Romania from '../assets/icons/flags/romania.svg';
@@ -66,6 +71,11 @@ export const ICONS = {
     german: German,
     hong_kong: HongKong,
     japan: Japan,
+    cambodia: Cambodia,
+    korea: Korea,
+    laos: Laos,
+    pakistan: Pakistan,
+    thailand: Thailand,
     romania: Romania,
     turkey: Turkey,
     vietnam: Vietnam,

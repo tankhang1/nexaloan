@@ -1,0 +1,206 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "현명하게 계산하고 똑똑하게 대출하세요",
+    "by": "Neoprototype 제공"
+  },
+  "main": {
+    "greeting": "안녕하세요,",
+    "title": "대출에 맞는\n해결책 찾기",
+    "heroTitle": "매일 더 명확하게 대출을 계획하세요",
+    "heroDesc": "상환액을 예상하고, 대출 시나리오를 비교하며, 계산 내역을 한곳에 정리하세요.",
+    "badge": "탐색",
+    "activeLoans": "내 대출",
+    "report": "요약 보고서",
+    "totalDebt": "총 대출금",
+    "totalPaid": "총 납부액",
+    "updatePayment": "업데이트",
+    "noLoans": "저장된 대출이 없습니다",
+    "paidThisMonth": "이번 달 납부액",
+    "paymentSuccess": "납부 내역이 업데이트되었습니다",
+    "paymentHistory": "납부 내역",
+    "noPayments": "납부 내역이 없습니다",
+    "monthlyRepayment": "월 상환액",
+    "confirm": "확인",
+    "cancel": "취소",
+    "mortgage": {
+      "title": "주택담보대출",
+      "desc": "월 상환액과 총 대출 비용을 더 명확하게 계산하세요."
+    },
+    "car": {
+      "title": "자동차 대출",
+      "desc": "자동차 대출의 월 납부액과 이자 비용을 쉽게 계획하세요."
+    },
+    "personal": {
+      "title": "개인 대출",
+      "desc": "개인 목적의 월 납부액과 상환 일정을 예상하세요."
+    },
+    "business": {
+      "title": "사업자 대출",
+      "desc": "현금 흐름과 사업 자금 결정을 위한 대출 옵션을 분석하세요."
+    }
+  },
+  "mortgage": {
+    "title": "대출 계산기",
+    "loanAmount": "대출 금액",
+    "duration": "기간(개월)",
+    "interestRate": "금리(%/년)",
+    "interestRateMonthly": "금리(%/월)",
+    "fixedPayment": "고정 상환액",
+    "fixedPrincipal": "원금 균등\n이자 감소",
+    "flatRate": "단리 고정 금리",
+    "descFixedPayment": "매월 상환액이 고정됩니다. 개인 예산 관리에 쉽습니다.",
+    "descFixedPrincipal": "원금을 균등하게 나눕니다. 총 상환액은 시간이 지날수록 줄어듭니다.",
+    "descFlatRate": "이자는 항상 최초 원금 기준으로 계산됩니다. 소매 대출에서 흔합니다.",
+    "calculate": "계산하기"
+  },
+  "mortgageResult": {
+    "amortization": "상환 일정",
+    "share": "공유",
+    "save": "저장",
+    "home": "홈",
+    "summaryBadge": "대출 요약",
+    "summaryDesc": "대출 계획과 상환 전망을 빠르게 확인하세요.",
+    "notificationTitle": "알림",
+    "notificationMessage": "대출이 성공적으로 저장되었습니다",
+    "downloadFileMessage": "Excel 파일이 성공적으로 다운로드되었습니다",
+    "resultTitle": "대출 결과",
+    "result": {
+      "title": "대출",
+      "loanAmount": "대출 금액",
+      "duration": "기간",
+      "month": "개월",
+      "year": "년",
+      "interestRate": "금리(%)",
+      "result": "결과",
+      "monthlyPayment": "월 상환액",
+      "totalPayments": "총 상환액",
+      "totalInterestPaid": "총 이자"
+    }
+  },
+  "mortgageDetail": {
+    "title": "대출",
+    "result": "결과",
+    "loanAmount": "대출 금액",
+    "duration": "기간",
+    "months": "개월",
+    "years": "년",
+    "month": "월",
+    "year": "년",
+    "interestRate": "금리(%)",
+    "monthlyPayment": "월 상환액",
+    "totalPayments": "총 상환액",
+    "totalInterestPaid": "총 이자",
+    "amortization": "상환 일정",
+    "summary": "요약",
+    "analysisByMonth": "월별 분석",
+    "table": {
+      "month": "월",
+      "principal": "원금",
+      "interest": "이자",
+      "monthlyPayment": "월 상환액",
+      "endingBalance": "잔액"
+    }
+  },
+  "settings": {
+    "title": "설정",
+    "selectLanguage": "언어 선택",
+    "currency": "통화",
+    "aboutUs": "회사 소개",
+    "terms": "이용약관",
+    "privacy": "개인정보 처리방침",
+    "aboutContent": {
+      "description": "Nexa Tech는 실용적이고 무료인 디지털 솔루션을 만들고 출시하는 작고 민첩한 개발팀입니다. 일상 문제를 해결하는 웹 및 모바일 애플리케이션 제작을 전문으로 합니다.",
+      "mission": "우리의 목표는 웹 앱, 모바일 앱, 오픈소스 도구 등 고품질 무료 디지털 제품으로 일상의 필요를 해결하는 것입니다.",
+      "features": {
+        "title": "핵심 가치",
+        "f1": "바로 사용할 수 있는 실용적인 제품 만들기",
+        "f2": "사용자 중심 접근",
+        "f3": "오픈소스와 커뮤니티 공유",
+        "f4": "사용자에게 완전히 무료"
+      },
+      "contact": "이메일: cs.nexatech@gmail.com",
+      "team": {
+        "title": "우리 팀",
+        "ethan": "Ethan - 기술 리드",
+        "tina": "Tina - 팀 리드"
+      }
+    },
+    "termsContent": {
+      "title": "서비스 이용약관",
+      "intro": "Nexa Loan에 오신 것을 환영합니다. 앱을 사용하면 다음 약관에 동의하는 것으로 간주됩니다.",
+      "section1": {
+        "title": "1. 약관 동의",
+        "content": "Nexa Loan에 접근하거나 사용하는 경우 본 약관과 관련 법률 및 규정을 준수하는 데 동의합니다."
+      },
+      "section2": {
+        "title": "2. 서비스 이용",
+        "content": "귀하는 합법적인 목적으로 앱을 사용하고 제3자의 권리를 침해하지 않는 데 동의합니다."
+      },
+      "section3": {
+        "title": "3. 지식재산권",
+        "content": "Nexa Loan의 모든 콘텐츠, 로고 및 디자인은 당사의 저작권입니다. 동의 없이 복사할 수 없습니다."
+      },
+      "section4": {
+        "title": "4. 책임의 제한",
+        "content": "앱의 계산 결과 사용으로 발생하는 금융 손실에 대해 당사는 책임지지 않습니다. 수치는 참고용입니다."
+      }
+    },
+    "privacyContent": {
+      "title": "개인정보 처리방침",
+      "intro": "Nexa Loan은 귀하의 개인정보 보호를 중요하게 생각합니다. 본 정책은 정보를 처리하는 방식을 설명합니다.",
+      "section1": {
+        "title": "1. 정보 수집",
+        "content": "대출 금액과 기간 등 앱 기능 사용 시 사용자가 직접 제공하는 정보를 수집합니다."
+      },
+      "section2": {
+        "title": "2. 정보 이용",
+        "content": "해당 정보는 계산 수행과 사용자 경험 개선에 사용됩니다."
+      },
+      "section3": {
+        "title": "3. 데이터 보안",
+        "content": "개인정보의 안전을 보장하기 위해 엄격한 보안 조치를 적용합니다."
+      },
+      "section4": {
+        "title": "4. 귀하의 권리",
+        "content": "귀하는 언제든지 개인정보의 열람, 수정 또는 삭제를 요청할 권리가 있습니다."
+      }
+    }
+  },
+  "history": {
+    "title": "내역",
+    "tabs": {
+      "all": "전체",
+      "newest": "최신순",
+      "oldest": "오래된순",
+      "deleteConfirmTitle": "삭제 확인",
+      "deleteConfirmDesc": "이 대출을 내역에서 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+      "clearAllConfirmTitle": "모든 내역 삭제",
+      "clearAllConfirmDesc": "저장된 모든 대출이 영구적으로 삭제됩니다. 계속하시겠습니까?"
+    },
+    "loanTitles": {
+      "mortgage": "주택담보대출"
+    }
+  },
+  "currency": {
+    "title": "통화",
+    "save": "저장",
+    "notification": {
+      "title": "알림",
+      "success": "통화가 성공적으로 업데이트되었습니다"
+    }
+  },
+  "language": {
+    "title": "언어",
+    "notification": {
+      "title": "알림",
+      "success": "언어가 성공적으로 저장되었습니다"
+    },
+    "save": "저장"
+  },
+  "noti": {
+    "title": "곧 제공될 기능",
+    "desc": "현재 이 기능을 준비 중입니다. 나중에 다시 확인해 주세요!"
+  },
+  "loading": "데이터 처리 중"
+}

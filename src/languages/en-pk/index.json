@@ -1,0 +1,206 @@
+{
+  "splash": {
+    "title": "PaySmart",
+    "subtitle": "Calculate Wisely, Borrow Smartly",
+    "by": "by Neoprototype"
+  },
+  "main": {
+    "greeting": "Hello there,",
+    "title": "Find Solutions\nFor Your Loans",
+    "heroTitle": "Plan your loans with more clarity every day",
+    "heroDesc": "Estimate repayments, explore loan scenarios, and keep your calculations organised in one place.",
+    "badge": "Explore",
+    "activeLoans": "My Loans",
+    "report": "Overview Report",
+    "totalDebt": "Total Debt",
+    "totalPaid": "Total Paid",
+    "updatePayment": "Update",
+    "noLoans": "No loans saved yet",
+    "paidThisMonth": "Paid this month",
+    "paymentSuccess": "Payment updated successfully",
+    "paymentHistory": "Payment History",
+    "noPayments": "No payment history yet",
+    "monthlyRepayment": "Monthly Repayment",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "mortgage": {
+      "title": "Home Loan",
+      "desc": "Calculate monthly home loan instalments and total borrowing cost with a clearer overview."
+    },
+    "car": {
+      "title": "Car Loan",
+      "desc": "Plan car loan instalments and interest costs with an easier monthly view."
+    },
+    "personal": {
+      "title": "Personal Loan",
+      "desc": "Estimate monthly instalments and repayment schedules for personal needs."
+    },
+    "business": {
+      "title": "Business Loan",
+      "desc": "Analyse loan options to improve cash flow and business financing decisions."
+    }
+  },
+  "mortgage": {
+    "title": "Loan Calculator",
+    "loanAmount": "Loan Amount",
+    "duration": "Duration (months)",
+    "interestRate": "Interest Rate (%/year)",
+    "interestRateMonthly": "Interest Rate (%/month)",
+    "fixedPayment": "Fixed Instalment",
+    "fixedPrincipal": "Fixed Principal\nReducing Interest",
+    "flatRate": "Flat Interest Rate",
+    "descFixedPayment": "Monthly instalment is fixed. Easier for personal budgeting.",
+    "descFixedPrincipal": "Principal is divided equally. Total payment decreases over time.",
+    "descFlatRate": "Interest is always calculated on original principal. Common for retail loans.",
+    "calculate": "Calculate"
+  },
+  "mortgageResult": {
+    "amortization": "Repayment Schedule",
+    "share": "Share",
+    "save": "Save",
+    "home": "Home",
+    "summaryBadge": "Loan Summary",
+    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook.",
+    "notificationTitle": "Notification",
+    "notificationMessage": "Loan saved successfully",
+    "downloadFileMessage": "Excel file downloaded successfully",
+    "resultTitle": "Loan Result",
+    "result": {
+      "title": "Loan",
+      "loanAmount": "Loan Amount",
+      "duration": "Duration",
+      "month": "Months",
+      "year": "Year",
+      "interestRate": "Int Rate (%)",
+      "result": "Result",
+      "monthlyPayment": "Monthly Instalment",
+      "totalPayments": "Total Payments",
+      "totalInterestPaid": "Total Interest Paid"
+    }
+  },
+  "mortgageDetail": {
+    "title": "Loan",
+    "result": "Result",
+    "loanAmount": "Loan Amount",
+    "duration": "Duration",
+    "months": "Months",
+    "years": "Years",
+    "month": "Month",
+    "year": "Year",
+    "interestRate": "Int Rate (%)",
+    "monthlyPayment": "Monthly Instalment",
+    "totalPayments": "Total Payments",
+    "totalInterestPaid": "Total Interest Paid",
+    "amortization": "Repayment Schedule",
+    "summary": "Summary",
+    "analysisByMonth": "Monthly Analysis",
+    "table": {
+      "month": "Month",
+      "principal": "Principal",
+      "interest": "Interest",
+      "monthlyPayment": "Monthly Instalment",
+      "endingBalance": "Ending Balance"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "selectLanguage": "Select Language",
+    "currency": "Currency",
+    "aboutUs": "About us",
+    "terms": "Terms and Conditions",
+    "privacy": "Privacy Policy",
+    "aboutContent": {
+      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialise in creating web and mobile applications to solve common daily challenges.",
+      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "features": {
+        "title": "Core Values",
+        "f1": "Building practical products for immediate use",
+        "f2": "User-centric approach",
+        "f3": "Open source and community sharing",
+        "f4": "Completely free for users"
+      },
+      "contact": "Email: cs.nexatech@gmail.com",
+      "team": {
+        "title": "Our Team",
+        "ethan": "Ethan - Tech Lead",
+        "tina": "Tina - Team Lead"
+      }
+    },
+    "termsContent": {
+      "title": "TERMS OF SERVICE",
+      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "section1": {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+      },
+      "section2": {
+        "title": "2. Use of Service",
+        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+      },
+      "section3": {
+        "title": "3. Intellectual Property",
+        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+      },
+      "section4": {
+        "title": "4. Limitation of Liability",
+        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+      }
+    },
+    "privacyContent": {
+      "title": "PRIVACY POLICY",
+      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "section1": {
+        "title": "1. Information Collection",
+        "content": "We collect information you provide directly when using app features such as loan amount and term."
+      },
+      "section2": {
+        "title": "2. Information Use",
+        "content": "The information is used to perform calculations and improve user experience."
+      },
+      "section3": {
+        "title": "3. Data Security",
+        "content": "We apply strict security measures to ensure the safety of your personal data."
+      },
+      "section4": {
+        "title": "4. Your Rights",
+        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+      }
+    }
+  },
+  "history": {
+    "title": "History",
+    "tabs": {
+      "all": "All",
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "deleteConfirmTitle": "Delete Confirmation",
+      "deleteConfirmDesc": "Are you sure you want to delete this loan from history? This action cannot be undone.",
+      "clearAllConfirmTitle": "Clear All History",
+      "clearAllConfirmDesc": "All saved loans will be permanently deleted. Are you sure you want to proceed?"
+    },
+    "loanTitles": {
+      "mortgage": "Home Loan"
+    }
+  },
+  "currency": {
+    "title": "Currency",
+    "save": "Save",
+    "notification": {
+      "title": "Notification",
+      "success": "Currency updated successfully"
+    }
+  },
+  "language": {
+    "title": "Language",
+    "notification": {
+      "title": "Notification",
+      "success": "Language saved successfully"
+    },
+    "save": "Save"
+  },
+  "noti": {
+    "title": "Feature Coming Soon",
+    "desc": "We're currently working on this feature. Please check back later to try it out!"
+  },
+  "loading": "Data is being processed"
+}

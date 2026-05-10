@@ -5,9 +5,14 @@ import VI_LANGUGAE from './vi/index.json';
 import DE_LANGUGAE from './de/index.json';
 import DE_AT_LANGUGAE from './de-at/index.json';
 import DE_CH_LANGUGAE from './de-ch/index.json';
+import EN_PK_LANGUGAE from './en-pk/index.json';
 import JA_LANGUGAE from './ja/index.json';
+import KM_LANGUGAE from './km/index.json';
+import KO_LANGUGAE from './ko/index.json';
+import LO_LANGUGAE from './lo/index.json';
 import PT_LANGUGAE from './pt/index.json';
 import RO_LANGUGAE from './ro/index.json';
+import TH_LANGUGAE from './th/index.json';
 import TR_LANGUGAE from './tr/index.json';
 import ZH_LANGUGAE from './zh/index.json';
 import {store} from '../redux/store';
@@ -21,6 +26,11 @@ export const i18nLanguages = {
   'zh-HK': 'Chinese (Hong Kong)',
   'de-CH': 'German (Switzerland)',
   'ja-JP': 'Japanese',
+  'ko-KR': 'Korean',
+  'th-TH': 'Thai',
+  'lo-LA': 'Lao',
+  'km-KH': 'Khmer',
+  'en-PK': 'English (Pakistan)',
   'ro-RO': 'Romanian',
   'pt-BR': 'Portuguese (Brazil)',
   'de-AT': 'German (Austria)',
@@ -63,6 +73,21 @@ export const i18nResources = {
   },
   'ja-JP': {
     common: JA_LANGUGAE,
+  },
+  'ko-KR': {
+    common: KO_LANGUGAE,
+  },
+  'th-TH': {
+    common: TH_LANGUGAE,
+  },
+  'lo-LA': {
+    common: LO_LANGUGAE,
+  },
+  'km-KH': {
+    common: KM_LANGUGAE,
+  },
+  'en-PK': {
+    common: EN_PK_LANGUGAE,
   },
   'ro-RO': {
     common: RO_LANGUGAE,
