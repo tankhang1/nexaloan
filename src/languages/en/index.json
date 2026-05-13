@@ -21,6 +21,13 @@
     "paymentHistory": "Payment History",
     "noPayments": "No payment history yet",
     "monthlyRepayment": "Monthly Repayment",
+    "remainingBalance": "Remaining Balance",
+    "repaymentProgress": "Repayment Progress",
+    "paymentsRecorded": "Payments Recorded",
+    "lastPayment": "Last Payment",
+    "invalidPaymentAmount": "Enter a valid payment amount",
+    "paymentAmountExceeded": "Payment is higher than the remaining balance",
+    "fullyPaid": "Fully Paid",
     "confirm": "Confirm",
     "cancel": "Cancel",
     "mortgage": {

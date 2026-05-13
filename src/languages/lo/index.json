@@ -21,6 +21,13 @@
     "paymentHistory": "ປະຫວັດການຈ່າຍ",
     "noPayments": "ຍັງບໍ່ມີປະຫວັດການຈ່າຍ",
     "monthlyRepayment": "ຄ່າຜ່ອນຕໍ່ເດືອນ",
+    "remainingBalance": "ຍອດເຫຼືອ",
+    "repaymentProgress": "ຄວາມຄືບໜ້າການຊໍາລະ",
+    "paymentsRecorded": "ການຊໍາລະທີ່ບັນທຶກ",
+    "lastPayment": "ການຊໍາລະຫຼ້າສຸດ",
+    "invalidPaymentAmount": "ໃສ່ຈໍານວນເງິນທີ່ຖືກຕ້ອງ",
+    "paymentAmountExceeded": "ຈໍານວນຊໍາລະສູງກວ່າຍອດເຫຼືອ",
+    "fullyPaid": "ຊໍາລະຄົບແລ້ວ",
     "confirm": "ຢືນຢັນ",
     "cancel": "ຍົກເລີກ",
     "mortgage": {

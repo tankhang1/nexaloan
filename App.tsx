@@ -1,6 +1,7 @@
 import React from 'react';
 import {Platform, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {KeyboardProvider} from 'react-native-keyboard-controller';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import Toast from 'react-native-toast-message';
@@ -72,12 +73,14 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <AppNavigation />
-          <Toast />
-        </PersistGate>
-      </Provider>
+      <KeyboardProvider preserveEdgeToEdge>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <AppNavigation />
+            <Toast />
+          </PersistGate>
+        </Provider>
+      </KeyboardProvider>
     </GestureHandlerRootView>
   );
 };

@@ -10,7 +10,7 @@ import {useTranslation} from 'react-i18next';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {formatNumber} from '../../hooks/format_number';
-import {updateLoan, TLoan} from '../../redux/slices/history';
+import {ELoan, updateLoan, TLoan} from '../../redux/slices/history';
 import AppInput from '../../components/AppInput';
 import {
   Feather,
@@ -19,18 +19,85 @@ import {
   FontAwesome6,
 } from '@expo/vector-icons';
 import AppBanner from '../../components/AppBanner';
+import {uuid} from '../../hooks/uuid';
 
 const MainScreen = () => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const history = useSelector((state: RootState) => state.history);
+  const {currency} = useSelector((state: RootState) => state.app);
 
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const [selectedLoan, setSelectedLoan] = React.useState<TLoan | null>(null);
   const [paymentAmount, setPaymentAmount] = React.useState('');
+  const [paymentError, setPaymentError] = React.useState('');
 
   const totalDebt = history.reduce((acc, curr) => acc + curr.loan_amount, 0);
   const totalPaid = history.reduce((acc, curr) => acc + (curr.paid_amount || 0), 0);
+  const activeSelectedLoan = React.useMemo(() => {
+    if (!selectedLoan) {
+      return null;
+    }
+
+    return history.find(loan => loan.id === selectedLoan.id) || null;
+  }, [history, selectedLoan]);
+  const selectedPaidAmount = React.useMemo(() => {
+    if (!activeSelectedLoan) {
+      return 0;
+    }
+
+    const paidFromPayments = (activeSelectedLoan.payments || []).reduce(
+      (total, payment) => total + payment.amount,
+      0,
+    );
+
+    return Math.max(paidFromPayments, activeSelectedLoan.paid_amount || 0);
+  }, [activeSelectedLoan]);
+  const selectedRemainingAmount = React.useMemo(() => {
+    if (!activeSelectedLoan) {
+      return 0;
+    }
+
+    return Math.max(activeSelectedLoan.loan_amount - selectedPaidAmount, 0);
+  }, [activeSelectedLoan, selectedPaidAmount]);
+  const formattedPaymentAmount = React.useMemo(() => {
+    if (!paymentAmount) {
+      return '';
+    }
+
+    return new Intl.NumberFormat(
+      activeSelectedLoan?.currency.locale || currency.locale,
+    ).format(Number(paymentAmount));
+  }, [activeSelectedLoan?.currency.locale, currency.locale, paymentAmount]);
+  const normalizedPaymentAmount = Number(paymentAmount);
+  const canSubmitPayment =
+    !!activeSelectedLoan &&
+    normalizedPaymentAmount > 0 &&
+    selectedRemainingAmount > 0 &&
+    normalizedPaymentAmount <= selectedRemainingAmount;
+
+  const getLoanTitle = React.useCallback(
+    (loan?: TLoan | null) => {
+      if (!loan) {
+        return '';
+      }
+
+      if (loan.type === ELoan.BUSINESS_LOAN) {
+        return t('main.business.title');
+      }
+
+      if (loan.type === ELoan.CAR_LOAN) {
+        return t('main.car.title');
+      }
+
+      if (loan.type === ELoan.PERSONAL_LOAN) {
+        return t('main.personal.title');
+      }
+
+      return t('main.mortgage.title');
+    },
+    [t],
+  );
 
   const onNavSettingScreen = () => {
     navigationRef.navigate('SettingScreen');
@@ -48,30 +115,60 @@ const MainScreen = () => {
 
   const onUpdatePayment = (loan: TLoan) => {
     setSelectedLoan(loan);
+    setPaymentAmount('');
+    setPaymentError('');
     setIsModalVisible(true);
+  };
+  const onChangePaymentAmount = (value: string) => {
+    const normalizedValue = value.replace(/[^0-9]/g, '');
+    const nextAmount = Number(normalizedValue);
+
+    setPaymentAmount(normalizedValue);
+    setPaymentError(
+      selectedRemainingAmount > 0 && nextAmount > selectedRemainingAmount
+        ? t('main.paymentAmountExceeded')
+        : '',
+    );
+  };
+  const onClosePaymentModal = () => {
+    setIsModalVisible(false);
+    setPaymentAmount('');
+    setPaymentError('');
+    setSelectedLoan(null);
   };
 
   const confirmPayment = () => {
-    if (selectedLoan && paymentAmount) {
-      const numericAmount = parseFloat(paymentAmount);
-      if (!isNaN(numericAmount)) {
-        dispatch(updateLoan({
-          ...selectedLoan,
-          paid_amount: (selectedLoan.paid_amount || 0) + numericAmount,
-          payments: [
-            ...(selectedLoan.payments || []),
-            {
-              id: Math.random().toString(),
-              date: new Date().toISOString(),
-              amount: numericAmount,
-            }
-          ]
-        } as TLoan));
-        setIsModalVisible(false);
-        setPaymentAmount('');
-        setSelectedLoan(null);
-      }
+    if (!activeSelectedLoan || normalizedPaymentAmount <= 0) {
+      setPaymentError(t('main.invalidPaymentAmount'));
+      return;
     }
+
+    if (selectedRemainingAmount <= 0) {
+      setPaymentError(t('main.fullyPaid'));
+      return;
+    }
+
+    if (normalizedPaymentAmount > selectedRemainingAmount) {
+      setPaymentError(t('main.paymentAmountExceeded'));
+      return;
+    }
+
+    const payments = [
+      ...(activeSelectedLoan.payments || []),
+      {
+        id: uuid(),
+        date: new Date().toISOString(),
+        amount: normalizedPaymentAmount,
+      },
+    ];
+
+    dispatch(updateLoan({
+      ...activeSelectedLoan,
+      label: activeSelectedLoan.label || getLoanTitle(activeSelectedLoan),
+      paid_amount: selectedPaidAmount + normalizedPaymentAmount,
+      payments,
+    } as TLoan));
+    onClosePaymentModal();
   };
 
   return (
@@ -127,7 +224,12 @@ const MainScreen = () => {
                 fontWeight={400}
               />
               <AppText
-                value={formatNumber(totalDebt, 'en-US', true, 'USD')}
+                value={formatNumber(
+                  totalDebt,
+                  currency.locale,
+                  true,
+                  currency.code,
+                )}
                 fontSize={20}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n0}
@@ -141,7 +243,12 @@ const MainScreen = () => {
                 fontWeight={400}
               />
               <AppText
-                value={formatNumber(totalPaid, 'en-US', true, 'USD')}
+                value={formatNumber(
+                  totalPaid,
+                  currency.locale,
+                  true,
+                  currency.code,
+                )}
                 fontSize={20}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n0}
@@ -177,14 +284,14 @@ const MainScreen = () => {
                 onPress={() => navigationRef.navigate('MortgageLoanResultDetailScreen', {
                   id: loan.id,
                   isHistory: true,
-                  label: loan.label,
+                  label: getLoanTitle(loan),
                 })}
               >
                 <View style={styles.activeLoanHeader}>
                   <View style={[styles.loanIcon, {backgroundColor: COLORS.foundation.blue.b300}]}>
                     <Ionicons name="cash" size={20} color={COLORS.foundation.neutral.n0} />
                   </View>
-                  <AppText value={loan.label} fontSize={16} fontWeight={600} color={COLORS.foundation.neutral.n700} />
+                  <AppText value={getLoanTitle(loan)} fontSize={16} fontWeight={600} color={COLORS.foundation.neutral.n700} />
                 </View>
                 <View style={styles.progressContainer}>
                   <View style={styles.progressBar}>
@@ -192,7 +299,17 @@ const MainScreen = () => {
                   </View>
                   <View style={[styles.rows, {marginTop: 4}]}>
                     <AppText
-                      value={`${formatNumber(loan.paid_amount || 0, 'en-US', true, 'USD')} / ${formatNumber(loan.loan_amount, 'en-US', true, 'USD')}`}
+                      value={`${formatNumber(
+                        loan.paid_amount || 0,
+                        loan.currency.locale,
+                        true,
+                        loan.currency.code,
+                      )} / ${formatNumber(
+                        loan.loan_amount,
+                        loan.currency.locale,
+                        true,
+                        loan.currency.code,
+                      )}`}
                       fontSize={11}
                       color={COLORS.foundation.neutral.n500}
                       fontWeight={400}
@@ -281,7 +398,7 @@ const MainScreen = () => {
               color={COLORS.foundation.neutral.n700}
             />
             <AppText
-              value={selectedLoan?.label || ''}
+              value={getLoanTitle(activeSelectedLoan)}
               fontSize={14}
               color={COLORS.foundation.neutral.n500}
               textStyle={{marginBottom: 20}}
@@ -289,26 +406,64 @@ const MainScreen = () => {
             />
             <AppInput
               placeholder={t('main.paidThisMonth')}
-              value={paymentAmount}
-              onChangeText={setPaymentAmount}
-              keyboardType="numeric"
+              value={formattedPaymentAmount}
+              onChangeText={onChangePaymentAmount}
+              keyboardType="number-pad"
               color={COLORS.foundation.neutral.n700}
               fontSize={16}
               fontWeight={400}
               placeholderTextColor={COLORS.foundation.neutral.n200}
             />
+            <View style={styles.modalHint}>
+              <AppText
+                value={`${t('main.remainingBalance')}: ${formatNumber(
+                  selectedRemainingAmount,
+                  activeSelectedLoan?.currency.locale || currency.locale,
+                  true,
+                  activeSelectedLoan?.currency.code || currency.code,
+                )}`}
+                color={COLORS.foundation.neutral.n500}
+                fontWeight={400}
+                fontSize={12}
+              />
+              {!!paymentError && (
+                <AppText
+                  value={paymentError}
+                  color="#D92D20"
+                  fontWeight={500}
+                  fontSize={12}
+                />
+              )}
+            </View>
             <View style={[styles.rows, {marginTop: 24, gap: 12}]}>
               <TouchableOpacity
                 style={[styles.modalBtn, {backgroundColor: COLORS.foundation.neutral.n100}]}
-                onPress={() => setIsModalVisible(false)}
+                onPress={onClosePaymentModal}
               >
                 <AppText value={t('main.cancel')} fontWeight={600} fontSize={15} color={COLORS.foundation.neutral.n700} />
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.modalBtn, {backgroundColor: COLORS.foundation.blue.b300}]}
+                style={[
+                  styles.modalBtn,
+                  {
+                    backgroundColor: canSubmitPayment
+                      ? COLORS.foundation.blue.b300
+                      : COLORS.foundation.neutral.n100,
+                  },
+                ]}
+                disabled={!canSubmitPayment}
                 onPress={confirmPayment}
               >
-                <AppText value={t('main.confirm')} color={COLORS.foundation.neutral.n0} fontWeight={600} fontSize={15} />
+                <AppText
+                  value={t('main.confirm')}
+                  color={
+                    canSubmitPayment
+                      ? COLORS.foundation.neutral.n0
+                      : COLORS.foundation.neutral.n500
+                  }
+                  fontWeight={600}
+                  fontSize={15}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -426,6 +581,9 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     padding: 24,
     gap: 12,
+  },
+  modalHint: {
+    gap: 6,
   },
   modalBtn: {
     flex: 1,

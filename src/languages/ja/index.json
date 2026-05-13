@@ -21,6 +21,13 @@
     "paymentHistory": "支払い履歴",
     "noPayments": "履歴なし",
     "monthlyRepayment": "月々の返済額",
+    "remainingBalance": "残高",
+    "repaymentProgress": "返済進捗",
+    "paymentsRecorded": "記録済み支払い",
+    "lastPayment": "最終支払い",
+    "invalidPaymentAmount": "有効な支払い金額を入力してください",
+    "paymentAmountExceeded": "支払い額が残高を超えています",
+    "fullyPaid": "完済済み",
     "confirm": "確認",
     "cancel": "キャンセル",
     "mortgage": {

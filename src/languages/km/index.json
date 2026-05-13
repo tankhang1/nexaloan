@@ -21,6 +21,13 @@
     "paymentHistory": "ប្រវត្តិការបង់សង",
     "noPayments": "មិនទាន់មានប្រវត្តិការបង់សង",
     "monthlyRepayment": "ការបង់សងប្រចាំខែ",
+    "remainingBalance": "សមតុល្យនៅសល់",
+    "repaymentProgress": "វឌ្ឍនភាពសងប្រាក់",
+    "paymentsRecorded": "ការបង់ប្រាក់បានកត់ត្រា",
+    "lastPayment": "ការបង់ប្រាក់ចុងក្រោយ",
+    "invalidPaymentAmount": "សូមបញ្ចូលចំនួនទឹកប្រាក់ត្រឹមត្រូវ",
+    "paymentAmountExceeded": "ចំនួនបង់លើសសមតុល្យនៅសល់",
+    "fullyPaid": "បានបង់គ្រប់ហើយ",
     "confirm": "បញ្ជាក់",
     "cancel": "បោះបង់",
     "mortgage": {

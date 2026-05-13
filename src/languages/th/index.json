@@ -21,6 +21,13 @@
     "paymentHistory": "ประวัติการชำระ",
     "noPayments": "ยังไม่มีประวัติการชำระ",
     "monthlyRepayment": "ยอดผ่อนต่อเดือน",
+    "remainingBalance": "ยอดคงเหลือ",
+    "repaymentProgress": "ความคืบหน้าการชำระ",
+    "paymentsRecorded": "รายการชำระที่บันทึก",
+    "lastPayment": "ชำระล่าสุด",
+    "invalidPaymentAmount": "กรุณากรอกจำนวนเงินที่ถูกต้อง",
+    "paymentAmountExceeded": "ยอดชำระมากกว่ายอดคงเหลือ",
+    "fullyPaid": "ชำระครบแล้ว",
     "confirm": "ยืนยัน",
     "cancel": "ยกเลิก",
     "mortgage": {

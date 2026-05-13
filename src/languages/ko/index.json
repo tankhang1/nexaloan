@@ -21,6 +21,13 @@
     "paymentHistory": "납부 내역",
     "noPayments": "납부 내역이 없습니다",
     "monthlyRepayment": "월 상환액",
+    "remainingBalance": "남은 잔액",
+    "repaymentProgress": "상환 진행률",
+    "paymentsRecorded": "기록된 납부",
+    "lastPayment": "최근 납부",
+    "invalidPaymentAmount": "유효한 납부 금액을 입력하세요",
+    "paymentAmountExceeded": "납부 금액이 남은 잔액보다 큽니다",
+    "fullyPaid": "완납됨",
     "confirm": "확인",
     "cancel": "취소",
     "mortgage": {

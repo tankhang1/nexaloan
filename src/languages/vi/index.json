@@ -21,6 +21,13 @@
     "paymentHistory": "Lịch Sử Trả Nợ",
     "noPayments": "Chưa có lịch sử thanh toán",
     "monthlyRepayment": "Khoản trả định kỳ",
+    "remainingBalance": "Còn Lại",
+    "repaymentProgress": "Tiến Độ Trả Nợ",
+    "paymentsRecorded": "Số Lần Thanh Toán",
+    "lastPayment": "Lần Trả Gần Nhất",
+    "invalidPaymentAmount": "Nhập số tiền hợp lệ",
+    "paymentAmountExceeded": "Số tiền vượt quá số còn lại",
+    "fullyPaid": "Đã Trả Xong",
     "confirm": "Xác nhận",
     "cancel": "Hủy",
     "mortgage": {

@@ -8,7 +8,17 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { useDispatch, useSelector } from "react-redux";
 import AppBanner from "../../components/AppBanner";
@@ -25,8 +35,9 @@ import { calculateFixedMonthlyPayment, calculateFlatRatePayment } from "../../ho
 import { calculateFixedPrincipal } from "../../hooks/fixed_principal";
 import { formatMonth } from "../../hooks/format_month";
 import { formatNumber } from "../../hooks/format_number";
+import { uuid } from "../../hooks/uuid";
 import { navigationRef } from "../../navigation";
-import { TLoan, updateLoan } from "../../redux/slices/history";
+import { TLoan, TPayment, updateLoan } from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
 import Table from "./components/Table";
@@ -43,6 +54,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
   const [tab, setTab] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [paymentAmount, setPaymentAmount] = useState("");
+  const [paymentError, setPaymentError] = useState("");
 
   const { currency } = useSelector((state: RootState) => state.app);
   const history = useSelector((state: RootState) => state.history);
@@ -66,6 +78,70 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
         : calculateFixedMonthlyPayment(mortgage!),
     [mortgage],
   );
+  const sortedPayments = useMemo(() => {
+    return [...(mortgage?.payments || [])].sort(
+      (left, right) => dayjs(right.date).valueOf() - dayjs(left.date).valueOf(),
+    );
+  }, [mortgage?.payments]);
+  const paymentStats = useMemo(() => {
+    const paidFromHistory = sortedPayments.reduce(
+      (total, payment) => total + payment.amount,
+      0,
+    );
+    const paidAmount = Math.max(paidFromHistory, mortgage?.paid_amount || 0);
+    const totalAmount = result?.totalPayment || mortgage?.loan_amount || 0;
+    const remainingAmount = Math.max(totalAmount - paidAmount, 0);
+    const progress = totalAmount
+      ? Math.min((paidAmount / totalAmount) * 100, 100)
+      : 0;
+
+    return {
+      paidAmount,
+      remainingAmount,
+      progress,
+      lastPayment: sortedPayments[0],
+    };
+  }, [
+    mortgage?.loan_amount,
+    mortgage?.paid_amount,
+    result?.totalPayment,
+    sortedPayments,
+  ]);
+  const groupedPayments = useMemo(() => {
+    return sortedPayments.reduce<{title: string; data: TPayment[]}[]>(
+      (groups, payment) => {
+        const title = dayjs(payment.date).format("MM/YYYY");
+        const currentGroup = groups.find((group) => group.title === title);
+
+        if (currentGroup) {
+          currentGroup.data.push(payment);
+        } else {
+          groups.push({ title, data: [payment] });
+        }
+
+        return groups;
+      },
+      [],
+    );
+  }, [sortedPayments]);
+  const normalizedPaymentAmount = useMemo(
+    () => Number(paymentAmount),
+    [paymentAmount],
+  );
+  const formattedPaymentAmount = useMemo(() => {
+    if (!paymentAmount) {
+      return "";
+    }
+
+    return new Intl.NumberFormat(
+      mortgage?.currency?.locale || currency.locale,
+    ).format(Number(paymentAmount));
+  }, [currency.locale, mortgage?.currency?.locale, paymentAmount]);
+  const canSubmitPayment =
+    !!mortgage &&
+    normalizedPaymentAmount > 0 &&
+    paymentStats.remainingAmount > 0 &&
+    normalizedPaymentAmount <= paymentStats.remainingAmount;
   const onGoBack = () => {
     navigationRef.goBack();
   };
@@ -80,30 +156,65 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     );
   }, [result, mortgage, currency]);
 
+  const onOpenPaymentModal = () => {
+    setPaymentError("");
+    setIsModalVisible(true);
+  };
+  const onChangePaymentAmount = (value: string) => {
+    const normalizedValue = value.replace(/[^0-9]/g, "");
+    const nextAmount = Number(normalizedValue);
+
+    setPaymentAmount(normalizedValue);
+    setPaymentError(
+      paymentStats.remainingAmount > 0 &&
+        nextAmount > paymentStats.remainingAmount
+        ? t("main.paymentAmountExceeded")
+        : "",
+    );
+  };
+  const onClosePaymentModal = () => {
+    setIsModalVisible(false);
+    setPaymentAmount("");
+    setPaymentError("");
+  };
   const onUpdatePayment = () => {
-    if (mortgage && paymentAmount) {
-      const numericAmount = parseFloat(paymentAmount);
-      if (!isNaN(numericAmount)) {
-        const activeLoan = mortgage as TLoan;
-        dispatch(
-          updateLoan({
-            ...activeLoan,
-            label: activeLoan.label || route.params?.label || "",
-            paid_amount: (activeLoan.paid_amount || 0) + numericAmount,
-            payments: [
-              ...(activeLoan.payments || []),
-              {
-                id: Math.random().toString(),
-                date: new Date().toISOString(),
-                amount: numericAmount,
-              },
-            ],
-          } as TLoan),
-        );
-        setIsModalVisible(false);
-        setPaymentAmount("");
-      }
+    if (!mortgage || normalizedPaymentAmount <= 0) {
+      setPaymentError(t("main.invalidPaymentAmount"));
+      return;
     }
+
+    if (paymentStats.remainingAmount <= 0) {
+      setPaymentError(t("main.fullyPaid"));
+      return;
+    }
+
+    if (normalizedPaymentAmount > paymentStats.remainingAmount) {
+      setPaymentError(t("main.paymentAmountExceeded"));
+      return;
+    }
+
+    const activeLoan = mortgage as TLoan;
+    const payments = [
+      ...(activeLoan.payments || []),
+      {
+        id: uuid(),
+        date: new Date().toISOString(),
+        amount: normalizedPaymentAmount,
+      },
+    ];
+
+    dispatch(
+      updateLoan({
+        ...activeLoan,
+        label: activeLoan.label || route.params?.label || "",
+        paid_amount: payments.reduce(
+          (total, payment) => total + payment.amount,
+          0,
+        ),
+        payments,
+      } as TLoan),
+    );
+    onClosePaymentModal();
   };
   return (
     <AppView appStyle={styles.overall}>
@@ -292,36 +403,122 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
       {tab === 2 && (
         <View style={styles.paymentContainer}>
           <View style={styles.paymentSummary}>
-            <View>
-              <AppText
-                value={t("main.totalPaid")}
-                fontSize={12}
-                color={COLORS.foundation.neutral.n500}
-                fontWeight={400}
-              />
-              <AppText
-                value={formatNumber(
-                  mortgage?.paid_amount || 0,
-                  mortgage?.currency?.locale || currency.locale,
-                  true,
-                  mortgage?.currency?.code || currency.code,
-                )}
-                fontSize={20}
-                fontWeight={700}
-                color={COLORS.foundation.blue.b500}
+            <View style={styles.paymentSummaryHeader}>
+              <View>
+                <AppText
+                  value={t("main.totalPaid")}
+                  fontSize={12}
+                  color={COLORS.foundation.neutral.n500}
+                  fontWeight={400}
+                />
+                <AppText
+                  value={formatNumber(
+                    paymentStats.paidAmount,
+                    mortgage?.currency?.locale || currency.locale,
+                    true,
+                    mortgage?.currency?.code || currency.code,
+                  )}
+                  fontSize={20}
+                  fontWeight={700}
+                  color={COLORS.foundation.blue.b500}
+                />
+              </View>
+              <Pressable
+                style={[
+                  styles.updateBtn,
+                  paymentStats.remainingAmount <= 0 && styles.disabledBtn,
+                ]}
+                disabled={paymentStats.remainingAmount <= 0}
+                onPress={onOpenPaymentModal}
+              >
+                <AppText
+                  value={
+                    paymentStats.remainingAmount <= 0
+                      ? t("main.fullyPaid")
+                      : t("main.updatePayment")
+                  }
+                  color={COLORS.foundation.neutral.n0}
+                  fontWeight={600}
+                  fontSize={14}
+                />
+              </Pressable>
+            </View>
+            <View style={styles.progressTrack}>
+              <View
+                style={[
+                  styles.progressFill,
+                  { width: `${paymentStats.progress}%` },
+                ]}
               />
             </View>
-            <Pressable
-              style={styles.updateBtn}
-              onPress={() => setIsModalVisible(true)}
-            >
-              <AppText
-                value={t("main.updatePayment")}
-                color={COLORS.foundation.neutral.n0}
-                fontWeight={600}
-                fontSize={14}
-              />
-            </Pressable>
+            <View style={styles.paymentStatGrid}>
+              <View style={styles.paymentStatItem}>
+                <AppText
+                  value={t("main.remainingBalance")}
+                  fontSize={11}
+                  color={COLORS.foundation.neutral.n500}
+                  fontWeight={400}
+                />
+                <AppText
+                  value={formatNumber(
+                    paymentStats.remainingAmount,
+                    mortgage?.currency?.locale || currency.locale,
+                    true,
+                    mortgage?.currency?.code || currency.code,
+                  )}
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n700}
+                  numberOfLines={1}
+                />
+              </View>
+              <View style={styles.paymentStatItem}>
+                <AppText
+                  value={t("main.repaymentProgress")}
+                  fontSize={11}
+                  color={COLORS.foundation.neutral.n500}
+                  fontWeight={400}
+                />
+                <AppText
+                  value={`${paymentStats.progress.toFixed(0)}%`}
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              </View>
+              <View style={styles.paymentStatItem}>
+                <AppText
+                  value={t("main.paymentsRecorded")}
+                  fontSize={11}
+                  color={COLORS.foundation.neutral.n500}
+                  fontWeight={400}
+                />
+                <AppText
+                  value={sortedPayments.length.toString()}
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              </View>
+              <View style={styles.paymentStatItem}>
+                <AppText
+                  value={t("main.lastPayment")}
+                  fontSize={11}
+                  color={COLORS.foundation.neutral.n500}
+                  fontWeight={400}
+                />
+                <AppText
+                  value={
+                    paymentStats.lastPayment
+                      ? dayjs(paymentStats.lastPayment.date).format("DD/MM/YYYY")
+                      : "--"
+                  }
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              </View>
+            </View>
           </View>
 
           <ScrollView
@@ -329,42 +526,63 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.paymentListContent}
           >
-            {mortgage?.payments && mortgage.payments.length > 0 ? (
-              [...mortgage.payments].reverse().map((payment) => (
-                <View key={payment.id} style={styles.paymentItem}>
-                  <View style={styles.paymentIcon}>
-                    <Ionicons
-                      name="checkmark-circle"
-                      size={20}
-                      color={COLORS.foundation.blue.b300}
-                    />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <AppText
-                      value={dayjs(payment.date).format("DD/MM/YYYY HH:mm")}
-                      fontSize={14}
-                      fontWeight={600}
-                      color={COLORS.foundation.neutral.n700}
-                    />
-                    <AppText
-                      value={t('main.monthlyRepayment')}
-                      fontSize={12}
-                      color={COLORS.foundation.neutral.n500}
-                      fontWeight={400}
-                    />
-                  </View>
+            {groupedPayments.length > 0 ? (
+              groupedPayments.map((group) => (
+                <View key={group.title} style={styles.paymentGroup}>
                   <AppText
-                    value={`+${formatNumber(payment.amount, mortgage?.currency?.locale || currency.locale, true, mortgage?.currency?.code || currency.code)}`}
-                    fontSize={15}
-                    fontWeight={700}
-                    color={COLORS.foundation.blue.b300}
+                    value={group.title}
+                    fontSize={12}
+                    color={COLORS.foundation.neutral.n500}
+                    fontWeight={600}
                   />
+                  {group.data.map((payment) => (
+                    <View key={payment.id} style={styles.paymentItem}>
+                      <View style={styles.paymentIcon}>
+                        <Ionicons
+                          name="checkmark-circle"
+                          size={20}
+                          color={COLORS.foundation.blue.b300}
+                        />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <AppText
+                          value={dayjs(payment.date).format("DD/MM/YYYY HH:mm")}
+                          fontSize={14}
+                          fontWeight={600}
+                          color={COLORS.foundation.neutral.n700}
+                        />
+                        <AppText
+                          value={t("main.monthlyRepayment")}
+                          fontSize={12}
+                          color={COLORS.foundation.neutral.n500}
+                          fontWeight={400}
+                        />
+                      </View>
+                      <AppText
+                        value={`+${formatNumber(
+                          payment.amount,
+                          mortgage?.currency?.locale || currency.locale,
+                          true,
+                          mortgage?.currency?.code || currency.code,
+                        )}`}
+                        fontSize={15}
+                        fontWeight={700}
+                        color={COLORS.foundation.blue.b300}
+                        numberOfLines={1}
+                      />
+                    </View>
+                  ))}
                 </View>
               ))
             ) : (
               <View style={styles.emptyPayments}>
+                <Ionicons
+                  name="receipt-outline"
+                  size={28}
+                  color={COLORS.foundation.neutral.n200}
+                />
                 <AppText
-                  value={t('main.noPayments')}
+                  value={t("main.noPayments")}
                   color={COLORS.foundation.neutral.n500}
                   fontWeight={400}
                   fontSize={14}
@@ -375,59 +593,101 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
         </View>
       )}
 
-      {isModalVisible && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <AppText
-              value={t("main.updatePayment")}
-              fontSize={20}
-              fontWeight={700}
-              textStyle={{ marginBottom: 20 }}
-              color={COLORS.foundation.neutral.n700}
-            />
-            <AppInput
-              placeholder={t("main.paidThisMonth")}
-              value={paymentAmount}
-              onChangeText={setPaymentAmount}
-              keyboardType="numeric"
-              color={COLORS.foundation.neutral.n700}
-              fontSize={16}
-              fontWeight={400}
-              placeholderTextColor={COLORS.foundation.neutral.n200}
-            />
-            <View style={[styles.rows, { marginTop: 24, gap: 12 }]}>
-              <Pressable
-                style={[
-                  styles.modalBtn,
-                  { backgroundColor: COLORS.foundation.neutral.n100 },
-                ]}
-                onPress={() => setIsModalVisible(false)}
-              >
+      <Modal
+        animationType="fade"
+        transparent
+        visible={isModalVisible}
+        onRequestClose={onClosePaymentModal}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+            style={styles.modalOverlay}
+          >
+            <TouchableWithoutFeedback accessible={false}>
+              <View style={styles.modalContent}>
                 <AppText
-                  value={t('main.cancel')}
-                  fontWeight={600}
-                  fontSize={15}
+                  value={t("main.updatePayment")}
+                  fontSize={20}
+                  fontWeight={700}
+                  textStyle={{ marginBottom: 20 }}
                   color={COLORS.foundation.neutral.n700}
                 />
-              </Pressable>
-              <Pressable
-                style={[
-                  styles.modalBtn,
-                  { backgroundColor: COLORS.foundation.blue.b300 },
-                ]}
-                onPress={onUpdatePayment}
-              >
-                <AppText
-                  value={t('main.confirm')}
-                  color={COLORS.foundation.neutral.n0}
-                  fontWeight={600}
-                  fontSize={15}
+                <AppInput
+                  placeholder={t("main.paidThisMonth")}
+                  value={formattedPaymentAmount}
+                  onChangeText={onChangePaymentAmount}
+                  keyboardType="number-pad"
+                  color={COLORS.foundation.neutral.n700}
+                  fontSize={16}
+                  fontWeight={400}
+                  placeholderTextColor={COLORS.foundation.neutral.n200}
                 />
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      )}
+                <View style={styles.modalHint}>
+                  <AppText
+                    value={`${t("main.remainingBalance")}: ${formatNumber(
+                      paymentStats.remainingAmount,
+                      mortgage?.currency?.locale || currency.locale,
+                      true,
+                      mortgage?.currency?.code || currency.code,
+                    )}`}
+                    color={COLORS.foundation.neutral.n500}
+                    fontWeight={400}
+                    fontSize={12}
+                  />
+                  {!!paymentError && (
+                    <AppText
+                      value={paymentError}
+                      color="#D92D20"
+                      fontWeight={500}
+                      fontSize={12}
+                    />
+                  )}
+                </View>
+                <View style={[styles.rows, { marginTop: 24, gap: 12 }]}>
+                  <Pressable
+                    style={[
+                      styles.modalBtn,
+                      { backgroundColor: COLORS.foundation.neutral.n100 },
+                    ]}
+                    onPress={onClosePaymentModal}
+                  >
+                    <AppText
+                      value={t("main.cancel")}
+                      fontWeight={600}
+                      fontSize={15}
+                      color={COLORS.foundation.neutral.n700}
+                    />
+                  </Pressable>
+                  <Pressable
+                    style={[
+                      styles.modalBtn,
+                      {
+                        backgroundColor: canSubmitPayment
+                          ? COLORS.foundation.blue.b300
+                          : COLORS.foundation.neutral.n100,
+                      },
+                    ]}
+                    disabled={!canSubmitPayment}
+                    onPress={onUpdatePayment}
+                  >
+                    <AppText
+                      value={t("main.confirm")}
+                      color={
+                        canSubmitPayment
+                          ? COLORS.foundation.neutral.n0
+                          : COLORS.foundation.neutral.n500
+                      }
+                      fontWeight={600}
+                      fontSize={15}
+                    />
+                  </Pressable>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </Modal>
       <Animated.View
         entering={FadeIn}
         exiting={FadeOut}
@@ -543,24 +803,60 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   paymentListContent: {
-    gap: 12,
+    gap: 16,
     paddingBottom: 12,
   },
   paymentSummary: {
+    backgroundColor: COLORS.foundation.neutral.n0,
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    gap: 14,
+  },
+  paymentSummaryHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: COLORS.foundation.neutral.n0,
-    padding: 20,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    gap: 12,
+  },
+  progressTrack: {
+    height: 8,
+    width: "100%",
+    borderRadius: 100,
+    overflow: "hidden",
+    backgroundColor: COLORS.foundation.neutral.n100,
+  },
+  progressFill: {
+    height: "100%",
+    borderRadius: 100,
+    backgroundColor: COLORS.foundation.blue.b300,
+  },
+  paymentStatGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  paymentStatItem: {
+    width: (WIDTH - 36 - 32 - 8) / 2,
+    minHeight: 58,
+    borderRadius: 12,
+    backgroundColor: COLORS.foundation.blue.b50,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 4,
   },
   updateBtn: {
     backgroundColor: COLORS.foundation.blue.b300,
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 12,
+  },
+  disabledBtn: {
+    backgroundColor: COLORS.foundation.neutral.n200,
+  },
+  paymentGroup: {
+    gap: 8,
   },
   paymentItem: {
     flexDirection: "row",
@@ -583,14 +879,18 @@ const styles = StyleSheet.create({
   emptyPayments: {
     padding: 40,
     alignItems: "center",
+    gap: 8,
+    borderRadius: 16,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
   },
   modalOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    zIndex: 1000,
   },
   modalContent: {
     width: "100%",
@@ -598,6 +898,9 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     padding: 24,
     gap: 12,
+  },
+  modalHint: {
+    gap: 6,
   },
   modalBtn: {
     flex: 1,
