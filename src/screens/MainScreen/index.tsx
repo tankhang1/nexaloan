@@ -17,6 +17,7 @@ import {
   MaterialCommunityIcons,
   Ionicons,
   FontAwesome6,
+  MaterialIcons,
 } from '@expo/vector-icons';
 import AppBanner from '../../components/AppBanner';
 import {uuid} from '../../hooks/uuid';
@@ -34,6 +35,9 @@ const MainScreen = () => {
 
   const totalDebt = history.reduce((acc, curr) => acc + curr.loan_amount, 0);
   const totalPaid = history.reduce((acc, curr) => acc + (curr.paid_amount || 0), 0);
+  const remainingDebt = Math.max(totalDebt - totalPaid, 0);
+  const paidProgress =
+    totalDebt > 0 ? Math.min((totalPaid / totalDebt) * 100, 100) : 0;
   const activeSelectedLoan = React.useMemo(() => {
     if (!selectedLoan) {
       return null;
@@ -104,6 +108,9 @@ const MainScreen = () => {
   };
   const onNavHistoryScreen = () => {
     navigationRef.navigate('HistoryScreen');
+  };
+  const onNavCompareLoanScreen = () => {
+    navigationRef.navigate('CompareLoanScreen');
   };
   const onNavMortgageLoanScreen = (
     type: 'mortgage' | 'car' | 'personal' | 'business',
@@ -183,23 +190,25 @@ const MainScreen = () => {
           />
           <AppText
             value={t('main.title')}
-            fontSize={34}
+            fontSize={28}
             fontWeight={700}
             color={COLORS.foundation.neutral.n700}
+            numberOfLines={2}
+            textStyle={styles.headerTitle}
           />
         </View>
         <View style={styles.headerRightSection}>
-          <AppIconButton onPress={onNavSettingScreen}>
+          <AppIconButton style={styles.headerIconButton} onPress={onNavSettingScreen}>
             <Feather
               name="settings"
-              size={24}
+              size={22}
               color={COLORS.foundation.neutral.n900}
             />
           </AppIconButton>
-          <AppIconButton onPress={onNavHistoryScreen}>
+          <AppIconButton style={styles.headerIconButton} onPress={onNavHistoryScreen}>
             <MaterialCommunityIcons
               name="history"
-              size={24}
+              size={22}
               color={COLORS.foundation.neutral.n900}
             />
           </AppIconButton>
@@ -209,38 +218,55 @@ const MainScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {/* Report Section */}
         <View style={styles.reportCard}>
-          <AppText
-            value={t('main.report')}
-            fontSize={18}
-            fontWeight={700}
-            color={COLORS.foundation.neutral.n0}
-          />
-          <View style={styles.reportRow}>
+          <View style={styles.reportHeader}>
             <View>
               <AppText
-                value={t('main.totalDebt')}
-                fontSize={12}
-                color="rgba(255,255,255,0.7)"
-                fontWeight={400}
-              />
-              <AppText
-                value={formatNumber(
-                  totalDebt,
-                  currency.locale,
-                  true,
-                  currency.code,
-                )}
-                fontSize={20}
+                value={t('main.report')}
+                fontSize={18}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n0}
               />
-            </View>
-            <View>
               <AppText
-                value={t('main.totalPaid')}
+                value={`${history.length} ${t('main.activeLoans')}`}
                 fontSize={12}
                 color="rgba(255,255,255,0.7)"
                 fontWeight={400}
+              />
+            </View>
+            <View style={styles.reportIcon}>
+              <MaterialIcons
+                name="insights"
+                size={24}
+                color={COLORS.foundation.blue.b300}
+              />
+            </View>
+          </View>
+          <View style={styles.reportPrimary}>
+            <AppText
+              value={t('main.totalDebt')}
+              fontSize={12}
+              color="rgba(255,255,255,0.7)"
+              fontWeight={500}
+            />
+            <AppText
+              value={formatNumber(
+                totalDebt,
+                currency.locale,
+                true,
+                currency.code,
+              )}
+              fontSize={30}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n0}
+            />
+          </View>
+          <View style={styles.reportMetricGrid}>
+            <View style={styles.reportMetricCard}>
+              <AppText
+                value={t('main.totalPaid')}
+                fontSize={11}
+                color="rgba(255,255,255,0.72)"
+                fontWeight={500}
               />
               <AppText
                 value={formatNumber(
@@ -249,9 +275,54 @@ const MainScreen = () => {
                   true,
                   currency.code,
                 )}
-                fontSize={20}
+                fontSize={16}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n0}
+                numberOfLines={1}
+              />
+            </View>
+            <View style={styles.reportMetricCard}>
+              <AppText
+                value={t('main.remainingBalance')}
+                fontSize={11}
+                color="rgba(255,255,255,0.72)"
+                fontWeight={500}
+              />
+              <AppText
+                value={formatNumber(
+                  remainingDebt,
+                  currency.locale,
+                  true,
+                  currency.code,
+                )}
+                fontSize={16}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n0}
+                numberOfLines={1}
+              />
+            </View>
+          </View>
+          <View style={styles.reportProgressSection}>
+            <View style={styles.reportProgressHeader}>
+              <AppText
+                value={t('main.repaymentProgress')}
+                fontSize={12}
+                color="rgba(255,255,255,0.75)"
+                fontWeight={500}
+              />
+              <AppText
+                value={`${paidProgress.toFixed(0)}%`}
+                fontSize={12}
+                color={COLORS.foundation.neutral.n0}
+                fontWeight={700}
+              />
+            </View>
+            <View style={styles.reportProgressTrack}>
+              <View
+                style={[
+                  styles.reportProgressFill,
+                  {width: `${paidProgress}%`},
+                ]}
               />
             </View>
           </View>
@@ -347,6 +418,16 @@ const MainScreen = () => {
 
         <View style={styles.cardContainer}>
           <Card
+            title={t('compareLoan.title')}
+            desc={t('compareLoan.desc')}
+            badgeLabel={t('compareLoan.badge')}
+            accentColor="#2E8B70"
+            iconBackgroundColor="#2E8B70"
+            icon={<MaterialIcons name="compare-arrows" size={26} color={COLORS.foundation.neutral.n0} />}
+            onPress={onNavCompareLoanScreen}
+            variant="grid"
+          />
+          <Card
             title={t('main.mortgage.title')}
             desc={t('main.mortgage.desc')}
             badgeLabel={t('main.badge')}
@@ -354,6 +435,7 @@ const MainScreen = () => {
             iconBackgroundColor="#0F8A6A"
             icon={<Ionicons name="home" size={24} color={COLORS.foundation.neutral.n0} />}
             onPress={() => onNavMortgageLoanScreen('mortgage')}
+            variant="grid"
           />
           <Card
             title={t('main.car.title')}
@@ -363,6 +445,7 @@ const MainScreen = () => {
             iconBackgroundColor="#5D7CF4"
             icon={<Ionicons name="car-sport" size={24} color={COLORS.foundation.neutral.n0} />}
             onPress={() => onNavMortgageLoanScreen('car')}
+            variant="grid"
           />
           <Card
             title={t('main.personal.title')}
@@ -372,6 +455,7 @@ const MainScreen = () => {
             iconBackgroundColor="#E07A5F"
             icon={<Ionicons name="person" size={24} color={COLORS.foundation.neutral.n0} />}
             onPress={() => onNavMortgageLoanScreen('personal')}
+            variant="grid"
           />
           <Card
             title={t('main.business.title')}
@@ -381,6 +465,7 @@ const MainScreen = () => {
             iconBackgroundColor="#B45CE0"
             icon={<FontAwesome6 name="briefcase" size={20} color={COLORS.foundation.neutral.n0} />}
             onPress={() => onNavMortgageLoanScreen('business')}
+            variant="grid"
           />
         </View>
         <View style={{height: 100}} />
@@ -483,15 +568,24 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   header: {
-    gap: 14,
+    gap: 12,
     paddingVertical: 4,
   },
   headerLeftSection: {
     gap: 4,
-    maxWidth: '68%',
+    flex: 1,
+    paddingRight: 14,
+  },
+  headerTitle: {
+    lineHeight: 34,
   },
   headerRightSection: {
-    gap: 14,
+    gap: 10,
+  },
+  headerIconButton: {
+    width: 48,
+    height: 44,
+    borderRadius: 16,
   },
   rows: {
     flexDirection: 'row',
@@ -504,18 +598,63 @@ const styles = StyleSheet.create({
   },
   reportCard: {
     backgroundColor: COLORS.foundation.blue.b300,
-    borderRadius: 24,
-    padding: 24,
-    gap: 16,
+    borderRadius: 28,
+    padding: 20,
+    gap: 18,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.1,
     shadowRadius: 8,
   },
-  reportRow: {
+  reportHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  reportIcon: {
+    width: 46,
+    height: 46,
+    borderRadius: 16,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  reportPrimary: {
+    gap: 4,
+  },
+  reportMetricGrid: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  reportMetricCard: {
+    flex: 1,
+    minHeight: 74,
+    borderRadius: 18,
+    backgroundColor: 'rgba(255,255,255,0.14)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.16)',
+    padding: 12,
+    justifyContent: 'space-between',
+  },
+  reportProgressSection: {
+    gap: 8,
+  },
+  reportProgressHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  reportProgressTrack: {
+    height: 10,
+    borderRadius: 999,
+    backgroundColor: 'rgba(255,255,255,0.22)',
+    overflow: 'hidden',
+  },
+  reportProgressFill: {
+    height: '100%',
+    borderRadius: 999,
+    backgroundColor: COLORS.foundation.neutral.n0,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -602,6 +741,8 @@ const styles = StyleSheet.create({
     borderColor: COLORS.foundation.neutral.n100,
   },
   cardContainer: {
-    gap: 16,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
   },
 });

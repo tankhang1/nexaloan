@@ -49,6 +49,26 @@
       "desc": "Analizează opțiunile de creditare\npentru a optimiza finanțarea companiei."
     }
   },
+  "compareLoan": {
+    "title": "Compară Împrumuturi",
+    "desc": "Compară opțiunile de plată înainte de a alege un împrumut.",
+    "badge": "Compară",
+    "optionA": "Opțiunea A",
+    "optionB": "Opțiunea B",
+    "loanAmount": "Suma Împrumutului",
+    "duration": "Durată (luni)",
+    "yearlyInterestRate": "Rata Dobânzii (%/an)",
+    "monthlyInterestRate": "Rata Dobânzii (%/lună)",
+    "results": "Rezultate Comparație",
+    "monthlyPayment": "Plată Lunară",
+    "averageMonthlyPayment": "Plată Medie Lunară",
+    "totalPayment": "Plată Totală",
+    "totalInterest": "Dobândă Totală",
+    "betterChoice": "Alegere Mai Bună",
+    "bestOption": "{{option}} economisește {{amount}}",
+    "sameCost": "Ambele opțiuni au același cost total",
+    "enterValidValues": "Introduceți valori valide pentru comparație"
+  },
   "mortgage": {
     "title": "Credit Imobiliar",
     "loanAmount": "Suma Împrumutată",

@@ -49,6 +49,26 @@
       "desc": "Analise opções de crédito\npara otimizar o capital da sua empresa."
     }
   },
+  "compareLoan": {
+    "title": "Comparar Empréstimos",
+    "desc": "Compare opções de pagamento antes de escolher um empréstimo.",
+    "badge": "Comparar",
+    "optionA": "Opção A",
+    "optionB": "Opção B",
+    "loanAmount": "Valor do Empréstimo",
+    "duration": "Prazo (meses)",
+    "yearlyInterestRate": "Taxa de Juros (%/ano)",
+    "monthlyInterestRate": "Taxa de Juros (%/mês)",
+    "results": "Resultados da Comparação",
+    "monthlyPayment": "Pagamento Mensal",
+    "averageMonthlyPayment": "Pagamento Médio Mensal",
+    "totalPayment": "Pagamento Total",
+    "totalInterest": "Juros Totais",
+    "betterChoice": "Melhor Escolha",
+    "bestOption": "{{option}} economiza {{amount}}",
+    "sameCost": "As duas opções têm o mesmo custo total",
+    "enterValidValues": "Insira valores válidos para comparar"
+  },
   "mortgage": {
     "title": "Financiamento Imobiliário",
     "loanAmount": "Valor Financiado",

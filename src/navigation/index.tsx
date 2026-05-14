@@ -13,6 +13,7 @@ import HistoryScreen from '../screens/HistoryScreen';
 import MortgageLoanScreen from '../screens/MortgageLoanScreen';
 import MortgageLoanResultScreen from '../screens/MortgageLoanResultScreen';
 import MortgageLoanResultDetailScreen from '../screens/MortgageLoanResultDetailScreen';
+import CompareLoanScreen from '../screens/CompareLoanScreen';
 import {initI18n} from '../languages';
 import AboutUsScreen from '../screens/AboutUsScreen';
 import TOUScreen from '../screens/TOUScreen';
@@ -30,6 +31,7 @@ const AppNavigation = () => {
         <Stack.Screen name="CurrencyScreen" component={CurrencyScreen} />
         <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
         <Stack.Screen name="AboutUsScreen" component={AboutUsScreen} />
+        <Stack.Screen name="CompareLoanScreen" component={CompareLoanScreen} />
         <Stack.Screen
           name="MortgageLoanScreen"
           component={MortgageLoanScreen}

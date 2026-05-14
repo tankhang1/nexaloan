@@ -49,6 +49,26 @@
       "desc": "Analysieren Sie Kreditoptionen,\num Ihre Unternehmensfinanzierung zu optimieren."
     }
   },
+  "compareLoan": {
+    "title": "Kredite Vergleichen",
+    "desc": "Vergleichen Sie Zahlungsoptionen, bevor Sie einen Kredit wählen.",
+    "badge": "Vergleich",
+    "optionA": "Option A",
+    "optionB": "Option B",
+    "loanAmount": "Darlehensbetrag",
+    "duration": "Laufzeit (Monate)",
+    "yearlyInterestRate": "Zinssatz (%/Jahr)",
+    "monthlyInterestRate": "Zinssatz (%/Monat)",
+    "results": "Vergleichsergebnisse",
+    "monthlyPayment": "Monatliche Rate",
+    "averageMonthlyPayment": "Ø Monatliche Rate",
+    "totalPayment": "Gesamtzahlung",
+    "totalInterest": "Gesamtzinsen",
+    "betterChoice": "Bessere Wahl",
+    "bestOption": "{{option}} spart {{amount}}",
+    "sameCost": "Beide Optionen haben die gleichen Gesamtkosten",
+    "enterValidValues": "Geben Sie gültige Werte zum Vergleichen ein"
+  },
   "mortgage": {
     "title": "Immobilienkredit",
     "loanAmount": "Darlehensbetrag",

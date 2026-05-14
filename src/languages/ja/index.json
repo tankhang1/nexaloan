@@ -47,6 +47,26 @@
       "desc": "事業資金に最適なローンの選択肢を\n分析・比較できます。"
     }
   },
+  "compareLoan": {
+    "title": "ローンを比較",
+    "desc": "ローンを選ぶ前に返済プランを並べて比較できます。",
+    "badge": "比較",
+    "optionA": "プラン A",
+    "optionB": "プラン B",
+    "loanAmount": "借入金額",
+    "duration": "期間（月）",
+    "yearlyInterestRate": "金利（%/年）",
+    "monthlyInterestRate": "金利（%/月）",
+    "results": "比較結果",
+    "monthlyPayment": "月々の支払い",
+    "averageMonthlyPayment": "平均月額",
+    "totalPayment": "総支払額",
+    "totalInterest": "総利息",
+    "betterChoice": "おすすめ",
+    "bestOption": "{{option}} は {{amount}} 節約できます",
+    "sameCost": "両方の総コストは同じです",
+    "enterValidValues": "比較するには有効な値を入力してください"
+  },
   "mortgage": {
     "title": "住宅ローン",
     "loanAmount": "借入金額",

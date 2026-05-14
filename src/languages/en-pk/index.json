@@ -47,6 +47,26 @@
       "desc": "Analyse loan options to improve cash flow and business financing decisions."
     }
   },
+  "compareLoan": {
+    "title": "Compare Loans",
+    "desc": "Compare payment options side by side before choosing a loan.",
+    "badge": "Compare",
+    "optionA": "Option A",
+    "optionB": "Option B",
+    "loanAmount": "Loan Amount",
+    "duration": "Duration (months)",
+    "yearlyInterestRate": "Interest Rate (%/year)",
+    "monthlyInterestRate": "Interest Rate (%/month)",
+    "results": "Comparison Results",
+    "monthlyPayment": "Monthly Payment",
+    "averageMonthlyPayment": "Avg Monthly Payment",
+    "totalPayment": "Total Payment",
+    "totalInterest": "Total Interest",
+    "betterChoice": "Better Choice",
+    "bestOption": "{{option}} saves {{amount}}",
+    "sameCost": "Both options have the same total cost",
+    "enterValidValues": "Enter valid values to compare"
+  },
   "mortgage": {
     "title": "Loan Calculator",
     "loanAmount": "Loan Amount",

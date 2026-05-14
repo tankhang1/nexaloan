@@ -49,6 +49,26 @@
       "desc": "分析不同融資方案，\n優化企業資金安排。"
     }
   },
+  "compareLoan": {
+    "title": "贷款比较",
+    "desc": "在选择贷款前，并排比较不同还款方案。",
+    "badge": "比较",
+    "optionA": "方案 A",
+    "optionB": "方案 B",
+    "loanAmount": "贷款金额",
+    "duration": "期限（月）",
+    "yearlyInterestRate": "利率（%/年）",
+    "monthlyInterestRate": "利率（%/月）",
+    "results": "比较结果",
+    "monthlyPayment": "每月还款",
+    "averageMonthlyPayment": "平均每月还款",
+    "totalPayment": "总还款额",
+    "totalInterest": "总利息",
+    "betterChoice": "更优选择",
+    "bestOption": "{{option}} 可节省 {{amount}}",
+    "sameCost": "两个方案的总成本相同",
+    "enterValidValues": "请输入有效数值进行比较"
+  },
   "mortgage": {
     "title": "按揭貸款",
     "loanAmount": "貸款金額",

@@ -47,6 +47,26 @@
       "desc": "Phân tích nhiều phương án vay để tối ưu dòng tiền cho hoạt động kinh doanh."
     }
   },
+  "compareLoan": {
+    "title": "So Sánh Khoản Vay",
+    "desc": "So sánh các phương án trả nợ trước khi chọn khoản vay.",
+    "badge": "So sánh",
+    "optionA": "Phương án A",
+    "optionB": "Phương án B",
+    "loanAmount": "Số Tiền Vay",
+    "duration": "Thời Hạn (tháng)",
+    "yearlyInterestRate": "Lãi Suất (%/năm)",
+    "monthlyInterestRate": "Lãi Suất (%/tháng)",
+    "results": "Kết Quả So Sánh",
+    "monthlyPayment": "Khoản Trả Hàng Tháng",
+    "averageMonthlyPayment": "Trả Trung Bình/Tháng",
+    "totalPayment": "Tổng Thanh Toán",
+    "totalInterest": "Tổng Tiền Lãi",
+    "betterChoice": "Lựa Chọn Tốt Hơn",
+    "bestOption": "{{option}} tiết kiệm {{amount}}",
+    "sameCost": "Hai phương án có tổng chi phí bằng nhau",
+    "enterValidValues": "Nhập giá trị hợp lệ để so sánh"
+  },
   "mortgage": {
     "title": "Vay Mua Nhà",
     "loanAmount": "Số Tiền Vay",

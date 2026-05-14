@@ -5,6 +5,7 @@ export type TNavigation = {
   CurrencyScreen: undefined;
   HistoryScreen: undefined;
   AboutUsScreen: undefined;
+  CompareLoanScreen: undefined;
   TOUScreen: undefined;
   PrivacyPolicyScreen: undefined;
   MortgageLoanScreen: {label: string};

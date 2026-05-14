@@ -49,6 +49,26 @@
       "desc": "İşletmeniz için uygun kredi seçeneklerini\nanaliz ederek finansmanı optimize edin."
     }
   },
+  "compareLoan": {
+    "title": "Kredileri Karşılaştır",
+    "desc": "Kredi seçmeden önce ödeme seçeneklerini yan yana karşılaştırın.",
+    "badge": "Karşılaştır",
+    "optionA": "Seçenek A",
+    "optionB": "Seçenek B",
+    "loanAmount": "Kredi Tutarı",
+    "duration": "Süre (ay)",
+    "yearlyInterestRate": "Faiz Oranı (%/yıl)",
+    "monthlyInterestRate": "Faiz Oranı (%/ay)",
+    "results": "Karşılaştırma Sonuçları",
+    "monthlyPayment": "Aylık Ödeme",
+    "averageMonthlyPayment": "Ortalama Aylık Ödeme",
+    "totalPayment": "Toplam Ödeme",
+    "totalInterest": "Toplam Faiz",
+    "betterChoice": "Daha İyi Seçim",
+    "bestOption": "{{option}} {{amount}} tasarruf sağlar",
+    "sameCost": "İki seçeneğin toplam maliyeti aynıdır",
+    "enterValidValues": "Karşılaştırmak için geçerli değerler girin"
+  },
   "mortgage": {
     "title": "Konut Kredisi",
     "loanAmount": "Kredi Tutarı",

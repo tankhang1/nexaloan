@@ -47,6 +47,26 @@
       "desc": "ວິເຄາະຕົວເລືອກເງິນກູ້ເພື່ອຊ່ວຍກະແສເງິນສົດ ແລະການເງິນທຸລະກິດ."
     }
   },
+  "compareLoan": {
+    "title": "ປຽບທຽບເງິນກູ້",
+    "desc": "ປຽບທຽບທາງເລືອກການຊໍາລະກ່ອນເລືອກເງິນກູ້.",
+    "badge": "ປຽບທຽບ",
+    "optionA": "ທາງເລືອກ A",
+    "optionB": "ທາງເລືອກ B",
+    "loanAmount": "ຈໍານວນເງິນກູ້",
+    "duration": "ໄລຍະເວລາ (ເດືອນ)",
+    "yearlyInterestRate": "ອັດຕາດອກເບ້ຍ (%/ປີ)",
+    "monthlyInterestRate": "ອັດຕາດອກເບ້ຍ (%/ເດືອນ)",
+    "results": "ຜົນການປຽບທຽບ",
+    "monthlyPayment": "ການຊໍາລະລາຍເດືອນ",
+    "averageMonthlyPayment": "ຄ່າສະເລ່ຍຕໍ່ເດືອນ",
+    "totalPayment": "ຍອດຊໍາລະທັງໝົດ",
+    "totalInterest": "ດອກເບ້ຍທັງໝົດ",
+    "betterChoice": "ທາງເລືອກທີ່ດີກວ່າ",
+    "bestOption": "{{option}} ປະຢັດ {{amount}}",
+    "sameCost": "ທັງສອງທາງເລືອກມີຕົ້ນທຶນລວມເທົ່າກັນ",
+    "enterValidValues": "ປ້ອນຄ່າທີ່ຖືກຕ້ອງເພື່ອປຽບທຽບ"
+  },
   "mortgage": {
     "title": "ເຄື່ອງຄຳນວນເງິນກູ້",
     "loanAmount": "ຈຳນວນເງິນກູ້",

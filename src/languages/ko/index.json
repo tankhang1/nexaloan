@@ -47,6 +47,26 @@
       "desc": "현금 흐름과 사업 자금 결정을 위한 대출 옵션을 분석하세요."
     }
   },
+  "compareLoan": {
+    "title": "대출 비교",
+    "desc": "대출을 선택하기 전에 상환 옵션을 나란히 비교하세요.",
+    "badge": "비교",
+    "optionA": "옵션 A",
+    "optionB": "옵션 B",
+    "loanAmount": "대출 금액",
+    "duration": "기간(개월)",
+    "yearlyInterestRate": "금리(%/년)",
+    "monthlyInterestRate": "금리(%/월)",
+    "results": "비교 결과",
+    "monthlyPayment": "월 상환액",
+    "averageMonthlyPayment": "평균 월 상환액",
+    "totalPayment": "총 상환액",
+    "totalInterest": "총 이자",
+    "betterChoice": "더 나은 선택",
+    "bestOption": "{{option}}에서 {{amount}} 절약",
+    "sameCost": "두 옵션의 총 비용이 같습니다",
+    "enterValidValues": "비교하려면 유효한 값을 입력하세요"
+  },
   "mortgage": {
     "title": "대출 계산기",
     "loanAmount": "대출 금액",
