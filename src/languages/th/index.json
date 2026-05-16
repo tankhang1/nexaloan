@@ -236,5 +236,14 @@
     "title": "ฟีเจอร์กำลังจะมา",
     "desc": "เรากำลังพัฒนาฟีเจอร์นี้ โปรดกลับมาตรวจสอบอีกครั้งในภายหลัง!"
   },
-  "loading": "กำลังประมวลผลข้อมูล"
+  "loading": "กำลังประมวลผลข้อมูล",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

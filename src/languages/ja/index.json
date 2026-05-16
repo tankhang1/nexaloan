@@ -236,5 +236,14 @@
     "title": "近日公開予定の機能",
     "desc": "現在、この機能を開発中です。ぜひ後ほどもう一度ご確認ください！"
   },
-  "loading": "データを処理中です"
+  "loading": "データを処理中です",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

@@ -176,5 +176,14 @@
     "title": "Funcție în curând",
     "desc": "Lucrăm în prezent la această funcție. Te rugăm să revii mai târziu pentru a o încerca!"
   },
-  "loading": "Datele sunt în curs de procesare"
+  "loading": "Datele sunt în curs de procesare",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

@@ -236,5 +236,14 @@
     "title": "មុខងារនឹងមកដល់ឆាប់ៗ",
     "desc": "យើងកំពុងអភិវឌ្ឍមុខងារនេះ។ សូមត្រឡប់មកពិនិត្យម្តងទៀតនៅពេលក្រោយ!"
   },
-  "loading": "កំពុងដំណើរការទិន្នន័យ"
+  "loading": "កំពុងដំណើរការទិន្នន័យ",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

@@ -176,5 +176,14 @@
     "title": "Recurso em Breve",
     "desc": "Estamos trabalhando neste recurso. Volte mais tarde para experimentá-lo!"
   },
-  "loading": "Os dados estão sendo processados"
+  "loading": "Os dados estão sendo processados",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

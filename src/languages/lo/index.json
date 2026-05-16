@@ -236,5 +236,14 @@
     "title": "ຟີເຈີກຳລັງຈະມາ",
     "desc": "ພວກເຮົາກຳລັງພັດທະນາຟີເຈີນີ້. ກະລຸນາກັບມາກວດເບິ່ງພາຍຫຼັງ!"
   },
-  "loading": "ກຳລັງປະມວນຜົນຂໍ້ມູນ"
+  "loading": "ກຳລັງປະມວນຜົນຂໍ້ມູນ",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

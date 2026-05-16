@@ -176,5 +176,14 @@
     "title": "Özellik Çok Yakında",
     "desc": "Bu özellikle ilgili çalışmalarımız devam ediyor. Denemek için lütfen daha sonra tekrar kontrol edin!"
   },
-  "loading": "Veriler işleniyor"
+  "loading": "Veriler işleniyor",
+  "whatIf": {
+    "title": "What-if simulator",
+    "extraMonthly": "Extra payment monthly",
+    "monthsSaved": "Months saved",
+    "interestSaved": "Interest saved",
+    "newPayoff": "New payoff time",
+    "newTotalPayment": "New total payment",
+    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  }
 }

@@ -236,5 +236,14 @@
     "title": "Chức Năng Sắp Ra Mắt",
     "desc": "Chúng tôi đang hoàn thiện chức năng này. Hãy quay lại sau để trải nghiệm!"
   },
-  "loading": "Dữ liệu đang được xử lý"
+  "loading": "Dữ liệu đang được xử lý",
+  "whatIf": {
+    "title": "Mô phỏng What-if",
+    "extraMonthly": "Trả thêm mỗi tháng",
+    "monthsSaved": "Tháng rút ngắn",
+    "interestSaved": "Lãi tiết kiệm",
+    "newPayoff": "Thời gian tất toán mới",
+    "newTotalPayment": "Tổng trả mới",
+    "supportNote": "V1 hiện hỗ trợ mô phỏng cho phương thức Trả góp đều."
+  }
 }

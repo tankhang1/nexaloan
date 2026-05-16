@@ -1,12 +1,7 @@
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Alert,
@@ -32,11 +27,15 @@ import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
 import { exportLoanXlsxToDownloadsRNFA } from "../../hooks/export_excel";
-import { calculateFixedMonthlyPayment, calculateFlatRatePayment } from "../../hooks/fixed_monthly_payment";
+import {
+  calculateFixedMonthlyPayment,
+  calculateFlatRatePayment,
+} from "../../hooks/fixed_monthly_payment";
 import { calculateFixedPrincipal } from "../../hooks/fixed_principal";
 import { formatMonth } from "../../hooks/format_month";
 import { formatNumber } from "../../hooks/format_number";
 import { uuid } from "../../hooks/uuid";
+import { simulateWithExtraPayment } from "../../hooks/what_if_simulator";
 import { navigationRef } from "../../navigation";
 import { TLoan, TPayment, updateLoan } from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
@@ -54,8 +53,10 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
   const scrollRef = useRef<Animated.ScrollView>(null);
   const [tab, setTab] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isWhatIfModalVisible, setIsWhatIfModalVisible] = useState(false);
   const [paymentAmount, setPaymentAmount] = useState("");
   const [paymentError, setPaymentError] = useState("");
+  const [extraPayment, setExtraPayment] = useState("");
 
   const { currency } = useSelector((state: RootState) => state.app);
   const history = useSelector((state: RootState) => state.history);
@@ -75,8 +76,8 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
       mortgage?.type === 1
         ? calculateFixedPrincipal(mortgage)
         : mortgage?.type === 2
-        ? calculateFlatRatePayment(mortgage)
-        : calculateFixedMonthlyPayment(mortgage!),
+          ? calculateFlatRatePayment(mortgage)
+          : calculateFixedMonthlyPayment(mortgage!),
     [mortgage],
   );
   const sortedPayments = useMemo(() => {
@@ -109,7 +110,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     sortedPayments,
   ]);
   const groupedPayments = useMemo(() => {
-    return sortedPayments.reduce<{title: string; data: TPayment[]}[]>(
+    return sortedPayments.reduce<{ title: string; data: TPayment[] }[]>(
       (groups, payment) => {
         const title = dayjs(payment.date).format("MM/YYYY");
         const currentGroup = groups.find((group) => group.title === title);
@@ -143,6 +144,21 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     normalizedPaymentAmount > 0 &&
     paymentStats.remainingAmount > 0 &&
     normalizedPaymentAmount <= paymentStats.remainingAmount;
+  const normalizedExtraPayment = useMemo(
+    () => Number(extraPayment || 0),
+    [extraPayment],
+  );
+  const whatIfResult = useMemo(() => {
+    if (!mortgage || !result) {
+      return null;
+    }
+
+    return simulateWithExtraPayment(
+      mortgage,
+      normalizedExtraPayment,
+      result.totalInterest || 0,
+    );
+  }, [mortgage, normalizedExtraPayment, result]);
   const onGoBack = () => {
     navigationRef.goBack();
   };
@@ -177,6 +193,16 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     setIsModalVisible(false);
     setPaymentAmount("");
     setPaymentError("");
+  };
+  const onOpenWhatIfModal = () => {
+    setIsWhatIfModalVisible(true);
+  };
+  const onCloseWhatIfModal = () => {
+    setIsWhatIfModalVisible(false);
+  };
+  const onChangeExtraPayment = (value: string) => {
+    const normalizedValue = value.replace(/[^0-9]/g, "");
+    setExtraPayment(normalizedValue);
   };
   const onUpdatePayment = () => {
     if (!mortgage || normalizedPaymentAmount <= 0) {
@@ -236,7 +262,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
           onPress: () => {
             const activeLoan = mortgage as TLoan;
             const payments = (activeLoan.payments || []).filter(
-              payment => payment.id !== paymentId,
+              (payment) => payment.id !== paymentId,
             );
 
             dispatch(
@@ -425,6 +451,17 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                 color={COLORS.foundation.blue.b500}
               />
             </Pressable>
+            <Pressable
+              style={styles.whatIfOpenBtn}
+              onPress={onOpenWhatIfModal}
+            >
+              <AppText
+                value={t("whatIf.title")}
+                fontSize={13}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+            </Pressable>
           </View>
         </View>
       )}
@@ -549,7 +586,9 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                 <AppText
                   value={
                     paymentStats.lastPayment
-                      ? dayjs(paymentStats.lastPayment.date).format("DD/MM/YYYY")
+                      ? dayjs(paymentStats.lastPayment.date).format(
+                          "DD/MM/YYYY",
+                        )
                       : "--"
                   }
                   fontSize={13}
@@ -613,11 +652,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                         onPress={() => onDeletePayment(payment.id)}
                         style={styles.deletePaymentBtn}
                       >
-                        <Feather
-                          name="trash-2"
-                          size={16}
-                          color="#D92D20"
-                        />
+                        <Feather name="trash-2" size={16} color="#D92D20" />
                       </Pressable>
                     </View>
                   ))}
@@ -729,6 +764,151 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                       }
                       fontWeight={600}
                       fontSize={15}
+                    />
+                  </Pressable>
+                </View>
+              </View>
+            </TouchableWithoutFeedback>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+      </Modal>
+      <Modal
+        animationType="fade"
+        transparent
+        visible={isWhatIfModalVisible}
+        onRequestClose={onCloseWhatIfModal}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+            style={styles.modalOverlay}
+          >
+            <TouchableWithoutFeedback accessible={false}>
+              <View style={styles.modalContent}>
+                <AppText
+                  value={t("whatIf.title")}
+                  fontSize={20}
+                  fontWeight={700}
+                  textStyle={{ marginBottom: 12 }}
+                  color={COLORS.foundation.neutral.n700}
+                />
+                {mortgage?.type !== 0 ? (
+                  <AppText
+                    value={t("whatIf.supportNote")}
+                    fontSize={12}
+                    fontWeight={400}
+                    color={COLORS.foundation.neutral.n500}
+                  />
+                ) : (
+                  <>
+                    <AppInput
+                      placeholder={t("whatIf.extraMonthly")}
+                      value={
+                        extraPayment
+                          ? new Intl.NumberFormat(
+                              mortgage?.currency?.locale || currency.locale,
+                            ).format(Number(extraPayment))
+                          : ""
+                      }
+                      onChangeText={onChangeExtraPayment}
+                      keyboardType="number-pad"
+                      color={COLORS.foundation.neutral.n700}
+                      fontSize={15}
+                      fontWeight={500}
+                      placeholderTextColor={COLORS.foundation.neutral.n200}
+                    />
+                    <View style={styles.whatIfGrid}>
+                      <View style={styles.whatIfItem}>
+                        <AppText
+                          value={t("whatIf.monthsSaved")}
+                          fontSize={11}
+                          fontWeight={400}
+                          color={COLORS.foundation.neutral.n500}
+                        />
+                        <AppText
+                          value={`${whatIfResult?.monthsSaved || 0}`}
+                          fontSize={14}
+                          fontWeight={700}
+                          color={COLORS.foundation.blue.b500}
+                        />
+                      </View>
+                      <View style={styles.whatIfItem}>
+                        <AppText
+                          value={t("whatIf.interestSaved")}
+                          fontSize={11}
+                          fontWeight={400}
+                          color={COLORS.foundation.neutral.n500}
+                        />
+                        <AppText
+                          value={formatNumber(
+                            whatIfResult?.interestSaved || 0,
+                            mortgage?.currency?.locale || currency.locale,
+                            true,
+                            mortgage?.currency?.code || currency.code,
+                          )}
+                          fontSize={14}
+                          fontWeight={700}
+                          color={COLORS.foundation.blue.b500}
+                          numberOfLines={1}
+                        />
+                      </View>
+                    </View>
+                    <View style={styles.whatIfGrid}>
+                      <View style={styles.whatIfItem}>
+                        <AppText
+                          value={t("whatIf.newPayoff")}
+                          fontSize={11}
+                          fontWeight={400}
+                          color={COLORS.foundation.neutral.n500}
+                        />
+                        <AppText
+                          value={formatMonth(
+                            whatIfResult?.newDurationMonths || 0,
+                            t,
+                          )}
+                          fontSize={14}
+                          fontWeight={700}
+                          color={COLORS.foundation.neutral.n700}
+                        />
+                      </View>
+                      <View style={styles.whatIfItem}>
+                        <AppText
+                          value={t("whatIf.newTotalPayment")}
+                          fontSize={11}
+                          fontWeight={400}
+                          color={COLORS.foundation.neutral.n500}
+                        />
+                        <AppText
+                          value={formatNumber(
+                            whatIfResult?.newTotalPayment ||
+                              result?.totalPayment ||
+                              0,
+                            mortgage?.currency?.locale || currency.locale,
+                            true,
+                            mortgage?.currency?.code || currency.code,
+                          )}
+                          fontSize={14}
+                          fontWeight={700}
+                          color={COLORS.foundation.neutral.n700}
+                          numberOfLines={1}
+                        />
+                      </View>
+                    </View>
+                  </>
+                )}
+                <View style={[styles.rows, { marginTop: 16 }]}>
+                  <Pressable
+                    style={[
+                      styles.modalBtn,
+                      { backgroundColor: COLORS.foundation.neutral.n100 },
+                    ]}
+                    onPress={onCloseWhatIfModal}
+                  >
+                    <AppText
+                      value={t("main.cancel")}
+                      fontWeight={600}
+                      fontSize={15}
+                      color={COLORS.foundation.neutral.n700}
                     />
                   </Pressable>
                 </View>
@@ -903,6 +1083,27 @@ const styles = StyleSheet.create({
   },
   disabledBtn: {
     backgroundColor: COLORS.foundation.neutral.n200,
+  },
+  whatIfOpenBtn: {
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 12,
+    height: 42,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  whatIfGrid: {
+    flexDirection: "row",
+    gap: 8,
+  },
+  whatIfItem: {
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: COLORS.foundation.blue.b50,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    gap: 4,
   },
   paymentGroup: {
     gap: 8,
