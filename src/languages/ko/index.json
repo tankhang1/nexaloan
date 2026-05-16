@@ -238,12 +238,12 @@
   },
   "loading": "데이터 처리 중",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "가상 상환 시뮬레이터",
+    "extraMonthly": "월 추가 상환액",
+    "monthsSaved": "단축된 개월 수",
+    "interestSaved": "절약되는 이자",
+    "newPayoff": "새 상환 완료 시점",
+    "newTotalPayment": "새 총 상환액",
+    "supportNote": "V1은 현재 고정 상환 방식에 대해서만 시뮬레이션을 지원합니다."
   }
 }

@@ -178,12 +178,12 @@
   },
   "loading": "Daten werden verarbeitet",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "Was-wäre-wenn-Simulator",
+    "extraMonthly": "Monatliche Sondertilgung",
+    "monthsSaved": "Eingesparte Monate",
+    "interestSaved": "Ersparte Zinsen",
+    "newPayoff": "Neue Laufzeit bis zur Rückzahlung",
+    "newTotalPayment": "Neue Gesamtrückzahlung",
+    "supportNote": "V1 unterstützt derzeit nur die Simulation für die Methode mit gleichbleibender Rate."
   }
 }
