@@ -124,7 +124,10 @@
       "interest": "Dobândă",
       "monthlyPayment": "Rată Lună",
       "endingBalance": "Sold Rămas"
-    }
+    },
+    "deletePaymentTitle": "Șterge plata",
+    "deletePaymentDesc": "Sigur doriți să ștergeți această înregistrare de plată? Această acțiune nu poate fi anulată.",
+    "deletePaymentAction": "Șterge"
   },
   "settings": {
     "title": "Setări",
@@ -143,7 +146,11 @@
       "deleteConfirmTitle": "Confirmare Ștergere",
       "deleteConfirmDesc": "Sigur doriți să ștergeți acest împrumut din istoric? Această acțiune nu poate fi anulată.",
       "clearAllConfirmTitle": "Șterge tot istoricul",
-      "clearAllConfirmDesc": "Toate împrumuturile salvate vor fi șterse definitiv. Sigur doriți să continuați?"
+      "clearAllConfirmDesc": "Toate împrumuturile salvate vor fi șterse definitiv. Sigur doriți să continuați?",
+      "deleteAction": "Șterge",
+      "deleteSuccess": "Împrumut șters din istoric",
+      "clearAllAction": "Șterge tot",
+      "clearAllSuccess": "Întregul istoric a fost șters"
     },
     "loanTitles": {
       "mortgage": "Credit Imobiliar"

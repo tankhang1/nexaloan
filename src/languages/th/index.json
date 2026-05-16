@@ -127,7 +127,10 @@
       "interest": "ดอกเบี้ย",
       "monthlyPayment": "ค่างวดรายเดือน",
       "endingBalance": "ยอดคงเหลือ"
-    }
+    },
+    "deletePaymentTitle": "ลบรายการชำระเงิน",
+    "deletePaymentDesc": "คุณแน่ใจหรือไม่ว่าต้องการลบบันทึกการชำระเงินนี้? การกระทำนี้ไม่สามารถย้อนกลับได้",
+    "deletePaymentAction": "ลบ"
   },
   "settings": {
     "title": "การตั้งค่า",
@@ -203,7 +206,11 @@
       "deleteConfirmTitle": "ยืนยันการลบ",
       "deleteConfirmDesc": "คุณแน่ใจหรือไม่ว่าต้องการลบสินเชื่อนี้จากประวัติ? การกระทำนี้ไม่สามารถย้อนกลับได้",
       "clearAllConfirmTitle": "ล้างประวัติทั้งหมด",
-      "clearAllConfirmDesc": "สินเชื่อที่บันทึกทั้งหมดจะถูกลบถาวร คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?"
+      "clearAllConfirmDesc": "สินเชื่อที่บันทึกทั้งหมดจะถูกลบถาวร คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?",
+      "deleteAction": "ลบ",
+      "deleteSuccess": "ลบสินเชื่อออกจากประวัติแล้ว",
+      "clearAllAction": "ลบทั้งหมด",
+      "clearAllSuccess": "ลบประวัติทั้งหมดแล้ว"
     },
     "loanTitles": {
       "mortgage": "สินเชื่อบ้าน"

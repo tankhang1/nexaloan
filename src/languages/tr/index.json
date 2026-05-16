@@ -124,7 +124,10 @@
       "interest": "Faiz",
       "monthlyPayment": "Aylık Taksit",
       "endingBalance": "Kalan Bakiye"
-    }
+    },
+    "deletePaymentTitle": "Ödemeyi sil",
+    "deletePaymentDesc": "Bu ödeme kaydını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "deletePaymentAction": "Sil"
   },
   "settings": {
     "title": "Ayarlar",
@@ -143,7 +146,11 @@
       "deleteConfirmTitle": "Silme Onayı",
       "deleteConfirmDesc": "Bu krediyi geçmişten silmek istediğinize emin misiniz? Bu işlem geri alınamaz.",
       "clearAllConfirmTitle": "Tüm Geçmişi Temizle",
-      "clearAllConfirmDesc": "Kayıtlı tüm krediler kalıcı olarak silinecektir. Devam etmek istediğinize emin misiniz?"
+      "clearAllConfirmDesc": "Kayıtlı tüm krediler kalıcı olarak silinecektir. Devam etmek istediğinize emin misiniz?",
+      "deleteAction": "Sil",
+      "deleteSuccess": "Kredi geçmişten silindi",
+      "clearAllAction": "Tümünü sil",
+      "clearAllSuccess": "Tüm geçmiş silindi"
     },
     "loanTitles": {
       "mortgage": "Konut Kredisi"

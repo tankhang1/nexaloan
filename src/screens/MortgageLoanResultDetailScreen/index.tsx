@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import React, {
@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   Modal,
@@ -215,6 +216,44 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
       } as TLoan),
     );
     onClosePaymentModal();
+  };
+  const onDeletePayment = (paymentId: string) => {
+    if (!mortgage) {
+      return;
+    }
+
+    Alert.alert(
+      t("mortgageDetail.deletePaymentTitle"),
+      t("mortgageDetail.deletePaymentDesc"),
+      [
+        {
+          text: t("main.cancel"),
+          style: "cancel",
+        },
+        {
+          text: t("mortgageDetail.deletePaymentAction"),
+          style: "destructive",
+          onPress: () => {
+            const activeLoan = mortgage as TLoan;
+            const payments = (activeLoan.payments || []).filter(
+              payment => payment.id !== paymentId,
+            );
+
+            dispatch(
+              updateLoan({
+                ...activeLoan,
+                label: activeLoan.label || route.params?.label || "",
+                paid_amount: payments.reduce(
+                  (total, payment) => total + payment.amount,
+                  0,
+                ),
+                payments,
+              } as TLoan),
+            );
+          },
+        },
+      ],
+    );
   };
   return (
     <AppView appStyle={styles.overall}>
@@ -570,6 +609,16 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                         color={COLORS.foundation.blue.b300}
                         numberOfLines={1}
                       />
+                      <Pressable
+                        onPress={() => onDeletePayment(payment.id)}
+                        style={styles.deletePaymentBtn}
+                      >
+                        <Feather
+                          name="trash-2"
+                          size={16}
+                          color="#D92D20"
+                        />
+                      </Pressable>
                     </View>
                   ))}
                 </View>
@@ -867,6 +916,16 @@ const styles = StyleSheet.create({
     gap: 12,
     borderWidth: 1,
     borderColor: COLORS.foundation.neutral.n100,
+  },
+  deletePaymentBtn: {
+    width: 30,
+    height: 30,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 4,
   },
   paymentIcon: {
     width: 36,

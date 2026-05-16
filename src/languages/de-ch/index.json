@@ -124,7 +124,10 @@
       "interest": "Zins",
       "monthlyPayment": "Zahlung",
       "endingBalance": "Restschuld"
-    }
+    },
+    "deletePaymentTitle": "Zahlung löschen",
+    "deletePaymentDesc": "Möchten Sie diesen Zahlungseintrag wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deletePaymentAction": "Löschen"
   },
   "settings": {
     "title": "Einstellungen",
@@ -143,7 +146,11 @@
       "deleteConfirmTitle": "Löschen bestätigen",
       "deleteConfirmDesc": "Sind Sie sicher, dass Sie diesen Kredit aus dem Verlauf löschen möchten? Dies kann nicht rückgängig gemacht werden.",
       "clearAllConfirmTitle": "Verlauf löschen",
-      "clearAllConfirmDesc": "Alle gespeicherten Kredite werden dauerhaft gelöscht. Möchten Sie wirklich fortfahren?"
+      "clearAllConfirmDesc": "Alle gespeicherten Kredite werden dauerhaft gelöscht. Möchten Sie wirklich fortfahren?",
+      "deleteAction": "Löschen",
+      "deleteSuccess": "Darlehen aus dem Verlauf gelöscht",
+      "clearAllAction": "Alle löschen",
+      "clearAllSuccess": "Gesamter Verlauf gelöscht"
     },
     "loanTitles": {
       "mortgage": "Hypothek"

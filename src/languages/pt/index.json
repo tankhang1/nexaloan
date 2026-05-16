@@ -124,7 +124,10 @@
       "interest": "Juros",
       "monthlyPayment": "Parcela",
       "endingBalance": "Saldo Devedor"
-    }
+    },
+    "deletePaymentTitle": "Excluir pagamento",
+    "deletePaymentDesc": "Tem certeza de que deseja excluir este registro de pagamento? Esta ação não pode ser desfeita.",
+    "deletePaymentAction": "Excluir"
   },
   "settings": {
     "title": "Configurações",
@@ -143,7 +146,11 @@
       "deleteConfirmTitle": "Confirmar Exclusão",
       "deleteConfirmDesc": "Tem certeza de que deseja excluir este empréstimo do histórico? Esta ação não pode ser desfeita.",
       "clearAllConfirmTitle": "Limpar Todo o Histórico",
-      "clearAllConfirmDesc": "Todos os empréstimos salvos serão excluídos permanentemente. Tem certeza de que deseja continuar?"
+      "clearAllConfirmDesc": "Todos os empréstimos salvos serão excluídos permanentemente. Tem certeza de que deseja continuar?",
+      "deleteAction": "Excluir",
+      "deleteSuccess": "Empréstimo removido do histórico",
+      "clearAllAction": "Excluir tudo",
+      "clearAllSuccess": "Todo o histórico foi excluído"
     },
     "loanTitles": {
       "mortgage": "Financiamento Imobiliário"

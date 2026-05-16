@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, View, TouchableOpacity} from 'react-native';
+import {ScrollView, StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
 import React from 'react';
 import AppView from '../../components/AppView';
 import AppText from '../../components/AppText';
@@ -10,7 +10,7 @@ import {useTranslation} from 'react-i18next';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {formatNumber} from '../../hooks/format_number';
-import {ELoan, updateLoan, TLoan} from '../../redux/slices/history';
+import {ELoan, updateLoan, deleteLoan, TLoan} from '../../redux/slices/history';
 import AppInput from '../../components/AppInput';
 import {
   Feather,
@@ -125,6 +125,20 @@ const MainScreen = () => {
     setPaymentAmount('');
     setPaymentError('');
     setIsModalVisible(true);
+  };
+  const onDeleteHistoryItem = (id: string) => {
+    Alert.alert(
+      t('history.tabs.deleteConfirmTitle'),
+      t('history.tabs.deleteConfirmDesc'),
+      [
+        {text: t('main.cancel'), style: 'cancel'},
+        {
+          text: t('history.tabs.deleteAction'),
+          style: 'destructive',
+          onPress: () => dispatch(deleteLoan(id)),
+        },
+      ],
+    );
   };
   const onChangePaymentAmount = (value: string) => {
     const normalizedValue = value.replace(/[^0-9]/g, '');
@@ -363,6 +377,15 @@ const MainScreen = () => {
                     <Ionicons name="cash" size={20} color={COLORS.foundation.neutral.n0} />
                   </View>
                   <AppText value={getLoanTitle(loan)} fontSize={16} fontWeight={600} color={COLORS.foundation.neutral.n700} />
+                  <TouchableOpacity
+                    style={styles.deleteLoanBtn}
+                    onPress={event => {
+                      event.stopPropagation();
+                      onDeleteHistoryItem(loan.id);
+                    }}
+                  >
+                    <Feather name="trash-2" size={14} color="#D92D20" />
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.progressContainer}>
                   <View style={styles.progressBar}>
@@ -679,6 +702,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
+  },
+  deleteLoanBtn: {
+    marginLeft: 'auto',
+    padding: 6,
   },
   loanIcon: {
     width: 40,

@@ -127,7 +127,10 @@
       "interest": "ດອກເບ້ຍ",
       "monthlyPayment": "ຄ່າຜ່ອນລາຍເດືອນ",
       "endingBalance": "ຍອດຄົງເຫຼືອ"
-    }
+    },
+    "deletePaymentTitle": "ລຶບລາຍການຊຳລະ",
+    "deletePaymentDesc": "ທ່ານແນ່ໃຈບໍ່ວ່າຈະລຶບບັນທຶກການຊຳລະນີ້? ການກະທຳນີ້ບໍ່ສາມາດຍ້ອນກັບໄດ້",
+    "deletePaymentAction": "ລຶບ"
   },
   "settings": {
     "title": "ຕັ້ງຄ່າ",
@@ -203,7 +206,11 @@
       "deleteConfirmTitle": "ຢືນຢັນການລຶບ",
       "deleteConfirmDesc": "ທ່ານແນ່ໃຈບໍວ່າຈະລຶບເງິນກູ້ນີ້ຈາກປະຫວັດ? ການກະທຳນີ້ຍ້ອນກັບບໍ່ໄດ້.",
       "clearAllConfirmTitle": "ລ້າງປະຫວັດທັງໝົດ",
-      "clearAllConfirmDesc": "ເງິນກູ້ທີ່ບັນທຶກທັງໝົດຈະຖືກລຶບຖາວອນ. ທ່ານແນ່ໃຈບໍ?"
+      "clearAllConfirmDesc": "ເງິນກູ້ທີ່ບັນທຶກທັງໝົດຈະຖືກລຶບຖາວອນ. ທ່ານແນ່ໃຈບໍ?",
+      "deleteAction": "ລຶບ",
+      "deleteSuccess": "ລຶບເງິນກູ້ອອກຈາກປະຫວັດແລ້ວ",
+      "clearAllAction": "ລຶບທັງໝົດ",
+      "clearAllSuccess": "ລຶບປະຫວັດທັງໝົດແລ້ວ"
     },
     "loanTitles": {
       "mortgage": "ເງິນກູ້ບ້ານ"

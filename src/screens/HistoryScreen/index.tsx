@@ -74,17 +74,22 @@ const HistoryScreen = () => {
     });
   };
 
-  const onDeleteHistoryItem = (id: string) => {
+  const onDeleteHistoryItem = (id: string, closeSwipe: () => void) => {
     Alert.alert(
       t('history.tabs.deleteConfirmTitle'),
       t('history.tabs.deleteConfirmDesc'),
       [
-        { text: t('main.cancel'), style: 'cancel' },
+        {
+          text: t('main.cancel'),
+          style: 'cancel',
+          onPress: closeSwipe,
+        },
         { 
-          text: t('main.confirm'), 
+          text: t('history.tabs.deleteAction'), 
+          style: 'destructive',
           onPress: () => {
             dispatch(deleteLoan(id));
-            Toast.show({ type: 'success', text1: t('main.paymentSuccess') });
+            Toast.show({ type: 'success', text1: t('history.tabs.deleteSuccess') });
           } 
         }
       ]
@@ -98,10 +103,11 @@ const HistoryScreen = () => {
       [
         { text: t('main.cancel'), style: 'cancel' },
         { 
-          text: t('main.confirm'), 
+          text: t('history.tabs.clearAllAction'), 
+          style: 'destructive',
           onPress: () => {
             dispatch(resetLoans());
-            Toast.show({ type: 'success', text1: t('main.paymentSuccess') });
+            Toast.show({ type: 'success', text1: t('history.tabs.clearAllSuccess') });
           } 
         }
       ]

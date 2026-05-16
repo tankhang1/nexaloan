@@ -1,7 +1,6 @@
 import {View, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import AppIconButton from '../../../components/AppIconButton';
 import AppText from '../../../components/AppText';
 import {COLORS} from '../../../constants/colors';
 import {WIDTH} from '../../../constants/dimension';
@@ -16,12 +15,14 @@ type TCard = {
   time: string;
   index: number;
   onPress: (value: string) => void;
-  onDelete?: (id: string) => void;
+  onDelete?: (id: string, closeSwipe: () => void) => void;
   id: string;
 };
 const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
 
 const Card = ({icon, time, title, value, year, id, index, onPress, onDelete}: TCard) => {
+  const swipeableRef = React.useRef<Swipeable | null>(null);
+
   const renderRightActions = () => {
     return (
       <View style={styles.deleteAction}>
@@ -32,8 +33,13 @@ const Card = ({icon, time, title, value, year, id, index, onPress, onDelete}: TC
 
   return (
     <Swipeable
+      ref={swipeableRef}
       renderRightActions={onDelete ? renderRightActions : undefined}
-      onSwipeableOpen={() => onDelete?.(id)}
+      onSwipeableOpen={() =>
+        onDelete?.(id, () => {
+          swipeableRef.current?.close();
+        })
+      }
       friction={2}
       rightThreshold={40}
     >

@@ -127,7 +127,10 @@
       "interest": "이자",
       "monthlyPayment": "월 상환액",
       "endingBalance": "잔액"
-    }
+    },
+    "deletePaymentTitle": "결제 내역 삭제",
+    "deletePaymentDesc": "이 결제 기록을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
+    "deletePaymentAction": "삭제"
   },
   "settings": {
     "title": "설정",
@@ -203,7 +206,11 @@
       "deleteConfirmTitle": "삭제 확인",
       "deleteConfirmDesc": "이 대출을 내역에서 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
       "clearAllConfirmTitle": "모든 내역 삭제",
-      "clearAllConfirmDesc": "저장된 모든 대출이 영구적으로 삭제됩니다. 계속하시겠습니까?"
+      "clearAllConfirmDesc": "저장된 모든 대출이 영구적으로 삭제됩니다. 계속하시겠습니까?",
+      "deleteAction": "삭제",
+      "deleteSuccess": "대출이 내역에서 삭제되었습니다",
+      "clearAllAction": "모두 삭제",
+      "clearAllSuccess": "전체 내역이 삭제되었습니다"
     },
     "loanTitles": {
       "mortgage": "주택담보대출"

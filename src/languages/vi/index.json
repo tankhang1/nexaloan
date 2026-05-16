@@ -127,7 +127,10 @@
       "interest": "Lãi",
       "monthlyPayment": "Trả Hàng Tháng",
       "endingBalance": "Dư Nợ Cuối Kỳ"
-    }
+    },
+    "deletePaymentTitle": "Xoá khoản thanh toán",
+    "deletePaymentDesc": "Bạn có chắc chắn muốn xoá bản ghi thanh toán này không? Hành động này không thể hoàn tác.",
+    "deletePaymentAction": "Xoá"
   },
   "settings": {
     "title": "Cài Đặt",
@@ -202,8 +205,12 @@
       "oldest": "Cũ nhất",
       "deleteConfirmTitle": "Xác nhận xoá",
       "deleteConfirmDesc": "Bạn có chắc chắn muốn xoá khoản vay này khỏi lịch sử không? Hành động này không thể hoàn tác.",
+      "deleteAction": "Xoá",
+      "deleteSuccess": "Đã xoá khoản vay khỏi lịch sử",
       "clearAllConfirmTitle": "Xoá toàn bộ lịch sử",
-      "clearAllConfirmDesc": "Tất cả các khoản vay đã lưu sẽ bị xoá vĩnh viễn. Bạn có chắc chắn muốn tiếp tục không?"
+      "clearAllConfirmDesc": "Tất cả các khoản vay đã lưu sẽ bị xoá vĩnh viễn. Bạn có chắc chắn muốn tiếp tục không?",
+      "clearAllAction": "Xoá tất cả",
+      "clearAllSuccess": "Đã xoá toàn bộ lịch sử"
     },
     "loanTitles": {
       "mortgage": "Vay Mua Nhà"
