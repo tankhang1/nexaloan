@@ -45,7 +45,8 @@
       "title": "Ticari Kredi",
       "desc": "İşletmeniz için uygun kredi seçeneklerini\nanaliz ederek finansmanı optimize edin."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place."
+    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
+    "payAll": "Pay all"
   },
   "compareLoan": {
     "title": "Kredileri Karşılaştır",

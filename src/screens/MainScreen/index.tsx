@@ -11,6 +11,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux/store';
 import {formatNumber} from '../../hooks/format_number';
 import {ELoan, updateLoan, deleteLoan, TLoan} from '../../redux/slices/history';
+import {
+  calculateFixedMonthlyPayment,
+  calculateFlatRatePayment,
+} from '../../hooks/fixed_monthly_payment';
+import {calculateFixedPrincipal} from '../../hooks/fixed_principal';
 import AppInput from '../../components/AppInput';
 import {
   Feather,
@@ -32,12 +37,32 @@ const MainScreen = () => {
   const [selectedLoan, setSelectedLoan] = React.useState<TLoan | null>(null);
   const [paymentAmount, setPaymentAmount] = React.useState('');
   const [paymentError, setPaymentError] = React.useState('');
+  const getLoanTotalPayable = React.useCallback((loan: TLoan) => {
+    if (loan.type === 1) {
+      return calculateFixedPrincipal(loan).totalPayment;
+    }
+    if (loan.type === 2) {
+      return calculateFlatRatePayment(loan).totalPayment;
+    }
+    return calculateFixedMonthlyPayment(loan).totalPayment;
+  }, []);
 
-  const totalDebt = history.reduce((acc, curr) => acc + curr.loan_amount, 0);
-  const totalPaid = history.reduce((acc, curr) => acc + (curr.paid_amount || 0), 0);
-  const remainingDebt = Math.max(totalDebt - totalPaid, 0);
-  const paidProgress =
-    totalDebt > 0 ? Math.min((totalPaid / totalDebt) * 100, 100) : 0;
+  const totalDebt = React.useMemo(
+    () => history.reduce((acc, loan) => acc + getLoanTotalPayable(loan), 0),
+    [getLoanTotalPayable, history],
+  );
+  const totalPaid = React.useMemo(
+    () => history.reduce((acc, loan) => acc + (loan.paid_amount || 0), 0),
+    [history],
+  );
+  const remainingDebt = React.useMemo(
+    () => Math.max(totalDebt - totalPaid, 0),
+    [totalDebt, totalPaid],
+  );
+  const paidProgress = React.useMemo(
+    () => (totalDebt > 0 ? Math.min((totalPaid / totalDebt) * 100, 100) : 0),
+    [totalDebt, totalPaid],
+  );
   const activeSelectedLoan = React.useMemo(() => {
     if (!selectedLoan) {
       return null;
@@ -62,8 +87,8 @@ const MainScreen = () => {
       return 0;
     }
 
-    return Math.max(activeSelectedLoan.loan_amount - selectedPaidAmount, 0);
-  }, [activeSelectedLoan, selectedPaidAmount]);
+    return Math.max(getLoanTotalPayable(activeSelectedLoan) - selectedPaidAmount, 0);
+  }, [activeSelectedLoan, getLoanTotalPayable, selectedPaidAmount]);
   const formattedPaymentAmount = React.useMemo(() => {
     if (!paymentAmount) {
       return '';
@@ -102,7 +127,6 @@ const MainScreen = () => {
     },
     [t],
   );
-
   const onNavSettingScreen = () => {
     navigationRef.navigate('SettingScreen');
   };
@@ -388,37 +412,62 @@ const MainScreen = () => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.progressContainer}>
-                  <View style={styles.progressPercentRow}>
-                    <AppText
-                      value={`${Math.min(
-                        ((loan.paid_amount || 0) / loan.loan_amount) * 100,
-                        100,
-                      ).toFixed(0)}%`}
-                      fontSize={10}
-                      color={COLORS.foundation.neutral.n700}
-                      fontWeight={700}
-                    />
-                  </View>
+                  {(() => {
+                    const totalPayable = getLoanTotalPayable(loan);
+                    const progressPercent = Math.min(
+                      ((loan.paid_amount || 0) / totalPayable) * 100,
+                      100,
+                    );
+                    return (
+                      <View style={styles.progressPercentRow}>
+                        <AppText
+                          value={`${progressPercent.toFixed(0)}%`}
+                          fontSize={10}
+                          color={COLORS.foundation.neutral.n700}
+                          fontWeight={700}
+                        />
+                      </View>
+                    );
+                  })()}
                   <View style={styles.progressBar}>
-                    <View style={[styles.progressFill, {width: `${Math.min(((loan.paid_amount || 0) / loan.loan_amount) * 100, 100)}%`}]} />
+                    {(() => {
+                      const totalPayable = getLoanTotalPayable(loan);
+                      const progressPercent = Math.min(
+                        ((loan.paid_amount || 0) / totalPayable) * 100,
+                        100,
+                      );
+                      return (
+                        <View
+                          style={[
+                            styles.progressFill,
+                            {width: `${progressPercent}%`},
+                          ]}
+                        />
+                      );
+                    })()}
                   </View>
                   <View style={[styles.rows, {marginTop: 4}]}>
-                    <AppText
-                      value={`${formatNumber(
-                        loan.paid_amount || 0,
-                        loan.currency.locale,
-                        true,
-                        loan.currency.code,
-                      )} / ${formatNumber(
-                        loan.loan_amount,
-                        loan.currency.locale,
-                        true,
-                        loan.currency.code,
-                      )}`}
-                      fontSize={11}
-                      color={COLORS.foundation.neutral.n500}
-                      fontWeight={400}
-                    />
+                    {(() => {
+                      const totalPayable = getLoanTotalPayable(loan);
+                      return (
+                        <AppText
+                          value={`${formatNumber(
+                            loan.paid_amount || 0,
+                            loan.currency.locale,
+                            true,
+                            loan.currency.code,
+                          )} / ${formatNumber(
+                            totalPayable,
+                            loan.currency.locale,
+                            true,
+                            loan.currency.code,
+                          )}`}
+                          fontSize={11}
+                          color={COLORS.foundation.neutral.n500}
+                          fontWeight={400}
+                        />
+                      );
+                    })()}
                     <TouchableOpacity
                       style={styles.updateBtn}
                       onPress={() => onUpdatePayment(loan)}

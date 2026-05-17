@@ -45,7 +45,8 @@
       "title": "Crédito Empresarial",
       "desc": "Analise opções de crédito\npara otimizar o capital da sua empresa."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place."
+    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
+    "payAll": "Pay all"
   },
   "compareLoan": {
     "title": "Comparar Empréstimos",

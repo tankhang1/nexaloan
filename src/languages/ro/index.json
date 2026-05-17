@@ -45,7 +45,8 @@
       "title": "Credit pentru Afaceri",
       "desc": "Analizează opțiunile de creditare\npentru a optimiza finanțarea companiei."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place."
+    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
+    "payAll": "Pay all"
   },
   "compareLoan": {
     "title": "Compară Împrumuturi",

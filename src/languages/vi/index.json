@@ -45,7 +45,8 @@
     "business": {
       "title": "Vay Kinh Doanh",
       "desc": "Phân tích nhiều phương án vay để tối ưu dòng tiền cho hoạt động kinh doanh."
-    }
+    },
+    "payAll": "Thanh toán hết"
   },
   "compareLoan": {
     "title": "So Sánh Khoản Vay",

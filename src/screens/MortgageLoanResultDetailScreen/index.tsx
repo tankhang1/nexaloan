@@ -196,7 +196,10 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     setIsModalVisible(true);
   };
   const onChangePaymentAmount = (value: string) => {
-    const normalizedValue = value.replace(/[^0-9]/g, "");
+    const cleanValue = value.replace(/[^0-9.]/g, "");
+    const [firstPart, ...restParts] = cleanValue.split(".");
+    const normalizedValue =
+      restParts.length > 0 ? `${firstPart}.${restParts.join("")}` : firstPart;
     const nextAmount = Number(normalizedValue);
 
     setPaymentAmount(normalizedValue);
@@ -206,6 +209,11 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
         ? t("main.paymentAmountExceeded")
         : "",
     );
+  };
+  const onPayAll = () => {
+    const nextAmount = Number(paymentStats.remainingAmount.toFixed(2));
+    setPaymentAmount(nextAmount.toString());
+    setPaymentError("");
   };
   const onClosePaymentModal = () => {
     setIsModalVisible(false);
@@ -770,6 +778,18 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                     fontWeight={400}
                     fontSize={12}
                   />
+                  <Pressable
+                    style={styles.payAllBtn}
+                    onPress={onPayAll}
+                    disabled={paymentStats.remainingAmount <= 0}
+                  >
+                    <AppText
+                      value={t("main.payAll")}
+                      color={COLORS.foundation.blue.b300}
+                      fontWeight={700}
+                      fontSize={12}
+                    />
+                  </Pressable>
                   {!!paymentError && (
                     <AppText
                       value={paymentError}
@@ -1235,6 +1255,15 @@ const styles = StyleSheet.create({
   },
   modalHint: {
     gap: 6,
+  },
+  payAllBtn: {
+    alignSelf: "flex-start",
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
   },
   modalBtn: {
     flex: 1,

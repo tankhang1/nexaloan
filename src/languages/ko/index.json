@@ -45,7 +45,8 @@
     "business": {
       "title": "사업자 대출",
       "desc": "현금 흐름과 사업 자금 결정을 위한 대출 옵션을 분석하세요."
-    }
+    },
+    "payAll": "Pay all"
   },
   "compareLoan": {
     "title": "대출 비교",

@@ -45,7 +45,8 @@
     "business": {
       "title": "Business Loan",
       "desc": "Analyse loan options to improve cash flow and business financing decisions."
-    }
+    },
+    "payAll": "Pay all"
   },
   "compareLoan": {
     "title": "Compare Loans",

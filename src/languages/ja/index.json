@@ -45,7 +45,8 @@
     "business": {
       "title": "ビジネスローン",
       "desc": "事業資金に最適なローンの選択肢を\n分析・比較できます。"
-    }
+    },
+    "payAll": "Pay all"
   },
   "compareLoan": {
     "title": "ローンを比較",
