@@ -6,9 +6,19 @@ import AppText from '../../components/AppText';
 import {useTranslation} from 'react-i18next';
 import {COLORS} from '../../constants/colors';
 import {navigationRef} from '../../navigation';
+import React, {useMemo} from 'react';
+import Constants from 'expo-constants';
 
 const AboutUsScreen = () => {
   const {t} = useTranslation();
+  const appVersionText = useMemo(() => {
+    const version =
+      Constants.expoConfig?.version ||
+      Constants.nativeApplicationVersion ||
+      '1.0.0';
+    const build = Constants.nativeBuildVersion;
+    return build ? `Version ${version} (${build})` : `Version ${version}`;
+  }, []);
   const onGoBack = () => {
     navigationRef.goBack();
   };
@@ -40,7 +50,7 @@ const AboutUsScreen = () => {
             fontWeight={700}
           />
           <AppText
-            value="Version 1.0.0"
+            value={appVersionText}
             color={COLORS.foundation.neutral.n500}
             fontSize={14}
           />
