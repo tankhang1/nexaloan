@@ -103,7 +103,11 @@
       "monthlyPayment": "ค่างวดรายเดือน",
       "totalPayments": "ยอดชำระรวม",
       "totalInterestPaid": "ดอกเบี้ยรวม"
-    }
+    },
+    "recalculate": "คำนวณใหม่",
+    "saveNew": "บันทึกเป็นรายการใหม่",
+    "updateSaved": "อัปเดต",
+    "updateSuccess": "อัปเดตรายการสินเชื่อที่บันทึกไว้สำเร็จ"
   },
   "mortgageDetail": {
     "title": "สินเชื่อ",

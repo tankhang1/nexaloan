@@ -73,6 +73,18 @@ const HistoryScreen = () => {
       label: mortgage.label,
     });
   };
+  const onRecalculate = (mortgage: TLoan) => {
+    navigationRef.navigate('MortgageLoanScreen', {
+      label: mortgage.label,
+      recalculateLoanId: mortgage.id,
+      recalculateSource: {
+        loan_amount: mortgage.loan_amount,
+        duration: mortgage.duration,
+        int_rate: mortgage.int_rate,
+        type: mortgage.type,
+      },
+    });
+  };
 
   const onDeleteHistoryItem = (id: string, closeSwipe: () => void) => {
     Alert.alert(
@@ -215,6 +227,7 @@ const HistoryScreen = () => {
           <Card
             id={mortgage.id}
             onPress={() => onNavMortgageDetailScreen(mortgage)}
+            onLongPress={() => onRecalculate(mortgage)}
             onDelete={onDeleteHistoryItem}
             index={index}
             key={Math.random()}

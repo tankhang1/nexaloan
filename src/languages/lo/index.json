@@ -103,7 +103,11 @@
       "monthlyPayment": "ຄ່າຜ່ອນລາຍເດືອນ",
       "totalPayments": "ຍອດຊຳລະລວມ",
       "totalInterestPaid": "ດອກເບ້ຍລວມ"
-    }
+    },
+    "recalculate": "ຄຳນວນໃໝ່",
+    "saveNew": "ບັນທຶກເປັນໃໝ່",
+    "updateSaved": "ອັບເດດ",
+    "updateSuccess": "ອັບເດດເງິນກູ້ທີ່ບັນທຶກໄວ້ສຳເລັດແລ້ວ"
   },
   "mortgageDetail": {
     "title": "ເງິນກູ້",

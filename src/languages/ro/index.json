@@ -29,9 +29,6 @@
     "fullyPaid": "Achitat integral",
     "confirm": "Confirmați",
     "cancel": "Anulați",
-    "descFixedPayment": "Rata lunară este fixă. Mai ușor pentru planificarea bugetului.",
-    "descFixedPrincipal": "Rambursare egală a principalului. Rata lunară scade în timp.",
-    "descFlatRate": "Dobânda se calculează la suma inițială. Comun la credite de consum.",
     "mortgage": {
       "title": "Credit Imobiliar",
       "desc": "Calculează ușor ratele lunare\nși costul total al creditului."
@@ -47,7 +44,8 @@
     "business": {
       "title": "Credit pentru Afaceri",
       "desc": "Analizează opțiunile de creditare\npentru a optimiza finanțarea companiei."
-    }
+    },
+    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place."
   },
   "compareLoan": {
     "title": "Compară Împrumuturi",
@@ -78,7 +76,10 @@
     "fixedPayment": "Rată Fixă",
     "fixedPrincipal": "Principal Fix\nDobândă Descrescătoare",
     "flatRate": "Rată Fixă (Flat)",
-    "calculate": "Calculează"
+    "calculate": "Calculează",
+    "descFixedPayment": "Rata lunară este fixă. Mai ușor pentru planificarea bugetului.",
+    "descFixedPrincipal": "Rambursare egală a principalului. Rata lunară scade în timp.",
+    "descFlatRate": "Dobânda se calculează la suma inițială. Comun la credite de consum."
   },
   "mortgageResult": {
     "amortization": "Grafic de Rambursare",
@@ -100,7 +101,13 @@
       "monthlyPayment": "Rată Lunară",
       "totalPayments": "Total de Plată",
       "totalInterestPaid": "Dobândă Totală Plătită"
-    }
+    },
+    "recalculate": "Recalculează",
+    "saveNew": "Salvează ca nou",
+    "updateSaved": "Actualizează",
+    "updateSuccess": "Împrumutul salvat a fost actualizat cu succes",
+    "summaryBadge": "Loan Summary",
+    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
   },
   "mortgageDetail": {
     "title": "Detalii Credit Imobiliar",
@@ -135,7 +142,64 @@
     "currency": "Monedă",
     "aboutUs": "Despre Noi",
     "terms": "Termeni și Condiții",
-    "privacy": "Politica de Confidențialitate"
+    "privacy": "Politica de Confidențialitate",
+    "aboutContent": {
+      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
+      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "features": {
+        "title": "Core Values",
+        "f1": "Building practical products for immediate use",
+        "f2": "User-centric approach",
+        "f3": "Open source and community sharing",
+        "f4": "Completely free for users"
+      },
+      "contact": "Email: cs.nexatech@gmail.com",
+      "team": {
+        "title": "Our Team",
+        "ethan": "Ethan - Tech Lead",
+        "tina": "Tina - Team Lead"
+      }
+    },
+    "termsContent": {
+      "title": "TERMS OF SERVICE",
+      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "section1": {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+      },
+      "section2": {
+        "title": "2. Use of Service",
+        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+      },
+      "section3": {
+        "title": "3. Intellectual Property",
+        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+      },
+      "section4": {
+        "title": "4. Limitation of Liability",
+        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+      }
+    },
+    "privacyContent": {
+      "title": "PRIVACY POLICY",
+      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "section1": {
+        "title": "1. Information Collection",
+        "content": "We collect information you provide directly when using app features such as loan amount and term."
+      },
+      "section2": {
+        "title": "2. Information Use",
+        "content": "The information is used to perform calculations and improve user experience."
+      },
+      "section3": {
+        "title": "3. Data Security",
+        "content": "We apply strict security measures to ensure the safety of your personal data."
+      },
+      "section4": {
+        "title": "4. Your Rights",
+        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+      }
+    }
   },
   "history": {
     "title": "Istoric",

@@ -32,7 +32,7 @@ import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
 import { navigationRef } from "../../navigation";
-import { addLoan, ELoan } from "../../redux/slices/history";
+import { addLoan, ELoan, TLoan, updateLoan as updateHistoryLoan } from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
 const Result = lazy(() => import("./components/Result"));
@@ -60,6 +60,34 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
     });
   };
   const onSave = useCallback(() => {
+    const nextType =
+      route.params.label === t("main.mortgage.title")
+        ? ELoan.MORTGAGE_LOAN
+        : route.params.label === t("main.car.title")
+          ? ELoan.CAR_LOAN
+          : route.params.label === t("main.business.title")
+            ? ELoan.BUSINESS_LOAN
+            : ELoan.PERSONAL_LOAN;
+
+    if (route.params?.isRecalculate && route.params?.recalculateLoanId) {
+      dispatch(
+        updateHistoryLoan({
+          ...(mortgage as TLoan),
+          id: route.params.recalculateLoanId,
+          label: route.params.label,
+          type: nextType,
+          date: new Date(),
+        }),
+      );
+      Toast.show({
+        text1: t("mortgageResult.notificationTitle"),
+        text2: t("mortgageResult.updateSuccess"),
+        type: "success",
+        position: "top",
+      });
+      return;
+    }
+
     Toast.show({
       text1: t("mortgageResult.notificationTitle"),
       text2: t("mortgageResult.notificationMessage"),
@@ -70,17 +98,37 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
       addLoan({
         ...mortgage,
         label: route.params.label,
-        type:
-          route.params.label === t("main.mortgage.title")
-            ? ELoan.MORTGAGE_LOAN
-            : route.params.label === t("main.car.title")
-              ? ELoan.CAR_LOAN
-              : route.params.label === t("main.business.title")
-                ? ELoan.BUSINESS_LOAN
-                : ELoan.PERSONAL_LOAN,
+        type: nextType,
       }),
     );
-  }, [dispatch, mortgage, t, route]);
+  }, [dispatch, mortgage, t, route.params]);
+  const onSaveAsNew = useCallback(() => {
+    Toast.show({
+      text1: t("mortgageResult.notificationTitle"),
+      text2: t("mortgageResult.notificationMessage"),
+      type: "success",
+      position: "top",
+    });
+
+    const nextType =
+      route.params.label === t("main.mortgage.title")
+        ? ELoan.MORTGAGE_LOAN
+        : route.params.label === t("main.car.title")
+          ? ELoan.CAR_LOAN
+          : route.params.label === t("main.business.title")
+            ? ELoan.BUSINESS_LOAN
+            : ELoan.PERSONAL_LOAN;
+
+    dispatch(
+      addLoan({
+        ...(mortgage as TLoan),
+        id: `${(mortgage as TLoan).id}-copy-${Date.now()}`,
+        label: route.params.label,
+        type: nextType,
+        date: new Date(),
+      }),
+    );
+  }, [dispatch, mortgage, route.params.label, t]);
   const onNavSetting = () => {
     navigationRef.navigate("SettingScreen");
   };
@@ -219,30 +267,67 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
                   fontSize={14}
                 />
               </Pressable>
-              <Pressable
-                style={[styles.button, styles.fullWidthButton]}
-                onPress={() => {
-                  if (isLoaded) {
-                    setShouldSaveAfterAd(true);
-                    show();
-                  } else {
-                    onSave();
-                    load();
-                  }
-                }}
-              >
-                <Feather
-                  name="bookmark"
-                  size={20}
-                  color={COLORS.foundation.blue.b500}
-                />
-                <AppText
-                  fontSize={14}
-                  fontWeight={600}
-                  value={t("mortgageResult.save")}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              </Pressable>
+              {route.params?.isRecalculate ? (
+                <View style={[styles.rows, styles.recalculateActionGroup]}>
+                  <Pressable
+                    style={[styles.button, styles.recalculateButton]}
+                    onPress={onSave}
+                  >
+                    <Feather
+                      name="refresh-cw"
+                      size={18}
+                      color={COLORS.foundation.blue.b500}
+                    />
+                    <AppText
+                      fontSize={12}
+                      fontWeight={600}
+                      value={t("mortgageResult.updateSaved")}
+                      color={COLORS.foundation.neutral.n700}
+                    />
+                  </Pressable>
+                  <Pressable
+                    style={[styles.button, styles.recalculateButton]}
+                    onPress={onSaveAsNew}
+                  >
+                    <Feather
+                      name="bookmark"
+                      size={18}
+                      color={COLORS.foundation.blue.b500}
+                    />
+                    <AppText
+                      fontSize={12}
+                      fontWeight={600}
+                      value={t("mortgageResult.saveNew")}
+                      color={COLORS.foundation.neutral.n700}
+                    />
+                  </Pressable>
+                </View>
+              ) : (
+                <Pressable
+                  style={[styles.button, styles.fullWidthButton]}
+                  onPress={() => {
+                    if (isLoaded) {
+                      setShouldSaveAfterAd(true);
+                      show();
+                    } else {
+                      onSave();
+                      load();
+                    }
+                  }}
+                >
+                  <Feather
+                    name="bookmark"
+                    size={20}
+                    color={COLORS.foundation.blue.b500}
+                  />
+                  <AppText
+                    fontSize={14}
+                    fontWeight={600}
+                    value={t("mortgageResult.save")}
+                    color={COLORS.foundation.neutral.n700}
+                  />
+                </Pressable>
+              )}
             </View>
           </View>
         </ScrollView>
@@ -282,6 +367,15 @@ const styles = StyleSheet.create({
   homeButton: {
     width: 116,
     height: 60,
+  },
+  recalculateActionGroup: {
+    width: WIDTH - 32 - 116 - 14,
+    gap: 8,
+  },
+  recalculateButton: {
+    width: (WIDTH - 32 - 116 - 14 - 8) / 2,
+    height: 60,
+    gap: 8,
   },
   button: {
     justifyContent: "center",

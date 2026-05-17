@@ -103,7 +103,11 @@
       "monthlyPayment": "ការបង់ប្រចាំខែ",
       "totalPayments": "ប្រាក់បង់សរុប",
       "totalInterestPaid": "ការប្រាក់សរុប"
-    }
+    },
+    "recalculate": "គណនាឡើងវិញ",
+    "saveNew": "រក្សាទុកជាថ្មី",
+    "updateSaved": "ធ្វើបច្ចុប្បន្នភាព",
+    "updateSuccess": "បានធ្វើបច្ចុប្បន្នភាពកម្ចីដែលបានរក្សាទុកដោយជោគជ័យ"
   },
   "mortgageDetail": {
     "title": "ប្រាក់កម្ចី",

@@ -103,7 +103,11 @@
       "monthlyPayment": "Monthly Instalment",
       "totalPayments": "Total Payments",
       "totalInterestPaid": "Total Interest Paid"
-    }
+    },
+    "recalculate": "Recalculate",
+    "saveNew": "Save New",
+    "updateSaved": "Update",
+    "updateSuccess": "Updated saved loan successfully"
   },
   "mortgageDetail": {
     "title": "Loan",

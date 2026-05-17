@@ -172,6 +172,22 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
       },
     );
   }, [result, mortgage, currency]);
+  const onRecalculate = useCallback(() => {
+    if (!mortgage) {
+      return;
+    }
+
+    navigationRef.navigate("MortgageLoanScreen", {
+      label: route.params?.label || "",
+      recalculateLoanId: route.params?.id,
+      recalculateSource: {
+        loan_amount: mortgage.loan_amount,
+        duration: mortgage.duration,
+        int_rate: mortgage.int_rate,
+        type: mortgage.type,
+      },
+    });
+  }, [mortgage, route.params?.id, route.params?.label]);
 
   const onOpenPaymentModal = () => {
     setPaymentError("");
@@ -451,17 +467,37 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                 color={COLORS.foundation.blue.b500}
               />
             </Pressable>
-            <Pressable
-              style={styles.whatIfOpenBtn}
-              onPress={onOpenWhatIfModal}
-            >
-              <AppText
-                value={t("whatIf.title")}
-                fontSize={13}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-              />
-            </Pressable>
+            <View style={styles.whatIfActionRow}>
+              {route.params?.isHistory && (
+                <Pressable style={styles.recalculateBtn} onPress={onRecalculate}>
+                  <Feather
+                    name="refresh-cw"
+                    size={16}
+                    color={COLORS.foundation.neutral.n700}
+                  />
+                  <AppText
+                    value={t("mortgageResult.recalculate")}
+                    fontSize={13}
+                    fontWeight={700}
+                    color={COLORS.foundation.neutral.n700}
+                  />
+                </Pressable>
+              )}
+              <Pressable
+                style={[
+                  styles.whatIfOpenBtn,
+                  route.params?.isHistory && styles.whatIfHalfBtn,
+                ]}
+                onPress={onOpenWhatIfModal}
+              >
+                <AppText
+                  value={t("whatIf.title")}
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              </Pressable>
+            </View>
           </View>
         </View>
       )}
@@ -1000,6 +1036,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 8,
   },
+  recalculateBtn: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 12,
+    minHeight: 42,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 6,
+  },
   gap8: {
     gap: 8,
   },
@@ -1085,6 +1133,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.foundation.neutral.n200,
   },
   whatIfOpenBtn: {
+    flex: 1,
     borderWidth: 1,
     borderColor: COLORS.foundation.neutral.n100,
     backgroundColor: COLORS.foundation.neutral.n0,
@@ -1092,6 +1141,13 @@ const styles = StyleSheet.create({
     height: 42,
     alignItems: "center",
     justifyContent: "center",
+  },
+  whatIfHalfBtn: {
+    flex: 1,
+  },
+  whatIfActionRow: {
+    flexDirection: "row",
+    gap: 8,
   },
   whatIfGrid: {
     flexDirection: "row",

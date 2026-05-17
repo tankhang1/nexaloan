@@ -103,7 +103,11 @@
       "monthlyPayment": "Khoản Trả Hàng Tháng",
       "totalPayments": "Tổng Số Tiền Thanh Toán",
       "totalInterestPaid": "Tổng Tiền Lãi Phải Trả"
-    }
+    },
+    "recalculate": "Tính lại",
+    "saveNew": "Lưu mới",
+    "updateSaved": "Cập nhật",
+    "updateSuccess": "Cập nhật khoản vay đã lưu thành công"
   },
   "mortgageDetail": {
     "title": "Vay Mua Nhà",

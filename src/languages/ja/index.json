@@ -103,7 +103,11 @@
       "monthlyPayment": "月々の返済額",
       "totalPayments": "総返済額",
       "totalInterestPaid": "支払総利息"
-    }
+    },
+    "recalculate": "再計算",
+    "saveNew": "新規保存",
+    "updateSaved": "更新",
+    "updateSuccess": "保存済みローンを更新しました"
   },
   "mortgageDetail": {
     "title": "住宅ローン詳細",

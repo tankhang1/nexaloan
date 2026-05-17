@@ -15,12 +15,24 @@ type TCard = {
   time: string;
   index: number;
   onPress: (value: string) => void;
+  onLongPress?: (value: string) => void;
   onDelete?: (id: string, closeSwipe: () => void) => void;
   id: string;
 };
 const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
 
-const Card = ({icon, time, title, value, year, id, index, onPress, onDelete}: TCard) => {
+const Card = ({
+  icon,
+  time,
+  title,
+  value,
+  year,
+  id,
+  index,
+  onPress,
+  onLongPress,
+  onDelete,
+}: TCard) => {
   const swipeableRef = React.useRef<Swipeable | null>(null);
 
   const renderRightActions = () => {
@@ -46,6 +58,7 @@ const Card = ({icon, time, title, value, year, id, index, onPress, onDelete}: TC
       <AnimatedTouchable
         entering={FadeIn.delay(index * 100)}
         onPress={() => onPress(id)}
+        onLongPress={() => onLongPress?.(id)}
       >
         <View style={styles.overall}>
           <View style={styles.leftSection}>

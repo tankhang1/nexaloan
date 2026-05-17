@@ -103,7 +103,11 @@
       "monthlyPayment": "월 상환액",
       "totalPayments": "총 상환액",
       "totalInterestPaid": "총 이자"
-    }
+    },
+    "recalculate": "다시 계산",
+    "saveNew": "새로 저장",
+    "updateSaved": "업데이트",
+    "updateSuccess": "저장된 대출이 성공적으로 업데이트되었습니다"
   },
   "mortgageDetail": {
     "title": "대출",

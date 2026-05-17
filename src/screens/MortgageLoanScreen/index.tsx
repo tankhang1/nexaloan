@@ -1,5 +1,5 @@
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import React, {useState, useTransition, useMemo} from 'react';
+import React, {useEffect, useState, useTransition, useMemo} from 'react';
 import AppView from '../../components/AppView';
 import AppText from '../../components/AppText';
 import {COLORS} from '../../constants/colors';
@@ -30,6 +30,7 @@ const MortgageLoanScreen = ({route}: Props) => {
   const [month, setMonth] = useState(1);
   const [type, setType] = useState(0);
   const [rate, setRate] = useState<string | number>(1);
+  const isRecalculateMode = !!route.params?.recalculateLoanId;
 
   const sliderLimits = useMemo(() => {
     const code = currency.code;
@@ -48,7 +49,7 @@ const MortgageLoanScreen = ({route}: Props) => {
   };
   const onNavMortgageLoanResult = () => {
     startTransition(() => {
-      const id = uuid();
+      const id = route.params?.recalculateLoanId || uuid();
       dispatch(
         addLoan({
           id: id,
@@ -62,9 +63,21 @@ const MortgageLoanScreen = ({route}: Props) => {
       );
       navigationRef.navigate('MortgageLoanResultScreen', {
         label: route.params.label,
+        recalculateLoanId: route.params?.recalculateLoanId,
+        isRecalculate: isRecalculateMode,
       });
     });
   };
+  useEffect(() => {
+    if (!route.params?.recalculateSource) {
+      return;
+    }
+
+    setLoanAmount(route.params.recalculateSource.loan_amount);
+    setMonth(route.params.recalculateSource.duration);
+    setRate(route.params.recalculateSource.int_rate);
+    setType(route.params.recalculateSource.type);
+  }, [route.params?.recalculateSource]);
   const onGoBack = () => {
     navigationRef.goBack();
   };
@@ -181,7 +194,7 @@ const MortgageLoanScreen = ({route}: Props) => {
               </View>
               <AppSlider
                 minValue={type === 2 ? 0.1 : 1}
-                maxValue={type === 2 ? 5 : 25}
+                maxValue={type === 2 ? 25 : 25}
                 curValue={+rate}
                 isFloat={true}
                 setCurValue={setRate}
