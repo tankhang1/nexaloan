@@ -388,6 +388,17 @@ const MainScreen = () => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.progressContainer}>
+                  <View style={styles.progressPercentRow}>
+                    <AppText
+                      value={`${Math.min(
+                        ((loan.paid_amount || 0) / loan.loan_amount) * 100,
+                        100,
+                      ).toFixed(0)}%`}
+                      fontSize={10}
+                      color={COLORS.foundation.neutral.n700}
+                      fontWeight={700}
+                    />
+                  </View>
                   <View style={styles.progressBar}>
                     <View style={[styles.progressFill, {width: `${Math.min(((loan.paid_amount || 0) / loan.loan_amount) * 100, 100)}%`}]} />
                   </View>
@@ -716,6 +727,9 @@ const styles = StyleSheet.create({
   },
   progressContainer: {
     gap: 4,
+  },
+  progressPercentRow: {
+    alignItems: 'flex-end',
   },
   progressBar: {
     height: 8,

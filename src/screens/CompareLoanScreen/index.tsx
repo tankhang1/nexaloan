@@ -20,6 +20,7 @@ import {
 import {navigationRef} from '../../navigation';
 import {RootState} from '../../redux/store';
 import {useTranslation} from 'react-i18next';
+import AppTrustNotice from '../../components/AppTrustNotice';
 
 type TLoanOption = {
   loanAmount: string;
@@ -411,7 +412,17 @@ const CompareLoanScreen = () => {
             fontWeight={700}
             color={COLORS.foundation.neutral.n700}
           />
-          {results.map(renderResultCard)}
+          <AppTrustNotice
+            summary={t('trust.compare.context')}
+            details={t('trust.disclaimer.short')}
+            expandLabel={t('trust.actions.readDisclaimer')}
+            collapseLabel={t('trust.actions.hideDisclaimer')}
+          />
+          {results.map(item => (
+            <React.Fragment key={item.label}>
+              {renderResultCard(item)}
+            </React.Fragment>
+          ))}
           <View style={styles.summaryCard}>
             <AppText
               value={

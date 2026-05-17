@@ -21,6 +21,21 @@ export const calculateFixedPrincipal = (
   const months = mortgage.duration;
   const monthlyPrincipal = mortgage.loan_amount / months;
   const monthlyInterestRate = mortgage.int_rate / 12 / 100;
+  if (
+    !Number.isFinite(months) ||
+    !Number.isFinite(monthlyInterestRate) ||
+    !Number.isFinite(mortgage.loan_amount) ||
+    months <= 0 ||
+    mortgage.loan_amount <= 0 ||
+    monthlyInterestRate < 0
+  ) {
+    return {
+      monthlyBreakdown: [],
+      totalPayment: 0,
+      totalInterest: 0,
+      averageMonthlyPayment: 0,
+    };
+  }
 
   const monthlyBreakdown: MonthlyBreakdown[] = [];
   let totalInterest = 0;

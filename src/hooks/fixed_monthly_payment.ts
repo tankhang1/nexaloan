@@ -24,6 +24,21 @@ export const calculateFixedMonthlyPayment = (
   const totalMonths = mortgage.duration;
   const monthlyRate = mortgage.int_rate / 12 / 100;
   const principal = mortgage.loan_amount;
+  if (
+    !Number.isFinite(totalMonths) ||
+    !Number.isFinite(monthlyRate) ||
+    !Number.isFinite(principal) ||
+    totalMonths <= 0 ||
+    principal <= 0 ||
+    monthlyRate < 0
+  ) {
+    return {
+      monthlyBreakdown: [],
+      totalPayment: 0,
+      totalInterest: 0,
+      averageMonthlyPayment: 0,
+    };
+  }
 
   // Handle 0% interest rate
   if (monthlyRate === 0) {
@@ -88,6 +103,21 @@ export const calculateFixedPrincipalPayment = (
   const totalMonths = mortgage.duration;
   const monthlyRate = mortgage.int_rate / 12 / 100;
   const principal = mortgage.loan_amount;
+  if (
+    !Number.isFinite(totalMonths) ||
+    !Number.isFinite(monthlyRate) ||
+    !Number.isFinite(principal) ||
+    totalMonths <= 0 ||
+    principal <= 0 ||
+    monthlyRate < 0
+  ) {
+    return {
+      monthlyBreakdown: [],
+      totalPayment: 0,
+      totalInterest: 0,
+      averageMonthlyPayment: 0,
+    };
+  }
 
   const fixedPrincipal = principal / totalMonths;
   let remainingPrincipal = principal;
@@ -129,6 +159,21 @@ export const calculateFlatRatePayment = (
   // For Flat Rate, interest is typically quoted monthly
   const monthlyRate = mortgage.int_rate / 100;
   const principal = mortgage.loan_amount;
+  if (
+    !Number.isFinite(totalMonths) ||
+    !Number.isFinite(monthlyRate) ||
+    !Number.isFinite(principal) ||
+    totalMonths <= 0 ||
+    principal <= 0 ||
+    monthlyRate < 0
+  ) {
+    return {
+      monthlyBreakdown: [],
+      totalPayment: 0,
+      totalInterest: 0,
+      averageMonthlyPayment: 0,
+    };
+  }
 
   const interestPayment = principal * monthlyRate;
   const principalPayment = principal / totalMonths;

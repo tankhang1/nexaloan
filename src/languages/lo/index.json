@@ -249,5 +249,38 @@
     "newPayoff": "New payoff time",
     "newTotalPayment": "New total payment",
     "supportNote": "V1 currently supports simulation for Fixed Payment only."
+  },
+  "trust": {
+    "disclaimer": {
+      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
+      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
+      "notAdvice": "This content is for informational purposes and is not financial advice."
+    },
+    "actions": {
+      "viewFormula": "View formula details",
+      "hideFormula": "Hide formula details",
+      "readDisclaimer": "Read full disclaimer",
+      "hideDisclaimer": "Hide disclaimer"
+    },
+    "result": {
+      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+    },
+    "compare": {
+      "context": "Comparison uses the same assumptions for both options to keep results fair."
+    },
+    "formula": {
+      "fixedPayment": {
+        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
+        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+      },
+      "fixedPrincipal": {
+        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
+        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+      },
+      "flatRate": {
+        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
+        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+      }
+    }
   }
 }

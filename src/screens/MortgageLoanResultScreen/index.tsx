@@ -35,6 +35,8 @@ import { navigationRef } from "../../navigation";
 import { addLoan, ELoan, TLoan, updateLoan as updateHistoryLoan } from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
+import AppTrustNotice from "../../components/AppTrustNotice";
+import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
 const Result = lazy(() => import("./components/Result"));
 
 type Props = NativeStackScreenProps<TNavigation, "MortgageLoanResultScreen">;
@@ -209,6 +211,17 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
             >
               <Result mortgage={mortgage} label={route.params.label} />
             </Suspense>
+          )}
+          {!!mortgage && (
+            <AppTrustNotice
+              summary={t("trust.result.estimation")}
+              details={`${getFormulaSummary(mortgage.type || 0, t)}\n\n${getFormulaDetails(
+                mortgage.type || 0,
+                t,
+              )}\n\n${t("trust.disclaimer.notAdvice")}`}
+              expandLabel={t("trust.actions.viewFormula")}
+              collapseLabel={t("trust.actions.hideFormula")}
+            />
           )}
           <View style={styles.actionGroup}>
             <View style={[styles.rows, styles.gap8]}>

@@ -8,7 +8,10 @@ import {COLORS} from '../../../constants/colors';
 import {WIDTH} from '../../../constants/dimension';
 import AppText from '../../../components/AppText';
 import {TMortgageLoan} from '../../../redux/slices/mortgage_loan_slices';
-import {calculateFixedMonthlyPayment} from '../../../hooks/fixed_monthly_payment';
+import {
+  calculateFixedMonthlyPayment,
+  calculateFlatRatePayment,
+} from '../../../hooks/fixed_monthly_payment';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../redux/store';
 import {useTranslation} from 'react-i18next';
@@ -30,6 +33,8 @@ const Result = ({mortgage, label}: TResult) => {
     () =>
       mortgage?.type === 1
         ? calculateFixedPrincipal(mortgage!)
+        : mortgage?.type === 2
+        ? calculateFlatRatePayment(mortgage!)
         : calculateFixedMonthlyPayment(mortgage!),
     [mortgage],
   );

@@ -14,14 +14,27 @@ import MortgageLoanScreen from '../screens/MortgageLoanScreen';
 import MortgageLoanResultScreen from '../screens/MortgageLoanResultScreen';
 import MortgageLoanResultDetailScreen from '../screens/MortgageLoanResultDetailScreen';
 import CompareLoanScreen from '../screens/CompareLoanScreen';
-import {initI18n} from '../languages';
+import i18next, {initI18n} from '../languages';
 import AboutUsScreen from '../screens/AboutUsScreen';
 import TOUScreen from '../screens/TOUScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 const Stack = createNativeStackNavigator<TNavigation>();
 export const navigationRef = createNavigationContainerRef<TNavigation>();
 const AppNavigation = () => {
-  initI18n();
+  const [isI18nReady, setIsI18nReady] = React.useState(i18next.isInitialized);
+
+  React.useEffect(() => {
+    if (!i18next.isInitialized) {
+      initI18n();
+    }
+
+    setIsI18nReady(true);
+  }, []);
+
+  if (!isI18nReady) {
+    return null;
+  }
+
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{headerShown: false}}>

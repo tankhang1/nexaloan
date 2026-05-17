@@ -40,6 +40,8 @@ import { navigationRef } from "../../navigation";
 import { TLoan, TPayment, updateLoan } from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
+import AppTrustNotice from "../../components/AppTrustNotice";
+import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
 import Table from "./components/Table";
 
 type Props = NativeStackScreenProps<
@@ -347,7 +349,11 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
         isEqual={false}
       />
       {tab === 0 && (
-        <View style={styles.statistic}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.summaryScrollContent}
+        >
+          <View style={styles.statistic}>
           <View style={styles.title}>
             <AppText
               value={route.params?.label}
@@ -498,8 +504,17 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                 />
               </Pressable>
             </View>
+            <AppTrustNotice
+              summary={getFormulaSummary(mortgage?.type || 0, t)}
+              details={`${getFormulaDetails(mortgage?.type || 0, t)}\n\n${t(
+                "trust.disclaimer.notAdvice",
+              )}`}
+              expandLabel={t("trust.actions.viewFormula")}
+              collapseLabel={t("trust.actions.hideFormula")}
+            />
           </View>
-        </View>
+          </View>
+        </ScrollView>
       )}
       {tab === 1 && (
         <View style={styles.borderRadius}>
@@ -1003,6 +1018,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.foundation.blue.b200,
     borderWidth: 1,
     borderColor: "black",
+  },
+  summaryScrollContent: {
+    paddingBottom: 120,
   },
   title: {
     width: WIDTH - 72,

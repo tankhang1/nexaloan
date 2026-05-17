@@ -249,5 +249,38 @@
     "newPayoff": "Thời gian tất toán mới",
     "newTotalPayment": "Tổng trả mới",
     "supportNote": "V1 hiện hỗ trợ mô phỏng cho phương thức Trả góp đều."
+  },
+  "trust": {
+    "disclaimer": {
+      "short": "Kết quả chỉ mang tính ước tính. Điều khoản vay thực tế, phí, thuế và chính sách ngân hàng có thể làm thay đổi số tiền phải trả.",
+      "long": "Công cụ này cung cấp ước tính để tham khảo dựa trên dữ liệu bạn nhập và phương thức tính đã chọn. Kết quả thực tế có thể khác do phí ngân hàng, bảo hiểm, thuế, phạt trả trước, ưu đãi, quy tắc làm tròn và thời điểm giải ngân. Vui lòng xác nhận điều khoản cuối cùng với bên cho vay.",
+      "notAdvice": "Nội dung chỉ nhằm mục đích cung cấp thông tin, không phải lời khuyên tài chính."
+    },
+    "actions": {
+      "viewFormula": "Xem chi tiết công thức",
+      "hideFormula": "Ẩn chi tiết công thức",
+      "readDisclaimer": "Xem toàn bộ lưu ý",
+      "hideDisclaimer": "Ẩn lưu ý"
+    },
+    "result": {
+      "estimation": "Kết quả chỉ là ước tính. Số tiền thực tế có thể khác theo điều khoản hợp đồng và bên cho vay."
+    },
+    "compare": {
+      "context": "So sánh sử dụng cùng giả định cho cả hai phương án để đảm bảo công bằng."
+    },
+    "formula": {
+      "fixedPayment": {
+        "summary": "Trả góp đều: khoản trả hàng tháng được tính theo công thức khấu hao dựa trên gốc, lãi suất và thời hạn.",
+        "details": "Khoản trả hàng tháng = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: số tiền gốc\nr: lãi suất theo tháng\nn: tổng số tháng\nTổng thanh toán = tổng các khoản trả hàng tháng\nTổng lãi = Tổng thanh toán - Tiền gốc."
+      },
+      "fixedPrincipal": {
+        "summary": "Trả gốc đều: phần gốc mỗi tháng cố định, tiền lãi giảm dần theo dư nợ còn lại.",
+        "details": "Gốc hàng tháng = P / n\nLãi tháng k = Dư nợ còn lại * r\nKhoản trả tháng = Gốc hàng tháng + Lãi tháng\nTổng lãi = tổng tiền lãi của tất cả các tháng."
+      },
+      "flatRate": {
+        "summary": "Lãi suất phẳng: tiền lãi được tính trên gốc ban đầu cho toàn bộ kỳ hạn.",
+        "details": "Tổng lãi = P * r * n\nLãi mỗi tháng = Tổng lãi / n\nKhoản trả mỗi tháng = (P / n) + Lãi mỗi tháng\nLưu ý: phương thức này dùng đơn vị %/tháng trong ứng dụng."
+      }
+    }
   }
 }

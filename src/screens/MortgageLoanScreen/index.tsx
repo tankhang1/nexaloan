@@ -1,29 +1,31 @@
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import React, {useEffect, useState, useTransition, useMemo} from 'react';
-import AppView from '../../components/AppView';
-import AppText from '../../components/AppText';
-import {COLORS} from '../../constants/colors';
-import AppIconButton from '../../components/AppIconButton';
-import {ICONS} from '../../constants/icon';
-import AppSlider from '../../components/AppSlider';
-import AppIndicator from '../../components/AppIndicator';
-import {WIDTH} from '../../constants/dimension';
-import {navigationRef} from '../../navigation';
-import {useDispatch, useSelector} from 'react-redux';
-import {addLoan} from '../../redux/slices/mortgage_loan_slices';
-import {uuid} from '../../hooks/uuid';
-import {RootState} from '../../redux/store';
-import AppInput from '../../components/AppInput';
-import {useTranslation} from 'react-i18next';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {TNavigation} from '../../utils/types/navigation';
-import {KeyboardAvoidingView} from 'react-native-keyboard-controller';
-type Props = NativeStackScreenProps<TNavigation, 'MortgageLoanScreen'>;
-const MortgageLoanScreen = ({route}: Props) => {
-  const {t} = useTranslation();
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import React, { useEffect, useMemo, useState, useTransition } from "react";
+import { useTranslation } from "react-i18next";
+import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { useDispatch, useSelector } from "react-redux";
+import AppIconButton from "../../components/AppIconButton";
+import AppIndicator from "../../components/AppIndicator";
+import AppInput from "../../components/AppInput";
+import AppSlider from "../../components/AppSlider";
+import AppText from "../../components/AppText";
+import AppTrustNotice from "../../components/AppTrustNotice";
+import AppView from "../../components/AppView";
+import { COLORS } from "../../constants/colors";
+import { WIDTH } from "../../constants/dimension";
+import { ICONS } from "../../constants/icon";
+import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
+import { uuid } from "../../hooks/uuid";
+import { navigationRef } from "../../navigation";
+import { addLoan } from "../../redux/slices/mortgage_loan_slices";
+import { RootState } from "../../redux/store";
+import { TNavigation } from "../../utils/types/navigation";
+type Props = NativeStackScreenProps<TNavigation, "MortgageLoanScreen">;
+const MortgageLoanScreen = ({ route }: Props) => {
+  const { t } = useTranslation();
   const [isPending, startTransition] = useTransition();
 
-  const {currency} = useSelector((state: RootState) => state.app);
+  const { currency } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
 
   const [loanAmount, setLoanAmount] = useState<string | number>(4000);
@@ -34,10 +36,10 @@ const MortgageLoanScreen = ({route}: Props) => {
 
   const sliderLimits = useMemo(() => {
     const code = currency.code;
-    if (code === 'VND' || code === 'IDR') {
+    if (code === "VND" || code === "IDR") {
       return { min: 10000000, max: 100000000000, step: 1000000 };
     }
-    if (code === 'INR' || code === 'JPY' || code === 'KRW' || code === 'THB') {
+    if (code === "INR" || code === "JPY" || code === "KRW" || code === "THB") {
       return { min: 100000, max: 1000000000, step: 10000 };
     }
     // High value currencies (USD, EUR, GBP, CHF, AUD, SGD)
@@ -45,23 +47,39 @@ const MortgageLoanScreen = ({route}: Props) => {
   }, [currency.code]);
 
   const onNavSetting = () => {
-    navigationRef.navigate('SettingScreen');
+    navigationRef.navigate("SettingScreen");
   };
   const onNavMortgageLoanResult = () => {
+    const duration = Math.floor(Number(month));
+    const interestRate = Number(rate);
+    const principal = Number(loanAmount);
+
+    if (
+      !Number.isFinite(duration) ||
+      !Number.isFinite(interestRate) ||
+      !Number.isFinite(principal) ||
+      duration <= 0 ||
+      principal <= 0 ||
+      interestRate < 0
+    ) {
+      Alert.alert(t("mortgage.title"), t("compareLoan.enterValidValues"));
+      return;
+    }
+
     startTransition(() => {
       const id = route.params?.recalculateLoanId || uuid();
       dispatch(
         addLoan({
           id: id,
-          duration: month,
-          int_rate: +rate,
-          loan_amount: +loanAmount,
+          duration,
+          int_rate: interestRate,
+          loan_amount: principal,
           date: new Date(),
           currency,
           type,
         }),
       );
-      navigationRef.navigate('MortgageLoanResultScreen', {
+      navigationRef.navigate("MortgageLoanResultScreen", {
         label: route.params.label,
         recalculateLoanId: route.params?.recalculateLoanId,
         isRecalculate: isRecalculateMode,
@@ -82,22 +100,22 @@ const MortgageLoanScreen = ({route}: Props) => {
     navigationRef.goBack();
   };
   return (
-    <AppView appStyle={styles.overall}>
-      <View style={styles.header}>
-        <AppIconButton onPress={onGoBack}>
-          <ICONS.button.chervon_left />
-        </AppIconButton>
-        <AppText
-          value={route.params.label || t('mortgage.title')}
-          fontSize={20}
-          fontWeight={600}
-          color={COLORS.foundation.neutral.n700}
-        />
-        <AppIconButton onPress={onNavSetting}>
-          <ICONS.button.setting />
-        </AppIconButton>
-      </View>
-      <KeyboardAvoidingView behavior="height" style={styles.keyboardAvoiding}>
+    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      <AppView appStyle={styles.overall}>
+        <View style={styles.header}>
+          <AppIconButton onPress={onGoBack}>
+            <ICONS.button.chervon_left />
+          </AppIconButton>
+          <AppText
+            value={route.params.label || t("mortgage.title")}
+            fontSize={20}
+            fontWeight={600}
+            color={COLORS.foundation.neutral.n700}
+          />
+          <AppIconButton onPress={onNavSetting}>
+            <ICONS.button.setting />
+          </AppIconButton>
+        </View>
         <View style={styles.body_container}>
           <View style={styles.gap40}>
             <View style={[styles.center, styles.gap8]}>
@@ -105,14 +123,14 @@ const MortgageLoanScreen = ({route}: Props) => {
                 <AppText
                   fontSize={14}
                   fontWeight={500}
-                  value={t('mortgage.loanAmount')}
+                  value={t("mortgage.loanAmount")}
                   color={COLORS.foundation.neutral.n200}
                 />
                 {/* <ICONS.info /> */}
               </View>
               <AppInput
-                onChangeText={value => {
-                  const numericValue = value.replace(/[^0-9]/g, ''); // Keep only digits
+                onChangeText={(value) => {
+                  const numericValue = value.replace(/[^0-9]/g, ""); // Keep only digits
                   if (!isNaN(+numericValue)) {
                     setLoanAmount(numericValue);
                   }
@@ -120,9 +138,11 @@ const MortgageLoanScreen = ({route}: Props) => {
                 keyboardType="numbers-and-punctuation"
                 fontSize={40}
                 fontWeight={500}
-                value={new Intl.NumberFormat(currency.locale).format(+loanAmount)}
+                value={new Intl.NumberFormat(currency.locale).format(
+                  +loanAmount,
+                )}
                 color={COLORS.foundation.neutral.n700}
-                textStyle={{width: '100%', textAlign: 'center'}}
+                textStyle={{ width: "100%", textAlign: "center" }}
               />
               <AppSlider
                 prefix={true}
@@ -138,15 +158,15 @@ const MortgageLoanScreen = ({route}: Props) => {
                   <AppText
                     fontSize={14}
                     fontWeight={500}
-                    value={t('mortgage.duration')}
+                    value={t("mortgage.duration")}
                     color={COLORS.foundation.neutral.n200}
                   />
                   {/* <ICONS.info /> */}
                 </View>
                 <AppInput
                   keyboardType="numbers-and-punctuation"
-                  onChangeText={value => {
-                    const numericValue = value.replace(/[^0-9]/g, ''); // Keep only digits
+                  onChangeText={(value) => {
+                    const numericValue = value.replace(/[^0-9]/g, ""); // Keep only digits
                     if (!isNaN(+numericValue)) {
                       setMonth(+numericValue);
                     }
@@ -172,7 +192,11 @@ const MortgageLoanScreen = ({route}: Props) => {
                   <AppText
                     fontSize={14}
                     fontWeight={500}
-                    value={type === 2 ? t('mortgage.interestRateMonthly') : t('mortgage.interestRate')}
+                    value={
+                      type === 2
+                        ? t("mortgage.interestRateMonthly")
+                        : t("mortgage.interestRate")
+                    }
                     color={COLORS.foundation.neutral.n200}
                   />
                   {/* <ICONS.info /> */}
@@ -182,8 +206,8 @@ const MortgageLoanScreen = ({route}: Props) => {
                   fontWeight={600}
                   value={rate.toString()}
                   keyboardType="numbers-and-punctuation"
-                  onChangeText={value => {
-                    const numericValue = value.replace(/[^0-9.]/g, '');
+                  onChangeText={(value) => {
+                    const numericValue = value.replace(/[^0-9.]/g, "");
                     if (!isNaN(+numericValue)) {
                       setRate(numericValue);
                     }
@@ -207,18 +231,18 @@ const MortgageLoanScreen = ({route}: Props) => {
               tabs={[
                 {
                   id: 0,
-                  children: t('mortgage.fixedPayment'),
+                  children: t("mortgage.fixedPayment"),
                   isLeftBorder: true,
                   tabWidth: (WIDTH - 36) * 0.33,
                 },
                 {
                   id: 1,
-                  children: t('mortgage.fixedPrincipal'),
+                  children: t("mortgage.fixedPrincipal"),
                   tabWidth: (WIDTH - 36) * 0.34,
                 },
                 {
                   id: 2,
-                  children: t('mortgage.flatRate'),
+                  children: t("mortgage.flatRate"),
                   isRightBorder: true,
                   tabWidth: (WIDTH - 36) * 0.33,
                 },
@@ -227,24 +251,37 @@ const MortgageLoanScreen = ({route}: Props) => {
               onPress={setType}
               isEqual={false}
             />
-            <View style={{minHeight: 40, paddingHorizontal: 4}}>
+            <View style={{ minHeight: 40, paddingHorizontal: 4 }}>
               <AppText
                 value={
                   type === 0
-                    ? t('mortgage.descFixedPayment')
+                    ? t("mortgage.descFixedPayment")
                     : type === 1
-                    ? t('mortgage.descFixedPrincipal')
-                    : t('mortgage.descFlatRate')
+                      ? t("mortgage.descFixedPrincipal")
+                      : t("mortgage.descFlatRate")
                 }
                 fontSize={12}
                 fontWeight={400}
                 color={COLORS.foundation.neutral.n500}
-                textStyle={{fontStyle: 'italic', lineHeight: 18}}
+                textStyle={{ fontStyle: "italic", lineHeight: 18 }}
               />
             </View>
+            <AppTrustNotice
+              summary={getFormulaSummary(type, t)}
+              details={getFormulaDetails(type, t)}
+              expandLabel={t("trust.actions.viewFormula")}
+              collapseLabel={t("trust.actions.hideFormula")}
+            />
+            <AppTrustNotice
+              summary={t("trust.disclaimer.short")}
+              details={t("trust.disclaimer.long")}
+              expandLabel={t("trust.actions.readDisclaimer")}
+              collapseLabel={t("trust.actions.hideDisclaimer")}
+            />
             <AppIconButton
-              style={{width: WIDTH - 36}}
-              onPress={onNavMortgageLoanResult}>
+              style={{ width: WIDTH - 36 }}
+              onPress={onNavMortgageLoanResult}
+            >
               <View style={[styles.rows, styles.gap8]}>
                 {isPending && <ActivityIndicator />}
                 {!isPending && <ICONS.calculator />}
@@ -253,15 +290,15 @@ const MortgageLoanScreen = ({route}: Props) => {
                     color="#090A0B"
                     fontWeight={600}
                     fontSize={14}
-                    value={t('mortgage.calculate')}
+                    value={t("mortgage.calculate")}
                   />
                 )}
               </View>
             </AppIconButton>
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </AppView>
+      </AppView>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -272,44 +309,48 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 15,
     gap: 16,
-    width: '100%',
+    width: "100%",
   },
   header: {
     paddingVertical: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  rows: {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'},
+  rows: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   rows_between: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   rows_left: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
-  gap8: {gap: 8},
-  gap14: {gap: 14},
-  gap40: {gap: 40},
+  gap8: { gap: 8 },
+  gap14: { gap: 14 },
+  gap40: { gap: 40 },
   textCenter: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   center: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
   },
-  keyboardAvoiding: {flex: 1},
-  body_container: {justifyContent: 'space-between', flex: 1},
+  keyboardAvoiding: { flex: 1 },
+  body_container: { justifyContent: "space-between", flex: 1 },
   inputBox: {
     width: 70,
-    textAlign: 'center',
+    textAlign: "center",
   },
   rateInputBox: {
     width: 92,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
