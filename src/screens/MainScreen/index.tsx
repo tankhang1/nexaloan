@@ -46,14 +46,21 @@ const MainScreen = () => {
     }
     return calculateFixedMonthlyPayment(loan).totalPayment;
   }, []);
+  const getLoanPaidAmount = React.useCallback((loan: TLoan) => {
+    const paidFromPayments = (loan.payments || []).reduce(
+      (total, payment) => total + payment.amount,
+      0,
+    );
+    return Math.max(paidFromPayments, loan.paid_amount || 0);
+  }, []);
 
   const totalDebt = React.useMemo(
     () => history.reduce((acc, loan) => acc + getLoanTotalPayable(loan), 0),
     [getLoanTotalPayable, history],
   );
   const totalPaid = React.useMemo(
-    () => history.reduce((acc, loan) => acc + (loan.paid_amount || 0), 0),
-    [history],
+    () => history.reduce((acc, loan) => acc + getLoanPaidAmount(loan), 0),
+    [getLoanPaidAmount, history],
   );
   const remainingDebt = React.useMemo(
     () => Math.max(totalDebt - totalPaid, 0),
@@ -75,13 +82,8 @@ const MainScreen = () => {
       return 0;
     }
 
-    const paidFromPayments = (activeSelectedLoan.payments || []).reduce(
-      (total, payment) => total + payment.amount,
-      0,
-    );
-
-    return Math.max(paidFromPayments, activeSelectedLoan.paid_amount || 0);
-  }, [activeSelectedLoan]);
+    return getLoanPaidAmount(activeSelectedLoan);
+  }, [activeSelectedLoan, getLoanPaidAmount]);
   const selectedRemainingAmount = React.useMemo(() => {
     if (!activeSelectedLoan) {
       return 0;
@@ -180,6 +182,11 @@ const MainScreen = () => {
     setPaymentAmount('');
     setPaymentError('');
     setSelectedLoan(null);
+  };
+  const onPayAll = () => {
+    const nextAmount = Number(selectedRemainingAmount.toFixed(2));
+    setPaymentAmount(nextAmount.toString());
+    setPaymentError('');
   };
 
   const confirmPayment = () => {
@@ -414,10 +421,11 @@ const MainScreen = () => {
                 <View style={styles.progressContainer}>
                   {(() => {
                     const totalPayable = getLoanTotalPayable(loan);
-                    const progressPercent = Math.min(
-                      ((loan.paid_amount || 0) / totalPayable) * 100,
-                      100,
-                    );
+                    const paidAmount = getLoanPaidAmount(loan);
+                    const progressPercent =
+                      totalPayable > 0
+                        ? Math.min((paidAmount / totalPayable) * 100, 100)
+                        : 0;
                     return (
                       <View style={styles.progressPercentRow}>
                         <AppText
@@ -432,10 +440,11 @@ const MainScreen = () => {
                   <View style={styles.progressBar}>
                     {(() => {
                       const totalPayable = getLoanTotalPayable(loan);
-                      const progressPercent = Math.min(
-                        ((loan.paid_amount || 0) / totalPayable) * 100,
-                        100,
-                      );
+                      const paidAmount = getLoanPaidAmount(loan);
+                      const progressPercent =
+                        totalPayable > 0
+                          ? Math.min((paidAmount / totalPayable) * 100, 100)
+                          : 0;
                       return (
                         <View
                           style={[
@@ -449,10 +458,11 @@ const MainScreen = () => {
                   <View style={[styles.rows, {marginTop: 4}]}>
                     {(() => {
                       const totalPayable = getLoanTotalPayable(loan);
+                      const paidAmount = getLoanPaidAmount(loan);
                       return (
                         <AppText
                           value={`${formatNumber(
-                            loan.paid_amount || 0,
+                            paidAmount,
                             loan.currency.locale,
                             true,
                             loan.currency.code,
@@ -594,6 +604,17 @@ const MainScreen = () => {
                 fontWeight={400}
                 fontSize={12}
               />
+              <TouchableOpacity
+                style={styles.payAllBtn}
+                onPress={onPayAll}
+                disabled={selectedRemainingAmount <= 0}>
+                <AppText
+                  value={t('main.payAll', {defaultValue: 'Pay all'})}
+                  color={COLORS.foundation.blue.b300}
+                  fontWeight={700}
+                  fontSize={12}
+                />
+              </TouchableOpacity>
               {!!paymentError && (
                 <AppText
                   value={paymentError}
@@ -813,6 +834,15 @@ const styles = StyleSheet.create({
   },
   modalHint: {
     gap: 6,
+  },
+  payAllBtn: {
+    alignSelf: 'flex-start',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
   },
   modalBtn: {
     flex: 1,

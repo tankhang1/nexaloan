@@ -784,7 +784,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                     disabled={paymentStats.remainingAmount <= 0}
                   >
                     <AppText
-                      value={t("main.payAll")}
+                      value={t("main.payAll", {defaultValue: "Pay all"})}
                       color={COLORS.foundation.blue.b300}
                       fontWeight={700}
                       fontSize={12}
