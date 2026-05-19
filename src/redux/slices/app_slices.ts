@@ -7,6 +7,7 @@ export type TApp = {
     locale: string;
   };
   language: string;
+  hasInitializedCurrency: boolean;
 };
 
 const initialState: TApp = {
@@ -16,6 +17,7 @@ const initialState: TApp = {
     locale: 'en-US',
   },
   language: '',
+  hasInitializedCurrency: false,
 };
 
 export const appSlice = createSlice({
@@ -36,11 +38,15 @@ export const appSlice = createSlice({
     updateLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
     },
+    markCurrencyInitialized: (state) => {
+      state.hasInitializedCurrency = true;
+    },
   },
 });
 
 // Export actions
-export const {updateCurrency, updateLanguage} = appSlice.actions;
+export const {updateCurrency, updateLanguage, markCurrencyInitialized} =
+  appSlice.actions;
 
 // Export reducer
 export default appSlice.reducer;

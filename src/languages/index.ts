@@ -13,11 +13,17 @@ import KO_LANGUGAE from './ko/index.json';
 import LO_LANGUGAE from './lo/index.json';
 import PT_LANGUGAE from './pt/index.json';
 import RO_LANGUGAE from './ro/index.json';
+import RU_LANGUGAE from './ru/index.json';
 import TH_LANGUGAE from './th/index.json';
 import TR_LANGUGAE from './tr/index.json';
 import ZH_LANGUGAE from './zh/index.json';
 import {store} from '../redux/store';
-import {updateLanguage} from '../redux/slices/app_slices';
+import {
+  markCurrencyInitialized,
+  updateCurrency,
+  updateLanguage,
+} from '../redux/slices/app_slices';
+import {CURRENCIES} from '../constants/currency';
 export type I18nLanguage = keyof typeof i18nLanguages;
 export const i18nLanguages = {
   'en-US': 'English',
@@ -33,6 +39,7 @@ export const i18nLanguages = {
   'km-KH': 'Khmer',
   'en-PK': 'English (Pakistan)',
   'ro-RO': 'Romanian',
+  'ru-RU': 'Russian',
   'pt-BR': 'Portuguese (Brazil)',
   'de-AT': 'German (Austria)',
 };
@@ -50,6 +57,7 @@ const languageFallbacks: Record<string, I18nLanguage> = {
   lo: 'lo-LA',
   km: 'km-KH',
   ro: 'ro-RO',
+  ru: 'ru-RU',
   pt: 'pt-BR',
 };
 
@@ -92,6 +100,64 @@ const resolveSupportedLanguage = (locale?: string): I18nLanguage => {
   }
 
   return i18nDefaultLang;
+};
+
+const getCurrencyFromLocale = (locale?: string) => {
+  const normalizedLocale = normalizeLocale(locale);
+  const language = normalizedLocale?.split('-')[0];
+  const region = normalizedLocale?.split('-')[1];
+
+  if (region) {
+    const byRegion = CURRENCIES.find(item => item.locale.endsWith(`-${region}`));
+    if (byRegion) {
+      return {
+        code: byRegion.label,
+        symbol: byRegion.symbol,
+        locale: byRegion.locale,
+      };
+    }
+  }
+
+  if (language) {
+    const byLanguage = CURRENCIES.find(item =>
+      item.locale.toLowerCase().startsWith(`${language.toLowerCase()}-`),
+    );
+    if (byLanguage) {
+      return {
+        code: byLanguage.label,
+        symbol: byLanguage.symbol,
+        locale: byLanguage.locale,
+      };
+    }
+  }
+
+  return {
+    code: 'USD',
+    symbol: '$',
+    locale: 'en-US',
+  };
+};
+
+const initializeCurrencyFromLocale = () => {
+  const {app} = store.getState();
+  const isDefaultCurrency =
+    app.currency.code === 'USD' &&
+    app.currency.symbol === '$' &&
+    app.currency.locale === 'en-US';
+
+  if (app.hasInitializedCurrency) {
+    return;
+  }
+
+  if (!isDefaultCurrency) {
+    store.dispatch(markCurrencyInitialized());
+    return;
+  }
+
+  const nextCurrency = getCurrencyFromLocale(getDeviceLocale());
+
+  store.dispatch(updateCurrency(nextCurrency));
+  store.dispatch(markCurrencyInitialized());
 };
 
 const getInitialLanguage = (): I18nLanguage => {
@@ -149,6 +215,9 @@ export const i18nResources = {
   'ro-RO': {
     common: RO_LANGUGAE,
   },
+  'ru-RU': {
+    common: RU_LANGUGAE,
+  },
   'pt-BR': {
     common: PT_LANGUGAE,
   },
@@ -161,6 +230,7 @@ const i18nNamespaces = ['common'] as const;
 export type I18nNamespace = (typeof i18nNamespaces)[number];
 export const i18nDefaultNs: I18nNamespace = 'common';
 export const initI18n = () => {
+  initializeCurrencyFromLocale();
   const lng = getInitialLanguage(); // after Redux is ready
 
   i18next.use(initReactI18next).init({

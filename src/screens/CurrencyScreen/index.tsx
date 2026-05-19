@@ -10,7 +10,10 @@ import Card from './components/Card';
 import {HEIGHT, WIDTH} from '../../constants/dimension';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux/store';
-import {updateCurrency} from '../../redux/slices/app_slices';
+import {
+  markCurrencyInitialized,
+  updateCurrency,
+} from '../../redux/slices/app_slices';
 import {CURRENCIES} from '../../constants/currency';
 import Toast from 'react-native-toast-message';
 import {useTranslation} from 'react-i18next';
@@ -30,6 +33,7 @@ const CurrencyScreen = () => {
   const onSave = () => {
     if (curCurrency) {
       dispatch(updateCurrency(curCurrency));
+      dispatch(markCurrencyInitialized());
       Toast.show({
         text1: t('currency.notification.title'),
         text2: t('currency.notification.success'),

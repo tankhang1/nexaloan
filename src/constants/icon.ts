@@ -25,6 +25,7 @@ import Thailand from '../assets/icons/flags/thailand.svg';
 import Turkey from '../assets/icons/flags/turkey.svg';
 import Vietnam from '../assets/icons/flags/vietnam.svg';
 import Romania from '../assets/icons/flags/romania.svg';
+import Russia from '../assets/icons/flags/russia.svg';
 import SwitzerLand from '../assets/icons/flags/switzer-land.svg';
 import USD from '../assets/icons/currency/usd.svg';
 import CHF from '../assets/icons/currency/chf.svg';
@@ -77,6 +78,7 @@ export const ICONS = {
     pakistan: Pakistan,
     thailand: Thailand,
     romania: Romania,
+    russia: Russia,
     turkey: Turkey,
     vietnam: Vietnam,
     switzer_land: SwitzerLand,

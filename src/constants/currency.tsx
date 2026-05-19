@@ -63,6 +63,12 @@ export const CURRENCIES = [
     icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
   },
   {
+    label: 'RUB',
+    symbol: '₽',
+    locale: 'ru-RU',
+    icon: <ICONS.button.money color={COLORS.foundation.neutral.n0} />,
+  },
+  {
     label: 'BRL',
     symbol: 'R$',
     locale: 'pt-BR',

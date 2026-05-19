@@ -14,6 +14,7 @@ export const LANGUAGES = [
   {label: 'Cambodia', icon: <ICONS.flag.cambodia />, code: 'km-KH'},
   {label: 'Pakistan', icon: <ICONS.flag.pakistan />, code: 'en-PK'},
   {label: 'Romania', icon: <ICONS.flag.romania />, code: 'ro-RO'},
+  {label: 'Russia', icon: <ICONS.flag.russia />, code: 'ru-RU'},
   {label: 'Brazil', icon: <ICONS.flag.brazil />, code: 'pt-BR'},
   {label: 'Austria', icon: <ICONS.flag.austria />, code: 'de-AT'},
 ];

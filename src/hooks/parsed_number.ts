@@ -10,6 +10,7 @@ export const parseNumber = (formattedValue: string, locale: string): number => {
     'de-CH': {group: "'", decimal: '.'},
     'ja-JP': {group: ',', decimal: '.'},
     'ro-RO': {group: '.', decimal: ','},
+    'ru-RU': {group: ' ', decimal: ','},
     'pt-BR': {group: '.', decimal: ','},
     'de-AT': {group: '.', decimal: ','},
   };
@@ -25,6 +26,7 @@ export const parseNumber = (formattedValue: string, locale: string): number => {
 
   const raw = numericPart
     .replace(new RegExp(`\\${separators.group}`, 'g'), '') // remove thousand separators
+    .replace(/\s/g, '') // handle locales using spaces as thousand separators
     .replace(separators.decimal, '.'); // convert decimal separator
 
   let parsed = parseFloat(raw);
