@@ -5,7 +5,21 @@ export type TNavigation = {
   CurrencyScreen: undefined;
   HistoryScreen: undefined;
   AboutUsScreen: undefined;
-  CompareLoanScreen: undefined;
+  CompareLoanScreen:
+    | undefined
+    | {
+        prefill?: {
+          loan_amount: number;
+          duration: number;
+          int_rate: number;
+          type: number;
+          currency: {
+            code: string;
+            symbol: string;
+            locale: string;
+          };
+        };
+      };
   TOUScreen: undefined;
   PrivacyPolicyScreen: undefined;
   MortgageLoanScreen: {

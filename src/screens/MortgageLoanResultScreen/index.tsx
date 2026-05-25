@@ -5,6 +5,7 @@ import React, {
   Suspense,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   useTransition,
@@ -25,21 +26,51 @@ import ViewShot from "react-native-view-shot";
 import { useDispatch, useSelector } from "react-redux";
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import AppIconButton from "../../components/AppIconButton";
+import AppSlider from "../../components/AppSlider";
 import AppText from "../../components/AppText";
 import AppView from "../../components/AppView";
 import { ADS } from "../../constants/ads";
 import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
+import { formatMonth } from "../../hooks/format_month";
+import { formatNumber } from "../../hooks/format_number";
+import {
+  addLoan as setCurrentLoan,
+  TMortgageLoan,
+} from "../../redux/slices/mortgage_loan_slices";
 import { navigationRef } from "../../navigation";
-import { addLoan, ELoan, TLoan, updateLoan as updateHistoryLoan } from "../../redux/slices/history";
+import {
+  addLoan as addHistoryLoan,
+  ELoan,
+  TLoan,
+  updateLoan as updateHistoryLoan,
+} from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
 import AppTrustNotice from "../../components/AppTrustNotice";
 import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
+import {
+  calculateFixedMonthlyPayment,
+  calculateFlatRatePayment,
+} from "../../hooks/fixed_monthly_payment";
+import { calculateFixedPrincipal } from "../../hooks/fixed_principal";
+
 const Result = lazy(() => import("./components/Result"));
 
 type Props = NativeStackScreenProps<TNavigation, "MortgageLoanResultScreen">;
+
+const useDebouncedValue = <T,>(value: T, delay = 100): T => {
+  const [debounced, setDebounced] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(timer);
+  }, [delay, value]);
+
+  return debounced;
+};
+
 const MortgageLoanResultScreen = ({ route }: Props) => {
   const [isPending, startTransition] = useTransition();
   const { isLoaded, isClosed, load, show } = useInterstitialAd(
@@ -51,16 +82,94 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
   const confettiRef = useRef<ConfettiCannon>(null);
   const mortgage = useSelector((state: RootState) => state.mortgage_loan);
   const dispatch = useDispatch();
+
+  const [rateDraft, setRateDraft] = useState(Number(mortgage.int_rate || 0));
+  const [durationDraft, setDurationDraft] = useState(
+    Number(mortgage.duration || 1),
+  );
+
+  useEffect(() => {
+    setRateDraft(Number(mortgage.int_rate || 0));
+    setDurationDraft(Number(mortgage.duration || 1));
+  }, [mortgage.duration, mortgage.int_rate]);
+
+  const debouncedRate = useDebouncedValue(rateDraft, 100);
+  const debouncedDuration = useDebouncedValue(durationDraft, 100);
+
+  const scenarioLoan = useMemo<TMortgageLoan>(() => {
+    return {
+      ...(mortgage as TMortgageLoan),
+      int_rate: Number(Number(debouncedRate).toFixed(2)),
+      duration: Math.max(1, Math.floor(debouncedDuration || 1)),
+    };
+  }, [debouncedDuration, debouncedRate, mortgage]);
+
+  const scenarioResult = useMemo(() => {
+    if (scenarioLoan.type === 1) {
+      return calculateFixedPrincipal(scenarioLoan);
+    }
+    if (scenarioLoan.type === 2) {
+      return calculateFlatRatePayment(scenarioLoan);
+    }
+    return calculateFixedMonthlyPayment(scenarioLoan);
+  }, [scenarioLoan]);
+
+  const maxPressureMonth = useMemo(() => {
+    const list = scenarioResult.monthlyBreakdown || [];
+    if (!list.length) {
+      return 0;
+    }
+
+    return list.reduce((current, item) =>
+      item.totalPayment > current.totalPayment ? item : current,
+    ).month;
+  }, [scenarioResult.monthlyBreakdown]);
+
+  const hasWhatIfChange = useMemo(() => {
+    return (
+      Number(scenarioLoan.int_rate) !== Number(mortgage.int_rate) ||
+      Number(scenarioLoan.duration) !== Number(mortgage.duration)
+    );
+  }, [mortgage.duration, mortgage.int_rate, scenarioLoan.duration, scenarioLoan.int_rate]);
+
   const onGoBack = () => {
     navigationRef.goBack();
   };
+
+  const onApplyScenario = () => {
+    dispatch(setCurrentLoan(scenarioLoan));
+    Toast.show({
+      text1: t("mortgageResult.notificationTitle"),
+      text2: "Đã áp dụng kịch bản mới",
+      type: "success",
+      position: "top",
+    });
+  };
+
   const onNavMortgageLoanResultDetail = () => {
+    if (hasWhatIfChange) {
+      dispatch(setCurrentLoan(scenarioLoan));
+    }
+
     startTransition(() => {
       navigationRef.navigate("MortgageLoanResultDetailScreen", {
         label: route.params.label,
       });
     });
   };
+
+  const onNavCompare = () => {
+    navigationRef.navigate("CompareLoanScreen", {
+      prefill: {
+        loan_amount: scenarioLoan.loan_amount,
+        duration: scenarioLoan.duration,
+        int_rate: scenarioLoan.int_rate,
+        type: scenarioLoan.type,
+        currency: scenarioLoan.currency,
+      },
+    });
+  };
+
   const onSave = useCallback(() => {
     const nextType =
       route.params.label === t("main.mortgage.title")
@@ -74,7 +183,7 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
     if (route.params?.isRecalculate && route.params?.recalculateLoanId) {
       dispatch(
         updateHistoryLoan({
-          ...(mortgage as TLoan),
+          ...(scenarioLoan as TLoan),
           id: route.params.recalculateLoanId,
           label: route.params.label,
           type: nextType,
@@ -97,13 +206,14 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
       position: "top",
     });
     dispatch(
-      addLoan({
-        ...mortgage,
+      addHistoryLoan({
+        ...(scenarioLoan as TLoan),
         label: route.params.label,
         type: nextType,
       }),
     );
-  }, [dispatch, mortgage, t, route.params]);
+  }, [dispatch, route.params, scenarioLoan, t]);
+
   const onSaveAsNew = useCallback(() => {
     Toast.show({
       text1: t("mortgageResult.notificationTitle"),
@@ -122,15 +232,16 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
             : ELoan.PERSONAL_LOAN;
 
     dispatch(
-      addLoan({
-        ...(mortgage as TLoan),
-        id: `${(mortgage as TLoan).id}-copy-${Date.now()}`,
+      addHistoryLoan({
+        ...(scenarioLoan as TLoan),
+        id: `${(scenarioLoan as TLoan).id}-copy-${Date.now()}`,
         label: route.params.label,
         type: nextType,
         date: new Date(),
       }),
     );
-  }, [dispatch, mortgage, route.params.label, t]);
+  }, [dispatch, route.params.label, scenarioLoan, t]);
+
   const onNavSetting = () => {
     navigationRef.navigate("SettingScreen");
   };
@@ -141,15 +252,16 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
     if (!viewRef.current) return;
 
     setTimeout(() => {
-      //@ts-expect-error no check
+      // @ts-expect-error no check
       viewRef.current
         .capture()
         .then((uri) => {
           Share.open({ url: uri, title: t("mortgageResult.resultTitle") });
         })
         .catch(console.log);
-    }, 500); // delay 500ms to ensure render
+    }, 500);
   };
+
   useEffect(() => {
     confettiRef.current?.start();
   }, []);
@@ -162,13 +274,12 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
       onSave();
     }
   }, [isClosed, onSave, shouldSaveAfterAd]);
+
   return (
     <ViewShot
       ref={viewRef}
       options={{
-        fileName: `${t("mortgageResult.result.title")}-${dayjs(
-          new Date(),
-        ).format("DD-MM-YYYY")}`,
+        fileName: `${t("mortgageResult.result.title")}-${dayjs(new Date()).format("DD-MM-YYYY")}`,
         format: "jpg",
         quality: 1,
       }}
@@ -188,41 +299,144 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
               <ICONS.button.setting />
             </AppIconButton>
           </View>
-          {mortgage && (
-            <Suspense
-              fallback={
-                <View
-                  style={[
-                    styles.flex,
-                    styles.flexRow,
-                    styles.gap8,
-                    styles.center,
-                  ]}
-                >
-                  <ActivityIndicator />
-                  <AppText
-                    fontSize={14}
-                    fontWeight={600}
-                    color={COLORS.foundation.neutral.n900}
-                    value={t("loading")}
-                  />
-                </View>
-              }
-            >
-              <Result mortgage={mortgage} label={route.params.label} />
-            </Suspense>
-          )}
-          {!!mortgage && (
-            <AppTrustNotice
-              summary={t("trust.result.estimation")}
-              details={`${getFormulaSummary(mortgage.type || 0, t)}\n\n${getFormulaDetails(
-                mortgage.type || 0,
-                t,
-              )}\n\n${t("trust.disclaimer.notAdvice")}`}
-              expandLabel={t("trust.actions.viewFormula")}
-              collapseLabel={t("trust.actions.hideFormula")}
+
+          <Suspense
+            fallback={
+              <View style={[styles.flex, styles.flexRow, styles.gap8, styles.center]}>
+                <ActivityIndicator />
+                <AppText
+                  fontSize={14}
+                  fontWeight={600}
+                  color={COLORS.foundation.neutral.n900}
+                  value={t("loading")}
+                />
+              </View>
+            }
+          >
+            <Result mortgage={scenarioLoan} label={route.params.label} />
+          </Suspense>
+
+          <View style={styles.insightCard}>
+            <AppText
+              value="Insight nhanh"
+              fontSize={16}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
             />
-          )}
+            <View style={styles.insightRow}>
+              <AppText
+                value="Tổng lãi"
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+              />
+              <AppText
+                value={formatNumber(
+                  scenarioResult.totalInterest,
+                  scenarioLoan.currency.locale,
+                  true,
+                  scenarioLoan.currency.code,
+                )}
+                fontSize={15}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+            </View>
+            <View style={styles.insightRow}>
+              <AppText
+                value="Tổng trả"
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+              />
+              <AppText
+                value={formatNumber(
+                  scenarioResult.totalPayment,
+                  scenarioLoan.currency.locale,
+                  true,
+                  scenarioLoan.currency.code,
+                )}
+                fontSize={15}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+            </View>
+            <View style={styles.insightRow}>
+              <AppText
+                value="Tháng áp lực cao nhất"
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+              />
+              <AppText
+                value={formatMonth(maxPressureMonth, t)}
+                fontSize={15}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+            </View>
+          </View>
+
+          <View style={styles.whatIfCard}>
+            <AppText
+              value="What-if realtime"
+              fontSize={16}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+            />
+            <View style={styles.whatIfSection}>
+              <AppText
+                value={scenarioLoan.type === 2 ? "Lãi suất (%/tháng)" : "Lãi suất (%/năm)"}
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+              />
+              <AppSlider
+                minValue={scenarioLoan.type === 2 ? 0.1 : 1}
+                maxValue={25}
+                curValue={rateDraft}
+                isFloat
+                setCurValue={setRateDraft}
+                prefix={false}
+              />
+            </View>
+            <View style={styles.whatIfSection}>
+              <AppText
+                value="Kỳ hạn (tháng)"
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+              />
+              <AppSlider
+                minValue={1}
+                maxValue={360}
+                curValue={durationDraft}
+                setCurValue={setDurationDraft}
+                prefix={false}
+              />
+            </View>
+            {hasWhatIfChange && (
+              <Pressable style={styles.applyScenarioBtn} onPress={onApplyScenario}>
+                <AppText
+                  value="Dùng kịch bản này"
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n700}
+                />
+              </Pressable>
+            )}
+          </View>
+
+          <AppTrustNotice
+            summary={t("trust.result.estimation")}
+            details={`${getFormulaSummary(scenarioLoan.type || 0, t)}\n\n${getFormulaDetails(
+              scenarioLoan.type || 0,
+              t,
+            )}\n\n${t("trust.disclaimer.notAdvice")}`}
+            expandLabel={t("trust.actions.viewFormula")}
+            collapseLabel={t("trust.actions.hideFormula")}
+          />
+
           <View style={styles.actionGroup}>
             <View style={[styles.rows, styles.gap8]}>
               <Pressable
@@ -263,16 +477,24 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
                 />
               </Pressable>
             </View>
+
+            <Pressable style={[styles.button, styles.compareButton]} onPress={onNavCompare}>
+              <MaterialIcons
+                name="compare-arrows"
+                size={21}
+                color={COLORS.foundation.blue.b500}
+              />
+              <AppText
+                fontSize={14}
+                fontWeight={700}
+                value="So sánh phương án"
+                color={COLORS.foundation.neutral.n700}
+              />
+            </Pressable>
+
             <View style={[styles.rows]}>
-              <Pressable
-                style={[styles.button, styles.homeButton]}
-                onPress={onGoHome}
-              >
-                <Ionicons
-                  name="home"
-                  size={21}
-                  color={COLORS.foundation.blue.b500}
-                />
+              <Pressable style={[styles.button, styles.homeButton]} onPress={onGoHome}>
+                <Ionicons name="home" size={21} color={COLORS.foundation.blue.b500} />
                 <AppText
                   value={t("mortgageResult.home")}
                   color={COLORS.foundation.neutral.n700}
@@ -377,6 +599,10 @@ const styles = StyleSheet.create({
     gap: 10,
     height: 60,
   },
+  compareButton: {
+    height: 56,
+    gap: 10,
+  },
   homeButton: {
     width: 116,
     height: 60,
@@ -399,6 +625,39 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: COLORS.foundation.neutral.n100,
+  },
+  insightCard: {
+    backgroundColor: "rgba(255,255,255,0.94)",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    padding: 14,
+    gap: 10,
+  },
+  insightRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  whatIfCard: {
+    backgroundColor: "rgba(255,255,255,0.94)",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    padding: 14,
+    gap: 10,
+  },
+  whatIfSection: {
+    gap: 4,
+  },
+  applyScenarioBtn: {
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: COLORS.foundation.blue.b50,
+    minHeight: 42,
+    alignItems: "center",
+    justifyContent: "center",
   },
   gap8: {
     gap: 8,

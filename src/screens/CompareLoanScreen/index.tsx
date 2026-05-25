@@ -1,5 +1,6 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 
 import AppIconButton from '../../components/AppIconButton';
@@ -21,6 +22,9 @@ import {navigationRef} from '../../navigation';
 import {RootState} from '../../redux/store';
 import {useTranslation} from 'react-i18next';
 import AppTrustNotice from '../../components/AppTrustNotice';
+import {TNavigation} from '../../utils/types/navigation';
+
+type Props = NativeStackScreenProps<TNavigation, 'CompareLoanScreen'>;
 
 type TLoanOption = {
   loanAmount: string;
@@ -66,12 +70,40 @@ const sanitizeDecimal = (value: string) => {
 const isValidNumberInRange = (value: number, min: number, max: number) =>
   Number.isFinite(value) && value >= min && value <= max;
 
-const CompareLoanScreen = () => {
+const CompareLoanScreen = ({route}: Props) => {
   const {t} = useTranslation();
   const {currency} = useSelector((state: RootState) => state.app);
   const [method, setMethod] = useState(0);
   const [optionA, setOptionA] = useState<TLoanOption>(defaultOptionA);
   const [optionB, setOptionB] = useState<TLoanOption>(defaultOptionB);
+
+  useEffect(() => {
+    const prefill = route.params?.prefill;
+    if (!prefill) {
+      return;
+    }
+
+    const nextMethod = Number.isFinite(prefill.type) ? prefill.type : 0;
+    const nextDuration = Math.max(1, Math.floor(prefill.duration || 1));
+    const nextRate = Math.max(0, prefill.int_rate || 0);
+    const suggestedDuration = Math.min(nextDuration + 12, MAX_DURATION_MONTHS);
+    const suggestedRate = Math.max(
+      0,
+      nextMethod === 2 ? nextRate - 0.2 : nextRate - 0.5,
+    );
+
+    setMethod(nextMethod);
+    setOptionA({
+      loanAmount: `${Math.max(1, Math.floor(prefill.loan_amount || 1))}`,
+      duration: `${nextDuration}`,
+      interestRate: `${nextRate}`,
+    });
+    setOptionB({
+      loanAmount: `${Math.max(1, Math.floor(prefill.loan_amount || 1))}`,
+      duration: `${suggestedDuration}`,
+      interestRate: `${suggestedRate}`,
+    });
+  }, [route.params?.prefill]);
 
   const formatCurrency = (value: number) =>
     formatNumber(value, currency.locale, true, currency.code);
