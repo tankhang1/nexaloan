@@ -22,6 +22,7 @@ import AppIconButton from "../../components/AppIconButton";
 import AppIndicator from "../../components/AppIndicator";
 import AppInput from "../../components/AppInput";
 import AppText from "../../components/AppText";
+import AppTrustNotice from "../../components/AppTrustNotice";
 import AppView from "../../components/AppView";
 import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
@@ -34,14 +35,13 @@ import {
 import { calculateFixedPrincipal } from "../../hooks/fixed_principal";
 import { formatMonth } from "../../hooks/format_month";
 import { formatNumber } from "../../hooks/format_number";
+import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
 import { uuid } from "../../hooks/uuid";
 import { simulateWithExtraPayment } from "../../hooks/what_if_simulator";
 import { navigationRef } from "../../navigation";
 import { TLoan, TPayment, updateLoan } from "../../redux/slices/history";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
-import AppTrustNotice from "../../components/AppTrustNotice";
-import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
 import Table from "./components/Table";
 
 type Props = NativeStackScreenProps<
@@ -196,10 +196,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
     setIsModalVisible(true);
   };
   const onChangePaymentAmount = (value: string) => {
-    const cleanValue = value.replace(/[^0-9.]/g, "");
-    const [firstPart, ...restParts] = cleanValue.split(".");
-    const normalizedValue =
-      restParts.length > 0 ? `${firstPart}.${restParts.join("")}` : firstPart;
+    const normalizedValue = value.replace(/[^0-9]/g, "");
     const nextAmount = Number(normalizedValue);
 
     setPaymentAmount(normalizedValue);
@@ -362,165 +359,168 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
           contentContainerStyle={styles.summaryScrollContent}
         >
           <View style={styles.statistic}>
-          <View style={styles.title}>
-            <AppText
-              value={route.params?.label}
-              fontSize={24}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n700}
-            />
-          </View>
-          <View style={[styles.rows, styles.justifyBetween]}>
-            <AppText
-              value={t("mortgageDetail.loanAmount")}
-              fontSize={14}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n50}
-            />
-            <AppText
-              value={formatNumber(
-                mortgage?.loan_amount || 0,
-                mortgage?.currency?.locale || currency.locale,
-                true,
-                mortgage?.currency?.code || currency.code,
-              )}
-              fontSize={15}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n0}
-            />
-          </View>
-          <View style={[styles.rows, styles.justifyBetween]}>
-            <AppText
-              value={t("mortgageDetail.duration")}
-              fontSize={14}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n50}
-            />
-            <AppText
-              value={formatMonth(mortgage?.duration || 0, t)}
-              fontSize={15}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n0}
-            />
-          </View>
-          <View style={[styles.rows, styles.justifyBetween]}>
-            <AppText
-              value={t("mortgageDetail.interestRate")}
-              fontSize={14}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n50}
-            />
-            <AppText
-              value={`${mortgage?.int_rate || 0}%`}
-              fontSize={15}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n0}
-            />
-          </View>
-          <View style={styles.gap14}>
-            <View style={[styles.rows, styles.gap8]}>
-              <Pressable style={styles.halfWidthButton}>
-                <AppText
-                  fontSize={12}
-                  fontWeight={500}
-                  value={t("mortgageDetail.monthlyPaymentAvg")}
-                  textStyle={styles.center}
-                  color={COLORS.foundation.neutral.n500}
-                />
-                <AppText
-                  allowFontScaling={true}
-                  fontSize={15}
-                  fontWeight={700}
-                  value={formatNumber(
-                    result?.averageMonthlyPayment || 0,
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
-                  color={COLORS.foundation.blue.b500}
-                />
-              </Pressable>
-              <Pressable style={styles.halfWidthButton}>
-                <AppText
-                  fontSize={12}
-                  fontWeight={500}
-                  value={t("mortgageDetail.totalInterestPaid")}
-                  color={COLORS.foundation.neutral.n500}
-                />
-                <AppText
-                  allowFontScaling={true}
-                  fontSize={15}
-                  fontWeight={700}
-                  value={formatNumber(
-                    result?.totalInterest || 0,
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
-                  color={COLORS.foundation.blue.b500}
-                />
-              </Pressable>
-            </View>
-            <Pressable style={styles.fullWidthButton}>
+            <View style={styles.title}>
               <AppText
-                fontSize={12}
+                value={route.params?.label}
+                fontSize={24}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+            </View>
+            <View style={[styles.rows, styles.justifyBetween]}>
+              <AppText
+                value={t("mortgageDetail.loanAmount")}
+                fontSize={14}
                 fontWeight={500}
-                value={t("mortgageDetail.totalPayments")}
-                color={COLORS.foundation.neutral.n500}
+                color={COLORS.foundation.neutral.n50}
               />
               <AppText
-                allowFontScaling={true}
-                fontSize={15}
-                fontWeight={700}
                 value={formatNumber(
-                  result?.totalPayment || 0,
+                  mortgage?.loan_amount || 0,
                   mortgage?.currency?.locale || currency.locale,
                   true,
                   mortgage?.currency?.code || currency.code,
                 )}
-                color={COLORS.foundation.blue.b500}
+                fontSize={15}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n0}
               />
-            </Pressable>
-            <View style={styles.whatIfActionRow}>
-              {route.params?.isHistory && (
-                <Pressable style={styles.recalculateBtn} onPress={onRecalculate}>
-                  <Feather
-                    name="refresh-cw"
-                    size={16}
-                    color={COLORS.foundation.neutral.n700}
+            </View>
+            <View style={[styles.rows, styles.justifyBetween]}>
+              <AppText
+                value={t("mortgageDetail.duration")}
+                fontSize={14}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n50}
+              />
+              <AppText
+                value={formatMonth(mortgage?.duration || 0, t)}
+                fontSize={15}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n0}
+              />
+            </View>
+            <View style={[styles.rows, styles.justifyBetween]}>
+              <AppText
+                value={t("mortgageDetail.interestRate")}
+                fontSize={14}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n50}
+              />
+              <AppText
+                value={`${mortgage?.int_rate || 0}%`}
+                fontSize={15}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n0}
+              />
+            </View>
+            <View style={styles.gap14}>
+              <View style={[styles.rows, styles.gap8]}>
+                <Pressable style={styles.halfWidthButton}>
+                  <AppText
+                    fontSize={12}
+                    fontWeight={500}
+                    value={t("mortgageDetail.monthlyPaymentAvg")}
+                    textStyle={styles.center}
+                    color={COLORS.foundation.neutral.n500}
                   />
                   <AppText
-                    value={t("mortgageResult.recalculate")}
+                    allowFontScaling={true}
+                    fontSize={15}
+                    fontWeight={700}
+                    value={formatNumber(
+                      result?.averageMonthlyPayment || 0,
+                      mortgage?.currency?.locale || currency.locale,
+                      true,
+                      mortgage?.currency?.code || currency.code,
+                    )}
+                    color={COLORS.foundation.blue.b500}
+                  />
+                </Pressable>
+                <Pressable style={styles.halfWidthButton}>
+                  <AppText
+                    fontSize={12}
+                    fontWeight={500}
+                    value={t("mortgageDetail.totalInterestPaid")}
+                    color={COLORS.foundation.neutral.n500}
+                  />
+                  <AppText
+                    allowFontScaling={true}
+                    fontSize={15}
+                    fontWeight={700}
+                    value={formatNumber(
+                      result?.totalInterest || 0,
+                      mortgage?.currency?.locale || currency.locale,
+                      true,
+                      mortgage?.currency?.code || currency.code,
+                    )}
+                    color={COLORS.foundation.blue.b500}
+                  />
+                </Pressable>
+              </View>
+              <Pressable style={styles.fullWidthButton}>
+                <AppText
+                  fontSize={12}
+                  fontWeight={500}
+                  value={t("mortgageDetail.totalPayments")}
+                  color={COLORS.foundation.neutral.n500}
+                />
+                <AppText
+                  allowFontScaling={true}
+                  fontSize={15}
+                  fontWeight={700}
+                  value={formatNumber(
+                    result?.totalPayment || 0,
+                    mortgage?.currency?.locale || currency.locale,
+                    true,
+                    mortgage?.currency?.code || currency.code,
+                  )}
+                  color={COLORS.foundation.blue.b500}
+                />
+              </Pressable>
+              <View style={styles.whatIfActionRow}>
+                {route.params?.isHistory && (
+                  <Pressable
+                    style={styles.recalculateBtn}
+                    onPress={onRecalculate}
+                  >
+                    <Feather
+                      name="refresh-cw"
+                      size={16}
+                      color={COLORS.foundation.neutral.n700}
+                    />
+                    <AppText
+                      value={t("mortgageResult.recalculate")}
+                      fontSize={13}
+                      fontWeight={700}
+                      color={COLORS.foundation.neutral.n700}
+                    />
+                  </Pressable>
+                )}
+                <Pressable
+                  style={[
+                    styles.whatIfOpenBtn,
+                    route.params?.isHistory && styles.whatIfHalfBtn,
+                  ]}
+                  onPress={onOpenWhatIfModal}
+                >
+                  <AppText
+                    value={t("whatIf.title")}
                     fontSize={13}
                     fontWeight={700}
                     color={COLORS.foundation.neutral.n700}
                   />
                 </Pressable>
-              )}
-              <Pressable
-                style={[
-                  styles.whatIfOpenBtn,
-                  route.params?.isHistory && styles.whatIfHalfBtn,
-                ]}
-                onPress={onOpenWhatIfModal}
-              >
-                <AppText
-                  value={t("whatIf.title")}
-                  fontSize={13}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              </Pressable>
+              </View>
+              <AppTrustNotice
+                summary={getFormulaSummary(mortgage?.type || 0, t)}
+                details={`${getFormulaDetails(mortgage?.type || 0, t)}\n\n${t(
+                  "trust.disclaimer.notAdvice",
+                )}`}
+                expandLabel={t("trust.actions.viewFormula")}
+                collapseLabel={t("trust.actions.hideFormula")}
+              />
             </View>
-            <AppTrustNotice
-              summary={getFormulaSummary(mortgage?.type || 0, t)}
-              details={`${getFormulaDetails(mortgage?.type || 0, t)}\n\n${t(
-                "trust.disclaimer.notAdvice",
-              )}`}
-              expandLabel={t("trust.actions.viewFormula")}
-              collapseLabel={t("trust.actions.hideFormula")}
-            />
-          </View>
           </View>
         </ScrollView>
       )}
@@ -575,6 +575,8 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                   color={COLORS.foundation.neutral.n0}
                   fontWeight={600}
                   fontSize={14}
+                  numberOfLines={2}
+                  textStyle={styles.updateBtnText}
                 />
               </Pressable>
             </View>
@@ -1162,10 +1164,16 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   updateBtn: {
+    minWidth: 92,
     backgroundColor: COLORS.foundation.blue.b300,
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  updateBtnText: {
+    textAlign: "center",
   },
   disabledBtn: {
     backgroundColor: COLORS.foundation.neutral.n200,

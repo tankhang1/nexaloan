@@ -455,7 +455,7 @@ const MainScreen = () => {
                       );
                     })()}
                   </View>
-                  <View style={[styles.rows, {marginTop: 4}]}>
+                  <View style={[styles.rows, styles.paymentRow]}>
                     {(() => {
                       const totalPayable = getLoanTotalPayable(loan);
                       const paidAmount = getLoanPaidAmount(loan);
@@ -475,6 +475,7 @@ const MainScreen = () => {
                           fontSize={11}
                           color={COLORS.foundation.neutral.n500}
                           fontWeight={400}
+                          textStyle={styles.paymentAmountText}
                         />
                       );
                     })()}
@@ -482,7 +483,14 @@ const MainScreen = () => {
                       style={styles.updateBtn}
                       onPress={() => onUpdatePayment(loan)}
                     >
-                      <AppText value={t('main.updatePayment')} fontSize={12} color={COLORS.foundation.blue.b300} fontWeight={600} />
+                      <AppText
+                        value={t('main.updatePayment')}
+                        fontSize={12}
+                        color={COLORS.foundation.blue.b300}
+                        fontWeight={600}
+                        numberOfLines={2}
+                        textStyle={styles.updateBtnText}
+                      />
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -811,11 +819,30 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: COLORS.foundation.blue.b300,
   },
+  paymentRow: {
+    marginTop: 4,
+    gap: 8,
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+  },
+  paymentAmountText: {
+    flexShrink: 1,
+    flexGrow: 1,
+    paddingRight: 8,
+  },
   updateBtn: {
+    flexShrink: 1,
+    minWidth: 92,
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 8,
     backgroundColor: COLORS.foundation.blue.b50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  updateBtnText: {
+    textAlign: 'center',
+    flexShrink: 1,
   },
   modalOverlay: {
     ...StyleSheet.absoluteFillObject,

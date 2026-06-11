@@ -1,6 +1,6 @@
-import {StyleProp, Text, TextStyle} from 'react-native';
-import React from 'react';
-import {FONT_FAMILY} from '../../constants/font_family';
+import React from "react";
+import { StyleProp, Text, TextStyle } from "react-native";
+import { FONT_FAMILY } from "../../constants/font_family";
 
 type TAppText = {
   value: string;
@@ -26,7 +26,7 @@ const AppText = ({
 }: TAppText) => {
   return (
     <Text
-      allowFontScaling={allowFontScaling}
+      allowFontScaling={false}
       numberOfLines={numberOfLines}
       style={[
         {
@@ -37,7 +37,8 @@ const AppText = ({
         },
         textStyle,
         appStyle,
-      ]}>
+      ]}
+    >
       {value}
     </Text>
   );

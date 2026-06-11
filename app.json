@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F8F9FA"
+      "backgroundColor": "#0B8F79"
     },
     "ios": {
       "supportsTablet": true,
@@ -39,16 +39,14 @@
       [
         "react-native-permissions",
         {
-          "iosPermissions": [
-            "AppTrackingTransparency"
-          ]
+          "iosPermissions": ["AppTrackingTransparency"]
         }
       ],
       [
         "react-native-google-mobile-ads",
         {
           "androidAppId": "ca-app-pub-3012411444875177~2256962439",
-          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "iosAppId": "ca-app-pub-3012411444875177~1606055279",
           "userTrackingUsageDescription": "This identifier will be used to deliver more relevant ads to you."
         }
       ],
