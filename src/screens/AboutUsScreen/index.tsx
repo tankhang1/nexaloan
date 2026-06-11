@@ -1,21 +1,21 @@
-import {StyleSheet, View, ScrollView, Image} from 'react-native';
-import AppView from '../../components/AppView';
-import AppIconButton from '../../components/AppIconButton';
-import {ICONS} from '../../constants/icon';
-import AppText from '../../components/AppText';
-import {useTranslation} from 'react-i18next';
-import {COLORS} from '../../constants/colors';
-import {navigationRef} from '../../navigation';
-import React, {useMemo} from 'react';
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
+import AppIconButton from "../../components/AppIconButton";
+import AppText from "../../components/AppText";
+import AppView from "../../components/AppView";
+import { COLORS } from "../../constants/colors";
+import { ICONS } from "../../constants/icon";
+import { navigationRef } from "../../navigation";
 
 const AboutUsScreen = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const appVersionText = useMemo(() => {
     const version =
       Constants.expoConfig?.version ||
       Constants.nativeApplicationVersion ||
-      '1.0.0';
+      "1.0.7";
     const build = Constants.nativeBuildVersion;
     return build ? `Version ${version} (${build})` : `Version ${version}`;
   }, []);
@@ -29,17 +29,20 @@ const AboutUsScreen = () => {
           <ICONS.button.chervon_left />
         </AppIconButton>
         <AppText
-          value={t('settings.aboutUs')}
+          value={t("settings.aboutUs")}
           fontSize={20}
           fontWeight={600}
           color={COLORS.foundation.neutral.n700}
         />
       </View>
-      <ScrollView contentContainerStyle={styles.body} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={styles.body}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.logoContainer}>
           <Image
             source={{
-              uri: 'https://nexa-tech-team.vercel.app/assets/logo-CJsuXJSw_1768365608404-CJsuXJSw.jpg',
+              uri: "https://nexa-tech-team.vercel.app/assets/logo-CJsuXJSw_1768365608404-CJsuXJSw.jpg",
             }}
             style={styles.logo}
           />
@@ -58,7 +61,7 @@ const AboutUsScreen = () => {
 
         <View style={styles.section}>
           <AppText
-            value={t('settings.aboutContent.description')}
+            value={t("settings.aboutContent.description")}
             color={COLORS.foundation.neutral.n500}
             fontSize={16}
             lineHeight={24}
@@ -67,7 +70,7 @@ const AboutUsScreen = () => {
 
         <View style={styles.section}>
           <AppText
-            value={t('settings.aboutContent.features.title')}
+            value={t("settings.aboutContent.features.title")}
             color={COLORS.foundation.neutral.n700}
             fontSize={18}
             fontWeight={600}
@@ -89,7 +92,7 @@ const AboutUsScreen = () => {
 
         <View style={styles.section}>
           <AppText
-            value={t('settings.aboutContent.mission')}
+            value={t("settings.aboutContent.mission")}
             color={COLORS.foundation.neutral.n500}
             fontSize={16}
             lineHeight={24}
@@ -98,7 +101,7 @@ const AboutUsScreen = () => {
 
         <View style={styles.footer}>
           <AppText
-            value={t('settings.aboutContent.contact')}
+            value={t("settings.aboutContent.contact")}
             color={COLORS.foundation.blue.b300}
             fontSize={14}
             fontWeight={500}
@@ -107,7 +110,7 @@ const AboutUsScreen = () => {
             value="© 2024 Nexa Loan. All rights reserved."
             color={COLORS.foundation.neutral.n200}
             fontSize={12}
-            appStyle={{marginTop: 8}}
+            appStyle={{ marginTop: 8 }}
           />
         </View>
       </ScrollView>
@@ -118,11 +121,11 @@ export default AboutUsScreen;
 const styles = StyleSheet.create({
   overall: {
     flex: 1,
-    width: '100%',
+    width: "100%",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 12,
     paddingHorizontal: 16,
     gap: 20,
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   logoContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 32,
     gap: 8,
   },
@@ -151,8 +154,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 10,
   },
   dot: {
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     marginTop: 20,
-    alignItems: 'center',
+    alignItems: "center",
     borderTopWidth: 1,
     borderTopColor: COLORS.foundation.neutral.n200,
     paddingTop: 24,
