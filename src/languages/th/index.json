@@ -46,7 +46,7 @@
       "title": "สินเชื่อธุรกิจ",
       "desc": "วิเคราะห์ตัวเลือกสินเชื่อเพื่อช่วยบริหารกระแสเงินสดและการเงินธุรกิจ"
     },
-    "payAll": "Pay all"
+    "payAll": "ชำระทั้งหมด"
   },
   "compareLoan": {
     "title": "เปรียบเทียบสินเชื่อ",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "อัตราดอกเบี้ย (%/เดือน)",
     "results": "ผลการเปรียบเทียบ",
     "monthlyPayment": "ยอดชำระรายเดือน",
+    "monthlyPaymentAvg": "ยอดชำระรายเดือนเฉลี่ย",
     "averageMonthlyPayment": "ยอดชำระเฉลี่ยต่อเดือน",
     "totalPayment": "ยอดชำระทั้งหมด",
     "totalInterest": "ดอกเบี้ยทั้งหมด",
@@ -80,7 +81,8 @@
     "descFixedPayment": "ค่างวดรายเดือนคงที่ วางแผนงบประมาณส่วนตัวได้ง่าย",
     "descFixedPrincipal": "แบ่งเงินต้นเท่ากัน ยอดชำระรวมจะลดลงตามเวลา",
     "descFlatRate": "ดอกเบี้ยคิดจากเงินต้นเดิมเสมอ มักใช้กับสินเชื่อรายย่อย",
-    "calculate": "คำนวณ"
+    "calculate": "คำนวณ",
+    "viewResult": "ดูผลลัพธ์"
   },
   "mortgageResult": {
     "amortization": "ตารางผ่อนชำระ",
@@ -140,6 +142,7 @@
     "year": "ปี",
     "interestRate": "ดอกเบี้ย (%)",
     "monthlyPayment": "ค่างวดรายเดือน",
+    "monthlyPaymentAvg": "ค่างวดรายเดือน (เฉลี่ย)",
     "totalPayments": "ยอดชำระรวม",
     "totalInterestPaid": "ดอกเบี้ยรวม",
     "amortization": "ตารางผ่อนชำระ",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech คือทีมพัฒนาขนาดเล็กที่คล่องตัว มุ่งสร้างและเปิดตัวโซลูชันดิจิทัลฟรีที่ใช้งานได้จริง เราเชี่ยวชาญในการสร้างเว็บและแอปมือถือเพื่อแก้ปัญหาในชีวิตประจำวัน",
       "mission": "พันธกิจของเราคือแก้ปัญหาในชีวิตประจำวันด้วยผลิตภัณฑ์ดิจิทัลคุณภาพสูงและฟรี รวมถึงเว็บแอป แอปมือถือ และเครื่องมือโอเพนซอร์ส",
+      "versionLabel": "เวอร์ชัน",
+      "copyright": "© {{year}} Nexa Loan. สงวนลิขสิทธิ์",
       "features": {
         "title": "ค่านิยมหลัก",
         "f1": "สร้างผลิตภัณฑ์ที่ใช้งานได้จริงทันที",
@@ -261,45 +266,45 @@
     "desc": "เรากำลังพัฒนาฟีเจอร์นี้ โปรดกลับมาตรวจสอบอีกครั้งในภายหลัง!"
   },
   "loading": "กำลังประมวลผลข้อมูล",
-  "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "whatIf": {
+    "title": "จำลองสถานการณ์",
+    "extraMonthly": "จ่ายเพิ่มต่อเดือน",
+    "monthsSaved": "จำนวนเดือนที่ประหยัดได้",
+    "interestSaved": "ดอกเบี้ยที่ประหยัดได้",
+    "newPayoff": "ระยะเวลาปิดหนี้ใหม่",
+    "newTotalPayment": "ยอดชำระรวมใหม่",
+    "supportNote": "V1 รองรับการจำลองเฉพาะค่างวดคงที่เท่านั้น"
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "เป็นเพียงการประมาณการ เงื่อนไขจริงของสินเชื่อ ค่าธรรมเนียม ภาษี และนโยบายของผู้ให้กู้ อาจทำให้ยอดชำระสุดท้ายเปลี่ยนแปลงได้",
+      "long": "เครื่องมือนี้ให้ค่าประมาณเพื่อการศึกษาโดยอิงจากข้อมูลที่คุณกรอกและวิธีคำนวณที่เลือก ผลลัพธ์จริงอาจแตกต่างได้จากค่าธรรมเนียมของผู้ให้กู้ ประกัน ภาษี ค่าปรับ โปรโมชั่น กฎการปัดเศษ และวันที่เบิกจ่าย กรุณายืนยันเงื่อนไขสุดท้ายกับผู้ให้กู้โดยตรง",
+      "notAdvice": "เนื้อหานี้มีไว้เพื่อให้ข้อมูลเท่านั้น และไม่ถือเป็นคำแนะนำทางการเงิน"
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "ดูรายละเอียดสูตร",
+      "hideFormula": "ซ่อนรายละเอียดสูตร",
+      "readDisclaimer": "อ่านคำเตือนฉบับเต็ม",
+      "hideDisclaimer": "ซ่อนคำเตือน"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "เป็นเพียงการประมาณการ ยอดชำระจริงอาจแตกต่างตามผู้ให้กู้และเงื่อนไขสัญญา"
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "การเปรียบเทียบใช้สมมติฐานเดียวกันทั้งสองตัวเลือกเพื่อให้ผลลัพธ์ยุติธรรม"
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "ค่างวดคงที่: ค่างวดรายเดือนคำนวณด้วยสูตรผ่อนชำระโดยใช้เงินต้น อัตราดอกเบี้ย และระยะเวลา",
+        "details": "ค่างวดรายเดือน = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: เงินต้น\nr: อัตราดอกเบี้ยรายเดือน\nn: จำนวนเดือนทั้งหมด\nยอดชำระรวม = ผลรวมของค่างวดรายเดือนทั้งหมด\nดอกเบี้ยรวม = ยอดชำระรวม - เงินต้น"
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "เงินต้นคงที่: ส่วนเงินต้นเท่ากันทุกเดือน และดอกเบี้ยจะลดลงตามเวลา",
+        "details": "เงินต้นรายเดือน = P / n\nดอกเบี้ยรายเดือน (เดือน k) = เงินต้นคงเหลือ * r\nค่างวดรายเดือน = เงินต้นรายเดือน + ดอกเบี้ยรายเดือน\nดอกเบี้ยรวม = ผลรวมของดอกเบี้ยรายเดือนทั้งหมด"
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "ดอกเบี้ยคงที่: ดอกเบี้ยคิดจากเงินต้นเดิมตลอดทั้งระยะเวลา",
+        "details": "ดอกเบี้ยรวม = P * r * n\nดอกเบี้ยรายเดือน = ดอกเบี้ยรวม / n\nค่างวดรายเดือน = (P / n) + ดอกเบี้ยรายเดือน\nหมายเหตุ: วิธีนี้ในแอปใช้หน่วย %/เดือน"
       }
     }
   }

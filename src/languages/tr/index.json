@@ -45,8 +45,8 @@
       "title": "Ticari Kredi",
       "desc": "İşletmeniz için uygun kredi seçeneklerini\nanaliz ederek finansmanı optimize edin."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
-    "payAll": "Pay all"
+    "heroDesc": "Ödemeleri tahmin edin, kredi senaryolarını inceleyin ve hesaplarınızı tek bir yerde düzenli tutun.",
+    "payAll": "Hepsini öde"
   },
   "compareLoan": {
     "title": "Kredileri Karşılaştır",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "Faiz Oranı (%/ay)",
     "results": "Karşılaştırma Sonuçları",
     "monthlyPayment": "Aylık Ödeme",
+    "monthlyPaymentAvg": "Ortalama aylık ödeme",
     "averageMonthlyPayment": "Ortalama Aylık Ödeme",
     "totalPayment": "Toplam Ödeme",
     "totalInterest": "Toplam Faiz",
@@ -78,6 +79,7 @@
     "fixedPrincipal": "Azalan Faizli Geri Ödeme\n(Eşit Anapara Sistemi)",
     "flatRate": "Sabit Faiz",
     "calculate": "Hesapla",
+    "viewResult": "Sonucu görüntüle",
     "descFixedPayment": "Aylık ödeme sabit. Bütçe planlaması için kolay.",
     "descFixedPrincipal": "Anapara eşit bölünür. Ödeme azalır, faiz maliyeti düşük.",
     "descFlatRate": "Faiz ana para üzerinden. Tüketici kredilerinde yaygın."
@@ -140,6 +142,7 @@
     "years": "Yıllar",
     "interestRate": "Faiz Oranı (%)",
     "monthlyPayment": "Aylık Taksit",
+    "monthlyPaymentAvg": "Ortalama aylık taksit",
     "totalPayments": "Toplam Ödeme",
     "totalInterestPaid": "Toplam Ödenen Faiz",
     "amortization": "Geri Ödeme Planı",
@@ -164,60 +167,62 @@
     "terms": "Kullanım Koşulları",
     "privacy": "Gizlilik Politikası",
     "aboutContent": {
-      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
-      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "description": "Nexa Tech, pratik ve ücretsiz dijital çözümler geliştiren ve yayınlayan küçük ve çevik bir geliştirme ekibidir. Günlük yaygın sorunları çözmek için web ve mobil uygulamalar oluşturmada uzmanız.",
+      "mission": "Misyonumuz, web uygulamaları, mobil uygulamalar ve açık kaynak araçlar dahil olmak üzere yüksek kaliteli ve ücretsiz dijital ürünler oluşturarak günlük ihtiyaçları çözmektir.",
+      "versionLabel": "Sürüm",
+      "copyright": "© {{year}} Nexa Loan. Tüm hakları saklıdır.",
       "features": {
-        "title": "Core Values",
-        "f1": "Building practical products for immediate use",
-        "f2": "User-centric approach",
-        "f3": "Open source and community sharing",
-        "f4": "Completely free for users"
+        "title": "Temel Değerler",
+        "f1": "Hemen kullanılabilecek pratik ürünler geliştirmek",
+        "f2": "Kullanıcı odaklı yaklaşım",
+        "f3": "Açık kaynak ve topluluk paylaşımı",
+        "f4": "Kullanıcılar için tamamen ücretsiz"
       },
-      "contact": "Email: cs.nexatech@gmail.com",
+      "contact": "E-posta: cs.nexatech@gmail.com",
       "team": {
-        "title": "Our Team",
-        "ethan": "Ethan - Tech Lead",
-        "tina": "Tina - Team Lead"
+        "title": "Ekibimiz",
+        "ethan": "Ethan - Teknik lider",
+        "tina": "Tina - Ekip lideri"
       }
     },
     "termsContent": {
-      "title": "TERMS OF SERVICE",
-      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "title": "HİZMET ŞARTLARI",
+      "intro": "Nexa Loan'a hoş geldiniz. Uygulamamızı kullanarak aşağıdaki şartları kabul etmiş olursunuz:",
       "section1": {
-        "title": "1. Acceptance of Terms",
-        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+        "title": "1. Şartların kabulü",
+        "content": "Nexa Loan'a erişerek veya kullanarak, bu Şartlara ve tüm geçerli yasa ve yönetmeliklere bağlı kalmayı kabul edersiniz."
       },
       "section2": {
-        "title": "2. Use of Service",
-        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+        "title": "2. Hizmetin kullanımı",
+        "content": "Uygulamayı yasal amaçlarla kullanmayı ve üçüncü tarafların haklarını ihlal etmemeyi kabul edersiniz."
       },
       "section3": {
-        "title": "3. Intellectual Property",
-        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+        "title": "3. Fikri mülkiyet",
+        "content": "Nexa Loan'a ait tüm içerik, logo ve tasarımlar telif hakkımız kapsamındadır. Onay olmadan kopyalanamaz."
       },
       "section4": {
-        "title": "4. Limitation of Liability",
-        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+        "title": "4. Sorumluluğun sınırlandırılması",
+        "content": "Uygulamadaki hesaplama sonuçlarının kullanımından doğabilecek finansal kayıplardan sorumlu değiliz. Rakamlar yalnızca referans amaçlıdır."
       }
     },
     "privacyContent": {
-      "title": "PRIVACY POLICY",
-      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "title": "GİZLİLİK POLİTİKASI",
+      "intro": "Nexa Loan gizliliğinizi korumayı taahhüt eder. Bu politika bilgilerinizi nasıl işlediğimizi açıklar.",
       "section1": {
-        "title": "1. Information Collection",
-        "content": "We collect information you provide directly when using app features such as loan amount and term."
+        "title": "1. Bilgi toplama",
+        "content": "Kredi tutarı ve vade gibi uygulama özelliklerini kullanırken doğrudan sağladığınız bilgileri toplarız."
       },
       "section2": {
-        "title": "2. Information Use",
-        "content": "The information is used to perform calculations and improve user experience."
+        "title": "2. Bilgilerin kullanımı",
+        "content": "Bilgiler hesaplamaları gerçekleştirmek ve kullanıcı deneyimini iyileştirmek için kullanılır."
       },
       "section3": {
-        "title": "3. Data Security",
-        "content": "We apply strict security measures to ensure the safety of your personal data."
+        "title": "3. Veri güvenliği",
+        "content": "Kişisel verilerinizin güvenliğini sağlamak için sıkı güvenlik önlemleri uygularız."
       },
       "section4": {
-        "title": "4. Your Rights",
-        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+        "title": "4. Haklarınız",
+        "content": "Kişisel bilgilerinizi istediğiniz zaman görüntüleme, düzenleme veya silme talebinde bulunma hakkınız vardır."
       }
     }
   },
@@ -262,44 +267,44 @@
   },
   "loading": "Veriler işleniyor",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "Senaryo simülatörü",
+    "extraMonthly": "Aylık ek ödeme",
+    "monthsSaved": "Kazanılan ay",
+    "interestSaved": "Tasarruf edilen faiz",
+    "newPayoff": "Yeni kapanış süresi",
+    "newTotalPayment": "Yeni toplam ödeme",
+    "supportNote": "V1 şu anda yalnızca Sabit Ödeme için simülasyonu destekler."
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "Yalnızca tahmindir. Gerçek kredi koşulları, ücretler, vergiler ve sağlayıcı politikaları nihai geri ödeme tutarını değiştirebilir.",
+      "long": "Bu hesaplayıcı, girdilerinize ve seçilen yönteme dayalı eğitim amaçlı tahminler sağlar. Sonuçlar; ücretler, sigorta, vergiler, cezalar, kampanyalar, yuvarlama kuralları ve ödeme tarihleri nedeniyle değişebilir. Nihai koşulları doğrudan kredi sağlayıcınızla doğrulayın.",
+      "notAdvice": "Bu içerik yalnızca bilgilendirme amaçlıdır ve finansal tavsiye değildir."
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "Formül ayrıntılarını göster",
+      "hideFormula": "Formül ayrıntılarını gizle",
+      "readDisclaimer": "Tam feragatnameyi oku",
+      "hideDisclaimer": "Feragatnameyi gizle"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "Yalnızca tahmindir. Nihai geri ödeme, sağlayıcı ve sözleşme koşullarına göre değişebilir."
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "Karşılaştırma, sonuçların adil olması için her iki seçenekte de aynı varsayımları kullanır."
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "Sabit Ödeme: aylık ödeme, anapara, oran ve vade kullanılarak amortismanla hesaplanır.",
+        "details": "Aylık ödeme = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: anapara tutarı\nr: aylık faiz oranı\nn: toplam ay sayısı\nToplam ödeme = tüm aylık ödemelerin toplamı\nToplam faiz = Toplam ödeme - Anapara."
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "Sabit Anapara: anapara kısmı her ay sabit kalır; faiz zamanla azalır.",
+        "details": "Aylık anapara = P / n\nAylık faiz (k ayı) = Kalan anapara * r\nAylık ödeme = Aylık anapara + Aylık faiz\nToplam faiz = aylık faizlerin toplamı."
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "Sabit Oran: faiz, tüm vade boyunca başlangıç anaparası üzerinden hesaplanır.",
+        "details": "Toplam faiz = P * r * n\nAylık faiz = Toplam faiz / n\nAylık ödeme = (P / n) + Aylık faiz\nNot: Bu uygulamada bu yöntem için %/ay kullanılır."
       }
     }
   }

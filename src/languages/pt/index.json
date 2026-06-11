@@ -45,8 +45,8 @@
       "title": "Crédito Empresarial",
       "desc": "Analise opções de crédito\npara otimizar o capital da sua empresa."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
-    "payAll": "Pay all"
+    "heroDesc": "Estime pagamentos, explore cenários de empréstimo e mantenha seus cálculos organizados em um só lugar.",
+    "payAll": "Pagar tudo"
   },
   "compareLoan": {
     "title": "Comparar Empréstimos",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "Taxa de Juros (%/mês)",
     "results": "Resultados da Comparação",
     "monthlyPayment": "Pagamento Mensal",
+    "monthlyPaymentAvg": "Pagamento médio mensal",
     "averageMonthlyPayment": "Pagamento Médio Mensal",
     "totalPayment": "Pagamento Total",
     "totalInterest": "Juros Totais",
@@ -78,6 +79,7 @@
     "fixedPrincipal": "Sistema SAC\n(Amortização Constante)",
     "flatRate": "Taxa Plana",
     "calculate": "Calcular",
+    "viewResult": "Ver resultado",
     "descFixedPayment": "Parcela fixa mensal. Mais fácil para planejamento.",
     "descFixedPrincipal": "Amortização fixa. Parcela diminui, juros menores.",
     "descFlatRate": "Juros sobre o valor inicial. Comum em varejo."
@@ -140,6 +142,7 @@
     "year": "Ano",
     "interestRate": "Juros (%)",
     "monthlyPayment": "Parcela Mensal",
+    "monthlyPaymentAvg": "Parcela média mensal",
     "totalPayments": "Total Pago",
     "totalInterestPaid": "Total de Juros Pagos",
     "amortization": "Tabela de Amortização",
@@ -164,60 +167,62 @@
     "terms": "Termos e Condições",
     "privacy": "Política de Privacidade",
     "aboutContent": {
-      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
-      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "description": "A Nexa Tech é uma equipe de desenvolvimento pequena e ágil, dedicada a criar e lançar soluções digitais práticas e gratuitas. Somos especializados em aplicações web e mobile para resolver desafios comuns do dia a dia.",
+      "mission": "Nossa missão é resolver necessidades do dia a dia criando produtos digitais gratuitos e de alta qualidade, incluindo apps web, apps móveis e ferramentas open source.",
+      "versionLabel": "Versão",
+      "copyright": "© {{year}} Nexa Loan. Todos os direitos reservados.",
       "features": {
-        "title": "Core Values",
-        "f1": "Building practical products for immediate use",
-        "f2": "User-centric approach",
-        "f3": "Open source and community sharing",
-        "f4": "Completely free for users"
+        "title": "Valores fundamentais",
+        "f1": "Criar produtos práticos para uso imediato",
+        "f2": "Abordagem centrada no utilizador",
+        "f3": "Código aberto e partilha com a comunidade",
+        "f4": "Totalmente gratuito para os utilizadores"
       },
-      "contact": "Email: cs.nexatech@gmail.com",
+      "contact": "E-mail: cs.nexatech@gmail.com",
       "team": {
-        "title": "Our Team",
-        "ethan": "Ethan - Tech Lead",
-        "tina": "Tina - Team Lead"
+        "title": "Nossa equipe",
+        "ethan": "Ethan - Líder técnico",
+        "tina": "Tina - Líder da equipe"
       }
     },
     "termsContent": {
-      "title": "TERMS OF SERVICE",
-      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "title": "TERMOS DE SERVIÇO",
+      "intro": "Bem-vindo ao Nexa Loan. Ao usar o nosso app, você concorda com os seguintes termos:",
       "section1": {
-        "title": "1. Acceptance of Terms",
-        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+        "title": "1. Aceitação dos Termos",
+        "content": "Ao acessar ou usar o Nexa Loan, você concorda em cumprir estes Termos e todas as leis e regulamentos aplicáveis."
       },
       "section2": {
-        "title": "2. Use of Service",
-        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+        "title": "2. Uso do Serviço",
+        "content": "Você concorda em usar o app para fins lícitos e a não violar os direitos de terceiros."
       },
       "section3": {
-        "title": "3. Intellectual Property",
-        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+        "title": "3. Propriedade Intelectual",
+        "content": "Todo o conteúdo, logotipos e design do Nexa Loan são protegidos por direitos autorais. Você não pode copiá-los sem consentimento."
       },
       "section4": {
-        "title": "4. Limitation of Liability",
-        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+        "title": "4. Limitação de Responsabilidade",
+        "content": "Não nos responsabilizamos por quaisquer perdas financeiras decorrentes do uso dos resultados de cálculo no app. Os números servem apenas como referência."
       }
     },
     "privacyContent": {
-      "title": "PRIVACY POLICY",
-      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "title": "POLÍTICA DE PRIVACIDADE",
+      "intro": "O Nexa Loan está comprometido em proteger a sua privacidade. Esta política explica como lidamos com as suas informações.",
       "section1": {
-        "title": "1. Information Collection",
-        "content": "We collect information you provide directly when using app features such as loan amount and term."
+        "title": "1. Recolha de informações",
+        "content": "Recolhemos informações que você fornece diretamente ao usar recursos do app, como valor do empréstimo e prazo."
       },
       "section2": {
-        "title": "2. Information Use",
-        "content": "The information is used to perform calculations and improve user experience."
+        "title": "2. Uso das informações",
+        "content": "As informações são usadas para realizar cálculos e melhorar a experiência do utilizador."
       },
       "section3": {
-        "title": "3. Data Security",
-        "content": "We apply strict security measures to ensure the safety of your personal data."
+        "title": "3. Segurança dos dados",
+        "content": "Aplicamos medidas de segurança rigorosas para garantir a proteção dos seus dados pessoais."
       },
       "section4": {
-        "title": "4. Your Rights",
-        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+        "title": "4. Os seus direitos",
+        "content": "Você tem o direito de solicitar a visualização, edição ou exclusão dos seus dados pessoais a qualquer momento."
       }
     }
   },
@@ -262,44 +267,44 @@
   },
   "loading": "Os dados estão sendo processados",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "Simulador de cenários",
+    "extraMonthly": "Pagamento extra mensal",
+    "monthsSaved": "Meses economizados",
+    "interestSaved": "Juros economizados",
+    "newPayoff": "Novo prazo de quitação",
+    "newTotalPayment": "Novo pagamento total",
+    "supportNote": "A V1 atualmente suporta simulação apenas para Pagamento Fixo."
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "Apenas estimativas. Os termos reais do empréstimo, taxas, impostos e políticas da instituição podem alterar o valor final da prestação.",
+      "long": "Esta calculadora fornece estimativas educativas com base nos seus dados e no método selecionado. Os resultados podem variar devido a taxas da instituição, seguro, impostos, penalidades, promoções, regras de arredondamento e datas de desembolso. Confirme os termos finais diretamente com a sua instituição.",
+      "notAdvice": "Este conteúdo é apenas informativo e não constitui aconselhamento financeiro."
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "Ver detalhes da fórmula",
+      "hideFormula": "Ocultar detalhes da fórmula",
+      "readDisclaimer": "Ler isenção completa",
+      "hideDisclaimer": "Ocultar isenção"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "Apenas estimativa. A prestação final pode variar conforme a instituição e os termos do contrato."
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "A comparação usa as mesmas premissas para ambas as opções, para manter o resultado justo."
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "Pagamento Fixo: o pagamento mensal é calculado com amortização usando principal, taxa e prazo.",
+        "details": "Pagamento mensal = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: valor principal\nr: taxa de juros mensal\nn: total de meses\nPagamento total = soma de todos os pagamentos mensais\nJuros totais = Pagamento total - Principal."
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "Principal Fixo: a parcela do principal permanece constante a cada mês; os juros diminuem ao longo do tempo.",
+        "details": "Principal mensal = P / n\nJuros mensais (mês k) = Principal restante * r\nPagamento mensal = Principal mensal + Juros mensais\nJuros totais = soma dos juros mensais."
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "Taxa Plana: os juros são calculados sobre o principal original durante todo o prazo.",
+        "details": "Juros totais = P * r * n\nJuros mensais = Juros totais / n\nPagamento mensal = (P / n) + Juros mensais\nNota: este app usa %/mês para este método."
       }
     }
   }

@@ -46,7 +46,7 @@
       "title": "ビジネスローン",
       "desc": "事業資金に最適なローンの選択肢を\n分析・比較できます。"
     },
-    "payAll": "Pay all"
+    "payAll": "全額返済"
   },
   "compareLoan": {
     "title": "ローンを比較",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "金利（%/月）",
     "results": "比較結果",
     "monthlyPayment": "月々の支払い",
+    "monthlyPaymentAvg": "平均月額",
     "averageMonthlyPayment": "平均月額",
     "totalPayment": "総支払額",
     "totalInterest": "総利息",
@@ -80,7 +81,8 @@
     "descFixedPayment": "月々の支払額が固定されます。家計管理がしやすい方式です。",
     "descFixedPrincipal": "元金を均等に分けます。総支払額は時間とともに減少します。",
     "descFlatRate": "利息は常に当初元本に対して計算されます。小口ローンでよく使われます。",
-    "calculate": "計算する"
+    "calculate": "計算する",
+    "viewResult": "結果を見る"
   },
   "mortgageResult": {
     "amortization": "返済計画表",
@@ -140,6 +142,7 @@
     "year": "年",
     "interestRate": "金利（％）",
     "monthlyPayment": "月々の返済額",
+    "monthlyPaymentAvg": "平均月額",
     "totalPayments": "総返済額",
     "totalInterestPaid": "支払総利息",
     "amortization": "返済計画表",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech は、実用的で無料のデジタルソリューションを開発・提供する小規模で機動力のある開発チームです。日常の課題を解決する Web アプリやモバイルアプリの制作を得意としています。",
       "mission": "私たちの使命は、Web アプリ、モバイルアプリ、オープンソースツールなど、高品質で無料のデジタル製品を通じて日常のニーズを解決することです。",
+      "versionLabel": "バージョン",
+      "copyright": "© {{year}} Nexa Loan. 全著作権所有。",
       "features": {
         "title": "コアバリュー",
         "f1": "すぐに使える実用的な製品を作る",
@@ -262,44 +267,44 @@
   },
   "loading": "データを処理中です",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "もしもシミュレーター",
+    "extraMonthly": "毎月の追加返済額",
+    "monthsSaved": "短縮できる月数",
+    "interestSaved": "節約できる利息",
+    "newPayoff": "新しい完済時期",
+    "newTotalPayment": "新しい総返済額",
+    "supportNote": "V1 では現在、固定返済のみシミュレーションに対応しています。"
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "これは概算です。実際の契約条件、手数料、税金、金融機関の方針により最終返済額は変わる場合があります。",
+      "long": "この計算機は、入力内容と選択した方式に基づく教育目的の概算を表示します。手数料、保険、税金、違約金、キャンペーン、端数処理、実行日などにより結果は変わる場合があります。最終条件は必ず金融機関にご確認ください。",
+      "notAdvice": "この内容は情報提供のみを目的としており、金融アドバイスではありません。"
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "計算式の詳細を見る",
+      "hideFormula": "計算式の詳細を隠す",
+      "readDisclaimer": "免責事項を読む",
+      "hideDisclaimer": "免責事項を隠す"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "概算のみです。最終返済額は金融機関や契約条件によって異なる場合があります。"
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "比較では、結果を公平にするため両方の条件を同じ前提で計算しています。"
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "固定返済: 元金、金利、期間を使って元利均等返済で月々の支払いを計算します。",
+        "details": "月々の返済額 = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: 元金\nr: 月利\nn: 総月数\n総返済額 = すべての月々の返済額の合計\n総利息 = 総返済額 - 元金。"
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "固定元金: 元金部分は毎月一定で、利息は時間とともに減少します。",
+        "details": "毎月の元金 = P / n\n毎月の利息（k月目）= 残元金 * r\n月々の返済額 = 毎月の元金 + 毎月の利息\n総利息 = 毎月の利息の合計。"
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "フラットレート: 利息は全期間を通して当初元金に対して計算されます。",
+        "details": "総利息 = P * r * n\n毎月の利息 = 総利息 / n\n月々の返済額 = (P / n) + 毎月の利息\n注: このアプリではこの方式に %/月 を使用しています。"
       }
     }
   }

@@ -423,7 +423,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                 <AppText
                   fontSize={12}
                   fontWeight={500}
-                  value={t("mortgageDetail.monthlyPayment") + " (Avg)"}
+                  value={t("mortgageDetail.monthlyPaymentAvg")}
                   textStyle={styles.center}
                   color={COLORS.foundation.neutral.n500}
                 />
@@ -784,7 +784,7 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                     disabled={paymentStats.remainingAmount <= 0}
                   >
                     <AppText
-                      value={t("main.payAll", {defaultValue: "Pay all"})}
+                      value={t("main.payAll")}
                       color={COLORS.foundation.blue.b300}
                       fontWeight={700}
                       fontSize={12}

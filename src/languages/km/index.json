@@ -46,7 +46,7 @@
       "title": "ប្រាក់កម្ចីអាជីវកម្ម",
       "desc": "វិភាគជម្រើសប្រាក់កម្ចី ដើម្បីជួយលំហូរសាច់ប្រាក់ និងការសម្រេចចិត្តហិរញ្ញវត្ថុអាជីវកម្ម។"
     },
-    "payAll": "Pay all"
+    "payAll": "បង់ទាំងអស់"
   },
   "compareLoan": {
     "title": "ប្រៀបធៀបប្រាក់កម្ចី",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "អត្រាការប្រាក់ (%/ខែ)",
     "results": "លទ្ធផលប្រៀបធៀប",
     "monthlyPayment": "ការបង់ប្រចាំខែ",
+    "monthlyPaymentAvg": "ការបង់ប្រចាំខែជាមធ្យម",
     "averageMonthlyPayment": "ការបង់មធ្យមប្រចាំខែ",
     "totalPayment": "ការបង់សរុប",
     "totalInterest": "ការប្រាក់សរុប",
@@ -80,7 +81,8 @@
     "descFixedPayment": "ការបង់ប្រចាំខែថេរ។ ងាយស្រួលសម្រាប់រៀបចំថវិកាផ្ទាល់ខ្លួន។",
     "descFixedPrincipal": "ដើមទុនត្រូវបានបែងចែកស្មើៗគ្នា។ ប្រាក់បង់សរុបនឹងថយចុះតាមពេលវេលា។",
     "descFlatRate": "ការប្រាក់តែងតែគណនាលើដើមទុនដើម។ ជារឿងធម្មតាសម្រាប់កម្ចីលក់រាយ។",
-    "calculate": "គណនា"
+    "calculate": "គណនា",
+    "viewResult": "មើលលទ្ធផល"
   },
   "mortgageResult": {
     "amortization": "តារាងសងប្រាក់",
@@ -140,6 +142,7 @@
     "year": "ឆ្នាំ",
     "interestRate": "ការប្រាក់ (%)",
     "monthlyPayment": "ការបង់ប្រចាំខែ",
+    "monthlyPaymentAvg": "ការបង់ប្រចាំខែជាមធ្យម",
     "totalPayments": "ប្រាក់បង់សរុប",
     "totalInterestPaid": "ការប្រាក់សរុប",
     "amortization": "តារាងសងប្រាក់",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech គឺជាក្រុមអភិវឌ្ឍន៍តូច និងរហ័ស ដែលបង្កើតដំណោះស្រាយឌីជីថលឥតគិតថ្លៃដែលមានប្រយោជន៍។ យើងមានជំនាញក្នុងការបង្កើតគេហទំព័រ និងកម្មវិធីទូរស័ព្ទដើម្បីដោះស្រាយបញ្ហាប្រចាំថ្ងៃ។",
       "mission": "បេសកកម្មរបស់យើងគឺដោះស្រាយតម្រូវការប្រចាំថ្ងៃដោយបង្កើតផលិតផលឌីជីថលគុណភាពខ្ពស់ និងឥតគិតថ្លៃ។",
+      "versionLabel": "កំណែ",
+      "copyright": "© {{year}} Nexa Loan. រក្សាសិទ្ធិគ្រប់យ៉ាង។",
       "features": {
         "title": "តម្លៃស្នូល",
         "f1": "បង្កើតផលិតផលអនុវត្តបានភ្លាមៗ",
@@ -262,44 +267,44 @@
   },
   "loading": "កំពុងដំណើរការទិន្នន័យ",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "កម្មវិធីសាកល្បង What-if",
+    "extraMonthly": "ការបង់បន្ថែមប្រចាំខែ",
+    "monthsSaved": "ខែដែលសន្សំបាន",
+    "interestSaved": "ការប្រាក់ដែលសន្សំបាន",
+    "newPayoff": "ពេលបញ្ចប់ថ្មី",
+    "newTotalPayment": "ការបង់សរុបថ្មី",
+    "supportNote": "កំណែ V1 គាំទ្រតែការសាកល្បងសម្រាប់ Fixed Payment ប៉ុណ្ណោះ។"
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "គ្រាន់តែជាការប៉ាន់ស្មានប៉ុណ្ណោះ។ លក្ខខណ្ឌកម្ចីពិតប្រាកដ កម្រៃ ស tax និងគោលនយោបាយអ្នកផ្តល់កម្ចីអាចផ្លាស់ប្តូរលទ្ធផលចុងក្រោយ។",
+      "long": "ម៉ាស៊ីនគណនានេះផ្តល់ការប៉ាន់ស្មានសម្រាប់គោលបំណងអប់រំ ដោយផ្អែកលើការបញ្ចូលរបស់អ្នក និងវិធីសាស្ត្រដែលបានជ្រើស។ លទ្ធផលអាចខុសដោយសារកម្រៃអ្នកផ្តល់កម្ចី ការធានារ៉ាប់រង ពន្ធ ការពិន័យ ការផ្សព្វផ្សាយ ច្បាប់បង្គត់ និងកាលបរិច្ឆេទដំណោះស្រាយ។ សូមបញ្ជាក់លក្ខខណ្ឌចុងក្រោយជាមួយអ្នកផ្តល់កម្ចីដោយផ្ទាល់។",
+      "notAdvice": "មាតិកានេះគ្រាន់តែសម្រាប់ព័ត៌មានប៉ុណ្ណោះ ហើយមិនមែនជាដំបូន្មានហិរញ្ញវត្ថុទេ។"
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "មើលលម្អិតរូបមន្ត",
+      "hideFormula": "លាក់លម្អិតរូបមន្ត",
+      "readDisclaimer": "អានការបដិសេធពេញលេញ",
+      "hideDisclaimer": "លាក់ការបដិសេធ"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "គ្រាន់តែជាការប៉ាន់ស្មានប៉ុណ្ណោះ។ ការបង់ចុងក្រោយអាចខុសគ្នាតាមអ្នកផ្តល់កម្ចី និងលក្ខខណ្ឌកិច្ចសន្យា។"
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "ការប្រៀបធៀបប្រើការសន្មត់ដូចគ្នាសម្រាប់ជម្រើសទាំងពីរ ដើម្បីរក្សាលទ្ធផលឲ្យយុត្តិធម៌។"
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "Fixed Payment: ការបង់ប្រចាំខែត្រូវបានគណនាតាមរយៈការបង់សងដោយប្រើប្រាស់ប្រាក់ដើម អត្រា និងរយៈពេល។",
+        "details": "ការបង់ប្រចាំខែ = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: ចំនួនប្រាក់ដើម\nr: អត្រាការប្រាក់ប្រចាំខែ\nn: ចំនួនខែសរុប\nការបង់សរុប = ផលបូកនៃការបង់ប្រចាំខែទាំងអស់\nការប្រាក់សរុប = ការបង់សរុប - ប្រាក់ដើម។"
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "Fixed Principal: ផ្នែកប្រាក់ដើមនៅថេររៀងរាល់ខែ ខណៈការប្រាក់ថយចុះតាមពេលវេលា។",
+        "details": "ប្រាក់ដើមប្រចាំខែ = P / n\nការប្រាក់ប្រចាំខែ (ខែ k) = ប្រាក់ដើមនៅសល់ * r\nការបង់ប្រចាំខែ = ប្រាក់ដើមប្រចាំខែ + ការប្រាក់ប្រចាំខែ\nការប្រាក់សរុប = ផលបូកនៃការប្រាក់ប្រចាំខែ។"
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "Flat Rate: ការប្រាក់ត្រូវបានគណនាលើប្រាក់ដើមដើមសម្រាប់រយៈពេលពេញលេញ។",
+        "details": "ការប្រាក់សរុប = P * r * n\nការប្រាក់ប្រចាំខែ = ការប្រាក់សរុប / n\nការបង់ប្រចាំខែ = (P / n) + ការប្រាក់ប្រចាំខែ\nចំណាំ: កម្មវិធីនេះប្រើ %/ខែ សម្រាប់វិធីសាស្ត្រនេះ។"
       }
     }
   }

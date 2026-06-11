@@ -46,7 +46,7 @@
       "title": "ເງິນກູ້ທຸລະກິດ",
       "desc": "ວິເຄາະຕົວເລືອກເງິນກູ້ເພື່ອຊ່ວຍກະແສເງິນສົດ ແລະການເງິນທຸລະກິດ."
     },
-    "payAll": "Pay all"
+    "payAll": "ຈ່າຍທັງໝົດ"
   },
   "compareLoan": {
     "title": "ປຽບທຽບເງິນກູ້",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "ອັດຕາດອກເບ້ຍ (%/ເດືອນ)",
     "results": "ຜົນການປຽບທຽບ",
     "monthlyPayment": "ການຊໍາລະລາຍເດືອນ",
+    "monthlyPaymentAvg": "ຄ່າສະເລ່ຍຕໍ່ເດືອນ",
     "averageMonthlyPayment": "ຄ່າສະເລ່ຍຕໍ່ເດືອນ",
     "totalPayment": "ຍອດຊໍາລະທັງໝົດ",
     "totalInterest": "ດອກເບ້ຍທັງໝົດ",
@@ -80,7 +81,8 @@
     "descFixedPayment": "ຄ່າຜ່ອນລາຍເດືອນຄົງທີ່. ງ່າຍຕໍ່ການວາງແຜນງົບປະມານ.",
     "descFixedPrincipal": "ແບ່ງເງິນຕົ້ນເທົ່າກັນ. ຍອດຊຳລະລວມຈະຫຼຸດລົງຕາມເວລາ.",
     "descFlatRate": "ດອກເບ້ຍຄຳນວນຈາກເງິນຕົ້ນເດີມສະເໝີ. ພົບເຫັນບ່ອຍໃນເງິນກູ້ລາຍຍ່ອຍ.",
-    "calculate": "ຄຳນວນ"
+    "calculate": "ຄຳນວນ",
+    "viewResult": "ເບິ່ງຜົນລັບ"
   },
   "mortgageResult": {
     "amortization": "ຕາຕະລາງຊຳລະ",
@@ -140,6 +142,7 @@
     "year": "ປີ",
     "interestRate": "ດອກເບ້ຍ (%)",
     "monthlyPayment": "ຄ່າຜ່ອນລາຍເດືອນ",
+    "monthlyPaymentAvg": "ຄ່າຜ່ອນລາຍເດືອນສະເລ່ຍ",
     "totalPayments": "ຍອດຊຳລະລວມ",
     "totalInterestPaid": "ດອກເບ້ຍລວມ",
     "amortization": "ຕາຕະລາງຊຳລະ",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech ແມ່ນທີມພັດທະນາຂະໜາດນ້ອຍທີ່ຄ່ອງຕົວ ມຸ່ງເນັ້ນສ້າງໂຊລູຊັນດິຈິຕອນຟຣີທີ່ໃຊ້ໄດ້ຈິງ.",
       "mission": "ພາລະກິດຂອງພວກເຮົາແມ່ນການແກ້ໄຂຄວາມຕ້ອງການປະຈຳວັນດ້ວຍຜະລິດຕະພັນດິຈິຕອນຄຸນນະພາບສູງແລະຟຣີ.",
+      "versionLabel": "ຮຸ່ນ",
+      "copyright": "© {{year}} Nexa Loan. ສະຫງວນລິຂະສິດທັງໝົດ.",
       "features": {
         "title": "ຄຸນຄ່າຫຼັກ",
         "f1": "ສ້າງຜະລິດຕະພັນທີ່ໃຊ້ໄດ້ຈິງທັນທີ",
@@ -262,44 +267,44 @@
   },
   "loading": "ກຳລັງປະມວນຜົນຂໍ້ມູນ",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "ເຄື່ອງຈຳລອງ What-if",
+    "extraMonthly": "ຈ່າຍເພີ່ມປະຈຳເດືອນ",
+    "monthsSaved": "ຈຳນວນເດືອນທີ່ປະຫຍັດໄດ້",
+    "interestSaved": "ດອກເບ້ຍທີ່ປະຫຍັດໄດ້",
+    "newPayoff": "ເວລາປິດບັນຊີໃໝ່",
+    "newTotalPayment": "ຍອດຈ່າຍລວມໃໝ່",
+    "supportNote": "V1 ຮອງຮັບການຈຳລອງສຳລັບ Fixed Payment ເທົ່ານັ້ນ."
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "ເປັນພຽງການປະເມີນເທົ່ານັ້ນ. ເງື່ອນໄຂກູ້ຢືມ ຄ່າທຳນຽມ ພາສີ ແລະນະໂຍບາຍຜູ້ໃຫ້ກູ້ອາດປ່ຽນຕົວເລກການຊຳລະສຸດທ້າຍ.",
+      "long": "ເຄື່ອງຄຳນວນນີ້ໃຫ້ການປະເມີນເພື່ອການຮຽນຮູ້ ໂດຍອີງຕາມຂໍ້ມູນທີ່ທ່ານໃສ່ ແລະວິທີການທີ່ເລືອກ. ຜົນອາດແຕກຕ່າງໄດ້ຈາກຄ່າທຳນຽມ ປະກັນໄພ ພາສີ ຄ່າປັບ ໂປຣໂມຊັນ ກົດກາການປັດເສດເລກ ແລະວັນທີປ່ອຍເງິນ. ກະລຸນາຢືນຢັນເງື່ອນໄຂສຸດທ້າຍກັບຜູ້ໃຫ້ກູ້ໂດຍກົງ.",
+      "notAdvice": "ເນື້ອຫານີ້ມີໄວ້ເພື່ອຂໍ້ມູນເທົ່ານັ້ນ ແລະບໍ່ແມ່ນຄຳແນະນຳດ້ານການເງິນ."
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "ເບິ່ງລາຍລະອຽດສູດ",
+      "hideFormula": "ຊ່ອນລາຍລະອຽດສູດ",
+      "readDisclaimer": "ອ່ານຂໍ້ປະຕິເສດເຕັມ",
+      "hideDisclaimer": "ຊ່ອນຂໍ້ປະຕິເສດ"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "ເປັນພຽງການປະເມີນເທົ່ານັ້ນ. ການຊຳລະສຸດທ້າຍອາດແຕກຕ່າງຕາມຜູ້ໃຫ້ກູ້ ແລະເງື່ອນໄຂສັນຍາ."
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "ການປຽບທຽບໃຊ້ສົມມຸດຕິຖານດຽວກັນສຳລັບທັງສອງຕົວເລືອກເພື່ອໃຫ້ຜົນຍຸດຕິທຳ."
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "Fixed Payment: ການຈ່າຍປະຈຳເດືອນຖືກຄຳນວນໂດຍໃຊ້ການຜ່ອນຊຳລະຕາມເງິນຕົ້ນ, ອັດຕາ, ແລະລະຍະເວລາ.",
+        "details": "ການຈ່າຍປະຈຳເດືອນ = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: ຈຳນວນເງິນຕົ້ນ\nr: ອັດຕາດອກເບ້ຍປະຈຳເດືອນ\nn: ຈຳນວນເດືອນລວມ\nການຈ່າຍລວມ = ຜົນບວກຂອງການຈ່າຍປະຈຳເດືອນທັງໝົດ\nດອກເບ້ຍລວມ = ການຈ່າຍລວມ - ເງິນຕົ້ນ."
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "Fixed Principal: ສ່ວນເງິນຕົ້ນຄົງທີ່ໃນແຕ່ລະເດືອນ ແລະດອກເບ້ຍຫຼຸດລົງຕາມເວລາ.",
+        "details": "ເງິນຕົ້ນປະຈຳເດືອນ = P / n\nດອກເບ້ຍປະຈຳເດືອນ (ເດືອນ k) = ເງິນຕົ້ນທີ່ເຫຼືອ * r\nການຈ່າຍປະຈຳເດືອນ = ເງິນຕົ້ນປະຈຳເດືອນ + ດອກເບ້ຍປະຈຳເດືອນ\nດອກເບ້ຍລວມ = ຜົນບວກຂອງດອກເບ້ຍປະຈຳເດືອນ."
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "Flat Rate: ດອກເບ້ຍຖືກຄຳນວນຈາກເງິນຕົ້ນເດີມຕະຫຼອດລະຍະເວລາ.",
+        "details": "ດອກເບ້ຍລວມ = P * r * n\nດອກເບ້ຍປະຈຳເດືອນ = ດອກເບ້ຍລວມ / n\nການຈ່າຍປະຈຳເດືອນ = (P / n) + ດອກເບ້ຍປະຈຳເດືອນ\nໝາຍເຫດ: ແອັບນີ້ໃຊ້ %/ເດືອນສຳລັບວິທີນີ້."
       }
     }
   }

@@ -45,8 +45,8 @@
       "title": "Credit pentru Afaceri",
       "desc": "Analizează opțiunile de creditare\npentru a optimiza finanțarea companiei."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
-    "payAll": "Pay all"
+    "heroDesc": "Estimați plățile, explorați scenarii de împrumut și păstrați calculele organizate într-un singur loc.",
+    "payAll": "Plătește tot"
   },
   "compareLoan": {
     "title": "Compară Împrumuturi",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "Rata Dobânzii (%/lună)",
     "results": "Rezultate Comparație",
     "monthlyPayment": "Plată Lunară",
+    "monthlyPaymentAvg": "Plată lunară medie",
     "averageMonthlyPayment": "Plată Medie Lunară",
     "totalPayment": "Plată Totală",
     "totalInterest": "Dobândă Totală",
@@ -78,6 +79,7 @@
     "fixedPrincipal": "Principal Fix\nDobândă Descrescătoare",
     "flatRate": "Rată Fixă (Flat)",
     "calculate": "Calculează",
+    "viewResult": "Vezi rezultatul",
     "descFixedPayment": "Rata lunară este fixă. Mai ușor pentru planificarea bugetului.",
     "descFixedPrincipal": "Rambursare egală a principalului. Rata lunară scade în timp.",
     "descFlatRate": "Dobânda se calculează la suma inițială. Comun la credite de consum."
@@ -140,6 +142,7 @@
     "years": "Ani",
     "interestRate": "Dobândă (%)",
     "monthlyPayment": "Rată Lunară",
+    "monthlyPaymentAvg": "Ratǎ lunară medie",
     "totalPayments": "Total de Plată",
     "totalInterestPaid": "Dobândă Totală Plătită",
     "amortization": "Grafic de Rambursare",
@@ -164,60 +167,62 @@
     "terms": "Termeni și Condiții",
     "privacy": "Politica de Confidențialitate",
     "aboutContent": {
-      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
-      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "description": "Nexa Tech este o echipă mică și agilă de dezvoltare, dedicată construirii și livrării de soluții digitale practice și gratuite. Suntem specializați în aplicații web și mobile care rezolvă provocările de zi cu zi.",
+      "mission": "Misiunea noastră este să rezolvăm nevoile cotidiene prin produse digitale gratuite și de înaltă calitate, inclusiv aplicații web, aplicații mobile și instrumente open-source.",
+      "versionLabel": "Versiune",
+      "copyright": "© {{year}} Nexa Loan. Toate drepturile rezervate.",
       "features": {
-        "title": "Core Values",
-        "f1": "Building practical products for immediate use",
-        "f2": "User-centric approach",
-        "f3": "Open source and community sharing",
-        "f4": "Completely free for users"
+        "title": "Valori de bază",
+        "f1": "Construim produse practice, gata de folosit imediat",
+        "f2": "Abordare centrată pe utilizator",
+        "f3": "Open source și partajare în comunitate",
+        "f4": "Complet gratuit pentru utilizatori"
       },
-      "contact": "Email: cs.nexatech@gmail.com",
+      "contact": "E-mail: cs.nexatech@gmail.com",
       "team": {
-        "title": "Our Team",
-        "ethan": "Ethan - Tech Lead",
-        "tina": "Tina - Team Lead"
+        "title": "Echipa noastră",
+        "ethan": "Ethan - Lead tehnic",
+        "tina": "Tina - Lead echipă"
       }
     },
     "termsContent": {
-      "title": "TERMS OF SERVICE",
-      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "title": "TERMENI ȘI CONDIȚII",
+      "intro": "Bine ați venit la Nexa Loan. Folosind aplicația noastră, sunteți de acord cu următorii termeni:",
       "section1": {
-        "title": "1. Acceptance of Terms",
-        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+        "title": "1. Acceptarea termenilor",
+        "content": "Prin accesarea sau utilizarea Nexa Loan, sunteți de acord să respectați acești Termeni și toate legile și reglementările aplicabile."
       },
       "section2": {
-        "title": "2. Use of Service",
-        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+        "title": "2. Utilizarea serviciului",
+        "content": "Sunteți de acord să utilizați aplicația în scopuri legale și să nu încălcați drepturile niciunei terțe părți."
       },
       "section3": {
-        "title": "3. Intellectual Property",
-        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+        "title": "3. Proprietate intelectuală",
+        "content": "Tot conținutul, siglele și designurile Nexa Loan sunt protejate de drepturi de autor. Nu le puteți copia fără consimțământ."
       },
       "section4": {
-        "title": "4. Limitation of Liability",
-        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+        "title": "4. Limitarea răspunderii",
+        "content": "Nu suntem responsabili pentru nicio pierdere financiară apărută din utilizarea rezultatelor de calcul din aplicație. Valorile sunt doar orientative."
       }
     },
     "privacyContent": {
-      "title": "PRIVACY POLICY",
-      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "title": "POLITICA DE CONFIDENȚIALITATE",
+      "intro": "Nexa Loan se angajează să vă protejeze confidențialitatea. Această politică explică modul în care gestionăm informațiile dvs.",
       "section1": {
-        "title": "1. Information Collection",
-        "content": "We collect information you provide directly when using app features such as loan amount and term."
+        "title": "1. Colectarea informațiilor",
+        "content": "Colectăm informațiile pe care le furnizați direct atunci când folosiți funcții ale aplicației, precum suma și perioada împrumutului."
       },
       "section2": {
-        "title": "2. Information Use",
-        "content": "The information is used to perform calculations and improve user experience."
+        "title": "2. Utilizarea informațiilor",
+        "content": "Informațiile sunt folosite pentru efectuarea calculelor și îmbunătățirea experienței utilizatorului."
       },
       "section3": {
-        "title": "3. Data Security",
-        "content": "We apply strict security measures to ensure the safety of your personal data."
+        "title": "3. Securitatea datelor",
+        "content": "Aplicăm măsuri stricte de securitate pentru a asigura protecția datelor dvs. personale."
       },
       "section4": {
-        "title": "4. Your Rights",
-        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+        "title": "4. Drepturile dvs.",
+        "content": "Aveți dreptul să solicitați oricând vizualizarea, editarea sau ștergerea informațiilor dvs. personale."
       }
     }
   },
@@ -262,44 +267,44 @@
   },
   "loading": "Datele sunt în curs de procesare",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "Simulator ipotetic",
+    "extraMonthly": "Plată suplimentară lunară",
+    "monthsSaved": "Luni economisite",
+    "interestSaved": "Dobândă economisită",
+    "newPayoff": "Noua dată de achitare",
+    "newTotalPayment": "Noua plată totală",
+    "supportNote": "V1 acceptă momentan simularea doar pentru plata fixă."
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "Doar estimări. Termenii reali ai împrumutului, taxele și politicile creditorului pot modifica suma finală de rambursare.",
+      "long": "Acest calculator oferă estimări educative pe baza datelor introduse și a metodei selectate. Rezultatele pot diferi din cauza taxelor, asigurărilor, impozitelor, penalităților, promoțiilor, regulilor de rotunjire și datelor de decontare. Vă rugăm să confirmați termenii finali direct cu creditorul.",
+      "notAdvice": "Acest conținut are doar rol informativ și nu reprezintă consultanță financiară."
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "Vezi detaliile formulei",
+      "hideFormula": "Ascunde detaliile formulei",
+      "readDisclaimer": "Citește declarația completă",
+      "hideDisclaimer": "Ascunde declarația"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "Doar estimare. Plata finală poate diferi în funcție de creditor și termenii contractului."
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "Compararea folosește aceleași ipoteze pentru ambele opțiuni, pentru a menține corectitudinea rezultatului."
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "Plata fixă: plata lunară este calculată prin amortizare folosind principalul, rata și termenul.",
+        "details": "Plata lunară = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: suma principală\nr: rata lunară a dobânzii\nn: numărul total de luni\nPlata totală = suma tuturor plăților lunare\nDobândă totală = Plata totală - Principal."
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "Principal fix: partea de principal rămâne constantă în fiecare lună; dobânda scade în timp.",
+        "details": "Principal lunar = P / n\nDobândă lunară (luna k) = Principal rămas * r\nPlata lunară = Principal lunar + Dobândă lunară\nDobândă totală = suma dobânzilor lunare."
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "Rată fixă: dobânda este calculată pe principalul inițial pe toată durata.",
+        "details": "Dobândă totală = P * r * n\nDobândă lunară = Dobândă totală / n\nPlata lunară = (P / n) + Dobândă lunară\nNotă: aplicația folosește %/lună pentru această metodă."
       }
     }
   }

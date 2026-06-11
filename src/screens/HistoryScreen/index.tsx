@@ -308,7 +308,9 @@ const HistoryScreen = () => {
 
       <View style={styles.filterCard}>
         <AppText
-          value="Bộ lọc nâng cao"
+          value={t('history.filters.advancedTitle', {
+            defaultValue: 'Advanced filter',
+          })}
           fontSize={15}
           fontWeight={700}
           color={COLORS.foundation.neutral.n700}
@@ -316,7 +318,9 @@ const HistoryScreen = () => {
         <View style={styles.filterRow}>
           <View style={styles.filterCol}>
             <AppText
-              value="Số tiền từ"
+              value={t('history.filters.amountFrom', {
+                defaultValue: 'Amount from',
+              })}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -336,7 +340,9 @@ const HistoryScreen = () => {
           </View>
           <View style={styles.filterCol}>
             <AppText
-              value="Số tiền đến"
+              value={t('history.filters.amountTo', {
+                defaultValue: 'Amount to',
+              })}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -350,7 +356,9 @@ const HistoryScreen = () => {
               color={COLORS.foundation.neutral.n700}
               fontSize={15}
               fontWeight={600}
-              placeholder="Không giới hạn"
+              placeholder={t('history.filters.noLimit', {
+                defaultValue: 'No limit',
+              })}
               placeholderTextColor={COLORS.foundation.neutral.n200}
             />
           </View>
@@ -358,7 +366,9 @@ const HistoryScreen = () => {
         <View style={styles.filterRow}>
           <View style={styles.filterCol}>
             <AppText
-              value="Từ ngày"
+              value={t('history.filters.dateFrom', {
+                defaultValue: 'From date',
+              })}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -370,7 +380,12 @@ const HistoryScreen = () => {
                 pressed && styles.dateFieldPressed,
               ]}>
               <AppText
-                value={formattedDate(filters.dateFrom) || "Chọn ngày"}
+                value={
+                  formattedDate(filters.dateFrom) ||
+                  t('history.filters.selectDate', {
+                    defaultValue: 'Select date',
+                  })
+                }
                 fontSize={15}
                 fontWeight={600}
                 color={
@@ -384,7 +399,9 @@ const HistoryScreen = () => {
           </View>
           <View style={styles.filterCol}>
             <AppText
-              value="Đến ngày"
+              value={t('history.filters.dateTo', {
+                defaultValue: 'To date',
+              })}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -396,7 +413,12 @@ const HistoryScreen = () => {
                 pressed && styles.dateFieldPressed,
               ]}>
               <AppText
-                value={formattedDate(filters.dateTo) || "Chọn ngày"}
+                value={
+                  formattedDate(filters.dateTo) ||
+                  t('history.filters.selectDate', {
+                    defaultValue: 'Select date',
+                  })
+                }
                 fontSize={15}
                 fontWeight={600}
                 color={
@@ -415,7 +437,9 @@ const HistoryScreen = () => {
         {listHistory.length === 0 && (
           <View style={styles.emptyState}>
             <AppText
-              value="Không có khoản vay nào khớp bộ lọc"
+              value={t('history.filters.noMatch', {
+                defaultValue: 'No loans match the filter',
+              })}
               fontSize={13}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -423,7 +447,9 @@ const HistoryScreen = () => {
             />
             <Pressable onPress={resetFilters} style={styles.resetFilterBtn}>
               <AppText
-                value="Xóa bộ lọc"
+                value={t('history.filters.clearFilter', {
+                  defaultValue: 'Clear filter',
+                })}
                 fontSize={13}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n700}

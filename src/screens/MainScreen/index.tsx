@@ -608,12 +608,12 @@ const MainScreen = () => {
                 style={styles.payAllBtn}
                 onPress={onPayAll}
                 disabled={selectedRemainingAmount <= 0}>
-                <AppText
-                  value={t('main.payAll', {defaultValue: 'Pay all'})}
-                  color={COLORS.foundation.blue.b300}
-                  fontWeight={700}
-                  fontSize={12}
-                />
+                  <AppText
+                    value={t('main.payAll')}
+                    color={COLORS.foundation.blue.b300}
+                    fontWeight={700}
+                    fontSize={12}
+                  />
               </TouchableOpacity>
               {!!paymentError && (
                 <AppText

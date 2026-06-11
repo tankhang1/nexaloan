@@ -60,6 +60,7 @@
     "monthlyInterestRate": "Lãi Suất (%/tháng)",
     "results": "Kết Quả So Sánh",
     "monthlyPayment": "Khoản Trả Hàng Tháng",
+    "monthlyPaymentAvg": "Khoản trả hàng tháng (TB)",
     "averageMonthlyPayment": "Trả Trung Bình/Tháng",
     "totalPayment": "Tổng Thanh Toán",
     "totalInterest": "Tổng Tiền Lãi",
@@ -80,7 +81,8 @@
     "descFixedPayment": "Số tiền trả hàng tháng cố định. Dễ dàng lập kế hoạch chi tiêu.",
     "descFixedPrincipal": "Tiền gốc chia đều. Tổng tiền trả giảm dần, tổng lãi thấp hơn.",
     "descFlatRate": "Lãi tính trên gốc ban đầu. Thường dùng cho vay tiêu dùng trả góp.",
-    "calculate": "Tính Toán"
+    "calculate": "Tính Toán",
+    "viewResult": "Xem kết quả"
   },
   "mortgageResult": {
     "amortization": "Chi tiết",
@@ -140,6 +142,7 @@
     "years": "Năm",
     "interestRate": "Lãi Suất (%)",
     "monthlyPayment": "Khoản Trả Hàng Tháng",
+    "monthlyPaymentAvg": "Khoản trả hàng tháng (TB)",
     "totalPayments": "Tổng Số Tiền Thanh Toán",
     "totalInterestPaid": "Tổng Tiền Lãi Phải Trả",
     "amortization": "Chi tiết",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech là một đội ngũ phát triển nhỏ và linh hoạt, chuyên xây dựng các giải pháp kỹ thuật số thiết thực và miễn phí. Chúng tôi tập trung vào việc tạo ra các ứng dụng web, di động và công cụ mã nguồn mở để giải quyết các thách thức hàng ngày.",
       "mission": "Sứ mệnh của chúng tôi là giải quyết các nhu cầu thiết yếu hàng ngày bằng cách tạo ra các sản phẩm kỹ thuật số chất lượng cao, miễn phí và hữu ích cho mọi người.",
+      "versionLabel": "Phiên bản",
+      "copyright": "© {{year}} Nexa Loan. Bảo lưu mọi quyền.",
       "features": {
         "title": "Giá Trị Cốt Lõi",
         "f1": "Xây dựng sản phẩm thực tế, dùng được ngay",

@@ -17,7 +17,12 @@ const AboutUsScreen = () => {
       Constants.nativeApplicationVersion ||
       "1.0.7";
     const build = Constants.nativeBuildVersion;
-    return build ? `Version ${version} (${build})` : `Version ${version}`;
+    const versionLabel = t("settings.aboutContent.versionLabel", {
+      defaultValue: "Version",
+    });
+    return build
+      ? `${versionLabel} ${version} (${build})`
+      : `${versionLabel} ${version}`;
   }, []);
   const onGoBack = () => {
     navigationRef.goBack();
@@ -107,7 +112,9 @@ const AboutUsScreen = () => {
             fontWeight={500}
           />
           <AppText
-            value="© 2024 Nexa Loan. All rights reserved."
+            value={t("settings.aboutContent.copyright", {
+              defaultValue: "© 2024 Nexa Loan. All rights reserved.",
+            })}
             color={COLORS.foundation.neutral.n200}
             fontSize={12}
             appStyle={{ marginTop: 8 }}

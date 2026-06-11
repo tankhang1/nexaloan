@@ -46,7 +46,7 @@
       "title": "사업자 대출",
       "desc": "현금 흐름과 사업 자금 결정을 위한 대출 옵션을 분석하세요."
     },
-    "payAll": "Pay all"
+    "payAll": "전체 상환"
   },
   "compareLoan": {
     "title": "대출 비교",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "금리(%/월)",
     "results": "비교 결과",
     "monthlyPayment": "월 상환액",
+    "monthlyPaymentAvg": "평균 월 상환액",
     "averageMonthlyPayment": "평균 월 상환액",
     "totalPayment": "총 상환액",
     "totalInterest": "총 이자",
@@ -80,7 +81,8 @@
     "descFixedPayment": "매월 상환액이 고정됩니다. 개인 예산 관리에 쉽습니다.",
     "descFixedPrincipal": "원금을 균등하게 나눕니다. 총 상환액은 시간이 지날수록 줄어듭니다.",
     "descFlatRate": "이자는 항상 최초 원금 기준으로 계산됩니다. 소매 대출에서 흔합니다.",
-    "calculate": "계산하기"
+    "calculate": "계산하기",
+    "viewResult": "결과 보기"
   },
   "mortgageResult": {
     "amortization": "상환 일정",
@@ -140,6 +142,7 @@
     "year": "년",
     "interestRate": "금리(%)",
     "monthlyPayment": "월 상환액",
+    "monthlyPaymentAvg": "평균 월 상환액",
     "totalPayments": "총 상환액",
     "totalInterestPaid": "총 이자",
     "amortization": "상환 일정",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech는 실용적이고 무료인 디지털 솔루션을 만들고 출시하는 작고 민첩한 개발팀입니다. 일상 문제를 해결하는 웹 및 모바일 애플리케이션 제작을 전문으로 합니다.",
       "mission": "우리의 목표는 웹 앱, 모바일 앱, 오픈소스 도구 등 고품질 무료 디지털 제품으로 일상의 필요를 해결하는 것입니다.",
+      "versionLabel": "버전",
+      "copyright": "© {{year}} Nexa Loan. 모든 권리 보유.",
       "features": {
         "title": "핵심 가치",
         "f1": "바로 사용할 수 있는 실용적인 제품 만들기",
@@ -272,34 +277,34 @@
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "이는 추정치입니다. 실제 대출 조건, 수수료, 세금, 금융기관 정책에 따라 최종 상환액이 달라질 수 있습니다.",
+      "long": "이 계산기는 입력값과 선택한 방식에 기반한 교육용 추정치를 제공합니다. 수수료, 보험, 세금, 위약금, 프로모션, 반올림 규칙, 실행일 등에 따라 결과가 달라질 수 있습니다. 최종 조건은 반드시 금융기관에 직접 확인하세요.",
+      "notAdvice": "이 내용은 정보 제공용이며 금융 조언이 아닙니다."
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "공식 상세 보기",
+      "hideFormula": "공식 상세 숨기기",
+      "readDisclaimer": "면책 조항 전체 읽기",
+      "hideDisclaimer": "면책 조항 숨기기"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "추정치일 뿐입니다. 최종 상환액은 금융기관과 계약 조건에 따라 달라질 수 있습니다."
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "비교는 공정한 결과를 위해 두 옵션에 동일한 가정을 사용합니다."
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "고정 상환: 원금, 금리, 기간을 사용해 원리금 균등 방식으로 월 상환액을 계산합니다.",
+        "details": "월 상환액 = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: 원금\nr: 월 이자율\nn: 총 개월 수\n총 상환액 = 모든 월 상환액의 합\n총 이자 = 총 상환액 - 원금."
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "고정 원금: 원금 부분은 매달 일정하고, 이자는 시간이 지날수록 감소합니다.",
+        "details": "월 원금 = P / n\n월 이자(k개월차) = 남은 원금 * r\n월 상환액 = 월 원금 + 월 이자\n총 이자 = 월 이자들의 합."
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "플랫 요율: 이자는 전체 기간 동안 최초 원금을 기준으로 계산됩니다.",
+        "details": "총 이자 = P * r * n\n월 이자 = 총 이자 / n\n월 상환액 = (P / n) + 월 이자\n참고: 이 앱에서는 이 방식에 %/월을 사용합니다."
       }
     }
   }

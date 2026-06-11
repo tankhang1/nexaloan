@@ -290,7 +290,7 @@ const MortgageLoanScreen = ({ route }: Props) => {
                     color="#090A0B"
                     fontWeight={600}
                     fontSize={14}
-                    value="Xem kết quả"
+                    value={t("mortgage.viewResult")}
                   />
                 )}
               </View>

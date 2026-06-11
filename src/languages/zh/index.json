@@ -45,8 +45,8 @@
       "title": "商業貸款",
       "desc": "分析不同融資方案，\n優化企業資金安排。"
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
-    "payAll": "Pay all"
+    "heroDesc": "估算还款、探索贷款方案，并将计算结果统一整理在一个地方。",
+    "payAll": "全部还款"
   },
   "compareLoan": {
     "title": "贷款比较",
@@ -60,6 +60,7 @@
     "monthlyInterestRate": "利率（%/月）",
     "results": "比较结果",
     "monthlyPayment": "每月还款",
+    "monthlyPaymentAvg": "平均每月还款",
     "averageMonthlyPayment": "平均每月还款",
     "totalPayment": "总还款额",
     "totalInterest": "总利息",
@@ -78,6 +79,7 @@
     "fixedPrincipal": "等额本金\n（利息递减）",
     "flatRate": "平息",
     "calculate": "计算",
+    "viewResult": "查看结果",
     "descFixedPayment": "每月还款固定。易于个人理财。",
     "descFixedPrincipal": "本金均等。还款额随时间减少，总利息较低。",
     "descFlatRate": "利息基于原始本金。常用于零售贷款。"
@@ -140,6 +142,7 @@
     "years": "年",
     "interestRate": "利率 (%)",
     "monthlyPayment": "每月供款",
+    "monthlyPaymentAvg": "平均每月供款",
     "totalPayments": "總還款金額",
     "totalInterestPaid": "已付利息總額",
     "amortization": "攤還表",
@@ -164,60 +167,62 @@
     "terms": "使用條款",
     "privacy": "私隱政策",
     "aboutContent": {
-      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
-      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "description": "Nexa Tech 是一个小而敏捷的开发团队，专注于构建并交付实用、免费的数字化解决方案。我们擅长创建网页和移动应用，解决日常常见问题。",
+      "mission": "我们的使命是通过打造高质量、免费的数字产品来满足日常需求，包括网页应用、移动应用和开源工具。",
+      "versionLabel": "版本",
+      "copyright": "© {{year}} Nexa Loan。保留所有权利。",
       "features": {
-        "title": "Core Values",
-        "f1": "Building practical products for immediate use",
-        "f2": "User-centric approach",
-        "f3": "Open source and community sharing",
-        "f4": "Completely free for users"
+        "title": "核心价值",
+        "f1": "打造可立即使用的实用产品",
+        "f2": "以用户为中心",
+        "f3": "开源并与社区共享",
+        "f4": "对用户完全免费"
       },
-      "contact": "Email: cs.nexatech@gmail.com",
+      "contact": "邮箱：cs.nexatech@gmail.com",
       "team": {
-        "title": "Our Team",
-        "ethan": "Ethan - Tech Lead",
-        "tina": "Tina - Team Lead"
+        "title": "我们的团队",
+        "ethan": "Ethan - 技术负责人",
+        "tina": "Tina - 团队负责人"
       }
     },
     "termsContent": {
-      "title": "TERMS OF SERVICE",
-      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "title": "服务条款",
+      "intro": "欢迎使用 Nexa Loan。使用我们的应用即表示您同意以下条款：",
       "section1": {
-        "title": "1. Acceptance of Terms",
-        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+        "title": "1. 接受条款",
+        "content": "通过访问或使用 Nexa Loan，您同意受本条款以及所有适用法律和法规的约束。"
       },
       "section2": {
-        "title": "2. Use of Service",
-        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+        "title": "2. 服务使用",
+        "content": "您同意将本应用用于合法用途，并且不侵犯任何第三方的权利。"
       },
       "section3": {
-        "title": "3. Intellectual Property",
-        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+        "title": "3. 知识产权",
+        "content": "Nexa Loan 的所有内容、标志和设计均受版权保护。未经同意不得复制。"
       },
       "section4": {
-        "title": "4. Limitation of Liability",
-        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+        "title": "4. 责任限制",
+        "content": "对于因使用应用中的计算结果而产生的任何财务损失，我们概不负责。所有数值仅供参考。"
       }
     },
     "privacyContent": {
-      "title": "PRIVACY POLICY",
-      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "title": "隐私政策",
+      "intro": "Nexa Loan 致力于保护您的隐私。本政策说明我们如何处理您的信息。",
       "section1": {
-        "title": "1. Information Collection",
-        "content": "We collect information you provide directly when using app features such as loan amount and term."
+        "title": "1. 信息收集",
+        "content": "我们会收集您在使用应用功能时直接提供的信息，例如贷款金额和期限。"
       },
       "section2": {
-        "title": "2. Information Use",
-        "content": "The information is used to perform calculations and improve user experience."
+        "title": "2. 信息使用",
+        "content": "这些信息用于执行计算并改善用户体验。"
       },
       "section3": {
-        "title": "3. Data Security",
-        "content": "We apply strict security measures to ensure the safety of your personal data."
+        "title": "3. 数据安全",
+        "content": "我们采取严格的安全措施，以确保您个人数据的安全。"
       },
       "section4": {
-        "title": "4. Your Rights",
-        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+        "title": "4. 您的权利",
+        "content": "您有权随时要求查看、编辑或删除您的个人信息。"
       }
     }
   },
@@ -262,44 +267,44 @@
   },
   "loading": "數據處理中",
   "whatIf": {
-    "title": "What-if simulator",
-    "extraMonthly": "Extra payment monthly",
-    "monthsSaved": "Months saved",
-    "interestSaved": "Interest saved",
-    "newPayoff": "New payoff time",
-    "newTotalPayment": "New total payment",
-    "supportNote": "V1 currently supports simulation for Fixed Payment only."
+    "title": "假设情景模拟",
+    "extraMonthly": "每月额外还款",
+    "monthsSaved": "节省月份",
+    "interestSaved": "节省利息",
+    "newPayoff": "新的结清时间",
+    "newTotalPayment": "新的总还款额",
+    "supportNote": "V1 目前仅支持固定还款方式的模拟。"
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "仅供估算。实际贷款条款、费用、税费和贷款方政策可能会改变最终还款金额。",
+      "long": "此计算器根据您的输入和所选方式提供教育用途的估算。由于贷款费用、保险、税费、罚金、促销、四舍五入规则和放款日期等因素，结果可能不同。请直接向贷款机构确认最终条款。",
+      "notAdvice": "此内容仅供参考，不构成财务建议。"
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "查看公式详情",
+      "hideFormula": "隐藏公式详情",
+      "readDisclaimer": "阅读完整免责声明",
+      "hideDisclaimer": "隐藏免责声明"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "仅为估算。最终还款可能会因贷款机构和合同条款而不同。"
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "比较时对两个方案使用相同假设，以确保结果公平。"
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "固定还款：使用本金、利率和期限，通过摊销方式计算每月还款。",
+        "details": "月还款额 = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: 本金\nr: 月利率\nn: 总月数\n总还款额 = 所有月还款额之和\n总利息 = 总还款额 - 本金。"
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "固定本金：每月本金部分保持不变，利息随时间递减。",
+        "details": "每月本金 = P / n\n每月利息（第 k 个月）= 剩余本金 * r\n月还款额 = 每月本金 + 每月利息\n总利息 = 每月利息之和。"
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "平息：利息在整个期限内按原始本金计算。",
+        "details": "总利息 = P * r * n\n每月利息 = 总利息 / n\n月还款额 = (P / n) + 每月利息\n注意：本应用在此方式中使用 %/月。"
       }
     }
   }

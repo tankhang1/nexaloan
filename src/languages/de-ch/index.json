@@ -45,21 +45,22 @@
       "title": "Unternehmenskredit",
       "desc": "Analysieren Sie Kreditoptionen zur\nOptimierung Ihrer Unternehmensfinanzierung."
     },
-    "heroDesc": "Estimate payments, explore loan scenarios, and keep your calculations organized in one place.",
-    "payAll": "Pay all"
+    "heroDesc": "Zahlungen schätzen, Kreditszenarien vergleichen und Ihre Berechnungen an einem Ort organisieren.",
+    "payAll": "Alles bezahlen"
   },
   "compareLoan": {
     "title": "Kredite Vergleichen",
     "desc": "Vergleichen Sie Zahlungsoptionen, bevor Sie einen Kredit wählen.",
     "badge": "Vergleich",
-    "optionA": "Option A",
-    "optionB": "Option B",
+    "optionA": "Variante A",
+    "optionB": "Variante B",
     "loanAmount": "Darlehensbetrag",
     "duration": "Laufzeit (Monate)",
     "yearlyInterestRate": "Zinssatz (%/Jahr)",
     "monthlyInterestRate": "Zinssatz (%/Monat)",
     "results": "Vergleichsergebnisse",
     "monthlyPayment": "Monatliche Rate",
+    "monthlyPaymentAvg": "Ø Monatliche Rate",
     "averageMonthlyPayment": "Ø Monatliche Rate",
     "totalPayment": "Gesamtzahlung",
     "totalInterest": "Gesamtzinsen",
@@ -78,6 +79,7 @@
     "fixedPrincipal": "Tilgungsdarlehen\n(Fallende Zinsen)",
     "flatRate": "Flatrate-Zins",
     "calculate": "Berechnen",
+    "viewResult": "Ergebnis anzeigen",
     "descFixedPayment": "Monatliche Rate ist fix. Einfacher für die Budgetplanung.",
     "descFixedPrincipal": "Tilgung ist gleichbleibend. Gesamtrate sinkt, Zinskosten niedriger.",
     "descFlatRate": "Zins immer auf den Ursprungsbetrag. Oft bei Konsumkrediten."
@@ -140,6 +142,7 @@
     "year": "Jahr",
     "interestRate": "Zinssatz (%)",
     "monthlyPayment": "Monatliche Belastung",
+    "monthlyPaymentAvg": "Monatliche Belastung (Ø)",
     "totalPayments": "Gesamtkosten",
     "totalInterestPaid": "Total bezahlte Zinsen",
     "amortization": "Amortisationsplan",
@@ -164,60 +167,62 @@
     "terms": "Allgemeine Geschäftsbedingungen",
     "privacy": "Datenschutzerklärung",
     "aboutContent": {
-      "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
-      "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "description": "Nexa Tech ist ein kleines, agiles Entwicklungsteam, das praktische und kostenlose digitale Lösungen entwickelt und veröffentlicht. Wir sind auf Web- und Mobile-Apps spezialisiert, die alltägliche Herausforderungen lösen.",
+      "mission": "Unsere Mission ist es, den Alltag mit hochwertigen, kostenlosen Digitalprodukten wie Web-Apps, Mobile-Apps und Open-Source-Tools zu vereinfachen.",
+      "versionLabel": "Version",
+      "copyright": "© {{year}} Nexa Loan. Alle Rechte vorbehalten.",
       "features": {
-        "title": "Core Values",
-        "f1": "Building practical products for immediate use",
-        "f2": "User-centric approach",
-        "f3": "Open source and community sharing",
-        "f4": "Completely free for users"
+        "title": "Kernwerte",
+        "f1": "Praktische Produkte für den sofortigen Einsatz entwickeln",
+        "f2": "Nutzerzentrierter Ansatz",
+        "f3": "Open Source und Austausch mit der Community",
+        "f4": "Vollständig kostenlos für Nutzer"
       },
-      "contact": "Email: cs.nexatech@gmail.com",
+      "contact": "E-Mail: cs.nexatech@gmail.com",
       "team": {
-        "title": "Our Team",
-        "ethan": "Ethan - Tech Lead",
-        "tina": "Tina - Team Lead"
+        "title": "Unser Team",
+        "ethan": "Ethan - Technischer Leiter",
+        "tina": "Tina - Teamleitung"
       }
     },
     "termsContent": {
-      "title": "TERMS OF SERVICE",
-      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "title": "NUTZUNGSBEDINGUNGEN",
+      "intro": "Willkommen bei Nexa Loan. Mit der Nutzung unserer App stimmen Sie den folgenden Bedingungen zu:",
       "section1": {
-        "title": "1. Acceptance of Terms",
-        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+        "title": "1. Annahme der Bedingungen",
+        "content": "Durch den Zugriff auf oder die Nutzung von Nexa Loan erklären Sie sich mit diesen Bedingungen sowie allen geltenden Gesetzen und Vorschriften einverstanden."
       },
       "section2": {
-        "title": "2. Use of Service",
-        "content": "You agree to use the app for lawful purposes and not to violate the rights of any third party."
+        "title": "2. Nutzung des Dienstes",
+        "content": "Sie verpflichten sich, die App nur für rechtmäßige Zwecke zu verwenden und die Rechte Dritter nicht zu verletzen."
       },
       "section3": {
-        "title": "3. Intellectual Property",
-        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+        "title": "3. Geistiges Eigentum",
+      "content": "Alle Inhalte, Logos und Designs von Nexa Loan sind urheberrechtlich geschützt. Eine Vervielfältigung ohne Zustimmung ist nicht gestattet."
       },
       "section4": {
-        "title": "4. Limitation of Liability",
-        "content": "We are not responsible for any financial loss arising from the use of calculation results on the app. The numbers are for reference only."
+        "title": "4. Haftungsbeschränkung",
+        "content": "Wir übernehmen keine Verantwortung für finanzielle Verluste, die aus der Nutzung der Berechnungsergebnisse in der App entstehen. Die Werte dienen nur als Referenz."
       }
     },
     "privacyContent": {
-      "title": "PRIVACY POLICY",
-      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "title": "DATENSCHUTZERKLÄRUNG",
+      "intro": "Nexa Loan verpflichtet sich zum Schutz Ihrer Privatsphäre. Diese Erklärung beschreibt, wie wir mit Ihren Daten umgehen.",
       "section1": {
-        "title": "1. Information Collection",
-        "content": "We collect information you provide directly when using app features such as loan amount and term."
+        "title": "1. Erhebung von Informationen",
+        "content": "Wir erfassen Informationen, die Sie direkt bei der Nutzung von App-Funktionen wie Kreditsumme und Laufzeit angeben."
       },
       "section2": {
-        "title": "2. Information Use",
-        "content": "The information is used to perform calculations and improve user experience."
+        "title": "2. Verwendung der Informationen",
+        "content": "Die Informationen werden verwendet, um Berechnungen durchzuführen und das Nutzererlebnis zu verbessern."
       },
       "section3": {
-        "title": "3. Data Security",
-        "content": "We apply strict security measures to ensure the safety of your personal data."
+        "title": "3. Datensicherheit",
+        "content": "Wir wenden strenge Sicherheitsmaßnahmen an, um die Sicherheit Ihrer personenbezogenen Daten zu gewährleisten."
       },
       "section4": {
-        "title": "4. Your Rights",
-        "content": "You have the right to request to view, edit, or delete your personal information at any time."
+        "title": "4. Ihre Rechte",
+        "content": "Sie haben jederzeit das Recht, Ihre personenbezogenen Daten einzusehen, zu bearbeiten oder zu löschen."
       }
     }
   },
@@ -272,34 +277,34 @@
   },
   "trust": {
     "disclaimer": {
-      "short": "Estimates only. Actual loan terms, fees, taxes, and lender policies may change final repayment figures.",
-      "long": "This calculator provides educational estimates based on your inputs and selected method. Results can differ due to lender fees, insurance, taxes, penalties, promotions, rounding rules, and disbursement dates. Please confirm final terms directly with your lender.",
-      "notAdvice": "This content is for informational purposes and is not financial advice."
+      "short": "Nur Schätzwerte. Tatsächliche Kreditkonditionen, Gebühren, Steuern und Richtlinien des Kreditgebers können die endgültige Rückzahlung verändern.",
+      "long": "Dieser Rechner liefert nur Richtwerte auf Basis Ihrer Eingaben und der gewählten Methode. Das tatsächliche Ergebnis kann aufgrund von Gebühren, Versicherungen, Steuern, Strafzahlungen, Aktionen, Rundungsregeln und Auszahlungszeitpunkt abweichen. Bitte bestätigen Sie die endgültigen Konditionen direkt mit Ihrem Kreditgeber.",
+      "notAdvice": "Dieser Inhalt dient nur zu Informationszwecken und stellt keine Finanzberatung dar."
     },
     "actions": {
-      "viewFormula": "View formula details",
-      "hideFormula": "Hide formula details",
-      "readDisclaimer": "Read full disclaimer",
-      "hideDisclaimer": "Hide disclaimer"
+      "viewFormula": "Formeldetails anzeigen",
+      "hideFormula": "Formeldetails ausblenden",
+      "readDisclaimer": "Vollständigen Hinweis lesen",
+      "hideDisclaimer": "Hinweis ausblenden"
     },
     "result": {
-      "estimation": "Estimation only. Final repayment may differ based on lender and contract terms."
+      "estimation": "Nur eine Schätzung. Die endgültige Rückzahlung kann je nach Kreditgeber und Vertragsbedingungen abweichen."
     },
     "compare": {
-      "context": "Comparison uses the same assumptions for both options to keep results fair."
+      "context": "Der Vergleich verwendet für beide Optionen dieselben Annahmen, damit die Ergebnisse fair bleiben."
     },
     "formula": {
       "fixedPayment": {
-        "summary": "Fixed Payment: monthly payment is calculated with amortization using principal, rate, and term.",
-        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: principal amount\nr: monthly interest rate\nn: total months\nTotal Payment = sum of all monthly payments\nTotal Interest = Total Payment - Principal."
+        "summary": "Feste Rate: Die monatliche Zahlung wird mit einer Annuitätenformel auf Basis von Darlehensbetrag, Zinssatz und Laufzeit berechnet.",
+        "details": "Monthly Payment = P * r * (1 + r)^n / ((1 + r)^n - 1).\nP: Darlehensbetrag\nr: monatlicher Zinssatz\nn: Gesamtmonate\nGesamtzahlung = Summe aller monatlichen Raten\nGesamtzinsen = Gesamtzahlung - Darlehensbetrag."
       },
       "fixedPrincipal": {
-        "summary": "Fixed Principal: principal portion stays constant each month; interest decreases over time.",
-        "details": "Monthly Principal = P / n\nMonthly Interest (month k) = Remaining Principal * r\nMonthly Payment = Monthly Principal + Monthly Interest\nTotal Interest = sum of monthly interest amounts."
+        "summary": "Fester Tilgungsbetrag: Der Tilgungsanteil bleibt jeden Monat gleich; die Zinsen sinken mit der Zeit.",
+        "details": "Monatliche Tilgung = P / n\nMonatliche Zinsen (Monat k) = Restschuld * r\nMonatliche Zahlung = Monatliche Tilgung + Monatliche Zinsen\nGesamtzinsen = Summe aller monatlichen Zinsbeträge."
       },
       "flatRate": {
-        "summary": "Flat Rate: interest is calculated on original principal for the full term.",
-        "details": "Total Interest = P * r * n\nMonthly Interest = Total Interest / n\nMonthly Payment = (P / n) + Monthly Interest\nNote: Flat rate uses %/month in this app for this method."
+        "summary": "Pauschalzins: Die Zinsen werden für die gesamte Laufzeit auf den ursprünglichen Darlehensbetrag berechnet.",
+        "details": "Gesamtzinsen = P * r * n\nMonatliche Zinsen = Gesamtzinsen / n\nMonatliche Zahlung = (P / n) + Monatliche Zinsen\nHinweis: Für diese Methode verwendet die App %/Monat."
       }
     }
   }

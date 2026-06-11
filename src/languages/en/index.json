@@ -60,6 +60,7 @@
     "monthlyInterestRate": "Interest Rate (%/month)",
     "results": "Comparison Results",
     "monthlyPayment": "Monthly Payment",
+    "monthlyPaymentAvg": "Average Monthly Payment",
     "averageMonthlyPayment": "Avg Monthly Payment",
     "totalPayment": "Total Payment",
     "totalInterest": "Total Interest",
@@ -80,7 +81,8 @@
     "descFixedPayment": "Monthly payment is fixed. Easier for personal budgeting.",
     "descFixedPrincipal": "Principal is divided equally. Total payment decreases over time.",
     "descFlatRate": "Interest always calculated on original principal. Common for retail loans.",
-    "calculate": "Calculate"
+    "calculate": "Calculate",
+    "viewResult": "View result"
   },
   "mortgageResult": {
     "amortization": "Amortization",
@@ -140,6 +142,7 @@
     "year": "Year",
     "interestRate": "Int Rate (%)",
     "monthlyPayment": "Monthly Payment",
+    "monthlyPaymentAvg": "Average Monthly Payment",
     "totalPayments": "Total Payments",
     "totalInterestPaid": "Total Interest Paid",
     "amortization": "Amortization",
@@ -166,6 +169,8 @@
     "aboutContent": {
       "description": "Nexa Tech is a small, agile development team dedicated to building and shipping practical, free digital solutions. We specialize in creating web and mobile applications to solve common daily challenges.",
       "mission": "Our mission is to solve everyday needs by creating high-quality, free digital products including web apps, mobile apps, and open-source tools.",
+      "versionLabel": "Version",
+      "copyright": "© {{year}} Nexa Loan. All rights reserved.",
       "features": {
         "title": "Core Values",
         "f1": "Building practical products for immediate use",
