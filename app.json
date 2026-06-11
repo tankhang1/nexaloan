@@ -18,6 +18,7 @@
       "bundleIdentifier": "com.anonymous.nexa-loan",
       "infoPlist": {
         "NSPhotoLibraryAddUsageDescription": "This app needs access to save images to your photo library.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to let you select and share saved images.",
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver more relevant ads to you.",
         "GADApplicationIdentifier": "ca-app-pub-3940256099942544~1458002511"
       }
