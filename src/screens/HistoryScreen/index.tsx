@@ -1,4 +1,11 @@
-import {View, StyleSheet, ScrollView, Pressable, Alert} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  Alert,
+  Modal,
+} from 'react-native';
 import React, {useMemo, useState} from 'react';
 import {COLORS} from '../../constants/colors';
 import AppView from '../../components/AppView';
@@ -41,6 +48,12 @@ const HistoryScreen = () => {
     dateTo: '',
     sortOrder: 0,
   });
+  const [datePickerField, setDatePickerField] = useState<
+    'dateFrom' | 'dateTo' | null
+  >(null);
+  const [pickerMonth, setPickerMonth] = useState(() =>
+    dayjs().startOf('month'),
+  );
 
   const history = useSelector((state: RootState) => state.history);
 
@@ -141,6 +154,49 @@ const HistoryScreen = () => {
   };
 
   const sanitizeInteger = (value: string) => value.replace(/[^0-9]/g, '');
+
+  const formattedDate = (value: string) => {
+    if (!value) {
+      return '';
+    }
+
+    const parsed = dayjs(value);
+    return parsed.isValid() ? parsed.format('DD/MM/YYYY') : value;
+  };
+
+  const openDatePicker = (field: 'dateFrom' | 'dateTo') => {
+    const currentDate = filters[field] ? dayjs(filters[field]) : dayjs();
+
+    setPickerMonth(currentDate.startOf('month'));
+    setDatePickerField(field);
+  };
+
+  const closeDatePicker = () => {
+    setDatePickerField(null);
+  };
+
+  const selectPickerDate = (date: dayjs.Dayjs) => {
+    if (!datePickerField) {
+      return;
+    }
+
+    setFilters(current => ({
+      ...current,
+      [datePickerField]: date.format('YYYY-MM-DD'),
+    }));
+    setDatePickerField(null);
+  };
+
+  const calendarCells = useMemo(() => {
+    const startOfMonth = pickerMonth.startOf('month');
+    const leadingEmptyCells = startOfMonth.day();
+    const daysInMonth = pickerMonth.daysInMonth();
+
+    return [
+      ...Array.from({length: leadingEmptyCells}, () => null),
+      ...Array.from({length: daysInMonth}, (_, index) => index + 1),
+    ];
+  }, [pickerMonth]);
 
   const resetFilters = () => {
     setFilters(current => ({
@@ -253,7 +309,7 @@ const HistoryScreen = () => {
       <View style={styles.filterCard}>
         <AppText
           value="Bộ lọc nâng cao"
-          fontSize={14}
+          fontSize={15}
           fontWeight={700}
           color={COLORS.foundation.neutral.n700}
         />
@@ -261,7 +317,7 @@ const HistoryScreen = () => {
           <View style={styles.filterCol}>
             <AppText
               value="Số tiền từ"
-              fontSize={12}
+              fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
             />
@@ -272,16 +328,16 @@ const HistoryScreen = () => {
               }
               keyboardType="number-pad"
               color={COLORS.foundation.neutral.n700}
-              fontSize={14}
-              fontWeight={500}
+              fontSize={15}
+              fontWeight={600}
               placeholder="0"
               placeholderTextColor={COLORS.foundation.neutral.n200}
             />
           </View>
           <View style={styles.filterCol}>
             <AppText
-              value="Đến"
-              fontSize={12}
+              value="Số tiền đến"
+              fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
             />
@@ -292,8 +348,8 @@ const HistoryScreen = () => {
               }
               keyboardType="number-pad"
               color={COLORS.foundation.neutral.n700}
-              fontSize={14}
-              fontWeight={500}
+              fontSize={15}
+              fontWeight={600}
               placeholder="Không giới hạn"
               placeholderTextColor={COLORS.foundation.neutral.n200}
             />
@@ -303,42 +359,54 @@ const HistoryScreen = () => {
           <View style={styles.filterCol}>
             <AppText
               value="Từ ngày"
-              fontSize={12}
+              fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
             />
-            <AppInput
-              value={filters.dateFrom}
-              onChangeText={value =>
-                setFilters(current => ({...current, dateFrom: value}))
-              }
-              keyboardType="numbers-and-punctuation"
-              color={COLORS.foundation.neutral.n700}
-              fontSize={14}
-              fontWeight={500}
-              placeholder="YYYY-MM-DD"
-              placeholderTextColor={COLORS.foundation.neutral.n200}
-            />
+            <Pressable
+              onPress={() => openDatePicker("dateFrom")}
+              style={({pressed}) => [
+                styles.dateField,
+                pressed && styles.dateFieldPressed,
+              ]}>
+              <AppText
+                value={formattedDate(filters.dateFrom) || "Chọn ngày"}
+                fontSize={15}
+                fontWeight={600}
+                color={
+                  filters.dateFrom
+                    ? COLORS.foundation.neutral.n700
+                    : COLORS.foundation.neutral.n200
+                }
+                numberOfLines={1}
+              />
+            </Pressable>
           </View>
           <View style={styles.filterCol}>
             <AppText
               value="Đến ngày"
-              fontSize={12}
+              fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
             />
-            <AppInput
-              value={filters.dateTo}
-              onChangeText={value =>
-                setFilters(current => ({...current, dateTo: value}))
-              }
-              keyboardType="numbers-and-punctuation"
-              color={COLORS.foundation.neutral.n700}
-              fontSize={14}
-              fontWeight={500}
-              placeholder="YYYY-MM-DD"
-              placeholderTextColor={COLORS.foundation.neutral.n200}
-            />
+            <Pressable
+              onPress={() => openDatePicker("dateTo")}
+              style={({pressed}) => [
+                styles.dateField,
+                pressed && styles.dateFieldPressed,
+              ]}>
+              <AppText
+                value={formattedDate(filters.dateTo) || "Chọn ngày"}
+                fontSize={15}
+                fontWeight={600}
+                color={
+                  filters.dateTo
+                    ? COLORS.foundation.neutral.n700
+                    : COLORS.foundation.neutral.n200
+                }
+                numberOfLines={1}
+              />
+            </Pressable>
           </View>
         </View>
       </View>
@@ -348,9 +416,10 @@ const HistoryScreen = () => {
           <View style={styles.emptyState}>
             <AppText
               value="Không có khoản vay nào khớp bộ lọc"
-              fontSize={14}
+              fontSize={13}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
+              textStyle={styles.emptyText}
             />
             <Pressable onPress={resetFilters} style={styles.resetFilterBtn}>
               <AppText
@@ -419,6 +488,102 @@ const HistoryScreen = () => {
         <View style={{height: 100}} />
       </ScrollView>
 
+      <Modal
+        visible={!!datePickerField}
+        transparent
+        animationType="fade"
+        onRequestClose={closeDatePicker}>
+        <Pressable style={styles.modalOverlay} onPress={closeDatePicker}>
+          <Pressable
+            style={styles.datePickerSheet}
+            onPress={event => event.stopPropagation()}>
+            <View style={styles.datePickerHeader}>
+              <AppText
+                value={pickerMonth.format("MM/YYYY")}
+                fontSize={16}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+              />
+              <View style={styles.datePickerActions}>
+                <AppIconButton
+                  onPress={() =>
+                    setPickerMonth(current => current.subtract(1, "month"))
+                  }>
+                  <Feather
+                    name="chevron-left"
+                    size={20}
+                    color={COLORS.foundation.neutral.n700}
+                  />
+                </AppIconButton>
+                <AppIconButton
+                  onPress={() =>
+                    setPickerMonth(current => current.add(1, "month"))
+                  }>
+                  <Feather
+                    name="chevron-right"
+                    size={20}
+                    color={COLORS.foundation.neutral.n700}
+                  />
+                </AppIconButton>
+              </View>
+            </View>
+
+            <View style={styles.weekdayRow}>
+              {["S", "M", "T", "W", "T", "F", "S"].map((day, index) => (
+                <AppText
+                  key={`${day}-${index}`}
+                  value={day}
+                  fontSize={11}
+                  fontWeight={700}
+                  color={COLORS.foundation.neutral.n500}
+                  textStyle={styles.weekdayCell}
+                />
+              ))}
+            </View>
+
+            <View style={styles.calendarGrid}>
+              {calendarCells.map((day, index) => {
+                if (!day) {
+                  return <View key={`empty-${index}`} style={styles.dayCell} />;
+                }
+
+                const currentDate = pickerMonth.date(day);
+                const selectedValue =
+                  datePickerField === "dateFrom"
+                    ? filters.dateFrom
+                    : filters.dateTo;
+                const isSelected =
+                  !!selectedValue &&
+                  dayjs(selectedValue).isValid() &&
+                  dayjs(selectedValue).isSame(currentDate, "day");
+
+                return (
+                  <Pressable
+                    key={currentDate.format("YYYY-MM-DD")}
+                    onPress={() => selectPickerDate(currentDate)}
+                    style={({pressed}) => [
+                      styles.dayCell,
+                      isSelected && styles.dayCellSelected,
+                      pressed && styles.dayCellPressed,
+                    ]}>
+                    <AppText
+                      value={`${day}`}
+                      fontSize={13}
+                      fontWeight={600}
+                      color={
+                        isSelected
+                          ? COLORS.foundation.neutral.n0
+                          : COLORS.foundation.neutral.n700
+                      }
+                    />
+                  </Pressable>
+                );
+              })}
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
+
       <AppBanner size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
     </AppView>
   );
@@ -451,16 +616,28 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.foundation.neutral.n100,
     backgroundColor: COLORS.foundation.neutral.n0,
-    padding: 12,
-    gap: 8,
+    padding: 16,
+    gap: 12,
   },
   filterRow: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 12,
   },
   filterCol: {
     flex: 1,
-    gap: 6,
+    gap: 8,
+  },
+  dateField: {
+    minHeight: 50,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    borderRadius: 18,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    paddingHorizontal: 16,
+    justifyContent: 'center',
+  },
+  dateFieldPressed: {
+    backgroundColor: COLORS.foundation.blue.b50,
   },
   gap16: {
     gap: 16,
@@ -474,9 +651,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.foundation.neutral.n100,
     backgroundColor: COLORS.foundation.neutral.n0,
-    padding: 16,
-    gap: 8,
+    padding: 18,
+    gap: 10,
     alignItems: 'center',
+  },
+  emptyText: {
+    textAlign: 'center',
+    lineHeight: 18,
   },
   resetFilterBtn: {
     borderRadius: 10,
@@ -487,5 +668,54 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(17, 24, 39, 0.35)',
+    justifyContent: 'flex-end',
+    padding: 16,
+  },
+  datePickerSheet: {
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n100,
+    padding: 16,
+    gap: 14,
+  },
+  datePickerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  datePickerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  weekdayRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  weekdayCell: {
+    width: (WIDTH - 64) / 7,
+    textAlign: 'center',
+  },
+  calendarGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  dayCell: {
+    width: (WIDTH - 64) / 7,
+    height: 42,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dayCellPressed: {
+    backgroundColor: COLORS.foundation.blue.b50,
+  },
+  dayCellSelected: {
+    backgroundColor: COLORS.foundation.blue.b300,
   },
 });
