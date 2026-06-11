@@ -19,7 +19,6 @@ import {
   View,
 } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { useInterstitialAd } from "react-native-google-mobile-ads";
 import Share from "react-native-share";
 import Toast from "react-native-toast-message";
 import ViewShot from "react-native-view-shot";
@@ -29,7 +28,6 @@ import AppIconButton from "../../components/AppIconButton";
 import AppSlider from "../../components/AppSlider";
 import AppText from "../../components/AppText";
 import AppView from "../../components/AppView";
-import { ADS } from "../../constants/ads";
 import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
@@ -73,10 +71,6 @@ const useDebouncedValue = <T,>(value: T, delay = 100): T => {
 
 const MortgageLoanResultScreen = ({ route }: Props) => {
   const [isPending, startTransition] = useTransition();
-  const { isLoaded, isClosed, load, show } = useInterstitialAd(
-    ADS.interstitial,
-  );
-  const [shouldSaveAfterAd, setShouldSaveAfterAd] = useState(false);
   const { t } = useTranslation();
   const viewRef = useRef<ViewShot>(null);
   const confettiRef = useRef<ConfettiCannon>(null);
@@ -265,15 +259,6 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
   useEffect(() => {
     confettiRef.current?.start();
   }, []);
-  useEffect(() => {
-    load();
-  }, [load]);
-  useEffect(() => {
-    if (isClosed && shouldSaveAfterAd) {
-      setShouldSaveAfterAd(false);
-      onSave();
-    }
-  }, [isClosed, onSave, shouldSaveAfterAd]);
 
   return (
     <ViewShot
@@ -559,13 +544,7 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
                 <Pressable
                   style={[styles.button, styles.fullWidthButton]}
                   onPress={() => {
-                    if (isLoaded) {
-                      setShouldSaveAfterAd(true);
-                      show();
-                    } else {
-                      onSave();
-                      load();
-                    }
+                    onSave();
                   }}
                 >
                   <Feather
