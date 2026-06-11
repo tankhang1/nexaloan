@@ -87,12 +87,30 @@
     "share": "ចែករំលែក",
     "save": "រក្សាទុក",
     "home": "ទំព័រដើម",
+    "compareScenario": "ប្រៀបធៀបសេណារីយោ",
+    "quickInsight": "សង្ខេបរហ័ស",
+    "whatIfRealtime": "សម្រួលពេលវេលាពិត",
+    "applyScenario": "អនុវត្តសេណារីយោនេះ",
     "summaryBadge": "សង្ខេបប្រាក់កម្ចី",
     "summaryDesc": "ទិដ្ឋភាពខ្លីៗអំពីផែនការខ្ចី និងការសងប្រាក់របស់អ្នក។",
     "notificationTitle": "ការជូនដំណឹង",
     "notificationMessage": "រក្សាទុកប្រាក់កម្ចីបានជោគជ័យ",
+    "scenarioApplied": "បានអនុវត្តសេណារីយោថ្មី",
     "downloadFileMessage": "ទាញយកឯកសារ Excel បានជោគជ័យ",
     "resultTitle": "លទ្ធផលប្រាក់កម្ចី",
+    "metric": {
+      "avg": "មធ្យម",
+      "cost": "ថ្លៃដើម",
+      "total": "សរុប"
+    },
+    "insight": {
+      "totalInterest": "ការប្រាក់សរុប",
+      "totalPayment": "ការទូទាត់សរុប",
+      "highestPressureMonth": "ខែដែលមានសម្ពាធខ្ពស់បំផុត",
+      "monthlyRate": "អត្រាការប្រាក់ (%/ខែ)",
+      "yearlyRate": "អត្រាការប្រាក់ (%/ឆ្នាំ)",
+      "durationMonths": "រយៈពេល (ខែ)"
+    },
     "result": {
       "title": "ប្រាក់កម្ចី",
       "loanAmount": "ចំនួនប្រាក់កម្ចី",
@@ -102,6 +120,7 @@
       "interestRate": "ការប្រាក់ (%)",
       "result": "លទ្ធផល",
       "monthlyPayment": "ការបង់ប្រចាំខែ",
+      "averageMonthlyPayment": "ការបង់ប្រចាំខែជាមធ្យម",
       "totalPayments": "ប្រាក់បង់សរុប",
       "totalInterestPaid": "ការប្រាក់សរុប"
     },

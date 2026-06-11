@@ -78,19 +78,37 @@
     "fixedPrincipal": "Tilgungsdarlehen\n(Fallende Zinsen)",
     "flatRate": "Flatrate-Zins",
     "calculate": "Berechnen",
-    "descFixedPayment": "Monatliche Rate là cố định. Einfacher für die Budgetplanung.",
-    "descFixedPrincipal": "Tilgung ist gleich. Gesamtrate sinkt, Zinskosten thấp hơn.",
-    "descFlatRate": "Zins immer auf den Ursprungsbetrag. Oft bei Konsumkrediten."
+    "descFixedPayment": "Die monatliche Rate ist fix. Das macht die Budgetplanung einfacher.",
+    "descFixedPrincipal": "Die Tilgung ist gleichmäßig verteilt. Die Gesamtrate sinkt, die Zinskosten sind geringer.",
+    "descFlatRate": "Die Zinsen werden immer auf den ursprünglichen Betrag berechnet. Das ist bei Konsumentenkrediten üblich."
   },
   "mortgageResult": {
     "amortization": "Tilgungsplan",
     "share": "Teilen",
     "save": "Speichern",
     "home": "Startseite",
+    "compareScenario": "Szenario vergleichen",
+    "quickInsight": "Kurzer Überblick",
+    "whatIfRealtime": "Szenario-Simulation",
+    "applyScenario": "Dieses Szenario anwenden",
     "notificationTitle": "Benachrichtigung",
     "notificationMessage": "Immobilienkredit erfolgreich gespeichert",
     "downloadFileMessage": "Excel-Datei erfolgreich heruntergeladen",
     "resultTitle": "Ergebnis – Immobilienkredit",
+    "scenarioApplied": "Neues Szenario angewendet",
+    "metric": {
+      "avg": "Ø",
+      "cost": "KOSTEN",
+      "total": "GESAMT"
+    },
+    "insight": {
+      "totalInterest": "Gesamtzinsen",
+      "totalPayment": "Gesamtzahlung",
+      "highestPressureMonth": "Monat mit höchster Belastung",
+      "monthlyRate": "Zinssatz (%/Monat)",
+      "yearlyRate": "Zinssatz (%/Jahr)",
+      "durationMonths": "Laufzeit (Monate)"
+    },
     "result": {
       "title": "Immobilienkredit",
       "loanAmount": "Darlehensbetrag",
@@ -100,6 +118,7 @@
       "interestRate": "Zinssatz (%)",
       "result": "Ergebnis",
       "monthlyPayment": "Monatliche Rate",
+      "averageMonthlyPayment": "Ø monatliche Rate",
       "totalPayments": "Gesamtrückzahlung",
       "totalInterestPaid": "Gesamtzinszahlung"
     },
@@ -107,8 +126,8 @@
     "saveNew": "Neu speichern",
     "updateSaved": "Aktualisieren",
     "updateSuccess": "Gespeichertes Darlehen erfolgreich aktualisiert",
-    "summaryBadge": "Loan Summary",
-    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
+    "summaryBadge": "Kreditübersicht",
+    "summaryDesc": "Ein kurzer Überblick über Ihren Finanzierungsplan und die Rückzahlung."
   },
   "mortgageDetail": {
     "title": "Details – Immobilienkredit",

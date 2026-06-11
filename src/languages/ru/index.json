@@ -87,12 +87,30 @@
     "share": "Поделиться",
     "save": "Сохранить",
     "home": "Главная",
+    "compareScenario": "Сравнить сценарий",
+    "quickInsight": "Краткий обзор",
+    "whatIfRealtime": "Симуляция в реальном времени",
+    "applyScenario": "Применить этот сценарий",
     "summaryBadge": "Сводка по кредиту",
     "summaryDesc": "Краткий обзор вашего плана займа и прогноза погашения.",
     "notificationTitle": "Уведомление",
     "notificationMessage": "Ипотечный кредит успешно сохранен",
+    "scenarioApplied": "Новый сценарий применен",
     "downloadFileMessage": "Файл Excel успешно загружен",
     "resultTitle": "Результат ипотечного кредита",
+    "metric": {
+      "avg": "СРЕД.",
+      "cost": "СТОИМОСТЬ",
+      "total": "ИТОГО"
+    },
+    "insight": {
+      "totalInterest": "Общие проценты",
+      "totalPayment": "Общая выплата",
+      "highestPressureMonth": "Месяц с наибольшей нагрузкой",
+      "monthlyRate": "Ставка (%/мес.)",
+      "yearlyRate": "Ставка (%/год)",
+      "durationMonths": "Срок (месяцы)"
+    },
     "result": {
       "title": "Ипотечный кредит",
       "loanAmount": "Сумма кредита",
@@ -102,6 +120,7 @@
       "interestRate": "Ставка (%)",
       "result": "Результат",
       "monthlyPayment": "Ежемесячный платеж",
+      "averageMonthlyPayment": "Средний ежемесячный платеж",
       "totalPayments": "Общая выплата",
       "totalInterestPaid": "Всего процентов выплачено"
     },

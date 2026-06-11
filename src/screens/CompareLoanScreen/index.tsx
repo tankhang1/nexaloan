@@ -224,6 +224,8 @@ const CompareLoanScreen = ({route}: Props) => {
         fontSize={18}
         fontWeight={700}
         color={COLORS.foundation.neutral.n700}
+        numberOfLines={2}
+        textStyle={styles.cardTitle}
       />
       <View style={styles.inputGroup}>
         <AppText
@@ -231,6 +233,7 @@ const CompareLoanScreen = ({route}: Props) => {
           fontSize={13}
           fontWeight={500}
           color={COLORS.foundation.neutral.n500}
+          numberOfLines={2}
         />
         <AppInput
           value={formatInputAmount(option.loanAmount)}
@@ -250,6 +253,7 @@ const CompareLoanScreen = ({route}: Props) => {
             fontSize={13}
             fontWeight={500}
             color={COLORS.foundation.neutral.n500}
+            numberOfLines={2}
           />
           <AppInput
             value={option.duration}
@@ -272,6 +276,7 @@ const CompareLoanScreen = ({route}: Props) => {
             fontSize={13}
             fontWeight={500}
             color={COLORS.foundation.neutral.n500}
+            numberOfLines={2}
           />
           <AppInput
             value={option.interestRate}
@@ -302,6 +307,8 @@ const CompareLoanScreen = ({route}: Props) => {
             fontSize={17}
             fontWeight={700}
             color={COLORS.foundation.neutral.n700}
+            numberOfLines={2}
+            textStyle={styles.resultTitle}
           />
           {isBest && (
             <View style={styles.bestBadge}>
@@ -310,6 +317,7 @@ const CompareLoanScreen = ({route}: Props) => {
                 fontSize={11}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n0}
+                numberOfLines={1}
               />
             </View>
           )}
@@ -325,52 +333,64 @@ const CompareLoanScreen = ({route}: Props) => {
           <>
             <View style={styles.resultRow}>
               <AppText
-                value={
-                  method === 1
-                    ? t('compareLoan.averageMonthlyPayment')
-                    : t('compareLoan.monthlyPayment')
-                }
-                fontSize={13}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n500}
-              />
-              <AppText
-                value={formatCurrency(result.averageMonthlyPayment)}
-                fontSize={15}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-              />
-            </View>
-            <View style={styles.resultRow}>
-              <AppText
-                value={t('compareLoan.totalPayment')}
-                fontSize={13}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n500}
-              />
-              <AppText
-                value={formatCurrency(result.totalPayment)}
-                fontSize={15}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-              />
-            </View>
-            <View style={styles.resultRow}>
-              <AppText
-                value={t('compareLoan.totalInterest')}
-                fontSize={13}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n500}
-              />
-              <AppText
-                value={formatCurrency(result.totalInterest)}
-                fontSize={15}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-              />
-            </View>
-          </>
-        )}
+              value={
+                method === 1
+                  ? t('compareLoan.averageMonthlyPayment')
+                  : t('compareLoan.monthlyPayment')
+              }
+              fontSize={13}
+              fontWeight={500}
+              color={COLORS.foundation.neutral.n500}
+              numberOfLines={2}
+              textStyle={styles.resultLabel}
+            />
+            <AppText
+              value={formatCurrency(result.averageMonthlyPayment)}
+              fontSize={15}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+              numberOfLines={1}
+              textStyle={styles.resultValue}
+            />
+          </View>
+          <View style={styles.resultRow}>
+            <AppText
+              value={t('compareLoan.totalPayment')}
+              fontSize={13}
+              fontWeight={500}
+              color={COLORS.foundation.neutral.n500}
+              numberOfLines={2}
+              textStyle={styles.resultLabel}
+            />
+            <AppText
+              value={formatCurrency(result.totalPayment)}
+              fontSize={15}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+              numberOfLines={1}
+              textStyle={styles.resultValue}
+            />
+          </View>
+          <View style={styles.resultRow}>
+            <AppText
+              value={t('compareLoan.totalInterest')}
+              fontSize={13}
+              fontWeight={500}
+              color={COLORS.foundation.neutral.n500}
+              numberOfLines={2}
+              textStyle={styles.resultLabel}
+            />
+            <AppText
+              value={formatCurrency(result.totalInterest)}
+              fontSize={15}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+              numberOfLines={1}
+              textStyle={styles.resultValue}
+            />
+          </View>
+        </>
+      )}
       </View>
     );
   };
@@ -399,6 +419,8 @@ const CompareLoanScreen = ({route}: Props) => {
             fontSize={28}
             fontWeight={700}
             color={COLORS.foundation.neutral.n700}
+            numberOfLines={2}
+            textStyle={styles.heroTitle}
           />
           <AppText
             value={t('compareLoan.desc')}
@@ -406,6 +428,7 @@ const CompareLoanScreen = ({route}: Props) => {
             fontWeight={400}
             color={COLORS.foundation.neutral.n500}
             textStyle={styles.heroDesc}
+            numberOfLines={3}
           />
         </View>
 
@@ -513,6 +536,9 @@ const styles = StyleSheet.create({
   heroDesc: {
     lineHeight: 20,
   },
+  heroTitle: {
+    textAlign: 'center',
+  },
   optionCard: {
     backgroundColor: 'rgba(255,255,255,0.94)',
     borderWidth: 1,
@@ -553,6 +579,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 12,
   },
+  cardTitle: {
+    flex: 1,
+    flexShrink: 1,
+  },
+  resultTitle: {
+    flex: 1,
+    flexShrink: 1,
+  },
   bestBadge: {
     backgroundColor: COLORS.foundation.blue.b300,
     borderRadius: 999,
@@ -564,6 +598,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     gap: 12,
+  },
+  resultLabel: {
+    flex: 1,
+    flexShrink: 1,
+  },
+  resultValue: {
+    flexShrink: 0,
+    textAlign: 'right',
   },
   summaryCard: {
     backgroundColor: COLORS.foundation.neutral.n0,

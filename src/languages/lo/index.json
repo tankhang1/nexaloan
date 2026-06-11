@@ -87,12 +87,30 @@
     "share": "ແບ່ງປັນ",
     "save": "ບັນທຶກ",
     "home": "ໜ້າຫຼັກ",
+    "compareScenario": "ປຽບທຽບສະຖານການ",
+    "quickInsight": "ສະຫຼຸບໄວ",
+    "whatIfRealtime": "ຈຳລອງແບບທັນທີ",
+    "applyScenario": "ໃຊ້ສະຖານການນີ້",
     "summaryBadge": "ສະຫຼຸບເງິນກູ້",
     "summaryDesc": "ພາບລວມສັ້ນໆຂອງແຜນການກູ້ ແລະການຊຳລະຄືນ.",
     "notificationTitle": "ແຈ້ງເຕືອນ",
     "notificationMessage": "ບັນທຶກເງິນກູ້ສຳເລັດ",
+    "scenarioApplied": "ໄດ້ນຳໃຊ້ສະຖານການໃໝ່ແລ້ວ",
     "downloadFileMessage": "ດາວໂຫຼດໄຟລ໌ Excel ສຳເລັດ",
     "resultTitle": "ຜົນການຄຳນວນເງິນກູ້",
+    "metric": {
+      "avg": "ສະເລ່ຍ",
+      "cost": "ຄ່າໃຊ້ຈ່າຍ",
+      "total": "ລວມ"
+    },
+    "insight": {
+      "totalInterest": "ດອກເບ້ຍລວມ",
+      "totalPayment": "ຍອດຊຳລະລວມ",
+      "highestPressureMonth": "ເດືອນທີ່ກົດດັນສູງສຸດ",
+      "monthlyRate": "ອັດຕາດອກເບ້ຍ (%/ເດືອນ)",
+      "yearlyRate": "ອັດຕາດອກເບ້ຍ (%/ປີ)",
+      "durationMonths": "ໄລຍະເວລາ (ເດືອນ)"
+    },
     "result": {
       "title": "ເງິນກູ້",
       "loanAmount": "ຈຳນວນເງິນກູ້",
@@ -102,6 +120,7 @@
       "interestRate": "ດອກເບ້ຍ (%)",
       "result": "ຜົນລັບ",
       "monthlyPayment": "ຄ່າຜ່ອນລາຍເດືອນ",
+      "averageMonthlyPayment": "ຄ່າຜ່ອນລາຍເດືອນສະເລ່ຍ",
       "totalPayments": "ຍອດຊຳລະລວມ",
       "totalInterestPaid": "ດອກເບ້ຍລວມ"
     },

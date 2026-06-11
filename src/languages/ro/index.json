@@ -87,10 +87,28 @@
     "share": "Distribuie",
     "save": "Salvează",
     "home": "Acasă",
+    "compareScenario": "Compară scenariul",
+    "quickInsight": "Rezumat rapid",
+    "whatIfRealtime": "Simulare în timp real",
+    "applyScenario": "Aplică acest scenariu",
     "notificationTitle": "Notificare",
     "notificationMessage": "Creditul imobiliar a fost salvat cu succes",
     "downloadFileMessage": "Descărcarea fișierului Excel a reușit",
     "resultTitle": "Rezultatul Creditului Imobiliar",
+    "scenarioApplied": "Noul scenariu a fost aplicat",
+    "metric": {
+      "avg": "MED.",
+      "cost": "COST",
+      "total": "TOTAL"
+    },
+    "insight": {
+      "totalInterest": "Dobândă totală",
+      "totalPayment": "Plată totală",
+      "highestPressureMonth": "Luna cu presiune maximă",
+      "monthlyRate": "Rată dobândă (%/lună)",
+      "yearlyRate": "Rată dobândă (%/an)",
+      "durationMonths": "Durată (luni)"
+    },
     "result": {
       "title": "Credit Imobiliar",
       "loanAmount": "Suma Împrumutată",
@@ -100,6 +118,7 @@
       "interestRate": "Dobândă (%)",
       "result": "Rezultat",
       "monthlyPayment": "Rată Lunară",
+      "averageMonthlyPayment": "Rată lunară medie",
       "totalPayments": "Total de Plată",
       "totalInterestPaid": "Dobândă Totală Plătită"
     },
@@ -107,8 +126,8 @@
     "saveNew": "Salvează ca nou",
     "updateSaved": "Actualizează",
     "updateSuccess": "Împrumutul salvat a fost actualizat cu succes",
-    "summaryBadge": "Loan Summary",
-    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
+    "summaryBadge": "Rezumatul creditului",
+    "summaryDesc": "O prezentare rapidă a planului de împrumut și a estimării rambursării."
   },
   "mortgageDetail": {
     "title": "Detalii Credit Imobiliar",

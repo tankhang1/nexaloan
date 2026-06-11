@@ -87,12 +87,30 @@
     "share": "共有",
     "save": "保存する",
     "home": "ホーム",
+    "compareScenario": "プランを比較",
+    "quickInsight": "概要",
+    "whatIfRealtime": "シミュレーション",
+    "applyScenario": "このシナリオを適用",
     "summaryBadge": "ローン概要",
     "summaryDesc": "借入計画と返済見通しをすばやく確認できます。",
     "notificationTitle": "お知らせ",
     "notificationMessage": "住宅ローン情報を保存しました",
+    "scenarioApplied": "新しいシナリオを適用しました",
     "downloadFileMessage": "Excelファイルのダウンロードが成功しました",
     "resultTitle": "住宅ローン結果",
+    "metric": {
+      "avg": "平均",
+      "cost": "費用",
+      "total": "合計"
+    },
+    "insight": {
+      "totalInterest": "総利息",
+      "totalPayment": "総返済額",
+      "highestPressureMonth": "負担が最も大きい月",
+      "monthlyRate": "金利（%/月）",
+      "yearlyRate": "金利（%/年）",
+      "durationMonths": "期間（月）"
+    },
     "result": {
       "title": "住宅ローン",
       "loanAmount": "借入金額",
@@ -102,6 +120,7 @@
       "interestRate": "金利（％）",
       "result": "結果",
       "monthlyPayment": "月々の返済額",
+      "averageMonthlyPayment": "平均月額",
       "totalPayments": "総返済額",
       "totalInterestPaid": "支払総利息"
     },

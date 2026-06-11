@@ -87,12 +87,30 @@
     "share": "공유",
     "save": "저장",
     "home": "홈",
+    "compareScenario": "시나리오 비교",
+    "quickInsight": "간단 요약",
+    "whatIfRealtime": "실시간 시뮬레이션",
+    "applyScenario": "이 시나리오 적용",
     "summaryBadge": "대출 요약",
     "summaryDesc": "대출 계획과 상환 전망을 빠르게 확인하세요.",
     "notificationTitle": "알림",
     "notificationMessage": "대출이 성공적으로 저장되었습니다",
+    "scenarioApplied": "새 시나리오가 적용되었습니다",
     "downloadFileMessage": "Excel 파일이 성공적으로 다운로드되었습니다",
     "resultTitle": "대출 결과",
+    "metric": {
+      "avg": "평균",
+      "cost": "비용",
+      "total": "합계"
+    },
+    "insight": {
+      "totalInterest": "총 이자",
+      "totalPayment": "총 상환액",
+      "highestPressureMonth": "가장 부담이 큰 달",
+      "monthlyRate": "금리(%/월)",
+      "yearlyRate": "금리(%/년)",
+      "durationMonths": "기간(개월)"
+    },
     "result": {
       "title": "대출",
       "loanAmount": "대출 금액",
@@ -102,6 +120,7 @@
       "interestRate": "금리(%)",
       "result": "결과",
       "monthlyPayment": "월 상환액",
+      "averageMonthlyPayment": "평균 월 상환액",
       "totalPayments": "총 상환액",
       "totalInterestPaid": "총 이자"
     },

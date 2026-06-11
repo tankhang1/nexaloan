@@ -87,10 +87,28 @@
     "share": "Compartilhar",
     "save": "Salvar",
     "home": "Início",
+    "compareScenario": "Comparar cenário",
+    "quickInsight": "Resumo rápido",
+    "whatIfRealtime": "Simulação em tempo real",
+    "applyScenario": "Aplicar este cenário",
     "notificationTitle": "Notificação",
     "notificationMessage": "Financiamento salvo com sucesso",
     "downloadFileMessage": "Download do arquivo Excel concluído com sucesso",
     "resultTitle": "Resultado do Financiamento",
+    "scenarioApplied": "Novo cenário aplicado",
+    "metric": {
+      "avg": "MÉD",
+      "cost": "CUSTO",
+      "total": "TOTAL"
+    },
+    "insight": {
+      "totalInterest": "Juros totais",
+      "totalPayment": "Pagamento total",
+      "highestPressureMonth": "Mês de maior pressão",
+      "monthlyRate": "Taxa de juros (%/mês)",
+      "yearlyRate": "Taxa de juros (%/ano)",
+      "durationMonths": "Prazo (meses)"
+    },
     "result": {
       "title": "Financiamento Imobiliário",
       "loanAmount": "Valor Financiado",
@@ -100,6 +118,7 @@
       "interestRate": "Juros (%)",
       "result": "Resultado",
       "monthlyPayment": "Parcela Mensal",
+      "averageMonthlyPayment": "Parcela mensal média",
       "totalPayments": "Total Pago",
       "totalInterestPaid": "Total de Juros Pagos"
     },
@@ -107,8 +126,8 @@
     "saveNew": "Salvar como novo",
     "updateSaved": "Atualizar",
     "updateSuccess": "Empréstimo salvo atualizado com sucesso",
-    "summaryBadge": "Loan Summary",
-    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
+    "summaryBadge": "Resumo do empréstimo",
+    "summaryDesc": "Uma visão rápida do seu plano de financiamento e da projeção de pagamento."
   },
   "mortgageDetail": {
     "title": "Detalhes do Financiamento",

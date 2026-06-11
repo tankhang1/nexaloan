@@ -100,9 +100,10 @@ const AppIndicator = ({
             <AppText
               value={item.children}
               color={COLORS.foundation.neutral.n900}
-              fontSize={11}
+              fontSize={10}
               fontWeight={600}
               textStyle={styles.center}
+              numberOfLines={2}
             />
           ) : (
             item.children

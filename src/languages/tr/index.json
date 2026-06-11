@@ -87,10 +87,28 @@
     "share": "Paylaş",
     "save": "Kaydet",
     "home": "Ana Sayfa",
+    "compareScenario": "Senaryoyu karşılaştır",
+    "quickInsight": "Hızlı özet",
+    "whatIfRealtime": "Gerçek zamanlı senaryo",
+    "applyScenario": "Bu senaryoyu uygula",
     "notificationTitle": "Bildirim",
     "notificationMessage": "Konut kredisi başarıyla kaydedildi",
     "downloadFileMessage": "Excel dosyası başarıyla indirildi",
     "resultTitle": "Konut Kredisi Sonucu",
+    "scenarioApplied": "Yeni senaryo uygulandı",
+    "metric": {
+      "avg": "ORT",
+      "cost": "MALİYET",
+      "total": "TOPLAM"
+    },
+    "insight": {
+      "totalInterest": "Toplam faiz",
+      "totalPayment": "Toplam ödeme",
+      "highestPressureMonth": "En yüksek baskı ayı",
+      "monthlyRate": "Faiz oranı (%/ay)",
+      "yearlyRate": "Faiz oranı (%/yıl)",
+      "durationMonths": "Vade (ay)"
+    },
     "result": {
       "title": "Konut Kredisi",
       "loanAmount": "Kredi Tutarı",
@@ -100,6 +118,7 @@
       "interestRate": "Faiz Oranı (%)",
       "result": "Sonuç",
       "monthlyPayment": "Aylık Taksit",
+      "averageMonthlyPayment": "Ortalama aylık taksit",
       "totalPayments": "Toplam Ödeme",
       "totalInterestPaid": "Toplam Ödenen Faiz"
     },
@@ -107,8 +126,8 @@
     "saveNew": "Yeni olarak kaydet",
     "updateSaved": "Güncelle",
     "updateSuccess": "Kaydedilen kredi başarıyla güncellendi",
-    "summaryBadge": "Loan Summary",
-    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
+    "summaryBadge": "Kredi özeti",
+    "summaryDesc": "Kredi planınız ve geri ödeme görünümünüzün kısa bir özeti."
   },
   "mortgageDetail": {
     "title": "Konut Kredisi Detayları",

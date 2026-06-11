@@ -87,12 +87,30 @@
     "share": "Chia sẻ",
     "save": "Lưu lại",
     "home": "Trang Chủ",
+    "compareScenario": "So sánh phương án",
+    "quickInsight": "Tóm tắt nhanh",
+    "whatIfRealtime": "Mô phỏng tức thời",
+    "applyScenario": "Áp dụng kịch bản này",
     "summaryBadge": "Tóm tắt khoản vay",
     "summaryDesc": "Xem nhanh kế hoạch vay, thời hạn và bức tranh hoàn trả của bạn.",
     "notificationTitle": "Thông báo",
     "notificationMessage": "Lưu thông tin vay mua nhà thành công",
+    "scenarioApplied": "Đã áp dụng kịch bản mới",
     "downloadFileMessage": "Tải xuống tệp Excel thành công",
     "resultTitle": "Kết Quả Vay Mua Nhà",
+    "metric": {
+      "avg": "TB",
+      "cost": "CHI PHÍ",
+      "total": "TỔNG"
+    },
+    "insight": {
+      "totalInterest": "Tổng lãi",
+      "totalPayment": "Tổng trả",
+      "highestPressureMonth": "Tháng áp lực cao nhất",
+      "monthlyRate": "Lãi suất (%/tháng)",
+      "yearlyRate": "Lãi suất (%/năm)",
+      "durationMonths": "Kỳ hạn (tháng)"
+    },
     "result": {
       "title": "Vay Mua Nhà",
       "loanAmount": "Số Tiền Vay",
@@ -102,6 +120,7 @@
       "interestRate": "Lãi Suất (%)",
       "result": "Kết Quả",
       "monthlyPayment": "Khoản Trả Hàng Tháng",
+      "averageMonthlyPayment": "Khoản trả trung bình hàng tháng",
       "totalPayments": "Tổng Số Tiền Thanh Toán",
       "totalInterestPaid": "Tổng Tiền Lãi Phải Trả"
     },

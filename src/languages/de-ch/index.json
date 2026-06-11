@@ -87,10 +87,28 @@
     "share": "Teilen",
     "save": "Speichern",
     "home": "Startseite",
+    "compareScenario": "Szenario vergleichen",
+    "quickInsight": "Kurzer Überblick",
+    "whatIfRealtime": "Szenario-Simulation",
+    "applyScenario": "Dieses Szenario anwenden",
     "notificationTitle": "Benachrichtigung",
     "notificationMessage": "Hypothek erfolgreich gespeichert",
     "downloadFileMessage": "Excel-Datei erfolgreich heruntergeladen",
     "resultTitle": "Ergebnis – Hypothek",
+    "scenarioApplied": "Neues Szenario angewendet",
+    "metric": {
+      "avg": "Ø",
+      "cost": "KOSTEN",
+      "total": "GESAMT"
+    },
+    "insight": {
+      "totalInterest": "Gesamtzinsen",
+      "totalPayment": "Gesamtzahlung",
+      "highestPressureMonth": "Monat mit höchster Belastung",
+      "monthlyRate": "Zinssatz (%/Monat)",
+      "yearlyRate": "Zinssatz (%/Jahr)",
+      "durationMonths": "Laufzeit (Monate)"
+    },
     "result": {
       "title": "Hypothek",
       "loanAmount": "Finanzierungsbetrag",
@@ -100,6 +118,7 @@
       "interestRate": "Zinssatz (%)",
       "result": "Ergebnis",
       "monthlyPayment": "Monatliche Belastung",
+      "averageMonthlyPayment": "Ø monatliche Rate",
       "totalPayments": "Gesamtkosten",
       "totalInterestPaid": "Total bezahlte Zinsen"
     },
@@ -107,8 +126,8 @@
     "saveNew": "Neu speichern",
     "updateSaved": "Aktualisieren",
     "updateSuccess": "Gespeichertes Darlehen erfolgreich aktualisiert",
-    "summaryBadge": "Loan Summary",
-    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
+    "summaryBadge": "Kreditübersicht",
+    "summaryDesc": "Ein kurzer Überblick über Ihren Finanzierungsplan und die Rückzahlung."
   },
   "mortgageDetail": {
     "title": "Hypothekarübersicht",

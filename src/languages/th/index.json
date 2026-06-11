@@ -87,12 +87,30 @@
     "share": "แชร์",
     "save": "บันทึก",
     "home": "หน้าแรก",
+    "compareScenario": "เปรียบเทียบสถานการณ์",
+    "quickInsight": "สรุปย่อ",
+    "whatIfRealtime": "จำลองแบบเรียลไทม์",
+    "applyScenario": "ใช้สถานการณ์นี้",
     "summaryBadge": "สรุปสินเชื่อ",
     "summaryDesc": "ภาพรวมสั้น ๆ ของแผนกู้และแนวโน้มการชำระคืน",
     "notificationTitle": "แจ้งเตือน",
     "notificationMessage": "บันทึกสินเชื่อสำเร็จ",
+    "scenarioApplied": "ใช้สถานการณ์ใหม่แล้ว",
     "downloadFileMessage": "ดาวน์โหลดไฟล์ Excel สำเร็จ",
     "resultTitle": "ผลลัพธ์สินเชื่อ",
+    "metric": {
+      "avg": "เฉลี่ย",
+      "cost": "ค่าใช้จ่าย",
+      "total": "รวม"
+    },
+    "insight": {
+      "totalInterest": "ดอกเบี้ยรวม",
+      "totalPayment": "ยอดชำระรวม",
+      "highestPressureMonth": "เดือนที่กดดันสูงสุด",
+      "monthlyRate": "อัตราดอกเบี้ย (%/เดือน)",
+      "yearlyRate": "อัตราดอกเบี้ย (%/ปี)",
+      "durationMonths": "ระยะเวลา (เดือน)"
+    },
     "result": {
       "title": "สินเชื่อ",
       "loanAmount": "วงเงินกู้",
@@ -102,6 +120,7 @@
       "interestRate": "ดอกเบี้ย (%)",
       "result": "ผลลัพธ์",
       "monthlyPayment": "ค่างวดรายเดือน",
+      "averageMonthlyPayment": "ค่างวดเฉลี่ยต่อเดือน",
       "totalPayments": "ยอดชำระรวม",
       "totalInterestPaid": "ดอกเบี้ยรวม"
     },

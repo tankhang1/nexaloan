@@ -87,10 +87,28 @@
     "share": "分享",
     "save": "儲存",
     "home": "主頁",
+    "compareScenario": "比較方案",
+    "quickInsight": "快速概覽",
+    "whatIfRealtime": "即時模擬",
+    "applyScenario": "套用此方案",
     "notificationTitle": "提示",
     "notificationMessage": "按揭貸款儲存成功",
     "downloadFileMessage": "Excel 文件下载成功",
     "resultTitle": "按揭計算結果",
+    "scenarioApplied": "已套用新方案",
+    "metric": {
+      "avg": "均",
+      "cost": "成本",
+      "total": "總計"
+    },
+    "insight": {
+      "totalInterest": "總利息",
+      "totalPayment": "總還款額",
+      "highestPressureMonth": "壓力最高的月份",
+      "monthlyRate": "利率（%/月）",
+      "yearlyRate": "利率（%/年）",
+      "durationMonths": "期限（月）"
+    },
     "result": {
       "title": "按揭貸款",
       "loanAmount": "貸款金額",
@@ -100,6 +118,7 @@
       "interestRate": "利率 (%)",
       "result": "結果",
       "monthlyPayment": "每月供款",
+      "averageMonthlyPayment": "平均每月還款",
       "totalPayments": "總還款金額",
       "totalInterestPaid": "已付利息總額"
     },
@@ -107,8 +126,8 @@
     "saveNew": "另存为新方案",
     "updateSaved": "更新",
     "updateSuccess": "已成功更新已保存贷款",
-    "summaryBadge": "Loan Summary",
-    "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook."
+    "summaryBadge": "貸款概要",
+    "summaryDesc": "可快速查看你的借款計劃與還款展望。"
   },
   "mortgageDetail": {
     "title": "按揭詳情",

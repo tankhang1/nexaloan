@@ -87,12 +87,30 @@
     "share": "Share",
     "save": "Save",
     "home": "Home",
+    "compareScenario": "Compare scenario",
+    "quickInsight": "Quick insight",
+    "whatIfRealtime": "What-if simulation",
+    "applyScenario": "Use this scenario",
     "summaryBadge": "Loan Summary",
     "summaryDesc": "A quick snapshot of your borrowing plan and repayment outlook.",
     "notificationTitle": "Notification",
     "notificationMessage": "Loan saved successfully",
+    "scenarioApplied": "New scenario applied",
     "downloadFileMessage": "Excel file downloaded successfully",
     "resultTitle": "Loan Result",
+    "metric": {
+      "avg": "AVG",
+      "cost": "COST",
+      "total": "TOTAL"
+    },
+    "insight": {
+      "totalInterest": "Total interest",
+      "totalPayment": "Total payment",
+      "highestPressureMonth": "Highest-pressure month",
+      "monthlyRate": "Interest rate (%/month)",
+      "yearlyRate": "Interest rate (%/year)",
+      "durationMonths": "Duration (months)"
+    },
     "result": {
       "title": "Loan",
       "loanAmount": "Loan Amount",
@@ -102,6 +120,7 @@
       "interestRate": "Int Rate (%)",
       "result": "Result",
       "monthlyPayment": "Monthly Instalment",
+      "averageMonthlyPayment": "Average monthly payment",
       "totalPayments": "Total Payments",
       "totalInterestPaid": "Total Interest Paid"
     },

@@ -140,7 +140,7 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
     dispatch(setCurrentLoan(scenarioLoan));
     Toast.show({
       text1: t("mortgageResult.notificationTitle"),
-      text2: "Đã áp dụng kịch bản mới",
+      text2: t("mortgageResult.scenarioApplied"),
       type: "success",
       position: "top",
     });
@@ -318,17 +318,19 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
 
           <View style={styles.insightCard}>
             <AppText
-              value="Insight nhanh"
+              value={t("mortgageResult.quickInsight")}
               fontSize={16}
               fontWeight={700}
               color={COLORS.foundation.neutral.n700}
             />
             <View style={styles.insightRow}>
               <AppText
-                value="Tổng lãi"
+                value={t("mortgageResult.insight.totalInterest")}
                 fontSize={13}
                 fontWeight={500}
                 color={COLORS.foundation.neutral.n500}
+                numberOfLines={2}
+                textStyle={styles.rowLabel}
               />
               <AppText
                 value={formatNumber(
@@ -340,14 +342,18 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
                 fontSize={15}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n700}
+                numberOfLines={1}
+                textStyle={styles.rowValue}
               />
             </View>
             <View style={styles.insightRow}>
               <AppText
-                value="Tổng trả"
+                value={t("mortgageResult.insight.totalPayment")}
                 fontSize={13}
                 fontWeight={500}
                 color={COLORS.foundation.neutral.n500}
+                numberOfLines={2}
+                textStyle={styles.rowLabel}
               />
               <AppText
                 value={formatNumber(
@@ -359,37 +365,48 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
                 fontSize={15}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n700}
+                numberOfLines={1}
+                textStyle={styles.rowValue}
               />
             </View>
             <View style={styles.insightRow}>
               <AppText
-                value="Tháng áp lực cao nhất"
+                value={t("mortgageResult.insight.highestPressureMonth")}
                 fontSize={13}
                 fontWeight={500}
                 color={COLORS.foundation.neutral.n500}
+                numberOfLines={2}
+                textStyle={styles.rowLabel}
               />
               <AppText
                 value={formatMonth(maxPressureMonth, t)}
                 fontSize={15}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n700}
+                numberOfLines={1}
+                textStyle={styles.rowValue}
               />
             </View>
           </View>
 
           <View style={styles.whatIfCard}>
             <AppText
-              value="What-if realtime"
+              value={t("mortgageResult.whatIfRealtime")}
               fontSize={16}
               fontWeight={700}
               color={COLORS.foundation.neutral.n700}
             />
             <View style={styles.whatIfSection}>
               <AppText
-                value={scenarioLoan.type === 2 ? "Lãi suất (%/tháng)" : "Lãi suất (%/năm)"}
+                value={
+                  scenarioLoan.type === 2
+                    ? t("mortgageResult.insight.monthlyRate")
+                    : t("mortgageResult.insight.yearlyRate")
+                }
                 fontSize={13}
                 fontWeight={500}
                 color={COLORS.foundation.neutral.n500}
+                numberOfLines={2}
               />
               <AppSlider
                 minValue={scenarioLoan.type === 2 ? 0.1 : 1}
@@ -402,10 +419,11 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
             </View>
             <View style={styles.whatIfSection}>
               <AppText
-                value="Kỳ hạn (tháng)"
+                value={t("mortgageResult.insight.durationMonths")}
                 fontSize={13}
                 fontWeight={500}
                 color={COLORS.foundation.neutral.n500}
+                numberOfLines={2}
               />
               <AppSlider
                 minValue={1}
@@ -418,7 +436,7 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
             {hasWhatIfChange && (
               <Pressable style={styles.applyScenarioBtn} onPress={onApplyScenario}>
                 <AppText
-                  value="Dùng kịch bản này"
+                  value={t("mortgageResult.applyScenario")}
                   fontSize={13}
                   fontWeight={700}
                   color={COLORS.foundation.neutral.n700}
@@ -487,7 +505,7 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
               <AppText
                 fontSize={14}
                 fontWeight={700}
-                value="So sánh phương án"
+                value={t("mortgageResult.compareScenario")}
                 color={COLORS.foundation.neutral.n700}
               />
             </Pressable>
@@ -638,6 +656,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  rowLabel: {
+    flex: 1,
+    flexShrink: 1,
+  },
+  rowValue: {
+    flexShrink: 0,
+    textAlign: "right",
   },
   whatIfCard: {
     backgroundColor: "rgba(255,255,255,0.94)",

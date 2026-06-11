@@ -41,191 +41,214 @@ const Result = ({mortgage, label}: TResult) => {
   return (
     <Animated.View layout={LinearTransition} style={styles.overall}>
       <View style={styles.panel}>
-          <View style={styles.hero}>
-            <View style={styles.heroGlow} />
-            <View style={styles.badgeRow}>
-              <View style={styles.badge}>
-                <Feather
-                  name="trending-up"
-                  size={16}
-                  color={COLORS.foundation.blue.b500}
-                />
-                <AppText
-                  fontSize={12}
-                  fontWeight={600}
-                  color={COLORS.foundation.blue.b500}
-                  value={t('mortgageResult.summaryBadge')}
-                />
-              </View>
-            </View>
-            <AppText
-              fontSize={28}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n700}
-              value={label}
-            />
-            <AppText
-              fontSize={13}
-              fontWeight={400}
-              color={COLORS.foundation.neutral.n500}
-              value={t('mortgageResult.summaryDesc')}
-            />
-          </View>
-          <View style={styles.contentContainer}>
-            <View style={styles.dataCard}>
-              <View style={styles.infoRow}>
-                <AppText
-                  fontSize={13}
-                  fontWeight={500}
-                  color={COLORS.foundation.neutral.n500}
-                  value={t('mortgageResult.result.loanAmount')}
-                />
-                <AppText
-                  fontSize={16}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                  value={formatNumber(
-                    mortgage?.loan_amount || 0,
-                    currency.locale,
-                    true,
-                    currency.code,
-                  )}
-                />
-              </View>
-              <View style={styles.separator} />
-              <View style={styles.infoRow}>
-                <AppText
-                  fontSize={13}
-                  fontWeight={500}
-                  color={COLORS.foundation.neutral.n500}
-                  value={t('mortgageResult.result.duration')}
-                />
-                <AppText
-                  fontSize={16}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                  value={formatMonth(mortgage?.duration || 0, t)}
-                />
-              </View>
-              <View style={styles.separator} />
-              <View style={styles.infoRow}>
-                <AppText
-                  fontSize={13}
-                  fontWeight={500}
-                  color={COLORS.foundation.neutral.n500}
-                  value={t('mortgageResult.result.interestRate')}
-                />
-                <AppText
-                  fontSize={16}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                  value={`${mortgage?.int_rate || 0}%`}
-                />
-              </View>
-            </View>
-            <View style={styles.promotionCard}>
-              <AppBanner />
+        <View style={styles.hero}>
+          <View style={styles.heroGlow} />
+          <View style={styles.badgeRow}>
+            <View style={styles.badge}>
+              <Feather
+                name="trending-up"
+                size={16}
+                color={COLORS.foundation.blue.b500}
+              />
+              <AppText
+                fontSize={12}
+                fontWeight={600}
+                color={COLORS.foundation.blue.b500}
+                value={t('mortgageResult.summaryBadge')}
+                numberOfLines={1}
+              />
             </View>
           </View>
-          <View style={styles.footerContainer}>
-            <View style={[styles.rows, styles.gap12]}>
-              <Pressable style={styles.halfWidthButton}>
-                <View style={styles.metricContent}>
-                  <View style={[styles.metricPill, styles.greenPill]}>
-                    <Feather
-                      name="calendar"
-                      size={14}
-                      color={COLORS.foundation.blue.b500}
-                    />
-                    <AppText
-                      fontSize={11}
-                      fontWeight={600}
-                      value="AVG"
-                      color={COLORS.foundation.blue.b500}
-                    />
-                  </View>
-                  <AppText
-                    fontSize={12}
-                    fontWeight={500}
-                    value={t('mortgageResult.result.monthlyPayment') + ' (Avg)'}
-                    color={COLORS.foundation.neutral.n500}
-                  />
-                  <AppText
-                    allowFontScaling={true}
-                    fontSize={20}
-                    fontWeight={700}
-                    value={formatNumber(
-                      result.averageMonthlyPayment,
-                      currency.locale,
-                      true,
-                      currency.code,
-                    )}
+          <AppText
+            fontSize={28}
+            fontWeight={700}
+            color={COLORS.foundation.neutral.n700}
+            value={label}
+            numberOfLines={2}
+            textStyle={styles.heroTitle}
+          />
+          <AppText
+            fontSize={13}
+            fontWeight={400}
+            color={COLORS.foundation.neutral.n500}
+            value={t('mortgageResult.summaryDesc')}
+            numberOfLines={3}
+            textStyle={styles.heroDesc}
+          />
+        </View>
+        <View style={styles.contentContainer}>
+          <View style={styles.dataCard}>
+            <View style={styles.infoRow}>
+              <AppText
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+                value={t('mortgageResult.result.loanAmount')}
+                numberOfLines={2}
+                textStyle={styles.infoLabel}
+              />
+              <AppText
+                fontSize={16}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+                value={formatNumber(
+                  mortgage?.loan_amount || 0,
+                  currency.locale,
+                  true,
+                  currency.code,
+                )}
+                numberOfLines={1}
+                textStyle={styles.infoValue}
+              />
+            </View>
+            <View style={styles.separator} />
+            <View style={styles.infoRow}>
+              <AppText
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+                value={t('mortgageResult.result.duration')}
+                numberOfLines={2}
+                textStyle={styles.infoLabel}
+              />
+              <AppText
+                fontSize={16}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+                value={formatMonth(mortgage?.duration || 0, t)}
+                numberOfLines={1}
+                textStyle={styles.infoValue}
+              />
+            </View>
+            <View style={styles.separator} />
+            <View style={styles.infoRow}>
+              <AppText
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+                value={t('mortgageResult.result.interestRate')}
+                numberOfLines={2}
+                textStyle={styles.infoLabel}
+              />
+              <AppText
+                fontSize={16}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n700}
+                value={`${mortgage?.int_rate || 0}%`}
+                numberOfLines={1}
+                textStyle={styles.infoValue}
+              />
+            </View>
+          </View>
+          <View style={styles.promotionCard}>
+            <AppBanner />
+          </View>
+        </View>
+        <View style={styles.footerContainer}>
+          <View style={[styles.rows, styles.gap12]}>
+            <Pressable style={styles.halfWidthButton}>
+              <View style={styles.metricContent}>
+                <View style={[styles.metricPill, styles.greenPill]}>
+                  <Feather
+                    name="calendar"
+                    size={14}
                     color={COLORS.foundation.blue.b500}
                   />
-                </View>
-              </Pressable>
-              <Pressable style={styles.halfWidthButton}>
-                <View style={styles.metricContent}>
-                  <View style={[styles.metricPill, styles.orangePill]}>
-                    <Feather name="percent" size={14} color="#B66A2A" />
-                    <AppText
-                      fontSize={11}
-                      fontWeight={600}
-                      value="COST"
-                      color="#B66A2A"
-                    />
-                  </View>
-                  <AppText
-                    fontSize={12}
-                    fontWeight={500}
-                    value={t('mortgageResult.result.totalInterestPaid')}
-                    color={COLORS.foundation.neutral.n500}
-                  />
-                  <AppText
-                    fontSize={20}
-                    fontWeight={700}
-                    value={formatNumber(
-                      result.totalInterest,
-                      currency.locale,
-                      true,
-                      currency.code,
-                    )}
-                    color="#B66A2A"
-                  />
-                </View>
-              </Pressable>
-            </View>
-            <Pressable style={styles.fullWidthButton}>
-              <View style={styles.metricContent}>
-                <View style={[styles.metricPill, styles.purplePill]}>
-                  <Feather name="layers" size={14} color="#6E4DD8" />
                   <AppText
                     fontSize={11}
                     fontWeight={600}
-                    value="TOTAL"
-                    color="#6E4DD8"
+                    value={t('mortgageResult.metric.avg')}
+                    color={COLORS.foundation.blue.b500}
                   />
                 </View>
                 <AppText
                   fontSize={12}
                   fontWeight={500}
-                  value={t('mortgageResult.result.totalPayments')}
+                  value={t('mortgageResult.result.averageMonthlyPayment')}
                   color={COLORS.foundation.neutral.n500}
+                  numberOfLines={2}
                 />
                 <AppText
-                  fontSize={24}
+                  allowFontScaling={true}
+                  fontSize={20}
                   fontWeight={700}
                   value={formatNumber(
-                    result.totalPayment,
+                    result.averageMonthlyPayment,
                     currency.locale,
                     true,
                     currency.code,
                   )}
-                  color="#6E4DD8"
+                  color={COLORS.foundation.blue.b500}
+                  numberOfLines={1}
+                />
+              </View>
+            </Pressable>
+            <Pressable style={styles.halfWidthButton}>
+              <View style={styles.metricContent}>
+                <View style={[styles.metricPill, styles.orangePill]}>
+                  <Feather name="percent" size={14} color="#B66A2A" />
+                  <AppText
+                    fontSize={11}
+                    fontWeight={600}
+                    value={t('mortgageResult.metric.cost')}
+                    color="#B66A2A"
+                  />
+                </View>
+                <AppText
+                  fontSize={12}
+                  fontWeight={500}
+                  value={t('mortgageResult.result.totalInterestPaid')}
+                  color={COLORS.foundation.neutral.n500}
+                  numberOfLines={2}
+                />
+                <AppText
+                  fontSize={20}
+                  fontWeight={700}
+                  value={formatNumber(
+                    result.totalInterest,
+                    currency.locale,
+                    true,
+                    currency.code,
+                  )}
+                  color="#B66A2A"
+                  numberOfLines={1}
                 />
               </View>
             </Pressable>
           </View>
+          <Pressable style={styles.fullWidthButton}>
+            <View style={styles.metricContent}>
+              <View style={[styles.metricPill, styles.purplePill]}>
+                <Feather name="layers" size={14} color="#6E4DD8" />
+                <AppText
+                  fontSize={11}
+                  fontWeight={600}
+                  value={t('mortgageResult.metric.total')}
+                  color="#6E4DD8"
+                />
+              </View>
+              <AppText
+                fontSize={12}
+                fontWeight={500}
+                value={t('mortgageResult.result.totalPayments')}
+                color={COLORS.foundation.neutral.n500}
+                numberOfLines={2}
+              />
+              <AppText
+                fontSize={24}
+                fontWeight={700}
+                value={formatNumber(
+                  result.totalPayment,
+                  currency.locale,
+                  true,
+                  currency.code,
+                )}
+                color="#6E4DD8"
+                numberOfLines={1}
+              />
+            </View>
+          </Pressable>
+        </View>
         </View>
     </Animated.View>
   );
@@ -280,6 +303,12 @@ const styles = StyleSheet.create({
   contentContainer: {
     gap: 14,
   },
+  heroTitle: {
+    textAlign: 'center',
+  },
+  heroDesc: {
+    textAlign: 'center',
+  },
   dataCard: {
     backgroundColor: COLORS.foundation.neutral.n0,
     borderRadius: 22,
@@ -295,6 +324,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 12,
     minHeight: 52,
+  },
+  infoLabel: {
+    flex: 1,
+    flexShrink: 1,
+  },
+  infoValue: {
+    flexShrink: 0,
+    textAlign: 'right',
   },
   separator: {
     height: 1,
