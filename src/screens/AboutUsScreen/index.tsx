@@ -11,19 +11,18 @@ import { navigationRef } from "../../navigation";
 
 const AboutUsScreen = () => {
   const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
   const appVersionText = useMemo(() => {
     const version =
       Constants.expoConfig?.version ||
       Constants.nativeApplicationVersion ||
       "1.0.7";
     const build = Constants.nativeBuildVersion;
-    const versionLabel = t("settings.aboutContent.versionLabel", {
-      defaultValue: "Version",
-    });
+    const versionLabel = t("settings.aboutContent.versionLabel");
     return build
       ? `${versionLabel} ${version} (${build})`
       : `${versionLabel} ${version}`;
-  }, []);
+  }, [t]);
   const onGoBack = () => {
     navigationRef.goBack();
   };
@@ -113,11 +112,11 @@ const AboutUsScreen = () => {
           />
           <AppText
             value={t("settings.aboutContent.copyright", {
-              defaultValue: "© 2024 Nexa Loan. All rights reserved.",
+              year: currentYear,
             })}
             color={COLORS.foundation.neutral.n200}
             fontSize={12}
-            appStyle={{ marginTop: 8 }}
+            appStyle={{marginTop: 8}}
           />
         </View>
       </ScrollView>

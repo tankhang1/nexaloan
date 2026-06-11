@@ -241,6 +241,17 @@
       "clearAllAction": "Alle löschen",
       "clearAllSuccess": "Gesamter Verlauf gelöscht"
     },
+    "filters": {
+      "advancedTitle": "Erweiterter Filter",
+      "amountFrom": "Betrag von",
+      "amountTo": "Betrag bis",
+      "noLimit": "Kein Limit",
+      "dateFrom": "Von Datum",
+      "dateTo": "Bis Datum",
+      "selectDate": "Datum wählen",
+      "noMatch": "Keine Kredite entsprechen dem Filter",
+      "clearFilter": "Filter zurücksetzen"
+    },
     "loanTitles": {
       "mortgage": "Immobilienkredit"
     }

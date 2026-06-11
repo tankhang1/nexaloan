@@ -241,6 +241,17 @@
       "clearAllAction": "ລຶບທັງໝົດ",
       "clearAllSuccess": "ລຶບປະຫວັດທັງໝົດແລ້ວ"
     },
+    "filters": {
+      "advancedTitle": "ຕົວກອງຂັ້ນສູງ",
+      "amountFrom": "ຈຳນວນຈາກ",
+      "amountTo": "ຈຳນວນຮອດ",
+      "noLimit": "ບໍ່ຈຳກັດ",
+      "dateFrom": "ຈາກວັນທີ",
+      "dateTo": "ຮອດວັນທີ",
+      "selectDate": "ເລືອກວັນທີ",
+      "noMatch": "ບໍ່ມີເງິນກູ້ທີ່ກົງກັບຕົວກອງ",
+      "clearFilter": "ລ້າງຕົວກອງ"
+    },
     "loanTitles": {
       "mortgage": "ເງິນກູ້ບ້ານ"
     }

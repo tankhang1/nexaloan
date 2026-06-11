@@ -241,6 +241,17 @@
       "clearAllAction": "Tümünü sil",
       "clearAllSuccess": "Tüm geçmiş silindi"
     },
+    "filters": {
+      "advancedTitle": "Gelişmiş filtre",
+      "amountFrom": "Miktar başlangıcı",
+      "amountTo": "Miktar bitişi",
+      "noLimit": "Sınır yok",
+      "dateFrom": "Başlangıç tarihi",
+      "dateTo": "Bitiş tarihi",
+      "selectDate": "Tarih seçin",
+      "noMatch": "Filtreyle eşleşen kredi yok",
+      "clearFilter": "Filtreyi temizle"
+    },
     "loanTitles": {
       "mortgage": "Konut Kredisi"
     }

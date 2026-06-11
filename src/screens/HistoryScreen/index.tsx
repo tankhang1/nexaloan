@@ -308,9 +308,7 @@ const HistoryScreen = () => {
 
       <View style={styles.filterCard}>
         <AppText
-          value={t('history.filters.advancedTitle', {
-            defaultValue: 'Advanced filter',
-          })}
+          value={t('history.filters.advancedTitle')}
           fontSize={15}
           fontWeight={700}
           color={COLORS.foundation.neutral.n700}
@@ -318,9 +316,7 @@ const HistoryScreen = () => {
         <View style={styles.filterRow}>
           <View style={styles.filterCol}>
             <AppText
-              value={t('history.filters.amountFrom', {
-                defaultValue: 'Amount from',
-              })}
+              value={t('history.filters.amountFrom')}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -340,9 +336,7 @@ const HistoryScreen = () => {
           </View>
           <View style={styles.filterCol}>
             <AppText
-              value={t('history.filters.amountTo', {
-                defaultValue: 'Amount to',
-              })}
+              value={t('history.filters.amountTo')}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -356,9 +350,7 @@ const HistoryScreen = () => {
               color={COLORS.foundation.neutral.n700}
               fontSize={15}
               fontWeight={600}
-              placeholder={t('history.filters.noLimit', {
-                defaultValue: 'No limit',
-              })}
+              placeholder={t('history.filters.noLimit')}
               placeholderTextColor={COLORS.foundation.neutral.n200}
             />
           </View>
@@ -366,9 +358,7 @@ const HistoryScreen = () => {
         <View style={styles.filterRow}>
           <View style={styles.filterCol}>
             <AppText
-              value={t('history.filters.dateFrom', {
-                defaultValue: 'From date',
-              })}
+              value={t('history.filters.dateFrom')}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -382,9 +372,7 @@ const HistoryScreen = () => {
               <AppText
                 value={
                   formattedDate(filters.dateFrom) ||
-                  t('history.filters.selectDate', {
-                    defaultValue: 'Select date',
-                  })
+                  t('history.filters.selectDate')
                 }
                 fontSize={15}
                 fontWeight={600}
@@ -399,9 +387,7 @@ const HistoryScreen = () => {
           </View>
           <View style={styles.filterCol}>
             <AppText
-              value={t('history.filters.dateTo', {
-                defaultValue: 'To date',
-              })}
+              value={t('history.filters.dateTo')}
               fontSize={11}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -415,9 +401,7 @@ const HistoryScreen = () => {
               <AppText
                 value={
                   formattedDate(filters.dateTo) ||
-                  t('history.filters.selectDate', {
-                    defaultValue: 'Select date',
-                  })
+                  t('history.filters.selectDate')
                 }
                 fontSize={15}
                 fontWeight={600}
@@ -437,9 +421,7 @@ const HistoryScreen = () => {
         {listHistory.length === 0 && (
           <View style={styles.emptyState}>
             <AppText
-              value={t('history.filters.noMatch', {
-                defaultValue: 'No loans match the filter',
-              })}
+              value={t('history.filters.noMatch')}
               fontSize={13}
               fontWeight={500}
               color={COLORS.foundation.neutral.n500}
@@ -447,9 +429,7 @@ const HistoryScreen = () => {
             />
             <Pressable onPress={resetFilters} style={styles.resetFilterBtn}>
               <AppText
-                value={t('history.filters.clearFilter', {
-                  defaultValue: 'Clear filter',
-                })}
+                value={t('history.filters.clearFilter')}
                 fontSize={13}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n700}

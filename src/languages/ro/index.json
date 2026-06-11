@@ -241,6 +241,17 @@
       "clearAllAction": "Șterge tot",
       "clearAllSuccess": "Întregul istoric a fost șters"
     },
+    "filters": {
+      "advancedTitle": "Filtru avansat",
+      "amountFrom": "Suma de la",
+      "amountTo": "Suma până la",
+      "noLimit": "Fără limită",
+      "dateFrom": "De la data",
+      "dateTo": "Până la data",
+      "selectDate": "Selectează data",
+      "noMatch": "Niciun împrumut nu se potrivește filtrului",
+      "clearFilter": "Șterge filtrul"
+    },
     "loanTitles": {
       "mortgage": "Credit Imobiliar"
     }

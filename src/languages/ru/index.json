@@ -241,6 +241,17 @@
       "clearAllAction": "Удалить все",
       "clearAllSuccess": "Вся история удалена"
     },
+    "filters": {
+      "advancedTitle": "Расширенный фильтр",
+      "amountFrom": "Сумма от",
+      "amountTo": "Сумма до",
+      "noLimit": "Без ограничения",
+      "dateFrom": "Дата с",
+      "dateTo": "Дата по",
+      "selectDate": "Выберите дату",
+      "noMatch": "Нет кредитов, подходящих под фильтр",
+      "clearFilter": "Сбросить фильтр"
+    },
     "loanTitles": {
       "mortgage": "Ипотечный кредит"
     }

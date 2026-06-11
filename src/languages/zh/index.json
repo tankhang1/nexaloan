@@ -241,6 +241,17 @@
       "clearAllAction": "全部删除",
       "clearAllSuccess": "所有历史记录已删除"
     },
+    "filters": {
+      "advancedTitle": "進階篩選",
+      "amountFrom": "金額從",
+      "amountTo": "金額到",
+      "noLimit": "無限制",
+      "dateFrom": "起始日期",
+      "dateTo": "結束日期",
+      "selectDate": "選擇日期",
+      "noMatch": "沒有符合篩選條件的貸款",
+      "clearFilter": "清除篩選"
+    },
     "loanTitles": {
       "mortgage": "按揭貸款"
     }

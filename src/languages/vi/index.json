@@ -241,6 +241,17 @@
       "clearAllAction": "Xoá tất cả",
       "clearAllSuccess": "Đã xoá toàn bộ lịch sử"
     },
+    "filters": {
+      "advancedTitle": "Bộ lọc nâng cao",
+      "amountFrom": "Mức từ",
+      "amountTo": "Mức đến",
+      "noLimit": "Không giới hạn",
+      "dateFrom": "Từ ngày",
+      "dateTo": "Đến ngày",
+      "selectDate": "Chọn ngày",
+      "noMatch": "Không có khoản vay nào khớp bộ lọc",
+      "clearFilter": "Xóa bộ lọc"
+    },
     "loanTitles": {
       "mortgage": "Vay Mua Nhà"
     }

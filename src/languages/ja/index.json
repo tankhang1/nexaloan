@@ -241,6 +241,17 @@
       "clearAllAction": "すべて削除",
       "clearAllSuccess": "履歴をすべて削除しました"
     },
+    "filters": {
+      "advancedTitle": "詳細フィルター",
+      "amountFrom": "金額の下限",
+      "amountTo": "金額の上限",
+      "noLimit": "上限なし",
+      "dateFrom": "開始日",
+      "dateTo": "終了日",
+      "selectDate": "日付を選択",
+      "noMatch": "条件に一致するローンはありません",
+      "clearFilter": "フィルターをクリア"
+    },
     "loanTitles": {
       "mortgage": "住宅ローン"
     }

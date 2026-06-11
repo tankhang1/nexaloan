@@ -241,6 +241,17 @@
       "clearAllAction": "모두 삭제",
       "clearAllSuccess": "전체 내역이 삭제되었습니다"
     },
+    "filters": {
+      "advancedTitle": "고급 필터",
+      "amountFrom": "금액 시작",
+      "amountTo": "금액 끝",
+      "noLimit": "제한 없음",
+      "dateFrom": "시작일",
+      "dateTo": "종료일",
+      "selectDate": "날짜 선택",
+      "noMatch": "필터에 맞는 대출이 없습니다",
+      "clearFilter": "필터 지우기"
+    },
     "loanTitles": {
       "mortgage": "주택담보대출"
     }

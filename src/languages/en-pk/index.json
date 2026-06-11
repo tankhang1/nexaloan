@@ -241,6 +241,17 @@
       "clearAllAction": "Delete all",
       "clearAllSuccess": "All history deleted"
     },
+    "filters": {
+      "advancedTitle": "Advanced filter",
+      "amountFrom": "Amount from",
+      "amountTo": "Amount to",
+      "noLimit": "No limit",
+      "dateFrom": "From date",
+      "dateTo": "To date",
+      "selectDate": "Select date",
+      "noMatch": "No loans match the filter",
+      "clearFilter": "Clear filter"
+    },
     "loanTitles": {
       "mortgage": "Home Loan"
     }

@@ -241,6 +241,17 @@
       "clearAllAction": "ลบทั้งหมด",
       "clearAllSuccess": "ลบประวัติทั้งหมดแล้ว"
     },
+    "filters": {
+      "advancedTitle": "ตัวกรองขั้นสูง",
+      "amountFrom": "จำนวนจาก",
+      "amountTo": "จำนวนถึง",
+      "noLimit": "ไม่จำกัด",
+      "dateFrom": "จากวันที่",
+      "dateTo": "ถึงวันที่",
+      "selectDate": "เลือกวันที่",
+      "noMatch": "ไม่พบสินเชื่อที่ตรงกับตัวกรอง",
+      "clearFilter": "ล้างตัวกรอง"
+    },
     "loanTitles": {
       "mortgage": "สินเชื่อบ้าน"
     }

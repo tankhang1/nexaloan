@@ -241,6 +241,17 @@
       "clearAllAction": "Excluir tudo",
       "clearAllSuccess": "Todo o histórico foi excluído"
     },
+    "filters": {
+      "advancedTitle": "Filtro avançado",
+      "amountFrom": "Valor de",
+      "amountTo": "Valor até",
+      "noLimit": "Sem limite",
+      "dateFrom": "De data",
+      "dateTo": "Até data",
+      "selectDate": "Selecionar data",
+      "noMatch": "Nenhum empréstimo corresponde ao filtro",
+      "clearFilter": "Limpar filtro"
+    },
     "loanTitles": {
       "mortgage": "Financiamento Imobiliário"
     }

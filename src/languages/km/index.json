@@ -241,6 +241,17 @@
       "clearAllAction": "លុបទាំងអស់",
       "clearAllSuccess": "បានលុបប្រវត្តិទាំងអស់"
     },
+    "filters": {
+      "advancedTitle": "តម្រងកម្រិតខ្ពស់",
+      "amountFrom": "ចំនួនពី",
+      "amountTo": "ចំនួនដល់",
+      "noLimit": "គ្មានដែនកំណត់",
+      "dateFrom": "ពីកាលបរិច្ឆេទ",
+      "dateTo": "ដល់កាលបរិច្ឆេទ",
+      "selectDate": "ជ្រើសកាលបរិច្ឆេទ",
+      "noMatch": "មិនមានប្រាក់កម្ចីណាដែលត្រូវនឹងតម្រងនេះ",
+      "clearFilter": "លុបតម្រង"
+    },
     "loanTitles": {
       "mortgage": "ប្រាក់កម្ចីទិញផ្ទះ"
     }
