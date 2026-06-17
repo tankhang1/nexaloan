@@ -14,7 +14,7 @@
       "backgroundColor": "#0B8F79"
     },
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.anonymous.nexa-loan",
       "infoPlist": {
         "NSPhotoLibraryAddUsageDescription": "This app needs access to save images to your photo library.",

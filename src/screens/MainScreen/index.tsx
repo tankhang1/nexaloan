@@ -1,4 +1,14 @@
-import {ScrollView, StyleSheet, View, TouchableOpacity, Alert} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Alert,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
+  Platform,
+} from 'react-native';
 import React from 'react';
 import AppView from '../../components/AppView';
 import AppText from '../../components/AppText';
@@ -574,97 +584,114 @@ const MainScreen = () => {
 
       {/* Update Payment Modal */}
       {isModalVisible && (
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <AppText
-              value={t('main.updatePayment')}
-              fontSize={20}
-              fontWeight={700}
-              textStyle={{marginBottom: 8}}
-              color={COLORS.foundation.neutral.n700}
-            />
-            <AppText
-              value={getLoanTitle(activeSelectedLoan)}
-              fontSize={14}
-              color={COLORS.foundation.neutral.n500}
-              textStyle={{marginBottom: 20}}
-              fontWeight={400}
-            />
-            <AppInput
-              placeholder={t('main.paidThisMonth')}
-              value={formattedPaymentAmount}
-              onChangeText={onChangePaymentAmount}
-              keyboardType="number-pad"
-              color={COLORS.foundation.neutral.n700}
-              fontSize={16}
-              fontWeight={400}
-              placeholderTextColor={COLORS.foundation.neutral.n200}
-            />
-            <View style={styles.modalHint}>
-              <AppText
-                value={`${t('main.remainingBalance')}: ${formatNumber(
-                  selectedRemainingAmount,
-                  activeSelectedLoan?.currency.locale || currency.locale,
-                  true,
-                  activeSelectedLoan?.currency.code || currency.code,
-                )}`}
-                color={COLORS.foundation.neutral.n500}
-                fontWeight={400}
-                fontSize={12}
-              />
-              <TouchableOpacity
-                style={styles.payAllBtn}
-                onPress={onPayAll}
-                disabled={selectedRemainingAmount <= 0}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+            style={styles.modalOverlay}>
+            <TouchableWithoutFeedback accessible={false}>
+              <View style={styles.modalContent}>
+                <ScrollView
+                  showsVerticalScrollIndicator={false}
+                  keyboardShouldPersistTaps="handled"
+                  contentContainerStyle={styles.modalScrollContent}>
                   <AppText
-                    value={t('main.payAll')}
-                    color={COLORS.foundation.blue.b300}
+                    value={t('main.updatePayment')}
+                    fontSize={20}
                     fontWeight={700}
-                    fontSize={12}
+                    textStyle={{marginBottom: 8}}
+                    color={COLORS.foundation.neutral.n700}
                   />
-              </TouchableOpacity>
-              {!!paymentError && (
-                <AppText
-                  value={paymentError}
-                  color="#D92D20"
-                  fontWeight={500}
-                  fontSize={12}
-                />
-              )}
-            </View>
-            <View style={[styles.rows, {marginTop: 24, gap: 12}]}>
-              <TouchableOpacity
-                style={[styles.modalBtn, {backgroundColor: COLORS.foundation.neutral.n100}]}
-                onPress={onClosePaymentModal}
-              >
-                <AppText value={t('main.cancel')} fontWeight={600} fontSize={15} color={COLORS.foundation.neutral.n700} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.modalBtn,
-                  {
-                    backgroundColor: canSubmitPayment
-                      ? COLORS.foundation.blue.b300
-                      : COLORS.foundation.neutral.n100,
-                  },
-                ]}
-                disabled={!canSubmitPayment}
-                onPress={confirmPayment}
-              >
-                <AppText
-                  value={t('main.confirm')}
-                  color={
-                    canSubmitPayment
-                      ? COLORS.foundation.neutral.n0
-                      : COLORS.foundation.neutral.n500
-                  }
-                  fontWeight={600}
-                  fontSize={15}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+                  <AppText
+                    value={getLoanTitle(activeSelectedLoan)}
+                    fontSize={14}
+                    color={COLORS.foundation.neutral.n500}
+                    textStyle={{marginBottom: 20}}
+                    fontWeight={400}
+                  />
+                  <AppInput
+                    placeholder={t('main.paidThisMonth')}
+                    value={formattedPaymentAmount}
+                    onChangeText={onChangePaymentAmount}
+                    keyboardType="number-pad"
+                    color={COLORS.foundation.neutral.n700}
+                    fontSize={16}
+                    fontWeight={400}
+                    placeholderTextColor={COLORS.foundation.neutral.n200}
+                  />
+                  <View style={styles.modalHint}>
+                    <AppText
+                      value={`${t('main.remainingBalance')}: ${formatNumber(
+                        selectedRemainingAmount,
+                        activeSelectedLoan?.currency.locale || currency.locale,
+                        true,
+                        activeSelectedLoan?.currency.code || currency.code,
+                      )}`}
+                      color={COLORS.foundation.neutral.n500}
+                      fontWeight={400}
+                      fontSize={12}
+                    />
+                    <TouchableOpacity
+                      style={styles.payAllBtn}
+                      onPress={onPayAll}
+                      disabled={selectedRemainingAmount <= 0}>
+                      <AppText
+                        value={t('main.payAll')}
+                        color={COLORS.foundation.blue.b300}
+                        fontWeight={700}
+                        fontSize={12}
+                      />
+                    </TouchableOpacity>
+                    {!!paymentError && (
+                      <AppText
+                        value={paymentError}
+                        color="#D92D20"
+                        fontWeight={500}
+                        fontSize={12}
+                      />
+                    )}
+                  </View>
+                  <View style={[styles.rows, {marginTop: 24, gap: 12}]}>
+                    <TouchableOpacity
+                      style={[
+                        styles.modalBtn,
+                        {backgroundColor: COLORS.foundation.neutral.n100},
+                      ]}
+                      onPress={onClosePaymentModal}>
+                      <AppText
+                        value={t('main.cancel')}
+                        fontWeight={600}
+                        fontSize={15}
+                        color={COLORS.foundation.neutral.n700}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[
+                        styles.modalBtn,
+                        {
+                          backgroundColor: canSubmitPayment
+                            ? COLORS.foundation.blue.b300
+                            : COLORS.foundation.neutral.n100,
+                        },
+                      ]}
+                      disabled={!canSubmitPayment}
+                      onPress={confirmPayment}>
+                      <AppText
+                        value={t('main.confirm')}
+                        color={
+                          canSubmitPayment
+                            ? COLORS.foundation.neutral.n0
+                            : COLORS.foundation.neutral.n500
+                        }
+                        fontWeight={600}
+                        fontSize={15}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </ScrollView>
+              </View>
+            </TouchableWithoutFeedback>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
       )}
     </AppView>
   );
@@ -854,9 +881,12 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: '100%',
+    maxHeight: '80%',
     backgroundColor: COLORS.foundation.neutral.n0,
     borderRadius: 24,
     padding: 24,
+  },
+  modalScrollContent: {
     gap: 12,
   },
   modalHint: {
