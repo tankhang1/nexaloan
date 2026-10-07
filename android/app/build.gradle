@@ -89,7 +89,7 @@ android {
 
     namespace 'com.anonymous.nexaloan'
     defaultConfig {
-        applicationId 'com.anonymous.nexaloan'
+        applicationId 'com.nexa.loan.estimator'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 13
