@@ -1,5 +1,12 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {Feather} from '@expo/vector-icons';
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {useSelector} from 'react-redux';
 
@@ -23,6 +30,7 @@ import {RootState} from '../../redux/store';
 import {useTranslation} from 'react-i18next';
 import AppTrustNotice from '../../components/AppTrustNotice';
 import {TNavigation} from '../../utils/types/navigation';
+import {FINANCE_IMAGES} from '../../assets';
 
 type Props = NativeStackScreenProps<TNavigation, 'CompareLoanScreen'>;
 
@@ -213,184 +221,82 @@ const CompareLoanScreen = ({route}: Props) => {
     }));
   };
 
-  const renderOptionForm = (
-    optionKey: 'a' | 'b',
+  const renderInputRow = (
     label: string,
-    option: TLoanOption,
+    field: keyof TLoanOption,
+    keyboardType: 'number-pad' | 'decimal-pad',
   ) => (
-    <View style={styles.optionCard}>
+    <View style={styles.inputRow}>
       <AppText
         value={label}
-        fontSize={18}
-        fontWeight={700}
-        color={COLORS.foundation.neutral.n700}
-        numberOfLines={2}
-        textStyle={styles.cardTitle}
+        fontSize={12}
+        fontWeight={600}
+        color={COLORS.foundation.neutral.n500}
+        numberOfLines={1}
       />
-      <View style={styles.inputGroup}>
-        <AppText
-          value={t('compareLoan.loanAmount')}
-          fontSize={13}
-          fontWeight={500}
-          color={COLORS.foundation.neutral.n500}
-          numberOfLines={2}
-        />
-        <AppInput
-          value={formatInputAmount(option.loanAmount)}
-          onChangeText={value => updateOption(optionKey, 'loanAmount', value)}
-          keyboardType="number-pad"
-          color={COLORS.foundation.neutral.n700}
-          fontSize={16}
-          fontWeight={600}
-          placeholder="0"
-          placeholderTextColor={COLORS.foundation.neutral.n200}
-        />
-      </View>
-      <View style={styles.inlineInputs}>
-        <View style={styles.inlineInput}>
-          <AppText
-            value={t('compareLoan.duration')}
-            fontSize={13}
-            fontWeight={500}
-            color={COLORS.foundation.neutral.n500}
-            numberOfLines={2}
-          />
-          <AppInput
-            value={option.duration}
-            onChangeText={value => updateOption(optionKey, 'duration', value)}
-            keyboardType="number-pad"
-            color={COLORS.foundation.neutral.n700}
-            fontSize={16}
-            fontWeight={600}
-            placeholder="0"
-            placeholderTextColor={COLORS.foundation.neutral.n200}
-          />
-        </View>
-        <View style={styles.inlineInput}>
-          <AppText
-            value={
-              method === 2
-                ? t('compareLoan.monthlyInterestRate')
-                : t('compareLoan.yearlyInterestRate')
-            }
-            fontSize={13}
-            fontWeight={500}
-            color={COLORS.foundation.neutral.n500}
-            numberOfLines={2}
-          />
-          <AppInput
-            value={option.interestRate}
-            onChangeText={value =>
-              updateOption(optionKey, 'interestRate', value)
-            }
-            keyboardType="numbers-and-punctuation"
-            color={COLORS.foundation.neutral.n700}
-            fontSize={16}
-            fontWeight={600}
-            placeholder="0"
-            placeholderTextColor={COLORS.foundation.neutral.n200}
-          />
-        </View>
+      <View style={styles.inputPair}>
+        {(['a', 'b'] as const).map(optionKey => {
+          const option = optionKey === 'a' ? optionA : optionB;
+          return (
+            <AppInput
+              key={optionKey}
+              value={
+                field === 'loanAmount'
+                  ? formatInputAmount(option.loanAmount)
+                  : option[field]
+              }
+              onChangeText={value => updateOption(optionKey, field, value)}
+              keyboardType={keyboardType}
+              color={COLORS.foundation.neutral.n700}
+              fontSize={15}
+              fontWeight={700}
+              placeholder="0"
+              placeholderTextColor={COLORS.foundation.neutral.n200}
+              textStyle={[
+                styles.input,
+                optionKey === 'a' ? styles.inputA : styles.inputB,
+              ]}
+            />
+          );
+        })}
       </View>
     </View>
   );
 
-  const renderResultCard = ({label, result}: TCompareResult) => {
-    const isBest =
-      !!result && !!comparison.bestLabel && comparison.bestLabel === label;
+  const [resultA, resultB] = results;
+  const metricRows: {label: string; key: keyof FixedPrincipalResult}[] = [
+    {
+      label:
+        method === 1
+          ? t('compareLoan.averageMonthlyPayment')
+          : t('compareLoan.monthlyPayment'),
+      key: 'averageMonthlyPayment',
+    },
+    {label: t('compareLoan.totalInterest'), key: 'totalInterest'},
+    {label: t('compareLoan.totalPayment'), key: 'totalPayment'},
+  ];
 
+  const renderMetricValue = (
+    value: number | undefined,
+    other: number | undefined,
+  ) => {
+    // Lower is better for every metric shown here.
+    const isBetter =
+      value !== undefined && other !== undefined && value < other;
     return (
-      <View style={[styles.resultCard, isBest && styles.bestResultCard]}>
-        <View style={styles.resultHeader}>
-          <AppText
-            value={label}
-            fontSize={17}
-            fontWeight={700}
-            color={COLORS.foundation.neutral.n700}
-            numberOfLines={2}
-            textStyle={styles.resultTitle}
-          />
-          {isBest && (
-            <View style={styles.bestBadge}>
-              <AppText
-                value={t('compareLoan.betterChoice')}
-                fontSize={11}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n0}
-                numberOfLines={1}
-              />
-            </View>
-          )}
-        </View>
-        {!result ? (
-          <AppText
-            value={t('compareLoan.enterValidValues')}
-            fontSize={13}
-            fontWeight={400}
-            color={COLORS.foundation.neutral.n500}
-          />
-        ) : (
-          <>
-            <View style={styles.resultRow}>
-              <AppText
-              value={
-                method === 1
-                  ? t('compareLoan.averageMonthlyPayment')
-                  : t('compareLoan.monthlyPayment')
-              }
-              fontSize={13}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n500}
-              numberOfLines={2}
-              textStyle={styles.resultLabel}
-            />
-            <AppText
-              value={formatCurrency(result.averageMonthlyPayment)}
-              fontSize={15}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n700}
-              numberOfLines={1}
-              textStyle={styles.resultValue}
-            />
-          </View>
-          <View style={styles.resultRow}>
-            <AppText
-              value={t('compareLoan.totalPayment')}
-              fontSize={13}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n500}
-              numberOfLines={2}
-              textStyle={styles.resultLabel}
-            />
-            <AppText
-              value={formatCurrency(result.totalPayment)}
-              fontSize={15}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n700}
-              numberOfLines={1}
-              textStyle={styles.resultValue}
-            />
-          </View>
-          <View style={styles.resultRow}>
-            <AppText
-              value={t('compareLoan.totalInterest')}
-              fontSize={13}
-              fontWeight={500}
-              color={COLORS.foundation.neutral.n500}
-              numberOfLines={2}
-              textStyle={styles.resultLabel}
-            />
-            <AppText
-              value={formatCurrency(result.totalInterest)}
-              fontSize={15}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n700}
-              numberOfLines={1}
-              textStyle={styles.resultValue}
-            />
-          </View>
-        </>
-      )}
+      <View style={[styles.metricCell, isBetter && styles.metricCellBest]}>
+        <AppText
+          value={value !== undefined ? formatCurrency(value) : '--'}
+          fontSize={13}
+          fontWeight={700}
+          color={
+            isBetter
+              ? COLORS.foundation.gold.g300
+              : COLORS.foundation.neutral.n0
+          }
+          numberOfLines={1}
+          adjustsFontSizeToFit
+        />
       </View>
     );
   };
@@ -404,7 +310,7 @@ const CompareLoanScreen = ({route}: Props) => {
         <AppText
           value={t('compareLoan.title')}
           fontSize={20}
-          fontWeight={600}
+          fontWeight={700}
           color={COLORS.foundation.neutral.n700}
         />
         <View style={styles.headerSpacer} />
@@ -412,43 +318,118 @@ const CompareLoanScreen = ({route}: Props) => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.scrollContent}>
-        <View style={styles.heroCard}>
-          <AppText
-            value={t('compareLoan.title')}
-            fontSize={28}
-            fontWeight={700}
-            color={COLORS.foundation.neutral.n700}
-            numberOfLines={2}
-            textStyle={styles.heroTitle}
-          />
-          <AppText
-            value={t('compareLoan.desc')}
-            fontSize={14}
-            fontWeight={400}
-            color={COLORS.foundation.neutral.n500}
-            textStyle={styles.heroDesc}
-            numberOfLines={3}
-          />
-        </View>
+        {/* Verdict: updates live while typing */}
+        <ImageBackground
+          source={FINANCE_IMAGES.cityBackground}
+          resizeMode="cover"
+          style={styles.verdictCard}
+          imageStyle={styles.verdictImage}>
+          <View pointerEvents="none" style={styles.verdictOverlay} />
+          <View style={styles.verdictTop}>
+            <View style={styles.flex}>
+              <AppText
+                value={t('compareLoan.results')}
+                fontSize={12}
+                fontWeight={600}
+                color={COLORS.foundation.gold.g300}
+              />
+              <AppText
+                value={
+                  comparison.isTie
+                    ? t('compareLoan.sameCost')
+                    : comparison.bestLabel
+                    ? t('compareLoan.bestOption', {
+                        option: comparison.bestLabel,
+                        amount: formatCurrency(comparison.diff),
+                      })
+                    : t('compareLoan.enterValidValues')
+                }
+                fontSize={18}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n0}
+                lineHeight={24}
+              />
+            </View>
+            <Image
+              source={FINANCE_IMAGES.chart}
+              resizeMode="contain"
+              style={styles.verdictArt}
+            />
+          </View>
+
+          <View style={styles.metricTable}>
+            <View style={styles.metricHeaderRow}>
+              <View style={styles.metricLabelCol} />
+              {[resultA, resultB].map((item, index) => (
+                <View key={item.label} style={styles.metricCell}>
+                  <View
+                    style={[
+                      styles.optionTag,
+                      index === 0 ? styles.optionTagA : styles.optionTagB,
+                    ]}>
+                    <AppText
+                      value={index === 0 ? 'A' : 'B'}
+                      fontSize={12}
+                      fontWeight={700}
+                      color={
+                        index === 0
+                          ? COLORS.foundation.neutral.n0
+                          : COLORS.foundation.blue.b500
+                      }
+                    />
+                  </View>
+                  {comparison.bestLabel === item.label && (
+                    <Feather
+                      name="award"
+                      size={14}
+                      color={COLORS.foundation.gold.g300}
+                    />
+                  )}
+                </View>
+              ))}
+            </View>
+            {metricRows.map(row => (
+              <View key={row.key} style={styles.metricRow}>
+                <AppText
+                  value={row.label}
+                  fontSize={11}
+                  fontWeight={500}
+                  color="rgba(255,255,255,0.75)"
+                  numberOfLines={2}
+                  textStyle={styles.metricLabelCol}
+                />
+                {renderMetricValue(
+                  resultA.result?.[row.key] as number | undefined,
+                  resultB.result?.[row.key] as number | undefined,
+                )}
+                {renderMetricValue(
+                  resultB.result?.[row.key] as number | undefined,
+                  resultA.result?.[row.key] as number | undefined,
+                )}
+              </View>
+            ))}
+          </View>
+        </ImageBackground>
 
         <AppIndicator
           tabs={[
             {
               id: 0,
               children: t('mortgage.fixedPayment'),
-              tabWidth: (WIDTH - 36) * 0.33,
+              tabWidth: (WIDTH - 32) * 0.33,
               isLeftBorder: true,
             },
             {
               id: 1,
               children: t('mortgage.fixedPrincipal'),
-              tabWidth: (WIDTH - 36) * 0.34,
+              tabWidth: (WIDTH - 32) * 0.34,
             },
             {
               id: 2,
               children: t('mortgage.flatRate'),
-              tabWidth: (WIDTH - 36) * 0.33,
+              tabWidth: (WIDTH - 32) * 0.33,
               isRightBorder: true,
             },
           ]}
@@ -457,46 +438,45 @@ const CompareLoanScreen = ({route}: Props) => {
           isEqual={false}
         />
 
-        {renderOptionForm('a', t('compareLoan.optionA'), optionA)}
-        {renderOptionForm('b', t('compareLoan.optionB'), optionB)}
-
-        <View style={styles.resultsSection}>
-          <AppText
-            value={t('compareLoan.results')}
-            fontSize={20}
-            fontWeight={700}
-            color={COLORS.foundation.neutral.n700}
-          />
-          <AppTrustNotice
-            summary={t('trust.compare.context')}
-            details={t('trust.disclaimer.short')}
-            expandLabel={t('trust.actions.readDisclaimer')}
-            collapseLabel={t('trust.actions.hideDisclaimer')}
-          />
-          {results.map(item => (
-            <React.Fragment key={item.label}>
-              {renderResultCard(item)}
-            </React.Fragment>
-          ))}
-          <View style={styles.summaryCard}>
-            <AppText
-              value={
-                comparison.isTie
-                  ? t('compareLoan.sameCost')
-                  : comparison.bestLabel
-                  ? t('compareLoan.bestOption', {
-                      option: comparison.bestLabel,
-                      amount: formatCurrency(comparison.diff),
-                    })
-                  : t('compareLoan.enterValidValues')
-              }
-              fontSize={14}
-              fontWeight={600}
-              color={COLORS.foundation.neutral.n700}
-              textStyle={styles.summaryText}
-            />
+        {/* Inputs: A and B side by side */}
+        <View style={styles.inputCard}>
+          <View style={styles.inputPair}>
+            <View style={[styles.columnHeader, styles.columnHeaderA]}>
+              <AppText
+                value={t('compareLoan.optionA')}
+                fontSize={13}
+                fontWeight={700}
+                color={COLORS.foundation.neutral.n0}
+                numberOfLines={1}
+              />
+            </View>
+            <View style={[styles.columnHeader, styles.columnHeaderB]}>
+              <AppText
+                value={t('compareLoan.optionB')}
+                fontSize={13}
+                fontWeight={700}
+                color={COLORS.foundation.blue.b500}
+                numberOfLines={1}
+              />
+            </View>
           </View>
+          {renderInputRow(t('compareLoan.loanAmount'), 'loanAmount', 'number-pad')}
+          {renderInputRow(t('compareLoan.duration'), 'duration', 'number-pad')}
+          {renderInputRow(
+            method === 2
+              ? t('compareLoan.monthlyInterestRate')
+              : t('compareLoan.yearlyInterestRate'),
+            'interestRate',
+            'decimal-pad',
+          )}
         </View>
+
+        <AppTrustNotice
+          summary={t('trust.compare.context')}
+          details={t('trust.disclaimer.short')}
+          expandLabel={t('trust.actions.readDisclaimer')}
+          collapseLabel={t('trust.actions.hideDisclaimer')}
+        />
       </ScrollView>
     </AppView>
   );
@@ -508,7 +488,7 @@ const styles = StyleSheet.create({
   overall: {
     flex: 1,
     paddingHorizontal: 16,
-    gap: 16,
+    gap: 12,
     width: '100%',
   },
   header: {
@@ -518,104 +498,130 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   headerSpacer: {
-    width: 55,
-    height: 48,
+    width: 44,
+  },
+  flex: {
+    flex: 1,
   },
   scrollContent: {
-    gap: 16,
+    gap: 14,
     paddingBottom: 32,
   },
-  heroCard: {
-    backgroundColor: COLORS.foundation.blue.b50,
-    borderRadius: 24,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.blue.b75,
-    gap: 8,
+  verdictCard: {
+    borderRadius: 26,
+    padding: 18,
+    gap: 16,
+    overflow: 'hidden',
+    backgroundColor: COLORS.foundation.blue.b500,
   },
-  heroDesc: {
-    lineHeight: 20,
+  verdictImage: {
+    borderRadius: 26,
   },
-  heroTitle: {
-    textAlign: 'center',
+  verdictOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(20, 30, 60, 0.4)',
   },
-  optionCard: {
-    backgroundColor: 'rgba(255,255,255,0.94)',
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    borderRadius: 22,
-    padding: 16,
-    gap: 14,
-  },
-  inputGroup: {
-    gap: 8,
-  },
-  inlineInputs: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  inlineInput: {
-    flex: 1,
-    gap: 8,
-  },
-  resultsSection: {
-    gap: 12,
-  },
-  resultCard: {
-    backgroundColor: 'rgba(255,255,255,0.94)',
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    borderRadius: 20,
-    padding: 16,
-    gap: 12,
-  },
-  bestResultCard: {
-    backgroundColor: COLORS.foundation.blue.b50,
-    borderColor: COLORS.foundation.blue.b200,
-  },
-  resultHeader: {
+  verdictTop: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     gap: 12,
   },
-  cardTitle: {
-    flex: 1,
-    flexShrink: 1,
+  verdictArt: {
+    width: 72,
+    height: 64,
   },
-  resultTitle: {
-    flex: 1,
-    flexShrink: 1,
+  metricTable: {
+    borderRadius: 16,
+    padding: 10,
+    gap: 6,
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderWidth: 1,
+    borderColor: 'rgba(226,194,117,0.3)',
   },
-  bestBadge: {
-    backgroundColor: COLORS.foundation.blue.b300,
-    borderRadius: 999,
-    paddingHorizontal: 10,
+  metricHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  metricRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    minHeight: 36,
+  },
+  metricLabelCol: {
+    width: 84,
+  },
+  metricCell: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
     paddingVertical: 6,
+    paddingHorizontal: 6,
+    borderRadius: 10,
   },
-  resultRow: {
-    flexDirection: 'row',
+  metricCellBest: {
+    backgroundColor: 'rgba(226,194,117,0.14)',
+  },
+  optionTag: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 12,
+    justifyContent: 'center',
   },
-  resultLabel: {
-    flex: 1,
-    flexShrink: 1,
+  optionTagA: {
+    backgroundColor: COLORS.foundation.blue.b300,
   },
-  resultValue: {
-    flexShrink: 0,
-    textAlign: 'right',
+  optionTagB: {
+    backgroundColor: COLORS.foundation.gold.g300,
   },
-  summaryCard: {
+  inputCard: {
     backgroundColor: COLORS.foundation.neutral.n0,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    borderRadius: 18,
-    padding: 16,
+    borderRadius: 24,
+    padding: 14,
+    gap: 14,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    shadowOffset: {width: 0, height: 6},
+    elevation: 2,
   },
-  summaryText: {
+  columnHeader: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderRadius: 12,
+  },
+  columnHeaderA: {
+    backgroundColor: COLORS.foundation.blue.b300,
+  },
+  columnHeaderB: {
+    backgroundColor: COLORS.foundation.gold.g300,
+  },
+  inputRow: {
+    gap: 6,
+  },
+  inputPair: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  input: {
+    flex: 1,
+    minHeight: 46,
+    borderRadius: 14,
+    borderWidth: 1.5,
+    paddingHorizontal: 12,
     textAlign: 'center',
-    lineHeight: 20,
+  },
+  inputA: {
+    borderColor: COLORS.foundation.blue.b100,
+    backgroundColor: COLORS.foundation.blue.b50,
+  },
+  inputB: {
+    borderColor: COLORS.foundation.gold.g300,
+    backgroundColor: COLORS.foundation.gold.g100,
   },
 });
