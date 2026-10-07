@@ -2,7 +2,7 @@
   "expo": {
     "name": "Easy Loan Estimator",
     "slug": "nexa_loan",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "nexaloan",
@@ -16,7 +16,9 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.nexa.loan.estimator",
+      "buildNumber": "2",
       "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Easy Loan Estimator only uses your photo library when you share or save a loan result image from the share menu. The app does not browse, read, or upload your existing photos.",
         "NSPhotoLibraryAddUsageDescription": "Easy Loan Estimator saves your loan result image to Photos only when you tap “Save Image” in the share menu. The app does not read or upload your existing photos.",
         "NSUserTrackingUsageDescription": "Allowing tracking lets us show ads that are more relevant to you. Your loan calculations stay on your device and are never used for ads. Easy Loan Estimator works the same if you choose not to allow it.",
         "GADApplicationIdentifier": "ca-app-pub-3940256099942544~1458002511"
