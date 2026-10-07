@@ -278,13 +278,13 @@
   },
   "loading": "Daten werden verarbeitet",
   "whatIf": {
-    "title": "Was-wäre-wenn-Simulator",
+    "title": "Sondertilgungsrechner",
     "extraMonthly": "Monatliche Sondertilgung",
     "monthsSaved": "Eingesparte Monate",
     "interestSaved": "Ersparte Zinsen",
     "newPayoff": "Neue Laufzeit bis zur Rückzahlung",
     "newTotalPayment": "Neue Gesamtrückzahlung",
-    "supportNote": "V1 unterstützt derzeit nur die Simulation für die Methode mit gleichbleibender Rate."
+    "supportNote": "Derzeit nur für die Methode mit gleichbleibender Rate verfügbar."
   },
   "trust": {
     "disclaimer": {

@@ -8,6 +8,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Platform,
+  Image,
 } from 'react-native';
 import React from 'react';
 import AppView from '../../components/AppView';
@@ -15,6 +16,7 @@ import AppText from '../../components/AppText';
 import {COLORS} from '../../constants/colors';
 import AppIconButton from '../../components/AppIconButton';
 import Card from './components/Card';
+import ReportCard from './components/ReportCard';
 import {navigationRef} from '../../navigation';
 import {useTranslation} from 'react-i18next';
 import {useSelector, useDispatch} from 'react-redux';
@@ -27,15 +29,10 @@ import {
 } from '../../hooks/fixed_monthly_payment';
 import {calculateFixedPrincipal} from '../../hooks/fixed_principal';
 import AppInput from '../../components/AppInput';
-import {
-  Feather,
-  MaterialCommunityIcons,
-  Ionicons,
-  FontAwesome6,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import {Feather, MaterialCommunityIcons} from '@expo/vector-icons';
 import AppBanner from '../../components/AppBanner';
 import {uuid} from '../../hooks/uuid';
+import {FINANCE_IMAGES} from '../../assets';
 
 const MainScreen = () => {
   const {t} = useTranslation();
@@ -139,6 +136,18 @@ const MainScreen = () => {
     },
     [t],
   );
+  const getLoanImage = (loan: TLoan) => {
+    if (loan.type === ELoan.BUSINESS_LOAN) {
+      return FINANCE_IMAGES.bank;
+    }
+    if (loan.type === ELoan.CAR_LOAN) {
+      return FINANCE_IMAGES.auto;
+    }
+    if (loan.type === ELoan.PERSONAL_LOAN) {
+      return FINANCE_IMAGES.wallet;
+    }
+    return FINANCE_IMAGES.home;
+  };
   const onNavSettingScreen = () => {
     navigationRef.navigate('SettingScreen');
   };
@@ -272,116 +281,16 @@ const MainScreen = () => {
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         {/* Report Section */}
-        <View style={styles.reportCard}>
-          <View style={styles.reportHeader}>
-            <View>
-              <AppText
-                value={t('main.report')}
-                fontSize={18}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n0}
-              />
-              <AppText
-                value={`${history.length} ${t('main.activeLoans')}`}
-                fontSize={12}
-                color="rgba(255,255,255,0.7)"
-                fontWeight={400}
-              />
-            </View>
-            <View style={styles.reportIcon}>
-              <MaterialIcons
-                name="insights"
-                size={24}
-                color={COLORS.foundation.blue.b300}
-              />
-            </View>
-          </View>
-          <View style={styles.reportPrimary}>
-            <AppText
-              value={t('main.totalDebt')}
-              fontSize={12}
-              color="rgba(255,255,255,0.7)"
-              fontWeight={500}
-            />
-            <AppText
-              value={formatNumber(
-                totalDebt,
-                currency.locale,
-                true,
-                currency.code,
-              )}
-              fontSize={30}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n0}
-            />
-          </View>
-          <View style={styles.reportMetricGrid}>
-            <View style={styles.reportMetricCard}>
-              <AppText
-                value={t('main.totalPaid')}
-                fontSize={11}
-                color="rgba(255,255,255,0.72)"
-                fontWeight={500}
-              />
-              <AppText
-                value={formatNumber(
-                  totalPaid,
-                  currency.locale,
-                  true,
-                  currency.code,
-                )}
-                fontSize={16}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n0}
-                numberOfLines={1}
-              />
-            </View>
-            <View style={styles.reportMetricCard}>
-              <AppText
-                value={t('main.remainingBalance')}
-                fontSize={11}
-                color="rgba(255,255,255,0.72)"
-                fontWeight={500}
-              />
-              <AppText
-                value={formatNumber(
-                  remainingDebt,
-                  currency.locale,
-                  true,
-                  currency.code,
-                )}
-                fontSize={16}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n0}
-                numberOfLines={1}
-              />
-            </View>
-          </View>
-          <View style={styles.reportProgressSection}>
-            <View style={styles.reportProgressHeader}>
-              <AppText
-                value={t('main.repaymentProgress')}
-                fontSize={12}
-                color="rgba(255,255,255,0.75)"
-                fontWeight={500}
-              />
-              <AppText
-                value={`${paidProgress.toFixed(0)}%`}
-                fontSize={12}
-                color={COLORS.foundation.neutral.n0}
-                fontWeight={700}
-              />
-            </View>
-            <View style={styles.reportProgressTrack}>
-              <View
-                style={[
-                  styles.reportProgressFill,
-                  {width: `${paidProgress}%`},
-                ]}
-              />
-            </View>
-          </View>
-        </View>
+        <ReportCard
+          loanCount={history.length}
+          totalDebt={totalDebt}
+          totalPaid={totalPaid}
+          remainingDebt={remainingDebt}
+          paidProgress={paidProgress}
+          locale={currency.locale}
+          currencyCode={currency.code}
+          onStart={() => onNavMortgageLoanScreen('mortgage')}
+        />
 
         {/* My Loans Section */}
         <View style={styles.sectionHeader}>
@@ -403,112 +312,109 @@ const MainScreen = () => {
 
         {history.length > 0 ? (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalList}>
-            {history.slice(0, 5).map((loan) => (
-              <TouchableOpacity
-                key={loan.id}
-                style={styles.activeLoanCard}
-                onPress={() => navigationRef.navigate('MortgageLoanResultDetailScreen', {
-                  id: loan.id,
-                  isHistory: true,
-                  label: getLoanTitle(loan),
-                })}
-              >
-                <View style={styles.activeLoanHeader}>
-                  <View style={[styles.loanIcon, {backgroundColor: COLORS.foundation.blue.b300}]}>
-                    <Ionicons name="cash" size={20} color={COLORS.foundation.neutral.n0} />
-                  </View>
-                  <AppText value={getLoanTitle(loan)} fontSize={16} fontWeight={600} color={COLORS.foundation.neutral.n700} />
-                  <TouchableOpacity
-                    style={styles.deleteLoanBtn}
-                    onPress={event => {
-                      event.stopPropagation();
-                      onDeleteHistoryItem(loan.id);
-                    }}
-                  >
-                    <Feather name="trash-2" size={14} color="#D92D20" />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.progressContainer}>
-                  {(() => {
-                    const totalPayable = getLoanTotalPayable(loan);
-                    const paidAmount = getLoanPaidAmount(loan);
-                    const progressPercent =
-                      totalPayable > 0
-                        ? Math.min((paidAmount / totalPayable) * 100, 100)
-                        : 0;
-                    return (
-                      <View style={styles.progressPercentRow}>
-                        <AppText
-                          value={`${progressPercent.toFixed(0)}%`}
-                          fontSize={10}
-                          color={COLORS.foundation.neutral.n700}
-                          fontWeight={700}
-                        />
-                      </View>
-                    );
-                  })()}
-                  <View style={styles.progressBar}>
-                    {(() => {
-                      const totalPayable = getLoanTotalPayable(loan);
-                      const paidAmount = getLoanPaidAmount(loan);
-                      const progressPercent =
-                        totalPayable > 0
-                          ? Math.min((paidAmount / totalPayable) * 100, 100)
-                          : 0;
-                      return (
-                        <View
-                          style={[
-                            styles.progressFill,
-                            {width: `${progressPercent}%`},
-                          ]}
-                        />
-                      );
-                    })()}
-                  </View>
-                  <View style={[styles.rows, styles.paymentRow]}>
-                    {(() => {
-                      const totalPayable = getLoanTotalPayable(loan);
-                      const paidAmount = getLoanPaidAmount(loan);
-                      return (
-                        <AppText
-                          value={`${formatNumber(
-                            paidAmount,
-                            loan.currency.locale,
-                            true,
-                            loan.currency.code,
-                          )} / ${formatNumber(
-                            totalPayable,
-                            loan.currency.locale,
-                            true,
-                            loan.currency.code,
-                          )}`}
-                          fontSize={11}
-                          color={COLORS.foundation.neutral.n500}
-                          fontWeight={400}
-                          textStyle={styles.paymentAmountText}
-                        />
-                      );
-                    })()}
-                    <TouchableOpacity
-                      style={styles.updateBtn}
-                      onPress={() => onUpdatePayment(loan)}
-                    >
-                      <AppText
-                        value={t('main.updatePayment')}
-                        fontSize={12}
-                        color={COLORS.foundation.blue.b300}
-                        fontWeight={600}
-                        numberOfLines={2}
-                        textStyle={styles.updateBtnText}
+            {history.slice(0, 5).map(loan => {
+              const totalPayable = getLoanTotalPayable(loan);
+              const paidAmount = getLoanPaidAmount(loan);
+              const progressPercent =
+                totalPayable > 0
+                  ? Math.min((paidAmount / totalPayable) * 100, 100)
+                  : 0;
+
+              return (
+                <TouchableOpacity
+                  key={loan.id}
+                  style={styles.activeLoanCard}
+                  onPress={() =>
+                    navigationRef.navigate('MortgageLoanResultDetailScreen', {
+                      id: loan.id,
+                      isHistory: true,
+                      label: getLoanTitle(loan),
+                    })
+                  }>
+                  <View style={styles.activeLoanHeader}>
+                    <View style={styles.loanIcon}>
+                      <Image
+                        source={getLoanImage(loan)}
+                        resizeMode="contain"
+                        style={styles.loanImage}
                       />
+                    </View>
+                    <View style={styles.activeLoanTitle}>
+                      <AppText
+                        value={getLoanTitle(loan)}
+                        fontSize={16}
+                        fontWeight={700}
+                        color={COLORS.foundation.neutral.n700}
+                        numberOfLines={1}
+                      />
+                      <AppText
+                        value={`${progressPercent.toFixed(0)}%`}
+                        fontSize={12}
+                        fontWeight={700}
+                        color={COLORS.foundation.gold.g500}
+                      />
+                    </View>
+                    <TouchableOpacity
+                      style={styles.deleteLoanBtn}
+                      onPress={event => {
+                        event.stopPropagation();
+                        onDeleteHistoryItem(loan.id);
+                      }}>
+                      <Feather name="trash-2" size={14} color="#D92D20" />
                     </TouchableOpacity>
                   </View>
-                </View>
-              </TouchableOpacity>
-            ))}
+                  <View style={styles.progressContainer}>
+                    <View style={styles.progressBar}>
+                      <View
+                        style={[
+                          styles.progressFill,
+                          {width: `${progressPercent}%`},
+                        ]}
+                      />
+                    </View>
+                    <View style={[styles.rows, styles.paymentRow]}>
+                      <AppText
+                        value={`${formatNumber(
+                          paidAmount,
+                          loan.currency.locale,
+                          true,
+                          loan.currency.code,
+                        )} / ${formatNumber(
+                          totalPayable,
+                          loan.currency.locale,
+                          true,
+                          loan.currency.code,
+                        )}`}
+                        fontSize={11}
+                        color={COLORS.foundation.neutral.n500}
+                        fontWeight={400}
+                        textStyle={styles.paymentAmountText}
+                      />
+                      <TouchableOpacity
+                        style={styles.updateBtn}
+                        onPress={() => onUpdatePayment(loan)}>
+                        <AppText
+                          value={t('main.updatePayment')}
+                          fontSize={12}
+                          color={COLORS.foundation.neutral.n0}
+                          fontWeight={600}
+                          numberOfLines={2}
+                          textStyle={styles.updateBtnText}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
           </ScrollView>
         ) : (
           <View style={styles.emptyLoans}>
+            <Image
+              source={FINANCE_IMAGES.emptyHistory}
+              resizeMode="contain"
+              style={styles.emptyImage}
+            />
             <AppText value={t('main.noLoans')} color={COLORS.foundation.neutral.n500} fontWeight={400} fontSize={14} />
           </View>
         )}
@@ -532,9 +438,9 @@ const MainScreen = () => {
             title={t('compareLoan.title')}
             desc={t('compareLoan.desc')}
             badgeLabel={t('compareLoan.badge')}
-            accentColor="#2E8B70"
-            iconBackgroundColor="#2E8B70"
-            icon={<MaterialIcons name="compare-arrows" size={26} color={COLORS.foundation.neutral.n0} />}
+            accentColor={COLORS.foundation.blue.b400}
+            iconBackgroundColor={COLORS.foundation.blue.b50}
+            image={FINANCE_IMAGES.calculator}
             onPress={onNavCompareLoanScreen}
             variant="grid"
           />
@@ -542,9 +448,9 @@ const MainScreen = () => {
             title={t('main.mortgage.title')}
             desc={t('main.mortgage.desc')}
             badgeLabel={t('main.badge')}
-            accentColor="#0F8A6A"
-            iconBackgroundColor="#0F8A6A"
-            icon={<Ionicons name="home" size={24} color={COLORS.foundation.neutral.n0} />}
+            accentColor={COLORS.foundation.blue.b400}
+            iconBackgroundColor={COLORS.foundation.gold.g100}
+            image={FINANCE_IMAGES.home}
             onPress={() => onNavMortgageLoanScreen('mortgage')}
             variant="grid"
           />
@@ -552,9 +458,9 @@ const MainScreen = () => {
             title={t('main.car.title')}
             desc={t('main.car.desc')}
             badgeLabel={t('main.badge')}
-            accentColor="#5D7CF4"
-            iconBackgroundColor="#5D7CF4"
-            icon={<Ionicons name="car-sport" size={24} color={COLORS.foundation.neutral.n0} />}
+            accentColor={COLORS.foundation.blue.b400}
+            iconBackgroundColor={COLORS.foundation.blue.b50}
+            image={FINANCE_IMAGES.auto}
             onPress={() => onNavMortgageLoanScreen('car')}
             variant="grid"
           />
@@ -562,9 +468,9 @@ const MainScreen = () => {
             title={t('main.personal.title')}
             desc={t('main.personal.desc')}
             badgeLabel={t('main.badge')}
-            accentColor="#E07A5F"
-            iconBackgroundColor="#E07A5F"
-            icon={<Ionicons name="person" size={24} color={COLORS.foundation.neutral.n0} />}
+            accentColor={COLORS.foundation.blue.b400}
+            iconBackgroundColor={COLORS.foundation.sage.s50}
+            image={FINANCE_IMAGES.wallet}
             onPress={() => onNavMortgageLoanScreen('personal')}
             variant="grid"
           />
@@ -572,9 +478,9 @@ const MainScreen = () => {
             title={t('main.business.title')}
             desc={t('main.business.desc')}
             badgeLabel={t('main.badge')}
-            accentColor="#B45CE0"
-            iconBackgroundColor="#B45CE0"
-            icon={<FontAwesome6 name="briefcase" size={20} color={COLORS.foundation.neutral.n0} />}
+            accentColor={COLORS.foundation.blue.b400}
+            iconBackgroundColor={COLORS.foundation.gold.g100}
+            image={FINANCE_IMAGES.bank}
             onPress={() => onNavMortgageLoanScreen('business')}
             variant="grid"
           />
@@ -735,66 +641,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     gap: 20,
   },
-  reportCard: {
-    backgroundColor: COLORS.foundation.blue.b300,
-    borderRadius: 28,
-    padding: 20,
-    gap: 18,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  reportHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  reportIcon: {
-    width: 46,
-    height: 46,
-    borderRadius: 16,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  reportPrimary: {
-    gap: 4,
-  },
-  reportMetricGrid: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  reportMetricCard: {
-    flex: 1,
-    minHeight: 74,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255,255,255,0.14)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.16)',
-    padding: 12,
-    justifyContent: 'space-between',
-  },
-  reportProgressSection: {
-    gap: 8,
-  },
-  reportProgressHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  reportProgressTrack: {
-    height: 10,
-    borderRadius: 999,
-    backgroundColor: 'rgba(255,255,255,0.22)',
-    overflow: 'hidden',
-  },
-  reportProgressFill: {
-    height: '100%',
-    borderRadius: 999,
-    backgroundColor: COLORS.foundation.neutral.n0,
-  },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -806,13 +652,20 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
   activeLoanCard: {
-    width: 260,
+    width: 272,
     backgroundColor: COLORS.foundation.neutral.n0,
-    borderRadius: 20,
+    borderRadius: 22,
     padding: 16,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    gap: 12,
+    gap: 14,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.1,
+    shadowRadius: 14,
+    shadowOffset: {width: 0, height: 6},
+    elevation: 3,
+  },
+  activeLoanTitle: {
+    flex: 1,
+    gap: 2,
   },
   activeLoanHeader: {
     flexDirection: 'row',
@@ -820,21 +673,27 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   deleteLoanBtn: {
-    marginLeft: 'auto',
-    padding: 6,
-  },
-  loanIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#FDECEA',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  loanIcon: {
+    width: 52,
+    height: 52,
+    borderRadius: 16,
+    backgroundColor: COLORS.foundation.blue.b50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loanImage: {
+    width: 44,
+    height: 44,
+  },
   progressContainer: {
     gap: 4,
-  },
-  progressPercentRow: {
-    alignItems: 'flex-end',
   },
   progressBar: {
     height: 8,
@@ -844,7 +703,8 @@ const styles = StyleSheet.create({
   },
   progressFill: {
     height: '100%',
-    backgroundColor: COLORS.foundation.blue.b300,
+    borderRadius: 4,
+    backgroundColor: COLORS.foundation.gold.g300,
   },
   paymentRow: {
     marginTop: 4,
@@ -860,10 +720,10 @@ const styles = StyleSheet.create({
   updateBtn: {
     flexShrink: 1,
     minWidth: 92,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 8,
-    backgroundColor: COLORS.foundation.blue.b50,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    backgroundColor: COLORS.foundation.blue.b300,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -909,13 +769,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   emptyLoans: {
-    padding: 24,
+    padding: 20,
+    gap: 8,
     alignItems: 'center',
-    backgroundColor: COLORS.foundation.neutral.n25,
-    borderRadius: 20,
-    borderStyle: 'dashed',
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    backgroundColor: 'rgba(255,255,255,0.75)',
+    borderRadius: 22,
+  },
+  emptyImage: {
+    width: 120,
+    height: 120,
   },
   cardContainer: {
     flexDirection: 'row',

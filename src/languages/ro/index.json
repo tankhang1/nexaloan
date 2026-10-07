@@ -278,13 +278,13 @@
   },
   "loading": "Datele sunt în curs de procesare",
   "whatIf": {
-    "title": "Simulator ipotetic",
+    "title": "Simulator de rambursare anticipată",
     "extraMonthly": "Plată suplimentară lunară",
     "monthsSaved": "Luni economisite",
     "interestSaved": "Dobândă economisită",
     "newPayoff": "Noua dată de achitare",
     "newTotalPayment": "Noua plată totală",
-    "supportNote": "V1 acceptă momentan simularea doar pentru plata fixă."
+    "supportNote": "Disponibil momentan doar pentru metoda cu rată fixă."
   },
   "trust": {
     "disclaimer": {

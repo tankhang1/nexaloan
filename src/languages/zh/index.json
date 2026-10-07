@@ -278,13 +278,13 @@
   },
   "loading": "數據處理中",
   "whatIf": {
-    "title": "假设情景模拟",
+    "title": "提前还款模拟",
     "extraMonthly": "每月额外还款",
     "monthsSaved": "节省月份",
     "interestSaved": "节省利息",
     "newPayoff": "新的结清时间",
     "newTotalPayment": "新的总还款额",
-    "supportNote": "V1 目前仅支持固定还款方式的模拟。"
+    "supportNote": "目前仅适用于等额本息还款方式。"
   },
   "trust": {
     "disclaimer": {

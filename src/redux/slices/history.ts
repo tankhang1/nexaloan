@@ -35,8 +35,11 @@ export const historySlice = createSlice({
   initialState,
   reducers: {
     // CREATE
+    // Saving the same result twice must not create duplicate ids.
     addLoan: (state, action: PayloadAction<TLoan>) => {
-      state.push(action.payload);
+      const deduped = state.filter(loan => loan.id !== action.payload.id);
+      deduped.push(action.payload);
+      return deduped;
     },
 
     // READ (typically done via selector, so not needed in slice)

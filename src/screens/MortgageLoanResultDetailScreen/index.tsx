@@ -1,10 +1,12 @@
-import { Feather, Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Alert,
+  Image,
+  ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
   Modal,
@@ -23,6 +25,9 @@ import AppIndicator from "../../components/AppIndicator";
 import AppInput from "../../components/AppInput";
 import AppText from "../../components/AppText";
 import AppTrustNotice from "../../components/AppTrustNotice";
+import AppLoanSummary from "../../components/AppLoanSummary";
+import AppProgressRing from "../../components/AppProgressRing";
+import { FINANCE_IMAGES } from "../../assets";
 import AppView from "../../components/AppView";
 import { COLORS } from "../../constants/colors";
 import { WIDTH } from "../../constants/dimension";
@@ -358,174 +363,63 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.summaryScrollContent}
         >
-          <View style={styles.statistic}>
-            <View style={styles.title}>
+          <AppLoanSummary
+            label={route.params?.label || ""}
+            loanAmount={mortgage?.loan_amount || 0}
+            duration={mortgage?.duration || 0}
+            interestRate={mortgage?.int_rate || 0}
+            averageMonthlyPayment={result?.averageMonthlyPayment || 0}
+            totalInterest={result?.totalInterest || 0}
+            totalPayment={result?.totalPayment || 0}
+            locale={mortgage?.currency?.locale || currency.locale}
+            currencyCode={mortgage?.currency?.code || currency.code}
+          />
+          <View style={styles.whatIfActionRow}>
+            <Pressable style={styles.actionTile} onPress={onOpenWhatIfModal}>
+              <Image
+                source={FINANCE_IMAGES.savingsJar}
+                resizeMode="contain"
+                style={styles.actionTileImage}
+              />
               <AppText
-                value={route.params?.label}
-                fontSize={24}
+                value={t("whatIf.title")}
+                fontSize={13}
                 fontWeight={700}
                 color={COLORS.foundation.neutral.n700}
+                numberOfLines={2}
+                textStyle={styles.actionTileText}
               />
-            </View>
-            <View style={[styles.rows, styles.justifyBetween]}>
-              <AppText
-                value={t("mortgageDetail.loanAmount")}
-                fontSize={14}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n50}
-              />
-              <AppText
-                value={formatNumber(
-                  mortgage?.loan_amount || 0,
-                  mortgage?.currency?.locale || currency.locale,
-                  true,
-                  mortgage?.currency?.code || currency.code,
-                )}
-                fontSize={15}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n0}
-              />
-            </View>
-            <View style={[styles.rows, styles.justifyBetween]}>
-              <AppText
-                value={t("mortgageDetail.duration")}
-                fontSize={14}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n50}
-              />
-              <AppText
-                value={formatMonth(mortgage?.duration || 0, t)}
-                fontSize={15}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n0}
-              />
-            </View>
-            <View style={[styles.rows, styles.justifyBetween]}>
-              <AppText
-                value={t("mortgageDetail.interestRate")}
-                fontSize={14}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n50}
-              />
-              <AppText
-                value={`${mortgage?.int_rate || 0}%`}
-                fontSize={15}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n0}
-              />
-            </View>
-            <View style={styles.gap14}>
-              <View style={[styles.rows, styles.gap8]}>
-                <Pressable style={styles.halfWidthButton}>
-                  <AppText
-                    fontSize={12}
-                    fontWeight={500}
-                    value={t("mortgageDetail.monthlyPaymentAvg")}
-                    textStyle={styles.center}
-                    color={COLORS.foundation.neutral.n500}
-                  />
-                  <AppText
-                    allowFontScaling={true}
-                    fontSize={15}
-                    fontWeight={700}
-                    value={formatNumber(
-                      result?.averageMonthlyPayment || 0,
-                      mortgage?.currency?.locale || currency.locale,
-                      true,
-                      mortgage?.currency?.code || currency.code,
-                    )}
-                    color={COLORS.foundation.blue.b500}
-                  />
-                </Pressable>
-                <Pressable style={styles.halfWidthButton}>
-                  <AppText
-                    fontSize={12}
-                    fontWeight={500}
-                    value={t("mortgageDetail.totalInterestPaid")}
-                    color={COLORS.foundation.neutral.n500}
-                  />
-                  <AppText
-                    allowFontScaling={true}
-                    fontSize={15}
-                    fontWeight={700}
-                    value={formatNumber(
-                      result?.totalInterest || 0,
-                      mortgage?.currency?.locale || currency.locale,
-                      true,
-                      mortgage?.currency?.code || currency.code,
-                    )}
-                    color={COLORS.foundation.blue.b500}
-                  />
-                </Pressable>
-              </View>
-              <Pressable style={styles.fullWidthButton}>
-                <AppText
-                  fontSize={12}
-                  fontWeight={500}
-                  value={t("mortgageDetail.totalPayments")}
-                  color={COLORS.foundation.neutral.n500}
+            </Pressable>
+            {route.params?.isHistory && (
+              <Pressable style={styles.actionTile} onPress={onRecalculate}>
+                <Image
+                  source={FINANCE_IMAGES.calculator}
+                  resizeMode="contain"
+                  style={styles.actionTileImage}
                 />
                 <AppText
-                  allowFontScaling={true}
-                  fontSize={15}
+                  value={t("mortgageResult.recalculate")}
+                  fontSize={13}
                   fontWeight={700}
-                  value={formatNumber(
-                    result?.totalPayment || 0,
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
-                  color={COLORS.foundation.blue.b500}
+                  color={COLORS.foundation.neutral.n700}
+                  numberOfLines={2}
+                  textStyle={styles.actionTileText}
                 />
               </Pressable>
-              <View style={styles.whatIfActionRow}>
-                {route.params?.isHistory && (
-                  <Pressable
-                    style={styles.recalculateBtn}
-                    onPress={onRecalculate}
-                  >
-                    <Feather
-                      name="refresh-cw"
-                      size={16}
-                      color={COLORS.foundation.neutral.n700}
-                    />
-                    <AppText
-                      value={t("mortgageResult.recalculate")}
-                      fontSize={13}
-                      fontWeight={700}
-                      color={COLORS.foundation.neutral.n700}
-                    />
-                  </Pressable>
-                )}
-                <Pressable
-                  style={[
-                    styles.whatIfOpenBtn,
-                    route.params?.isHistory && styles.whatIfHalfBtn,
-                  ]}
-                  onPress={onOpenWhatIfModal}
-                >
-                  <AppText
-                    value={t("whatIf.title")}
-                    fontSize={13}
-                    fontWeight={700}
-                    color={COLORS.foundation.neutral.n700}
-                  />
-                </Pressable>
-              </View>
-              <AppTrustNotice
-                summary={getFormulaSummary(mortgage?.type || 0, t)}
-                details={`${getFormulaDetails(mortgage?.type || 0, t)}\n\n${t(
-                  "trust.disclaimer.notAdvice",
-                )}`}
-                expandLabel={t("trust.actions.viewFormula")}
-                collapseLabel={t("trust.actions.hideFormula")}
-              />
-            </View>
+            )}
           </View>
+          <AppTrustNotice
+            summary={getFormulaSummary(mortgage?.type || 0, t)}
+            details={`${getFormulaDetails(mortgage?.type || 0, t)}\n\n${t(
+              "trust.disclaimer.notAdvice",
+            )}`}
+            expandLabel={t("trust.actions.viewFormula")}
+            collapseLabel={t("trust.actions.hideFormula")}
+          />
         </ScrollView>
       )}
       {tab === 1 && (
-        <View style={styles.borderRadius}>
+        <View style={styles.tableContainer}>
           <Table
             result={result}
             mortgage={mortgage}
@@ -537,128 +431,112 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
       )}
       {tab === 2 && (
         <View style={styles.paymentContainer}>
-          <View style={styles.paymentSummary}>
-            <View style={styles.paymentSummaryHeader}>
-              <View>
-                <AppText
-                  value={t("main.totalPaid")}
-                  fontSize={12}
-                  color={COLORS.foundation.neutral.n500}
-                  fontWeight={400}
-                />
-                <AppText
-                  value={formatNumber(
-                    paymentStats.paidAmount,
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
-                  fontSize={20}
-                  fontWeight={700}
-                  color={COLORS.foundation.blue.b500}
-                />
-              </View>
-              <Pressable
-                style={[
-                  styles.updateBtn,
-                  paymentStats.remainingAmount <= 0 && styles.disabledBtn,
-                ]}
-                disabled={paymentStats.remainingAmount <= 0}
-                onPress={onOpenPaymentModal}
-              >
-                <AppText
-                  value={
-                    paymentStats.remainingAmount <= 0
-                      ? t("main.fullyPaid")
-                      : t("main.updatePayment")
-                  }
-                  color={COLORS.foundation.neutral.n0}
-                  fontWeight={600}
-                  fontSize={14}
-                  numberOfLines={2}
-                  textStyle={styles.updateBtnText}
-                />
-              </Pressable>
-            </View>
-            <View style={styles.progressTrack}>
-              <View
-                style={[
-                  styles.progressFill,
-                  { width: `${paymentStats.progress}%` },
-                ]}
-              />
-            </View>
-            <View style={styles.paymentStatGrid}>
-              <View style={styles.paymentStatItem}>
+          <ImageBackground
+            source={FINANCE_IMAGES.cityBackground}
+            resizeMode="cover"
+            style={styles.paymentHero}
+            imageStyle={styles.paymentHeroImage}
+          >
+            <View pointerEvents="none" style={styles.paymentHeroOverlay} />
+            <View style={styles.paymentHeroTop}>
+              <View style={styles.flex}>
                 <AppText
                   value={t("main.remainingBalance")}
-                  fontSize={11}
-                  color={COLORS.foundation.neutral.n500}
-                  fontWeight={400}
+                  fontSize={13}
+                  fontWeight={500}
+                  color="rgba(255,255,255,0.75)"
                 />
                 <AppText
                   value={formatNumber(
-                    paymentStats.remainingAmount,
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
-                  fontSize={13}
+                  paymentStats.remainingAmount,
+                  mortgage?.currency?.locale || currency.locale,
+                  true,
+                  mortgage?.currency?.code || currency.code,
+                )}
+                  fontSize={26}
                   fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
+                  color={COLORS.foundation.neutral.n0}
                   numberOfLines={1}
-                />
-              </View>
-              <View style={styles.paymentStatItem}>
-                <AppText
-                  value={t("main.repaymentProgress")}
-                  fontSize={11}
-                  color={COLORS.foundation.neutral.n500}
-                  fontWeight={400}
+                  adjustsFontSizeToFit
                 />
                 <AppText
-                  value={`${paymentStats.progress.toFixed(0)}%`}
-                  fontSize={13}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
+                  value={`${t("main.totalPaid")}: ${formatNumber(
+                  paymentStats.paidAmount,
+                  mortgage?.currency?.locale || currency.locale,
+                  true,
+                  mortgage?.currency?.code || currency.code,
+                )}`}
+                  fontSize={12}
+                  fontWeight={600}
+                  color={COLORS.foundation.gold.g300}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
                 />
               </View>
-              <View style={styles.paymentStatItem}>
+              <AppProgressRing progress={paymentStats.progress} size={84} />
+            </View>
+            <View style={styles.paymentHeroStats}>
+              <View style={styles.flex}>
                 <AppText
                   value={t("main.paymentsRecorded")}
                   fontSize={11}
-                  color={COLORS.foundation.neutral.n500}
-                  fontWeight={400}
+                  fontWeight={500}
+                  color="rgba(255,255,255,0.7)"
                 />
                 <AppText
                   value={sortedPayments.length.toString()}
-                  fontSize={13}
+                  fontSize={15}
                   fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
+                  color={COLORS.foundation.neutral.n0}
                 />
               </View>
-              <View style={styles.paymentStatItem}>
+              <View style={styles.paymentHeroDivider} />
+              <View style={styles.flex}>
                 <AppText
                   value={t("main.lastPayment")}
                   fontSize={11}
-                  color={COLORS.foundation.neutral.n500}
-                  fontWeight={400}
+                  fontWeight={500}
+                  color="rgba(255,255,255,0.7)"
                 />
                 <AppText
                   value={
                     paymentStats.lastPayment
-                      ? dayjs(paymentStats.lastPayment.date).format(
-                          "DD/MM/YYYY",
-                        )
+                      ? dayjs(paymentStats.lastPayment.date).format("DD/MM/YYYY")
                       : "--"
                   }
-                  fontSize={13}
+                  fontSize={15}
                   fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
+                  color={COLORS.foundation.neutral.n0}
                 />
               </View>
             </View>
-          </View>
+          </ImageBackground>
+
+          <Pressable
+            style={({ pressed }) => [
+              styles.paymentCta,
+              paymentStats.remainingAmount <= 0 && styles.paymentCtaDone,
+              pressed && styles.pressed,
+            ]}
+            disabled={paymentStats.remainingAmount <= 0}
+            onPress={onOpenPaymentModal}
+          >
+            <Feather
+              name={paymentStats.remainingAmount <= 0 ? "check-circle" : "plus-circle"}
+              size={20}
+              color={COLORS.foundation.neutral.n0}
+            />
+            <AppText
+              value={
+                paymentStats.remainingAmount <= 0
+                  ? t("main.fullyPaid")
+                  : t("main.updatePayment")
+              }
+              color={COLORS.foundation.neutral.n0}
+              fontWeight={700}
+              fontSize={16}
+            />
+          </Pressable>
 
           <ScrollView
             style={styles.paymentList}
@@ -677,43 +555,39 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
                   {group.data.map((payment) => (
                     <View key={payment.id} style={styles.paymentItem}>
                       <View style={styles.paymentIcon}>
-                        <Ionicons
-                          name="checkmark-circle"
-                          size={20}
-                          color={COLORS.foundation.blue.b300}
+                        <Image
+                          source={FINANCE_IMAGES.receipt}
+                          resizeMode="contain"
+                          style={styles.paymentIconImage}
                         />
                       </View>
-                      <View style={{ flex: 1 }}>
+                      <View style={styles.flex}>
                         <AppText
-                          value={dayjs(payment.date).format("DD/MM/YYYY HH:mm")}
-                          fontSize={14}
-                          fontWeight={600}
-                          color={COLORS.foundation.neutral.n700}
+                          value={`+${formatNumber(
+                            payment.amount,
+                            mortgage?.currency?.locale || currency.locale,
+                            true,
+                            mortgage?.currency?.code || currency.code,
+                          )}`}
+                          fontSize={16}
+                          fontWeight={700}
+                          color={COLORS.foundation.sage.s500}
+                          numberOfLines={1}
+                          adjustsFontSizeToFit
                         />
                         <AppText
-                          value={t("main.monthlyRepayment")}
+                          value={dayjs(payment.date).format("DD/MM/YYYY · HH:mm")}
                           fontSize={12}
+                          fontWeight={500}
                           color={COLORS.foundation.neutral.n500}
-                          fontWeight={400}
                         />
                       </View>
-                      <AppText
-                        value={`+${formatNumber(
-                          payment.amount,
-                          mortgage?.currency?.locale || currency.locale,
-                          true,
-                          mortgage?.currency?.code || currency.code,
-                        )}`}
-                        fontSize={15}
-                        fontWeight={700}
-                        color={COLORS.foundation.blue.b300}
-                        numberOfLines={1}
-                      />
                       <Pressable
                         onPress={() => onDeletePayment(payment.id)}
                         style={styles.deletePaymentBtn}
+                        hitSlop={8}
                       >
-                        <Feather name="trash-2" size={16} color="#D92D20" />
+                        <Feather name="trash-2" size={15} color="#D92D20" />
                       </Pressable>
                     </View>
                   ))}
@@ -721,10 +595,10 @@ const MortgageLoanResultDetailScreen = ({ route }: Props) => {
               ))
             ) : (
               <View style={styles.emptyPayments}>
-                <Ionicons
-                  name="receipt-outline"
-                  size={28}
-                  color={COLORS.foundation.neutral.n200}
+                <Image
+                  source={FINANCE_IMAGES.receipt}
+                  resizeMode="contain"
+                  style={styles.emptyPaymentsImage}
                 />
                 <AppText
                   value={t("main.noPayments")}
@@ -1032,61 +906,10 @@ const styles = StyleSheet.create({
   justifyBetween: {
     justifyContent: "space-between",
   },
-  statistic: {
-    width: WIDTH - 36,
-    padding: 16,
-    borderRadius: 16,
-    gap: 14,
-    backgroundColor: COLORS.foundation.blue.b200,
-    borderWidth: 1,
-    borderColor: "black",
-  },
   summaryScrollContent: {
+    paddingTop: 14,
     paddingBottom: 120,
-  },
-  title: {
-    width: WIDTH - 72,
-    paddingVertical: 8,
-    borderRadius: 16,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n700,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  halfWidthButton: {
-    width: (WIDTH - 36 - 44) / 2,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderRadius: 16,
-    gap: 4,
-    height: 63,
-    borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 8,
-  },
-  fullWidthButton: {
-    width: WIDTH - 32 - 40,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderRadius: 16,
-    gap: 4,
-    height: 63,
-    borderWidth: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 8,
-  },
-  recalculateBtn: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderRadius: 12,
-    minHeight: 42,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 6,
+    gap: 14,
   },
   gap8: {
     gap: 8,
@@ -1099,9 +922,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.foundation.blue.b300,
   },
   text: { margin: 6, color: COLORS.foundation.neutral.n0 },
-  borderRadius: {
-    borderRadius: 20,
-    overflow: "hidden",
+  tableContainer: {
+    flex: 1,
   },
   center: {
     textAlign: "center",
@@ -1114,7 +936,8 @@ const styles = StyleSheet.create({
   },
   paymentContainer: {
     flex: 1,
-    gap: 20,
+    gap: 14,
+    paddingTop: 14,
   },
   paymentList: {
     flex: 1,
@@ -1123,72 +946,85 @@ const styles = StyleSheet.create({
     gap: 16,
     paddingBottom: 12,
   },
-  paymentSummary: {
-    backgroundColor: COLORS.foundation.neutral.n0,
-    padding: 16,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+  paymentHero: {
+    borderRadius: 26,
+    padding: 18,
+    gap: 16,
+    overflow: "hidden",
+    backgroundColor: COLORS.foundation.blue.b500,
+  },
+  paymentHeroImage: {
+    borderRadius: 26,
+  },
+  paymentHeroOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(20, 30, 60, 0.4)",
+  },
+  paymentHeroTop: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: 14,
   },
-  paymentSummaryHeader: {
+  paymentHeroStats: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    gap: 12,
-  },
-  progressTrack: {
-    height: 8,
-    width: "100%",
-    borderRadius: 100,
-    overflow: "hidden",
-    backgroundColor: COLORS.foundation.neutral.n100,
-  },
-  progressFill: {
-    height: "100%",
-    borderRadius: 100,
-    backgroundColor: COLORS.foundation.blue.b300,
-  },
-  paymentStatGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  paymentStatItem: {
-    width: (WIDTH - 36 - 32 - 8) / 2,
-    minHeight: 58,
-    borderRadius: 12,
-    backgroundColor: COLORS.foundation.blue.b50,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    gap: 4,
-  },
-  updateBtn: {
-    minWidth: 92,
-    backgroundColor: COLORS.foundation.blue.b300,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  updateBtnText: {
-    textAlign: "center",
-  },
-  disabledBtn: {
-    backgroundColor: COLORS.foundation.neutral.n200,
-  },
-  whatIfOpenBtn: {
-    flex: 1,
+    padding: 12,
+    borderRadius: 16,
+    backgroundColor: "rgba(255,255,255,0.1)",
     borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderRadius: 12,
-    height: 42,
+    borderColor: "rgba(226,194,117,0.3)",
+  },
+  paymentHeroDivider: {
+    width: 1,
+    alignSelf: "stretch",
+    marginHorizontal: 12,
+    backgroundColor: "rgba(255,255,255,0.15)",
+  },
+  paymentCta: {
+    height: 54,
+    borderRadius: 18,
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    gap: 8,
+    backgroundColor: COLORS.foundation.blue.b400,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 4,
   },
-  whatIfHalfBtn: {
+  paymentCtaDone: {
+    backgroundColor: COLORS.foundation.sage.s500,
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  flex: {
+    flex: 1,
+  },
+  pressed: {
+    opacity: 0.85,
+  },
+  actionTile: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    minHeight: 64,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
+  },
+  actionTileImage: {
+    width: 40,
+    height: 40,
+  },
+  actionTileText: {
     flex: 1,
   },
   whatIfActionRow: {
@@ -1214,38 +1050,45 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: COLORS.foundation.neutral.n0,
-    padding: 16,
-    borderRadius: 16,
+    padding: 12,
+    borderRadius: 20,
     gap: 12,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
   },
   deletePaymentBtn: {
-    width: 30,
-    height: 30,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "#FDECEA",
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 4,
   },
   paymentIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 10,
-    backgroundColor: COLORS.foundation.blue.b50,
+    width: 48,
+    height: 48,
+    borderRadius: 14,
+    backgroundColor: COLORS.foundation.sage.s50,
     alignItems: "center",
     justifyContent: "center",
   },
+  paymentIconImage: {
+    width: 36,
+    height: 36,
+  },
   emptyPayments: {
-    padding: 40,
+    padding: 28,
     alignItems: "center",
     gap: 8,
-    borderRadius: 16,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    borderRadius: 22,
+    backgroundColor: "rgba(255,255,255,0.8)",
+  },
+  emptyPaymentsImage: {
+    width: 96,
+    height: 96,
   },
   modalOverlay: {
     flex: 1,

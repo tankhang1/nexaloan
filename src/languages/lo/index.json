@@ -278,13 +278,13 @@
   },
   "loading": "ກຳລັງປະມວນຜົນຂໍ້ມູນ",
   "whatIf": {
-    "title": "ເຄື່ອງຈຳລອງ What-if",
+    "title": "ຈຳລອງການຈ່າຍໜີ້ກ່ອນກຳນົດ",
     "extraMonthly": "ຈ່າຍເພີ່ມປະຈຳເດືອນ",
     "monthsSaved": "ຈຳນວນເດືອນທີ່ປະຫຍັດໄດ້",
     "interestSaved": "ດອກເບ້ຍທີ່ປະຫຍັດໄດ້",
     "newPayoff": "ເວລາປິດບັນຊີໃໝ່",
     "newTotalPayment": "ຍອດຈ່າຍລວມໃໝ່",
-    "supportNote": "V1 ຮອງຮັບການຈຳລອງສຳລັບ Fixed Payment ເທົ່ານັ້ນ."
+    "supportNote": "ປັດຈຸບັນໃຊ້ໄດ້ສະເພາະວິທີຈ່າຍງວດເທົ່າກັນເທົ່ານັ້ນ."
   },
   "trust": {
     "disclaimer": {

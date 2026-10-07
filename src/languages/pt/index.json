@@ -278,13 +278,13 @@
   },
   "loading": "Os dados estão sendo processados",
   "whatIf": {
-    "title": "Simulador de cenários",
+    "title": "Simulador de quitação antecipada",
     "extraMonthly": "Pagamento extra mensal",
     "monthsSaved": "Meses economizados",
     "interestSaved": "Juros economizados",
     "newPayoff": "Novo prazo de quitação",
     "newTotalPayment": "Novo pagamento total",
-    "supportNote": "A V1 atualmente suporta simulação apenas para Pagamento Fixo."
+    "supportNote": "Disponível no momento apenas para o método de Pagamento Fixo."
   },
   "trust": {
     "disclaimer": {

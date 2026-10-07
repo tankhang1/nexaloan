@@ -13,6 +13,7 @@ import React, {
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -29,10 +30,8 @@ import AppSlider from "../../components/AppSlider";
 import AppText from "../../components/AppText";
 import AppView from "../../components/AppView";
 import { COLORS } from "../../constants/colors";
-import { WIDTH } from "../../constants/dimension";
 import { ICONS } from "../../constants/icon";
 import { formatMonth } from "../../hooks/format_month";
-import { formatNumber } from "../../hooks/format_number";
 import {
   addLoan as setCurrentLoan,
   TMortgageLoan,
@@ -47,6 +46,7 @@ import {
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
 import AppTrustNotice from "../../components/AppTrustNotice";
+import { FINANCE_IMAGES } from "../../assets";
 import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
 import {
   calculateFixedMonthlyPayment,
@@ -164,6 +164,16 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
     });
   };
 
+  // Snapshot of the last saved scenario, so repeated taps don't re-add it.
+  const [savedSnapshot, setSavedSnapshot] = useState<string | null>(null);
+  const currentSnapshot = JSON.stringify([
+    scenarioLoan.loan_amount,
+    scenarioLoan.duration,
+    scenarioLoan.int_rate,
+    scenarioLoan.type,
+  ]);
+  const isSaved = savedSnapshot === currentSnapshot;
+
   const onSave = useCallback(() => {
     const nextType =
       route.params.label === t("main.mortgage.title")
@@ -193,12 +203,19 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
       return;
     }
 
+    if (isSaved) {
+      return;
+    }
+    const wasSavedBefore = savedSnapshot !== null;
     Toast.show({
       text1: t("mortgageResult.notificationTitle"),
-      text2: t("mortgageResult.notificationMessage"),
+      text2: wasSavedBefore
+        ? t("mortgageResult.updateSuccess")
+        : t("mortgageResult.notificationMessage"),
       type: "success",
       position: "top",
     });
+    // addLoan replaces an entry with the same id, so re-saving updates it.
     dispatch(
       addHistoryLoan({
         ...(scenarioLoan as TLoan),
@@ -206,7 +223,16 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
         type: nextType,
       }),
     );
-  }, [dispatch, route.params, scenarioLoan, t]);
+    setSavedSnapshot(currentSnapshot);
+  }, [
+    currentSnapshot,
+    dispatch,
+    isSaved,
+    route.params,
+    savedSnapshot,
+    scenarioLoan,
+    t,
+  ]);
 
   const onSaveAsNew = useCallback(() => {
     Toast.show({
@@ -236,9 +262,6 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
     );
   }, [dispatch, route.params.label, scenarioLoan, t]);
 
-  const onNavSetting = () => {
-    navigationRef.navigate("SettingScreen");
-  };
   const onGoHome = () => {
     navigationRef.navigate("MainScreen");
   };
@@ -280,8 +303,14 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
             <AppIconButton onPress={onGoBack}>
               <ICONS.button.chervon_left />
             </AppIconButton>
-            <AppIconButton onPress={onNavSetting}>
-              <ICONS.button.setting />
+            <AppText
+              value={t("mortgageResult.result.result")}
+              fontSize={20}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+            />
+            <AppIconButton onPress={onGoHome}>
+              <Ionicons name="home-outline" size={20} color={COLORS.foundation.neutral.n700} />
             </AppIconButton>
           </View>
 
@@ -302,58 +331,11 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
           </Suspense>
 
           <View style={styles.insightCard}>
-            <AppText
-              value={t("mortgageResult.quickInsight")}
-              fontSize={16}
-              fontWeight={700}
-              color={COLORS.foundation.neutral.n700}
+            <Image
+              source={FINANCE_IMAGES.clock}
+              resizeMode="contain"
+              style={styles.insightImage}
             />
-            <View style={styles.insightRow}>
-              <AppText
-                value={t("mortgageResult.insight.totalInterest")}
-                fontSize={13}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n500}
-                numberOfLines={2}
-                textStyle={styles.rowLabel}
-              />
-              <AppText
-                value={formatNumber(
-                  scenarioResult.totalInterest,
-                  scenarioLoan.currency.locale,
-                  true,
-                  scenarioLoan.currency.code,
-                )}
-                fontSize={15}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-                numberOfLines={1}
-                textStyle={styles.rowValue}
-              />
-            </View>
-            <View style={styles.insightRow}>
-              <AppText
-                value={t("mortgageResult.insight.totalPayment")}
-                fontSize={13}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n500}
-                numberOfLines={2}
-                textStyle={styles.rowLabel}
-              />
-              <AppText
-                value={formatNumber(
-                  scenarioResult.totalPayment,
-                  scenarioLoan.currency.locale,
-                  true,
-                  scenarioLoan.currency.code,
-                )}
-                fontSize={15}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-                numberOfLines={1}
-                textStyle={styles.rowValue}
-              />
-            </View>
             <View style={styles.insightRow}>
               <AppText
                 value={t("mortgageResult.insight.highestPressureMonth")}
@@ -441,126 +423,86 @@ const MortgageLoanResultScreen = ({ route }: Props) => {
           />
 
           <View style={styles.actionGroup}>
-            <View style={[styles.rows, styles.gap8]}>
-              <Pressable
-                style={[styles.button, styles.halfWidthButton]}
-                onPress={onNavMortgageLoanResultDetail}
-              >
-                {isPending && <ActivityIndicator />}
-                {!isPending && (
-                  <MaterialIcons
-                    name="pie-chart-outline"
-                    size={22}
-                    color={COLORS.foundation.blue.b500}
-                  />
+            <View style={styles.tileRow}>
+              <Pressable style={styles.tile} onPress={onNavMortgageLoanResultDetail}>
+                {isPending ? (
+                  <ActivityIndicator />
+                ) : (
+                  <MaterialIcons name="pie-chart-outline" size={22} color={COLORS.foundation.blue.b300} />
                 )}
-                {!isPending && (
-                  <AppText
-                    fontSize={14}
-                    fontWeight={600}
-                    value={t("mortgageResult.amortization")}
-                    color={COLORS.foundation.neutral.n700}
-                  />
-                )}
-              </Pressable>
-              <Pressable
-                style={[styles.button, styles.halfWidthButton]}
-                onPress={onOpenShare}
-              >
-                <Feather
-                  name="share-2"
-                  size={21}
-                  color={COLORS.foundation.blue.b500}
-                />
                 <AppText
-                  fontSize={14}
+                  fontSize={12}
+                  fontWeight={600}
+                  value={t("mortgageResult.amortization")}
+                  color={COLORS.foundation.neutral.n700}
+                  numberOfLines={2}
+                  textStyle={styles.tileText}
+                />
+              </Pressable>
+              <Pressable style={styles.tile} onPress={onNavCompare}>
+                <MaterialIcons name="compare-arrows" size={22} color={COLORS.foundation.blue.b300} />
+                <AppText
+                  fontSize={12}
+                  fontWeight={600}
+                  value={t("mortgageResult.compareScenario")}
+                  color={COLORS.foundation.neutral.n700}
+                  numberOfLines={2}
+                  textStyle={styles.tileText}
+                />
+              </Pressable>
+              <Pressable style={styles.tile} onPress={onOpenShare}>
+                <Feather name="share-2" size={20} color={COLORS.foundation.blue.b300} />
+                <AppText
+                  fontSize={12}
                   fontWeight={600}
                   value={t("mortgageResult.share")}
                   color={COLORS.foundation.neutral.n700}
+                  numberOfLines={2}
+                  textStyle={styles.tileText}
                 />
               </Pressable>
             </View>
 
-            <Pressable style={[styles.button, styles.compareButton]} onPress={onNavCompare}>
-              <MaterialIcons
-                name="compare-arrows"
-                size={21}
-                color={COLORS.foundation.blue.b500}
-              />
-              <AppText
-                fontSize={14}
-                fontWeight={700}
-                value={t("mortgageResult.compareScenario")}
-                color={COLORS.foundation.neutral.n700}
-              />
-            </Pressable>
-
-            <View style={[styles.rows]}>
-              <Pressable style={[styles.button, styles.homeButton]} onPress={onGoHome}>
-                <Ionicons name="home" size={21} color={COLORS.foundation.blue.b500} />
-                <AppText
-                  value={t("mortgageResult.home")}
-                  color={COLORS.foundation.neutral.n700}
-                  fontWeight={600}
-                  fontSize={14}
-                />
-              </Pressable>
-              {route.params?.isRecalculate ? (
-                <View style={[styles.rows, styles.recalculateActionGroup]}>
-                  <Pressable
-                    style={[styles.button, styles.recalculateButton]}
-                    onPress={onSave}
-                  >
-                    <Feather
-                      name="refresh-cw"
-                      size={18}
-                      color={COLORS.foundation.blue.b500}
-                    />
-                    <AppText
-                      fontSize={12}
-                      fontWeight={600}
-                      value={t("mortgageResult.updateSaved")}
-                      color={COLORS.foundation.neutral.n700}
-                    />
-                  </Pressable>
-                  <Pressable
-                    style={[styles.button, styles.recalculateButton]}
-                    onPress={onSaveAsNew}
-                  >
-                    <Feather
-                      name="bookmark"
-                      size={18}
-                      color={COLORS.foundation.blue.b500}
-                    />
-                    <AppText
-                      fontSize={12}
-                      fontWeight={600}
-                      value={t("mortgageResult.saveNew")}
-                      color={COLORS.foundation.neutral.n700}
-                    />
-                  </Pressable>
-                </View>
-              ) : (
-                <Pressable
-                  style={[styles.button, styles.fullWidthButton]}
-                  onPress={() => {
-                    onSave();
-                  }}
-                >
-                  <Feather
-                    name="bookmark"
-                    size={20}
-                    color={COLORS.foundation.blue.b500}
-                  />
+            {route.params?.isRecalculate ? (
+              <View style={[styles.rows, styles.gap8]}>
+                <Pressable style={[styles.primaryButton, styles.flex]} onPress={onSave}>
+                  <Feather name="refresh-cw" size={18} color={COLORS.foundation.neutral.n0} />
                   <AppText
-                    fontSize={14}
-                    fontWeight={600}
-                    value={t("mortgageResult.save")}
-                    color={COLORS.foundation.neutral.n700}
+                    fontSize={15}
+                    fontWeight={700}
+                    value={t("mortgageResult.updateSaved")}
+                    color={COLORS.foundation.neutral.n0}
                   />
                 </Pressable>
-              )}
-            </View>
+                <Pressable style={[styles.secondaryButton, styles.flex]} onPress={onSaveAsNew}>
+                  <Feather name="bookmark" size={18} color={COLORS.foundation.blue.b400} />
+                  <AppText
+                    fontSize={15}
+                    fontWeight={700}
+                    value={t("mortgageResult.saveNew")}
+                    color={COLORS.foundation.blue.b400}
+                  />
+                </Pressable>
+              </View>
+            ) : (
+              <Pressable
+                style={[styles.primaryButton, isSaved && styles.savedButton]}
+                onPress={onSave}
+                disabled={isSaved}
+              >
+                <Feather
+                  name={isSaved ? "check-circle" : "bookmark"}
+                  size={20}
+                  color={COLORS.foundation.neutral.n0}
+                />
+                <AppText
+                  fontSize={16}
+                  fontWeight={700}
+                  value={t("mortgageResult.save")}
+                  color={COLORS.foundation.neutral.n0}
+                />
+              </Pressable>
+            )}
           </View>
         </ScrollView>
         <ConfettiCannon
@@ -586,52 +528,77 @@ const styles = StyleSheet.create({
     paddingBottom: 52,
     gap: 16,
   },
-  halfWidthButton: {
-    width: (WIDTH - 32) / 2 - 7,
-    gap: 10,
-    height: 60,
-  },
-  fullWidthButton: {
-    width: WIDTH - 32 - 116 - 14,
-    gap: 10,
-    height: 60,
-  },
-  compareButton: {
-    height: 56,
-    gap: 10,
-  },
-  homeButton: {
-    width: 116,
-    height: 60,
-  },
-  recalculateActionGroup: {
-    width: WIDTH - 32 - 116 - 14,
-    gap: 8,
-  },
-  recalculateButton: {
-    width: (WIDTH - 32 - 116 - 14 - 8) / 2,
-    height: 60,
-    gap: 8,
-  },
-  button: {
-    justifyContent: "center",
-    alignItems: "center",
+  tileRow: {
     flexDirection: "row",
-    paddingHorizontal: 18,
-    backgroundColor: "rgba(255,255,255,0.96)",
+    gap: 10,
+  },
+  tile: {
+    flex: 1,
+    minHeight: 84,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    paddingHorizontal: 8,
+    paddingVertical: 12,
+    gap: 6,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: COLORS.foundation.neutral.n0,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
+  },
+  tileText: {
+    textAlign: "center",
+  },
+  primaryButton: {
+    height: 56,
+    borderRadius: 18,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    backgroundColor: COLORS.foundation.blue.b400,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 4,
+  },
+  savedButton: {
+    backgroundColor: COLORS.foundation.sage.s500,
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  secondaryButton: {
+    height: 56,
+    borderRadius: 18,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    backgroundColor: COLORS.foundation.blue.b50,
   },
   insightCard: {
-    backgroundColor: "rgba(255,255,255,0.94)",
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    padding: 14,
-    gap: 10,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 24,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 2,
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  insightImage: {
+    width: 44,
+    height: 44,
   },
   insightRow: {
+    flex: 1,
+    gap: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -645,22 +612,23 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   whatIfCard: {
-    backgroundColor: "rgba(255,255,255,0.94)",
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    padding: 14,
-    gap: 10,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 24,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 2,
+    padding: 16,
+    gap: 12,
   },
   whatIfSection: {
     gap: 4,
   },
   applyScenarioBtn: {
     borderRadius: 14,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
     backgroundColor: COLORS.foundation.blue.b50,
-    minHeight: 42,
+    minHeight: 44,
     alignItems: "center",
     justifyContent: "center",
   },

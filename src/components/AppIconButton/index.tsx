@@ -20,12 +20,15 @@ export default AppIconButton;
 const styles = StyleSheet.create({
   overall: {
     backgroundColor: COLORS.foundation.neutral.n0,
-    width: 55,
-    height: 48,
+    width: 44,
+    height: 44,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    borderRadius: 22,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+    shadowOffset: {width: 0, height: 2},
+    elevation: 2,
   },
 });

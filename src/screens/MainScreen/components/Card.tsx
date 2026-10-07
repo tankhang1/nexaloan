@@ -1,4 +1,11 @@
-import {StyleSheet, View, Pressable, ColorValue} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  ColorValue,
+  Image,
+  ImageSourcePropType,
+} from 'react-native';
 import React from 'react';
 import {Feather} from '@expo/vector-icons';
 import {COLORS} from '../../../constants/colors';
@@ -7,6 +14,7 @@ import AppText from '../../../components/AppText';
 
 type TCard = {
   icon?: React.ReactNode;
+  image?: ImageSourcePropType;
   title?: string;
   desc?: string;
   onPress?: () => void;
@@ -20,6 +28,7 @@ type TCard = {
 const Card = ({
   desc,
   icon,
+  image,
   title,
   isDisable = false,
   onPress,
@@ -51,12 +60,20 @@ const Card = ({
                   styles.gridIconContainer,
                   {backgroundColor: iconBackgroundColor},
                 ]}>
-                {icon}
+                {image ? (
+                  <Image
+                    source={image}
+                    style={styles.gridImage}
+                    resizeMode="contain"
+                  />
+                ) : (
+                  icon
+                )}
               </View>
               <View style={styles.gridArrowWrap}>
                 <Feather
-                  name="arrow-up-right"
-                  size={17}
+                  name="chevron-right"
+                  size={16}
                   color={COLORS.foundation.neutral.n500}
                 />
               </View>
@@ -178,10 +195,13 @@ export default Card;
 
 const styles = StyleSheet.create({
   cardWrapper: {
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    backgroundColor: 'rgba(255,255,255,0.94)',
+    backgroundColor: COLORS.foundation.neutral.n0,
     borderRadius: 22,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.1,
+    shadowRadius: 14,
+    shadowOffset: {width: 0, height: 4},
+    elevation: 2,
     width: WIDTH - 36,
     minHeight: 112,
     padding: 14,
@@ -247,15 +267,19 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   gridIconContainer: {
-    width: 48,
-    height: 48,
+    width: 64,
+    height: 64,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 17,
+    borderRadius: 20,
+  },
+  gridImage: {
+    width: 56,
+    height: 56,
   },
   gridArrowWrap: {
-    width: 32,
-    height: 32,
+    width: 26,
+    height: 26,
     borderRadius: 13,
     alignItems: 'center',
     justifyContent: 'center',
@@ -290,8 +314,8 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   chevronWrap: {
-    width: 34,
-    height: 34,
+    width: 28,
+    height: 28,
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',

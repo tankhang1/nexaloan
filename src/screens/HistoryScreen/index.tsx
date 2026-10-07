@@ -5,7 +5,9 @@ import {
   Pressable,
   Alert,
   Modal,
+  Image,
 } from 'react-native';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
 import React, {useMemo, useState} from 'react';
 import {COLORS} from '../../constants/colors';
 import AppView from '../../components/AppView';
@@ -14,7 +16,6 @@ import {navigationRef} from '../../navigation';
 import AppText from '../../components/AppText';
 import {WIDTH} from '../../constants/dimension';
 import Card from './components/Card';
-import AppIndicator from '../../components/AppIndicator';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux/store';
 import dayjs from 'dayjs';
@@ -25,7 +26,8 @@ import {formatNumber} from '../../hooks/format_number';
 import {formatMonth} from '../../hooks/format_month';
 import AppBanner from '../../components/AppBanner';
 import {BannerAdSize} from 'react-native-google-mobile-ads';
-import {Feather, Ionicons, FontAwesome6} from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
+import {FINANCE_IMAGES} from '../../assets';
 import AppInput from '../../components/AppInput';
 
 type THistoryFilterState = {
@@ -36,6 +38,14 @@ type THistoryFilterState = {
   dateTo: string;
   sortOrder: number;
 };
+
+const TYPE_FILTERS = [
+  {id: 0, label: 'history.tabs.all', image: null},
+  {id: 1, label: 'main.mortgage.title', image: FINANCE_IMAGES.home},
+  {id: 2, label: 'main.personal.title', image: FINANCE_IMAGES.wallet},
+  {id: 3, label: 'main.business.title', image: FINANCE_IMAGES.bank},
+  {id: 4, label: 'main.car.title', image: FINANCE_IMAGES.auto},
+];
 
 const HistoryScreen = () => {
   const {t} = useTranslation();
@@ -55,7 +65,14 @@ const HistoryScreen = () => {
     dayjs().startOf('month'),
   );
 
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   const history = useSelector((state: RootState) => state.history);
+  const hasAdvancedFilter =
+    !!filters.amountMin ||
+    !!filters.amountMax ||
+    !!filters.dateFrom ||
+    !!filters.dateTo;
 
   const listHistory = useMemo(() => {
     const minAmount = Number(filters.amountMin || 0);
@@ -208,6 +225,11 @@ const HistoryScreen = () => {
     }));
   };
 
+  const resetAllFilters = () => {
+    resetFilters();
+    setFilters(current => ({...current, loanType: 0}));
+  };
+
   return (
     <AppView appStyle={styles.overall}>
       <View style={styles.header}>
@@ -221,98 +243,122 @@ const HistoryScreen = () => {
         <AppText
           value={t('history.title')}
           fontSize={20}
-          fontWeight={600}
-          color={COLORS.foundation.neutral.n700}
-        />
-        <AppIconButton onPress={onClearAllHistory}>
-          <Feather
-            name="trash-2"
-            size={24}
-            color={COLORS.foundation.neutral.n900}
-          />
-        </AppIconButton>
-      </View>
-
-      <View style={styles.rows}>
-        <AppIndicator
-          tabs={[
-            {
-              id: 0,
-              children: t('history.tabs.all'),
-              isLeftBorder: true,
-            },
-            {
-              id: 1,
-              children: (
-                <Ionicons
-                  name="home"
-                  size={18}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              ),
-            },
-            {
-              id: 2,
-              children: (
-                <Ionicons
-                  name="person"
-                  size={18}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              ),
-            },
-            {
-              id: 3,
-              children: (
-                <FontAwesome6
-                  name="briefcase"
-                  size={15}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              ),
-            },
-            {
-              id: 4,
-              children: (
-                <Ionicons
-                  name="car-sport"
-                  size={18}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              ),
-              isRightBorder: true,
-            },
-          ]}
-          activeKey={filters.loanType}
-          onPress={value => setFilters(current => ({...current, loanType: value}))}
-          tabWidth={(WIDTH - 34) / 8}
-        />
-        <AppIndicator
-          tabs={[
-            {
-              id: 0,
-              children: t('history.tabs.newest'),
-              isLeftBorder: true,
-            },
-            {
-              id: 1,
-              children: t('history.tabs.oldest'),
-              isRightBorder: true,
-            },
-          ]}
-          activeKey={filters.sortOrder}
-          onPress={value => setFilters(current => ({...current, sortOrder: value}))}
-          tabWidth={(WIDTH - 34) / 6}
-        />
-      </View>
-
-      <View style={styles.filterCard}>
-        <AppText
-          value={t('history.filters.advancedTitle')}
-          fontSize={15}
           fontWeight={700}
           color={COLORS.foundation.neutral.n700}
         />
+        <AppIconButton onPress={onClearAllHistory}>
+          <Feather name="trash-2" size={20} color="#D92D20" />
+        </AppIconButton>
+      </View>
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.chipScroll}
+        contentContainerStyle={styles.chipRow}>
+        {TYPE_FILTERS.map(item => {
+          const isActive = filters.loanType === item.id;
+          return (
+            <Pressable
+              key={item.id}
+              onPress={() =>
+                setFilters(current => ({...current, loanType: item.id}))
+              }
+              style={[styles.typeChip, isActive && styles.typeChipActive]}>
+              {item.image && (
+                <Image
+                  source={item.image}
+                  resizeMode="contain"
+                  style={styles.typeChipImage}
+                />
+              )}
+              <AppText
+                value={t(item.label)}
+                fontSize={13}
+                fontWeight={600}
+                color={
+                  isActive
+                    ? COLORS.foundation.neutral.n0
+                    : COLORS.foundation.neutral.n700
+                }
+              />
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+
+      <View style={styles.toolbar}>
+        <AppText
+          value={`${listHistory.length} / ${history.length}`}
+          fontSize={13}
+          fontWeight={600}
+          color={COLORS.foundation.neutral.n500}
+        />
+        <View style={styles.toolbarActions}>
+          <Pressable
+            style={styles.toolButton}
+            onPress={() =>
+              setFilters(current => ({
+                ...current,
+                sortOrder: current.sortOrder === 0 ? 1 : 0,
+              }))
+            }>
+            <Feather
+              name={filters.sortOrder === 0 ? 'arrow-down' : 'arrow-up'}
+              size={14}
+              color={COLORS.foundation.blue.b400}
+            />
+            <AppText
+              value={
+                filters.sortOrder === 0
+                  ? t('history.tabs.newest')
+                  : t('history.tabs.oldest')
+              }
+              fontSize={13}
+              fontWeight={600}
+              color={COLORS.foundation.blue.b400}
+            />
+          </Pressable>
+          <Pressable
+            style={[styles.toolButton, isFilterOpen && styles.toolButtonActive]}
+            onPress={() => setIsFilterOpen(current => !current)}>
+            <Feather
+              name="sliders"
+              size={14}
+              color={
+                isFilterOpen
+                  ? COLORS.foundation.neutral.n0
+                  : COLORS.foundation.blue.b400
+              }
+            />
+            {hasAdvancedFilter && <View style={styles.activeDot} />}
+          </Pressable>
+        </View>
+      </View>
+
+      {isFilterOpen && (
+        <Animated.View
+          entering={FadeIn}
+          exiting={FadeOut}
+          style={styles.filterCard}>
+          <View style={styles.filterHeader}>
+            <AppText
+              value={t('history.filters.advancedTitle')}
+              fontSize={15}
+              fontWeight={700}
+              color={COLORS.foundation.neutral.n700}
+            />
+            {hasAdvancedFilter && (
+              <Pressable onPress={resetFilters}>
+                <AppText
+                  value={t('history.filters.clearFilter')}
+                  fontSize={12}
+                  fontWeight={700}
+                  color={COLORS.foundation.blue.b400}
+                />
+              </Pressable>
+            )}
+          </View>
         <View style={styles.filterRow}>
           <View style={styles.filterCol}>
             <AppText
@@ -322,6 +368,7 @@ const HistoryScreen = () => {
               color={COLORS.foundation.neutral.n500}
             />
             <AppInput
+              textStyle={styles.inputField}
               value={filters.amountMin ? new Intl.NumberFormat().format(Number(filters.amountMin)) : ''}
               onChangeText={value =>
                 setFilters(current => ({...current, amountMin: sanitizeInteger(value)}))
@@ -342,6 +389,7 @@ const HistoryScreen = () => {
               color={COLORS.foundation.neutral.n500}
             />
             <AppInput
+              textStyle={styles.inputField}
               value={filters.amountMax ? new Intl.NumberFormat().format(Number(filters.amountMax)) : ''}
               onChangeText={value =>
                 setFilters(current => ({...current, amountMax: sanitizeInteger(value)}))
@@ -415,27 +463,47 @@ const HistoryScreen = () => {
             </Pressable>
           </View>
         </View>
-      </View>
+        </Animated.View>
+      )}
 
-      <ScrollView contentContainerStyle={[styles.center, styles.gap16]}>
-        {listHistory.length === 0 && (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}>
+        {history.length === 0 ? (
           <View style={styles.emptyState}>
+            <Image
+              source={FINANCE_IMAGES.emptyHistory}
+              resizeMode="contain"
+              style={styles.emptyImage}
+            />
             <AppText
-              value={t('history.filters.noMatch')}
-              fontSize={13}
-              fontWeight={500}
+              value={t('main.noLoans')}
+              fontSize={14}
+              fontWeight={600}
               color={COLORS.foundation.neutral.n500}
               textStyle={styles.emptyText}
             />
-            <Pressable onPress={resetFilters} style={styles.resetFilterBtn}>
-              <AppText
-                value={t('history.filters.clearFilter')}
-                fontSize={13}
-                fontWeight={700}
-                color={COLORS.foundation.neutral.n700}
-              />
-            </Pressable>
           </View>
+        ) : (
+          listHistory.length === 0 && (
+            <View style={styles.emptyState}>
+              <AppText
+                value={t('history.filters.noMatch')}
+                fontSize={13}
+                fontWeight={500}
+                color={COLORS.foundation.neutral.n500}
+                textStyle={styles.emptyText}
+              />
+              <Pressable onPress={resetAllFilters} style={styles.resetFilterBtn}>
+                <AppText
+                  value={t('history.filters.clearFilter')}
+                  fontSize={13}
+                  fontWeight={700}
+                  color={COLORS.foundation.blue.b400}
+                />
+              </Pressable>
+            </View>
+          )
         )}
         {listHistory.map((mortgage, index) => (
           <Card
@@ -445,32 +513,14 @@ const HistoryScreen = () => {
             onDelete={onDeleteHistoryItem}
             index={index}
             key={mortgage.id}
-            icon={
-              mortgage.type === ELoan.MORTGAGE_LOAN ? (
-                <Ionicons
-                  name="home"
-                  size={22}
-                  color={COLORS.foundation.neutral.n0}
-                />
-              ) : mortgage.type === ELoan.PERSONAL_LOAN ? (
-                <Ionicons
-                  name="person"
-                  size={22}
-                  color={COLORS.foundation.neutral.n0}
-                />
-              ) : mortgage.type === ELoan.BUSINESS_LOAN ? (
-                <FontAwesome6
-                  name="briefcase"
-                  size={18}
-                  color={COLORS.foundation.neutral.n0}
-                />
-              ) : (
-                <Ionicons
-                  name="car-sport"
-                  size={22}
-                  color={COLORS.foundation.neutral.n0}
-                />
-              )
+            image={
+              mortgage.type === ELoan.MORTGAGE_LOAN
+                ? FINANCE_IMAGES.home
+                : mortgage.type === ELoan.PERSONAL_LOAN
+                  ? FINANCE_IMAGES.wallet
+                  : mortgage.type === ELoan.BUSINESS_LOAN
+                    ? FINANCE_IMAGES.bank
+                    : FINANCE_IMAGES.auto
             }
             title={
               mortgage.type === ELoan.BUSINESS_LOAN
@@ -491,7 +541,6 @@ const HistoryScreen = () => {
             time={`${dayjs(mortgage.date).format('DD/MM/YYYY')}`}
           />
         ))}
-        <View style={{height: 100}} />
       </ScrollView>
 
       <Modal
@@ -610,20 +659,81 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 16,
   },
-  rows: {
-    justifyContent: 'space-between',
+  chipScroll: {
+    flexGrow: 0,
+  },
+  chipRow: {
+    gap: 8,
+    paddingHorizontal: 16,
+  },
+  typeChip: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 6,
+    height: 40,
+    paddingHorizontal: 14,
+    borderRadius: 999,
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderWidth: 1,
+    borderColor: COLORS.foundation.neutral.n50,
+  },
+  typeChipActive: {
+    backgroundColor: COLORS.foundation.blue.b400,
+    borderColor: COLORS.foundation.blue.b400,
+  },
+  typeChipImage: {
+    width: 24,
+    height: 24,
+  },
+  toolbar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
+  },
+  toolbarActions: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  toolButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    height: 36,
+    minWidth: 36,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    justifyContent: 'center',
+    backgroundColor: COLORS.foundation.blue.b50,
+  },
+  toolButtonActive: {
+    backgroundColor: COLORS.foundation.blue.b400,
+  },
+  activeDot: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: COLORS.foundation.gold.g300,
   },
   filterCard: {
     marginHorizontal: 16,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    borderRadius: 22,
     backgroundColor: COLORS.foundation.neutral.n0,
     padding: 16,
     gap: 12,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    shadowOffset: {width: 0, height: 4},
+    elevation: 2,
+  },
+  filterHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   filterRow: {
     flexDirection: 'row',
@@ -631,47 +741,51 @@ const styles = StyleSheet.create({
   },
   filterCol: {
     flex: 1,
-    gap: 8,
+    gap: 6,
+  },
+  inputField: {
+    minHeight: 46,
+    borderRadius: 14,
+    borderWidth: 0,
+    paddingHorizontal: 14,
+    backgroundColor: COLORS.foundation.neutral.n25,
   },
   dateField: {
-    minHeight: 50,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    borderRadius: 18,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    paddingHorizontal: 16,
+    minHeight: 46,
+    borderRadius: 14,
+    backgroundColor: COLORS.foundation.neutral.n25,
+    paddingHorizontal: 14,
     justifyContent: 'center',
   },
   dateFieldPressed: {
     backgroundColor: COLORS.foundation.blue.b50,
   },
-  gap16: {
-    gap: 16,
-  },
-  center: {
-    alignItems: 'center',
+  listContent: {
+    paddingHorizontal: 16,
+    paddingTop: 2,
+    paddingBottom: 24,
+    gap: 12,
   },
   emptyState: {
-    width: WIDTH - 34,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
-    backgroundColor: COLORS.foundation.neutral.n0,
-    padding: 18,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    padding: 20,
     gap: 10,
     alignItems: 'center',
+  },
+  emptyImage: {
+    width: 140,
+    height: 140,
   },
   emptyText: {
     textAlign: 'center',
     lineHeight: 18,
   },
   resetFilterBtn: {
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
+    borderRadius: 12,
     backgroundColor: COLORS.foundation.blue.b50,
-    minHeight: 36,
-    paddingHorizontal: 14,
+    minHeight: 38,
+    paddingHorizontal: 16,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -684,8 +798,6 @@ const styles = StyleSheet.create({
   datePickerSheet: {
     backgroundColor: COLORS.foundation.neutral.n0,
     borderRadius: 24,
-    borderWidth: 1,
-    borderColor: COLORS.foundation.neutral.n100,
     padding: 16,
     gap: 14,
   },
@@ -722,6 +834,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.foundation.blue.b50,
   },
   dayCellSelected: {
-    backgroundColor: COLORS.foundation.blue.b300,
+    backgroundColor: COLORS.foundation.blue.b400,
   },
 });

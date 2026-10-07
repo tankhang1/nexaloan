@@ -1,17 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  FlatList,
-  ListRenderItemInfo,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import AppText from "../../../components/AppText";
 import { COLORS } from "../../../constants/colors";
-import { HEIGHT, WIDTH } from "../../../constants/dimension";
 import {
   FixedPrincipalResult,
   MonthlyBreakdown,
@@ -27,196 +19,102 @@ type TTable = {
 };
 const Table = ({ result, mortgage, onScrollEnd }: TTable) => {
   const { t } = useTranslation();
-  const insets = useSafeAreaInsets();
   const { currency } = useSelector((state: RootState) => state.app);
-  const TABLE = useMemo(
-    () => [
-      {
-        id: "month",
-        label: t("mortgageDetail.table.month"),
-        width: 60,
-      },
-      {
-        id: "principalPayment",
-        label: t("mortgageDetail.table.principal"),
-        width: (WIDTH - 36 - 60 - 4) / 2,
-        format: (value: number) =>
-          formatNumber(
-            value,
-            mortgage?.currency?.locale || currency.locale,
-            true,
-            mortgage?.currency?.code || currency.code,
-          ),
-      },
-      {
-        id: "remainingPrincipal",
-        label: t("mortgageDetail.table.endingBalance"),
-        width: (WIDTH - 36 - 60 - 4) / 2,
-        format: (value: number) =>
-          formatNumber(
-            value,
-            mortgage?.currency?.locale || currency.locale,
-            true,
-            mortgage?.currency?.code || currency.code,
-          ),
-      },
-    ],
-    [currency, mortgage, t],
+  const locale = mortgage?.currency?.locale || currency.locale;
+  const code = mortgage?.currency?.code || currency.code;
+  const format = useCallback(
+    (value: number) => formatNumber(value, locale, true, code),
+    [locale, code],
   );
-  const renderItem = ({
-    item,
-    index,
-  }: ListRenderItemInfo<MonthlyBreakdown>) => {
+
+  const renderItem = ({ item }: ListRenderItemInfo<MonthlyBreakdown>) => {
+    const total = item.principalPayment + item.interestPayment;
+    const principalShare = total > 0 ? (item.principalPayment / total) * 100 : 0;
+    const isYearStart = (item.month - 1) % 12 === 0;
+
     return (
-      <View
-        style={[styles.rows]}
-        key={`${item.remainingPrincipal}-${item.interestPayment}-${item.month}-${item.principalPayment}-${index}`}
-      >
-        <View
-          key={`month-${index}`}
-          style={[
-            styles.dataItem,
-            styles.rightBorder,
-            index % 2 === 0 && { backgroundColor: COLORS.foundation.blue.b50 },
-            {
-              width: 60,
-            },
-          ]}
-        >
+      <View style={styles.itemWrap}>
+        {isYearStart && (
           <AppText
-            allowFontScaling={false}
-            fontSize={16}
+            value={`${t("mortgageDetail.year")} ${Math.floor((item.month - 1) / 12) + 1}`}
+            fontSize={13}
             fontWeight={700}
-            color={COLORS.foundation.blue.b500}
-            value={item["month"].toString()}
+            color={COLORS.foundation.gold.g500}
+            textStyle={styles.yearLabel}
           />
-        </View>
-        <View>
-          <View style={styles.rows}>
-            <View
-              key={`principalPayment-${index}`}
-              style={[
-                styles.dataItem,
-                styles.rightBorder,
-                styles.itemHeight,
-                index % 2 === 0 && {
-                  backgroundColor: COLORS.foundation.blue.b50,
-                },
-                {
-                  width: (WIDTH - 36 - 60 - 4) / 2,
-                },
-              ]}
-            >
-              <AppText
-                allowFontScaling={false}
-                fontSize={12}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n700}
-                value={formatNumber(
-                  item["principalPayment"],
-                  mortgage?.currency?.locale || currency.locale,
-                  true,
-                  mortgage?.currency?.code || currency.code,
-                )}
-              />
-            </View>
-            <View
-              key={`remainingPrincipal-${index}`}
-              style={[
-                styles.dataItem,
-                styles.itemHeight,
-                index % 2 === 0 && {
-                  backgroundColor: COLORS.foundation.blue.b50,
-                },
-                {
-                  width: (WIDTH - 36 - 60 - 4) / 2,
-                },
-              ]}
-            >
-              <AppText
-                allowFontScaling={false}
-                fontSize={12}
-                fontWeight={500}
-                color={COLORS.foundation.neutral.n700}
-                value={formatNumber(
-                  item["remainingPrincipal"],
-                  mortgage?.currency?.locale || currency.locale,
-                  true,
-                  mortgage?.currency?.code || currency.code,
-                )}
-              />
-            </View>
+        )}
+        <View style={styles.card}>
+          <View style={styles.monthBadge}>
+            <AppText
+              value={item.month.toString()}
+              fontSize={15}
+              fontWeight={700}
+              color={COLORS.foundation.blue.b400}
+            />
           </View>
-          <View style={styles.rows}>
-            <View
-              key={`interest-${index}`}
-              style={[
-                styles.dataItem,
-                styles.itemHeight,
-                index % 2 === 0 && {
-                  backgroundColor: COLORS.foundation.blue.b50,
-                },
-                {
-                  width: (WIDTH - 36 - 60 - 4) / 2,
-                },
-              ]}
-            >
-              <View style={[styles.center]}>
+          <View style={styles.body}>
+            <View style={styles.topRow}>
+              <View style={styles.flex}>
                 <AppText
-                  allowFontScaling={false}
-                  fontSize={10}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                  value={`${t("mortgageDetail.table.interest")}`}
+                  value={t("mortgageDetail.table.monthlyPayment")}
+                  fontSize={11}
+                  fontWeight={500}
+                  color={COLORS.foundation.neutral.n500}
                 />
                 <AppText
-                  allowFontScaling={false}
-                  fontSize={12}
-                  fontWeight={500}
+                  value={format(item.totalPayment)}
+                  fontSize={16}
+                  fontWeight={700}
                   color={COLORS.foundation.neutral.n700}
-                  value={formatNumber(
-                    item["interestPayment"],
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                />
+              </View>
+              <View style={[styles.flex, styles.alignEnd]}>
+                <AppText
+                  value={t("mortgageDetail.table.endingBalance")}
+                  fontSize={11}
+                  fontWeight={500}
+                  color={COLORS.foundation.neutral.n500}
+                  numberOfLines={1}
+                />
+                <AppText
+                  value={format(item.remainingPrincipal)}
+                  fontSize={13}
+                  fontWeight={600}
+                  color={COLORS.foundation.neutral.n700}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
                 />
               </View>
             </View>
-            <View
-              key={`monthlyPayment-${index}`}
-              style={[
-                styles.dataItem,
-                styles.itemHeight,
-                index % 2 === 0 && {
-                  backgroundColor: COLORS.foundation.blue.b50,
-                },
-                {
-                  width: (WIDTH - 36 - 60 - 4) / 2,
-                },
-              ]}
-            >
-              <View style={[styles.wrap, styles.center]}>
+            <View style={styles.bar}>
+              <View style={[styles.principalFill, { flex: principalShare }]} />
+              <View style={[styles.interestFill, { flex: 100 - principalShare }]} />
+            </View>
+            <View style={styles.legendRow}>
+              <View style={styles.legend}>
+                <View style={[styles.dot, styles.principalFill]} />
                 <AppText
-                  allowFontScaling={false}
-                  fontSize={10}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n700}
-                  value={`${t("mortgageDetail.table.monthlyPayment")}`}
-                  textStyle={{ textAlign: "center" }}
-                />
-                <AppText
-                  allowFontScaling={false}
-                  fontSize={12}
+                  value={`${t("mortgageDetail.table.principal")} ${format(item.principalPayment)}`}
+                  fontSize={11}
                   fontWeight={500}
-                  color={COLORS.foundation.neutral.n700}
-                  value={formatNumber(
-                    item["totalPayment"],
-                    mortgage?.currency?.locale || currency.locale,
-                    true,
-                    mortgage?.currency?.code || currency.code,
-                  )}
-                  textStyle={{ textAlign: "center" }}
+                  color={COLORS.foundation.neutral.n500}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  textStyle={styles.flexShrink}
+                />
+              </View>
+              <View style={styles.legend}>
+                <View style={[styles.dot, styles.interestFill]} />
+                <AppText
+                  value={`${t("mortgageDetail.table.interest")} ${format(item.interestPayment)}`}
+                  fontSize={11}
+                  fontWeight={500}
+                  color={COLORS.foundation.neutral.n500}
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  textStyle={styles.flexShrink}
                 />
               </View>
             </View>
@@ -225,106 +123,100 @@ const Table = ({ result, mortgage, onScrollEnd }: TTable) => {
       </View>
     );
   };
+
   return (
-    <View style={styles.overall}>
-      <ScrollView
-        nestedScrollEnabled
-        horizontal
-        bounces={false}
-        showsHorizontalScrollIndicator={false}
-      >
-        <View>
-          <View style={styles.rows}>
-            {TABLE.map((item, index) => (
-              <View
-                key={item.id}
-                style={[
-                  styles.headerItem,
-                  { width: item.width },
-                  index === 0 && styles.leftRadius,
-                  index === TABLE.length - 1 && styles.rightRadius,
-                ]}
-              >
-                <AppText
-                  value={item.label}
-                  fontSize={12}
-                  textStyle={{ textAlign: "center" }}
-                  fontWeight={700}
-                  color={COLORS.foundation.neutral.n0}
-                />
-              </View>
-            ))}
-          </View>
-          <View
-            style={{
-              height: HEIGHT - insets.top - insets.bottom - 60 - 4 - 200 - 10,
-            }}
-          >
-            <FlatList
-              nestedScrollEnabled
-              data={result?.monthlyBreakdown}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.month.toString()}
-              onScrollEndDrag={onScrollEnd}
-            />
-          </View>
-        </View>
-      </ScrollView>
-    </View>
+    <FlatList
+      style={styles.flex}
+      contentContainerStyle={styles.listContent}
+      showsVerticalScrollIndicator={false}
+      data={result?.monthlyBreakdown}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.month.toString()}
+      onScrollEndDrag={onScrollEnd}
+      initialNumToRender={12}
+      windowSize={7}
+    />
   );
 };
 
 export default Table;
 
 const styles = StyleSheet.create({
-  overall: {
-    width: WIDTH - 36,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderBottomWidth: 0,
-    backgroundColor: COLORS.foundation.neutral.n900,
-    overflow: "hidden",
+  flex: {
+    flex: 1,
   },
-  leftRadius: {
-    borderTopLeftRadius: 20,
+  flexShrink: {
+    flexShrink: 1,
   },
-  rightRadius: {
-    borderTopRightRadius: 20,
+  alignEnd: {
+    alignItems: "flex-end",
   },
-  rows: {
+  listContent: {
+    paddingTop: 14,
+    paddingBottom: 24,
+  },
+  itemWrap: {
+    marginBottom: 10,
+  },
+  yearLabel: {
+    marginTop: 6,
+    marginBottom: 8,
+    marginLeft: 4,
+  },
+  card: {
     flexDirection: "row",
-    gap: 0,
-  },
-  wrap: {
-    flexWrap: "wrap",
-  },
-  headerItem: {
-    backgroundColor: COLORS.foundation.blue.b300,
-    justifyContent: "center",
-    alignItems: "center",
-    height: 60,
-  },
-  dataItem: {
+    gap: 12,
+    padding: 14,
+    borderRadius: 20,
     backgroundColor: COLORS.foundation.neutral.n0,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 1,
+  },
+  monthBadge: {
+    width: 40,
+    height: 40,
+    borderRadius: 14,
+    alignItems: "center",
     justifyContent: "center",
+    backgroundColor: COLORS.foundation.blue.b50,
+  },
+  body: {
+    flex: 1,
+    gap: 10,
+  },
+  topRow: {
+    flexDirection: "row",
+    gap: 10,
+  },
+  bar: {
+    flexDirection: "row",
+    height: 6,
+    borderRadius: 999,
+    overflow: "hidden",
+    gap: 2,
+  },
+  principalFill: {
+    backgroundColor: COLORS.foundation.blue.b300,
+  },
+  interestFill: {
+    backgroundColor: COLORS.foundation.gold.g300,
+  },
+  legendRow: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  legend: {
+    flex: 1,
+    flexDirection: "row",
     alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.foundation.neutral.n100,
+    gap: 6,
   },
-  rightBorder: {
-    borderRightWidth: 1,
-    borderRightColor: COLORS.foundation.neutral.n100,
-  },
-  bottomBorder: {
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.foundation.neutral.n100,
-  },
-  itemHeight: {
-    height: "auto",
-    minHeight: 40,
-    paddingVertical: 10,
-  },
-  center: {
-    alignItems: "center",
+  dot: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
   },
 });

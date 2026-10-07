@@ -278,13 +278,13 @@
   },
   "loading": "Veriler işleniyor",
   "whatIf": {
-    "title": "Senaryo simülatörü",
+    "title": "Erken ödeme simülatörü",
     "extraMonthly": "Aylık ek ödeme",
     "monthsSaved": "Kazanılan ay",
     "interestSaved": "Tasarruf edilen faiz",
     "newPayoff": "Yeni kapanış süresi",
     "newTotalPayment": "Yeni toplam ödeme",
-    "supportNote": "V1 şu anda yalnızca Sabit Ödeme için simülasyonu destekler."
+    "supportNote": "Şu anda yalnızca Sabit Ödeme yöntemi için kullanılabilir."
   },
   "trust": {
     "disclaimer": {

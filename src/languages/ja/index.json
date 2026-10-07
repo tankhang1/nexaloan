@@ -278,13 +278,13 @@
   },
   "loading": "データを処理中です",
   "whatIf": {
-    "title": "もしもシミュレーター",
+    "title": "繰上返済シミュレーション",
     "extraMonthly": "毎月の追加返済額",
     "monthsSaved": "短縮できる月数",
     "interestSaved": "節約できる利息",
     "newPayoff": "新しい完済時期",
     "newTotalPayment": "新しい総返済額",
-    "supportNote": "V1 では現在、固定返済のみシミュレーションに対応しています。"
+    "supportNote": "現在は元利均等返済のみ対応しています。"
   },
   "trust": {
     "disclaimer": {

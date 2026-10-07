@@ -1,7 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useMemo, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Alert, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  Image,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useDispatch, useSelector } from "react-redux";
 import AppIconButton from "../../components/AppIconButton";
@@ -17,10 +24,21 @@ import { ICONS } from "../../constants/icon";
 import { getFormulaDetails, getFormulaSummary } from "../../hooks/trust_copy";
 import { uuid } from "../../hooks/uuid";
 import { navigationRef } from "../../navigation";
+import { FINANCE_IMAGES } from "../../assets";
 import { addLoan } from "../../redux/slices/mortgage_loan_slices";
 import { RootState } from "../../redux/store";
 import { TNavigation } from "../../utils/types/navigation";
 type Props = NativeStackScreenProps<TNavigation, "MortgageLoanScreen">;
+
+const getDefaultLoanAmount = (code: string) => {
+  if (code === "VND" || code === "IDR") {
+    return 1000000000;
+  }
+  if (code === "INR" || code === "JPY" || code === "KRW" || code === "THB") {
+    return 10000000;
+  }
+  return 200000;
+};
 const MortgageLoanScreen = ({ route }: Props) => {
   const { t } = useTranslation();
   const [isPending, startTransition] = useTransition();
@@ -28,10 +46,12 @@ const MortgageLoanScreen = ({ route }: Props) => {
   const { currency } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
 
-  const [loanAmount, setLoanAmount] = useState<string | number>(4000);
-  const [month, setMonth] = useState(1);
+  const [loanAmount, setLoanAmount] = useState<string | number>(() =>
+    getDefaultLoanAmount(currency.code),
+  );
+  const [month, setMonth] = useState(120);
   const [type, setType] = useState(0);
-  const [rate, setRate] = useState<string | number>(1);
+  const [rate, setRate] = useState<string | number>(8);
   const isRecalculateMode = !!route.params?.recalculateLoanId;
 
   const sliderLimits = useMemo(() => {
@@ -99,258 +119,355 @@ const MortgageLoanScreen = ({ route }: Props) => {
   const onGoBack = () => {
     navigationRef.goBack();
   };
+  const heroImage = useMemo(() => {
+    const label = route.params.label;
+    if (label === t("main.car.title")) {
+      return FINANCE_IMAGES.auto;
+    }
+    if (label === t("main.personal.title")) {
+      return FINANCE_IMAGES.wallet;
+    }
+    if (label === t("main.business.title")) {
+      return FINANCE_IMAGES.bank;
+    }
+    return FINANCE_IMAGES.home;
+  }, [route.params.label, t]);
+  const durationHint =
+    month >= 12
+      ? `≈ ${+(month / 12).toFixed(1)} ${t("mortgageDetail.years")}`
+      : "";
+
   return (
-    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-      <AppView appStyle={styles.overall}>
-        <View style={styles.header}>
-          <AppIconButton onPress={onGoBack}>
-            <ICONS.button.chervon_left />
-          </AppIconButton>
-          <AppText
-            value={route.params.label || t("mortgage.title")}
-            fontSize={20}
-            fontWeight={600}
+    <AppView appStyle={styles.overall}>
+      <View style={styles.header}>
+        <AppIconButton onPress={onGoBack}>
+          <ICONS.button.chervon_left />
+        </AppIconButton>
+        <AppText
+          value={route.params.label || t("mortgage.title")}
+          fontSize={20}
+          fontWeight={700}
+          color={COLORS.foundation.neutral.n700}
+        />
+        <AppIconButton onPress={onNavSetting}>
+          <ICONS.button.setting />
+        </AppIconButton>
+      </View>
+
+      <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
+        bottomOffset={24}
+        contentContainerStyle={styles.scrollContent}
+      >
+        {/* Loan amount */}
+        <View style={styles.card}>
+          <View style={styles.amountHeader}>
+            <View style={styles.gap4}>
+              <AppText
+                fontSize={13}
+                fontWeight={600}
+                value={t("mortgage.loanAmount")}
+                color={COLORS.foundation.neutral.n500}
+              />
+              <AppText
+                fontSize={12}
+                fontWeight={500}
+                value={currency.code}
+                color={COLORS.foundation.gold.g500}
+              />
+            </View>
+            <Image
+              source={heroImage}
+              resizeMode="contain"
+              style={styles.heroImage}
+            />
+          </View>
+          <AppInput
+            onChangeText={(value) => {
+              const numericValue = value.replace(/[^0-9]/g, ""); // Keep only digits
+              if (!isNaN(+numericValue)) {
+                setLoanAmount(numericValue);
+              }
+            }}
+            keyboardType="number-pad"
+            fontSize={34}
+            fontWeight={700}
+            value={new Intl.NumberFormat(currency.locale).format(+loanAmount)}
             color={COLORS.foundation.neutral.n700}
+            textStyle={styles.amountInput}
           />
-          <AppIconButton onPress={onNavSetting}>
-            <ICONS.button.setting />
-          </AppIconButton>
+          <AppSlider
+            prefix={true}
+            minValue={sliderLimits.min}
+            maxValue={sliderLimits.max}
+            curValue={+loanAmount}
+            setCurValue={setLoanAmount}
+          />
         </View>
-        <View style={styles.body_container}>
-          <View style={styles.gap40}>
-            <View style={[styles.center, styles.gap8]}>
-              <View style={[styles.rows, styles.gap8]}>
+
+        {/* Duration & rate */}
+        <View style={styles.card}>
+          <View style={styles.gap8}>
+            <View style={styles.rows_between}>
+              <View style={styles.gap4}>
                 <AppText
-                  fontSize={14}
-                  fontWeight={500}
-                  value={t("mortgage.loanAmount")}
-                  color={COLORS.foundation.neutral.n200}
+                  fontSize={13}
+                  fontWeight={600}
+                  value={t("mortgage.duration")}
+                  color={COLORS.foundation.neutral.n500}
                 />
-                {/* <ICONS.info /> */}
+                {!!durationHint && (
+                  <AppText
+                    fontSize={12}
+                    fontWeight={500}
+                    value={durationHint}
+                    color={COLORS.foundation.gold.g500}
+                  />
+                )}
               </View>
               <AppInput
+                keyboardType="number-pad"
                 onChangeText={(value) => {
                   const numericValue = value.replace(/[^0-9]/g, ""); // Keep only digits
                   if (!isNaN(+numericValue)) {
-                    setLoanAmount(numericValue);
+                    setMonth(+numericValue);
                   }
                 }}
-                keyboardType="numbers-and-punctuation"
-                fontSize={40}
-                fontWeight={500}
-                value={new Intl.NumberFormat(currency.locale).format(
-                  +loanAmount,
-                )}
+                value={month.toString()}
+                fontSize={18}
+                fontWeight={700}
                 color={COLORS.foundation.neutral.n700}
-                textStyle={{ width: "100%", textAlign: "center" }}
-              />
-              <AppSlider
-                prefix={true}
-                minValue={sliderLimits.min}
-                maxValue={sliderLimits.max}
-                curValue={+loanAmount}
-                setCurValue={setLoanAmount}
+                textStyle={styles.valuePill}
               />
             </View>
-            <View style={styles.gap8}>
-              <View style={styles.rows_between}>
-                <View style={[styles.rows_left, styles.gap8]}>
-                  <AppText
-                    fontSize={14}
-                    fontWeight={500}
-                    value={t("mortgage.duration")}
-                    color={COLORS.foundation.neutral.n200}
-                  />
-                  {/* <ICONS.info /> */}
-                </View>
-                <AppInput
-                  keyboardType="numbers-and-punctuation"
-                  onChangeText={(value) => {
-                    const numericValue = value.replace(/[^0-9]/g, ""); // Keep only digits
-                    if (!isNaN(+numericValue)) {
-                      setMonth(+numericValue);
-                    }
-                  }}
-                  value={month.toString()}
-                  fontSize={16}
-                  fontWeight={600}
-                  color={COLORS.foundation.neutral.n700}
-                  textStyle={styles.inputBox}
-                />
-              </View>
-              <AppSlider
-                minValue={1}
-                maxValue={200}
-                curValue={month}
-                setCurValue={setMonth}
-                prefix={false}
-              />
-            </View>
-            <View style={styles.gap8}>
-              <View style={styles.rows_between}>
-                <View style={[styles.rows_left, styles.gap8]}>
-                  <AppText
-                    fontSize={14}
-                    fontWeight={500}
-                    value={
-                      type === 2
-                        ? t("mortgage.interestRateMonthly")
-                        : t("mortgage.interestRate")
-                    }
-                    color={COLORS.foundation.neutral.n200}
-                  />
-                  {/* <ICONS.info /> */}
-                </View>
-                <AppInput
-                  fontSize={16}
-                  fontWeight={600}
-                  value={rate.toString()}
-                  keyboardType="numbers-and-punctuation"
-                  onChangeText={(value) => {
-                    const numericValue = value.replace(/[^0-9.]/g, "");
-                    if (!isNaN(+numericValue)) {
-                      setRate(numericValue);
-                    }
-                  }}
-                  textStyle={styles.rateInputBox}
-                  color={COLORS.foundation.neutral.n700}
-                />
-              </View>
-              <AppSlider
-                minValue={type === 2 ? 0.1 : 1}
-                maxValue={type === 2 ? 25 : 25}
-                curValue={+rate}
-                isFloat={true}
-                setCurValue={setRate}
-                prefix={false}
-              />
-            </View>
+            <AppSlider
+              minValue={1}
+              maxValue={360}
+              curValue={month}
+              setCurValue={setMonth}
+              prefix={false}
+            />
           </View>
-          <View style={styles.gap14}>
-            <AppIndicator
-              tabs={[
-                {
-                  id: 0,
-                  children: t("mortgage.fixedPayment"),
-                  isLeftBorder: true,
-                  tabWidth: (WIDTH - 36) * 0.33,
-                },
-                {
-                  id: 1,
-                  children: t("mortgage.fixedPrincipal"),
-                  tabWidth: (WIDTH - 36) * 0.34,
-                },
-                {
-                  id: 2,
-                  children: t("mortgage.flatRate"),
-                  isRightBorder: true,
-                  tabWidth: (WIDTH - 36) * 0.33,
-                },
-              ]}
-              activeKey={type}
-              onPress={setType}
-              isEqual={false}
-            />
-            <View style={{ minHeight: 40, paddingHorizontal: 4 }}>
+          <View style={styles.divider} />
+          <View style={styles.gap8}>
+            <View style={styles.rows_between}>
               <AppText
+                fontSize={13}
+                fontWeight={600}
                 value={
-                  type === 0
-                    ? t("mortgage.descFixedPayment")
-                    : type === 1
-                      ? t("mortgage.descFixedPrincipal")
-                      : t("mortgage.descFlatRate")
+                  type === 2
+                    ? t("mortgage.interestRateMonthly")
+                    : t("mortgage.interestRate")
                 }
-                fontSize={12}
-                fontWeight={400}
                 color={COLORS.foundation.neutral.n500}
-                textStyle={{ fontStyle: "italic", lineHeight: 18 }}
+              />
+              <AppInput
+                fontSize={18}
+                fontWeight={700}
+                value={rate.toString()}
+                keyboardType="decimal-pad"
+                onChangeText={(value) => {
+                  const numericValue = value.replace(/[^0-9.]/g, "");
+                  if (!isNaN(+numericValue)) {
+                    setRate(numericValue);
+                  }
+                }}
+                textStyle={styles.valuePill}
+                color={COLORS.foundation.neutral.n700}
               />
             </View>
-            <AppTrustNotice
-              summary={getFormulaSummary(type, t)}
-              details={getFormulaDetails(type, t)}
-              expandLabel={t("trust.actions.viewFormula")}
-              collapseLabel={t("trust.actions.hideFormula")}
+            <AppSlider
+              minValue={type === 2 ? 0.1 : 1}
+              maxValue={25}
+              curValue={+rate}
+              isFloat={true}
+              setCurValue={setRate}
+              prefix={false}
             />
-            <AppTrustNotice
-              summary={t("trust.disclaimer.short")}
-              details={t("trust.disclaimer.long")}
-              expandLabel={t("trust.actions.readDisclaimer")}
-              collapseLabel={t("trust.actions.hideDisclaimer")}
-            />
-            <AppIconButton
-              style={{ width: WIDTH - 36 }}
-              onPress={onNavMortgageLoanResult}
-            >
-              <View style={[styles.rows, styles.gap8]}>
-                {isPending && <ActivityIndicator />}
-                {!isPending && <ICONS.calculator />}
-                {!isPending && (
-                  <AppText
-                    color="#090A0B"
-                    fontWeight={600}
-                    fontSize={14}
-                    value={t("mortgage.viewResult")}
-                  />
-                )}
-              </View>
-            </AppIconButton>
           </View>
         </View>
-      </AppView>
-    </KeyboardAwareScrollView>
+
+        {/* Repayment method */}
+        <View style={styles.card}>
+          <AppIndicator
+            tabs={[
+              {
+                id: 0,
+                children: t("mortgage.fixedPayment"),
+                isLeftBorder: true,
+                tabWidth: TAB_AREA * 0.33,
+              },
+              {
+                id: 1,
+                children: t("mortgage.fixedPrincipal"),
+                tabWidth: TAB_AREA * 0.34,
+              },
+              {
+                id: 2,
+                children: t("mortgage.flatRate"),
+                isRightBorder: true,
+                tabWidth: TAB_AREA * 0.33,
+              },
+            ]}
+            activeKey={type}
+            onPress={setType}
+            isEqual={false}
+          />
+          <AppText
+            value={
+              type === 0
+                ? t("mortgage.descFixedPayment")
+                : type === 1
+                  ? t("mortgage.descFixedPrincipal")
+                  : t("mortgage.descFlatRate")
+            }
+            fontSize={13}
+            fontWeight={400}
+            color={COLORS.foundation.neutral.n500}
+            textStyle={styles.methodDesc}
+          />
+          <AppTrustNotice
+            summary={getFormulaSummary(type, t)}
+            details={getFormulaDetails(type, t)}
+            expandLabel={t("trust.actions.viewFormula")}
+            collapseLabel={t("trust.actions.hideFormula")}
+          />
+        </View>
+
+        <AppText
+          value={t("trust.disclaimer.short")}
+          fontSize={11}
+          fontWeight={400}
+          color={COLORS.foundation.neutral.n500}
+          textStyle={styles.disclaimer}
+        />
+      </KeyboardAwareScrollView>
+
+      <View style={styles.footer}>
+        <Pressable
+          style={({ pressed }) => [styles.cta, pressed && styles.ctaPressed]}
+          onPress={onNavMortgageLoanResult}
+          disabled={isPending}
+        >
+          {isPending ? (
+            <ActivityIndicator color={COLORS.foundation.neutral.n0} />
+          ) : (
+            <>
+              <Image
+                source={FINANCE_IMAGES.calculator}
+                resizeMode="contain"
+                style={styles.ctaIcon}
+              />
+              <AppText
+                color={COLORS.foundation.neutral.n0}
+                fontWeight={700}
+                fontSize={16}
+                value={t("mortgage.viewResult")}
+              />
+            </>
+          )}
+        </Pressable>
+      </View>
+    </AppView>
   );
 };
 
 export default MortgageLoanScreen;
+
+const TAB_AREA = WIDTH - 32 - 32;
+
 const styles = StyleSheet.create({
   overall: {
     flex: 1,
     paddingHorizontal: 16,
-    paddingBottom: 15,
-    gap: 16,
     width: "100%",
   },
   header: {
     paddingVertical: 4,
+    marginBottom: 12,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  rows: {
+  scrollContent: {
+    gap: 14,
+    paddingBottom: 24,
+  },
+  card: {
+    backgroundColor: COLORS.foundation.neutral.n0,
+    borderRadius: 24,
+    padding: 16,
+    gap: 14,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.08,
+    shadowRadius: 14,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 2,
+  },
+  amountHeader: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  },
+  heroImage: {
+    width: 64,
+    height: 52,
+  },
+  amountInput: {
+    width: "100%",
+    paddingVertical: 4,
   },
   rows_between: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  rows_left: {
+  gap4: { gap: 4 },
+  gap8: { gap: 8 },
+  valuePill: {
+    minWidth: 84,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    textAlign: "center",
+    backgroundColor: COLORS.foundation.blue.b50,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: COLORS.foundation.neutral.n50,
+  },
+  methodDesc: {
+    lineHeight: 19,
+    paddingHorizontal: 2,
+  },
+  disclaimer: {
+    lineHeight: 16,
+    paddingHorizontal: 6,
+    textAlign: "center",
+  },
+  footer: {
+    paddingTop: 8,
+    paddingBottom: 8,
+  },
+  cta: {
+    height: 56,
+    borderRadius: 18,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  gap8: { gap: 8 },
-  gap14: { gap: 14 },
-  gap40: { gap: 40 },
-  textCenter: {
-    textAlign: "center",
-  },
-  center: {
     justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
+    gap: 10,
+    backgroundColor: COLORS.foundation.blue.b400,
+    shadowColor: COLORS.foundation.blue.b500,
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 4,
   },
-  keyboardAvoiding: { flex: 1 },
-  body_container: { justifyContent: "space-between", flex: 1 },
-  inputBox: {
-    width: 70,
-    textAlign: "center",
+  ctaPressed: {
+    opacity: 0.85,
   },
-  rateInputBox: {
-    width: 92,
-    textAlign: "center",
+  ctaIcon: {
+    width: 28,
+    height: 28,
   },
 });

@@ -12,6 +12,7 @@ type TAppText = {
   textStyle?: StyleProp<TextStyle>;
   numberOfLines?: number;
   allowFontScaling?: boolean;
+  adjustsFontSizeToFit?: boolean;
 };
 const AppText = ({
   value,
@@ -23,11 +24,14 @@ const AppText = ({
   appStyle,
   textStyle,
   allowFontScaling = false,
+  adjustsFontSizeToFit,
 }: TAppText) => {
   return (
     <Text
       allowFontScaling={false}
       numberOfLines={numberOfLines}
+      adjustsFontSizeToFit={adjustsFontSizeToFit}
+      minimumFontScale={adjustsFontSizeToFit ? 0.6 : undefined}
       style={[
         {
           color,

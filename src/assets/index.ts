@@ -1,0 +1,18 @@
+export const FINANCE_IMAGES = {
+  auto: require('./finance/asset-auto.webp'),
+  bank: require('./finance/asset-bank.webp'),
+  calculator: require('./finance/asset-calculator.webp'),
+  chart: require('./finance/asset-chart.webp'),
+  clock: require('./finance/asset-clock.webp'),
+  home: require('./finance/asset-home.webp'),
+  keys: require('./finance/asset-keys.webp'),
+  piggyBank: require('./finance/asset-piggy-bank.webp'),
+  receipt: require('./finance/asset-receipt.webp'),
+  savingsJar: require('./finance/asset-savings-jar.webp'),
+  shield: require('./finance/asset-shield.webp'),
+  wallet: require('./finance/asset-wallet.webp'),
+  emptyHistory: require('./finance/finance-empty-history.webp'),
+  growthOrb: require('./finance/finance-growth-orb.webp'),
+  paperBackground: require('./finance/paper-background-v2.webp'),
+  cityBackground: require('./finance/loan-summary-background-v2.webp'),
+};

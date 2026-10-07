@@ -278,13 +278,13 @@
   },
   "loading": "Dữ liệu đang được xử lý",
   "whatIf": {
-    "title": "Mô phỏng What-if",
+    "title": "Mô phỏng trả nợ sớm",
     "extraMonthly": "Trả thêm mỗi tháng",
     "monthsSaved": "Tháng rút ngắn",
     "interestSaved": "Lãi tiết kiệm",
     "newPayoff": "Thời gian tất toán mới",
     "newTotalPayment": "Tổng trả mới",
-    "supportNote": "V1 hiện hỗ trợ mô phỏng cho phương thức Trả góp đều."
+    "supportNote": "Hiện chỉ áp dụng cho phương thức Trả góp đều."
   },
   "trust": {
     "disclaimer": {
