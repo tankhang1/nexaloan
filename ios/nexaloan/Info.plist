@@ -50,11 +50,9 @@
 		<true/>
 	</dict>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app needs access to save images to your photo library.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to your photo library to let you select and share saved images.</string>
+	<string>Easy Loan Estimator saves your loan result image to Photos only when you tap “Save Image” in the share menu. The app does not read or upload your existing photos.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver more relevant ads to you.</string>
+	<string>Allowing tracking lets us show ads that are more relevant to you. Your loan calculations stay on your device and are never used for ads. Easy Loan Estimator works the same if you choose not to allow it.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -51,7 +51,7 @@ const AboutUsScreen = () => {
             style={styles.logo}
           />
           <AppText
-            value="Nexa Loan"
+            value="Easy Loan Estimator"
             color={COLORS.foundation.blue.b300}
             fontSize={24}
             fontWeight={700}

@@ -187,10 +187,10 @@
     },
     "termsContent": {
       "title": "TERMS OF SERVICE",
-      "intro": "Welcome to Nexa Loan. By using our app, you agree to the following terms:",
+      "intro": "Welcome to Easy Loan Estimator. By using our app, you agree to the following terms:",
       "section1": {
         "title": "1. Acceptance of Terms",
-        "content": "By accessing or using Nexa Loan, you agree to be bound by these Terms and all applicable laws and regulations."
+        "content": "By accessing or using Easy Loan Estimator, you agree to be bound by these Terms and all applicable laws and regulations."
       },
       "section2": {
         "title": "2. Use of Service",
@@ -198,7 +198,7 @@
       },
       "section3": {
         "title": "3. Intellectual Property",
-        "content": "All content, logos, and designs of Nexa Loan are our copyright. You may not copy them without consent."
+        "content": "All content, logos, and designs of Easy Loan Estimator are our copyright. You may not copy them without consent."
       },
       "section4": {
         "title": "4. Limitation of Liability",
@@ -207,7 +207,7 @@
     },
     "privacyContent": {
       "title": "PRIVACY POLICY",
-      "intro": "Nexa Loan is committed to protecting your privacy. This policy explains how we handle your information.",
+      "intro": "Easy Loan Estimator is committed to protecting your privacy. This policy explains how we handle your information.",
       "section1": {
         "title": "1. Information Collection",
         "content": "We collect information you provide directly when using app features such as loan amount and term."

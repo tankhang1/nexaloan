@@ -15,11 +15,10 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.anonymous.nexa-loan",
+      "bundleIdentifier": "com.nexa.loan.estimator",
       "infoPlist": {
-        "NSPhotoLibraryAddUsageDescription": "This app needs access to save images to your photo library.",
-        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to let you select and share saved images.",
-        "NSUserTrackingUsageDescription": "This identifier will be used to deliver more relevant ads to you.",
+        "NSPhotoLibraryAddUsageDescription": "Easy Loan Estimator saves your loan result image to Photos only when you tap “Save Image” in the share menu. The app does not read or upload your existing photos.",
+        "NSUserTrackingUsageDescription": "Allowing tracking lets us show ads that are more relevant to you. Your loan calculations stay on your device and are never used for ads. Easy Loan Estimator works the same if you choose not to allow it.",
         "GADApplicationIdentifier": "ca-app-pub-3940256099942544~1458002511"
       }
     },
@@ -48,7 +47,7 @@
         {
           "androidAppId": "ca-app-pub-3012411444875177~2256962439",
           "iosAppId": "ca-app-pub-3012411444875177~1606055279",
-          "userTrackingUsageDescription": "This identifier will be used to deliver more relevant ads to you."
+          "userTrackingUsageDescription": "Allowing tracking lets us show ads that are more relevant to you. Your loan calculations stay on your device and are never used for ads. Easy Loan Estimator works the same if you choose not to allow it."
         }
       ],
       "expo-sqlite"

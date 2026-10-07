@@ -187,10 +187,10 @@
     },
     "termsContent": {
       "title": "服务条款",
-      "intro": "欢迎使用 Nexa Loan。使用我们的应用即表示您同意以下条款：",
+      "intro": "欢迎使用 Easy Loan Estimator。使用我们的应用即表示您同意以下条款：",
       "section1": {
         "title": "1. 接受条款",
-        "content": "通过访问或使用 Nexa Loan，您同意受本条款以及所有适用法律和法规的约束。"
+        "content": "通过访问或使用 Easy Loan Estimator，您同意受本条款以及所有适用法律和法规的约束。"
       },
       "section2": {
         "title": "2. 服务使用",
@@ -198,7 +198,7 @@
       },
       "section3": {
         "title": "3. 知识产权",
-        "content": "Nexa Loan 的所有内容、标志和设计均受版权保护。未经同意不得复制。"
+        "content": "Easy Loan Estimator 的所有内容、标志和设计均受版权保护。未经同意不得复制。"
       },
       "section4": {
         "title": "4. 责任限制",
@@ -207,7 +207,7 @@
     },
     "privacyContent": {
       "title": "隐私政策",
-      "intro": "Nexa Loan 致力于保护您的隐私。本政策说明我们如何处理您的信息。",
+      "intro": "Easy Loan Estimator 致力于保护您的隐私。本政策说明我们如何处理您的信息。",
       "section1": {
         "title": "1. 信息收集",
         "content": "我们会收集您在使用应用功能时直接提供的信息，例如贷款金额和期限。"

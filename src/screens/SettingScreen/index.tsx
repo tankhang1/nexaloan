@@ -94,7 +94,7 @@ const SettingScreen = () => {
           />
           <View style={styles.brandText}>
             <AppText
-              value="Nexa Loan"
+              value="Easy Loan Estimator"
               fontSize={20}
               fontWeight={700}
               color={COLORS.foundation.neutral.n0}
